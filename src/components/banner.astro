@@ -1,0 +1,177 @@
+---
+import Logo from "@/graphics/waf.svg";
+import Info from "@/graphics/info.svg";
+import InfoDialog from "@/components/info.astro";
+---
+
+<header class="banner">
+  <a href="/#">
+    <Logo />
+    <span id="logo-text" class="sr-only">Home</span>
+  </a>
+  <p class="running-title" aria-hidden="true">
+    Firas Razak <span class="designation">Product Design & Management</span>
+  </p>
+  <button
+    type="button"
+    class="squiggle-info-trigger"
+    commandfor="info-dialog"
+    command="show-modal"
+  >
+    <span>Design Squiggle</span>
+    <Info />
+  </button>
+  <InfoDialog />
+  <a class="contact-cta" href="/#contact"
+    ><span class="text">Contact</span> <Logo /></a
+  >
+</header>
+<style>
+  a {
+    text-decoration: none;
+    &:visited {
+      color: inherit;
+    }
+  }
+
+  .banner {
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr;
+    align-items: center;
+    padding: var(--py) var(--px) calc(var(--px) * 2);
+    background-image: linear-gradient(
+      to bottom,
+      #000000 0%,
+      #000000af 20%,
+      #00000057 50%,
+      #00000000 100%
+    );
+    backdrop-filter: blur(20px);
+    mask: linear-gradient(white, transparent);
+    position: sticky;
+    top: 0;
+    pointer-events: none;
+    & > * {
+      pointer-events: auto;
+    }
+  }
+  .logo {
+    box-sizing: content-box;
+    margin-top: 0.75rem;
+    transition: transform 300ms ease;
+    vertical-align: middle;
+  }
+  #logo-text {
+    display: inline-block;
+    transition: opacity 300ms ease;
+    margin-inline-start: 1ex;
+  }
+  .running-title {
+    align-self: center;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 3%;
+    transition: opacity 300ms ease;
+  }
+  [aria-hidden="true"] {
+    opacity: 0;
+  }
+  .designation {
+    font-weight: 400;
+    margin-inline-start: 0.25ch;
+  }
+  .squiggle-info-trigger {
+    white-space: nowrap;
+    padding: 1em 1.25em;
+    margin-inline-end: -1.25em;
+    grid-column: 3;
+    grid-row: 1;
+    &:hover {
+      background-image: linear-gradient(
+        to bottom right,
+        #ffffff14 50%,
+        #ffffff00
+      );
+      & > span {
+        text-decoration: underline;
+      }
+    }
+  }
+  .info {
+    width: 1.15em;
+    height: auto;
+    vertical-align: middle;
+    margin-bottom: 0.15em;
+  }
+  .contact-cta {
+    opacity: 0;
+    color: inherit;
+    vertical-align: middle;
+    grid-column: 3;
+    grid-row: 1;
+    text-align: end;
+    & .text {
+      display: inline-block;
+    }
+    & .logo {
+      margin-inline-start: 0.5em;
+      translate: 0 calc(-50%);
+      transform: rotate(-135deg);
+    }
+  }
+</style>
+<script>
+  // observe title
+  const logo = document.querySelector(".logo") as HTMLElement;
+  const logoText = document.querySelector("#logo-text") as HTMLElement;
+  const runningTitle = document.querySelector(".running-title") as HTMLElement;
+  const squiggleInfoTrigger = document.querySelector(
+    ".squiggle-info-trigger",
+  ) as HTMLElement;
+  const contactCTA = document.querySelector(".contact-cta") as HTMLElement;
+
+  const titleObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.boundingClientRect.top <= 0) {
+        runningTitle.style.opacity = "1";
+        logo.style.transform = "rotate(45deg)";
+        logoText.innerText = "Scroll to top";
+        logoText.classList.remove("sr-only");
+        logoText.style.opacity = "1";
+        squiggleInfoTrigger.style.opacity = "0";
+        squiggleInfoTrigger.style.pointerEvents = "none";
+        contactCTA.style.opacity = "1";
+        contactCTA.style.pointerEvents = "auto";
+      }
+      if (entry.boundingClientRect.bottom >= 0) {
+        runningTitle.style.opacity = "0";
+        logo.style.transform = "rotate(0deg)";
+        logoText.innerText = "home";
+        logoText.classList.add("sr-only");
+        logoText.style.opacity = "0";
+        squiggleInfoTrigger.style.opacity = "1";
+        squiggleInfoTrigger.style.pointerEvents = "auto";
+        contactCTA.style.opacity = "0";
+        contactCTA.style.pointerEvents = "none";
+      }
+    });
+  });
+  titleObserver.observe(document.querySelector("#title") as HTMLElement);
+
+  // observe contact
+  const contactCTALogo = document.querySelector(
+    ".contact-cta .logo",
+  ) as HTMLElement;
+  const contactObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.boundingClientRect.top <= 0) {
+        contactCTALogo.style.display = "none";
+      }
+      if (entry.boundingClientRect.bottom >= 0) {
+        contactCTALogo.style.display = "";
+      }
+    });
+  });
+  contactObserver.observe(document.querySelector("#contact") as HTMLElement);
+</script>

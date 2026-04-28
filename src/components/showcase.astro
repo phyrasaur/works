@@ -1,0 +1,111 @@
+---
+const cases = [
+  {
+    heading: "Rebranding printshop customer experience",
+    brand: "Hyperprint",
+    topic: "Service design",
+    slug: "hyperprint",
+  },
+  {
+    heading: "Wellness made social",
+    brand: "Wellverse",
+    topic: "Product Design",
+    slug: "wellverse",
+  },
+  {
+    heading: "Donation tracking conceptualised",
+    brand: "DonAid",
+    topic: "Product Management",
+    slug: "donaid",
+  },
+];
+const totalCases = cases.length;
+---
+
+<section aria-labelledby="showcase-title" id="showcase">
+  <h2 class="sr-only" id="showcase-title">Showcase</h2>
+  <ul class="list">
+    {
+      cases.map((caseItem, index, acc) => (
+        <li class="item">
+          <article class="preview">
+            <img
+              class="image"
+              src={`/src/images/${caseItem.slug}-hero.jpg`}
+              alt=""
+            />
+            <h3 class="heading">{caseItem.heading}</h3>
+            <p class="topic">{caseItem.topic}</p>
+            <p class="brand">
+              <span class="name">{caseItem.brand}</span>
+              <span class="label">Brand</span>
+            </p>
+            <p class="pagination">
+              <span class="page">
+                {index + 1} / {totalCases}
+              </span>
+              <span class="label">Showcase</span>
+            </p>
+          </article>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+<style>
+  [aria-labelledby="showcase-title"] {
+    scroll-margin-top: 5rem;
+    .list {
+      & .item {
+        display: grid;
+      }
+    }
+    .preview {
+      padding: calc(var(--px) / 2) var(--px) var(--px);
+      display: grid;
+      grid-template-columns: minmax(0, 4fr) minmax(0, 1fr) minmax(0, 1fr);
+      grid-auto-flow: dense;
+      & .image {
+        grid-column: 1 / -1;
+        width: 100%;
+        max-height: 70vh;
+        height: auto;
+        object-fit: cover;
+        opacity: 50%;
+      }
+      & .heading {
+        font-size: 1.5em;
+        padding-top: 1.5rem;
+        grid-column: 1;
+        margin: 0;
+      }
+      & .topic {
+        font-size: 1.25em;
+        grid-column: 1;
+        padding-top: 0.5rem;
+      }
+      & .brand {
+        grid-column: 2;
+        grid-row: span 2;
+        display: grid;
+        padding-top: 1.5rem;
+        & .name {
+          font-size: 1.5em;
+        }
+      }
+      & .pagination {
+        grid-column: 3;
+        grid-row: span 2;
+        display: grid;
+        text-align: end;
+        padding-top: 1.5rem;
+        & .page {
+          font-size: 1.5em;
+        }
+      }
+      & .label {
+        color: #ffffff87;
+      }
+    }
+  }
+</style>
