@@ -5,9 +5,10 @@ import InfoDialog from "@/components/info.astro";
 ---
 
 <header class="banner">
-  <a href="/#">
+  <a href="/" class="logo-link">
     <Logo />
-    <span id="logo-text" class="sr-only">Home</span>
+    <span class="sr-only">Home</span>
+    <span class="top-text" aria-hidden="true">Scroll to top</span>
   </a>
   <p class="running-title" aria-hidden="true">
     Firas Razak <span class="designation">Product Design & Management</span>
@@ -27,11 +28,16 @@ import InfoDialog from "@/components/info.astro";
   >
 </header>
 <style>
+  /* Reset */
   a {
     text-decoration: none;
     &:visited {
       color: inherit;
     }
+  }
+  [aria-hidden="true"] {
+    transition: opacity 300ms ease-in-out;
+    opacity: 0;
   }
 
   .banner {
@@ -56,16 +62,19 @@ import InfoDialog from "@/components/info.astro";
       pointer-events: auto;
     }
   }
-  .logo {
-    box-sizing: content-box;
-    margin-top: 0.75rem;
-    transition: transform 300ms ease;
-    vertical-align: middle;
-  }
-  #logo-text {
-    display: inline-block;
-    transition: opacity 300ms ease;
-    margin-inline-start: 1ex;
+  .logo-link {
+    width: max-content;
+    color: #ffffffb2;
+    &:hover {
+      color: #ffffff;
+    }
+    & > .logo {
+      box-sizing: content-box;
+      margin-top: 0.75rem;
+      transition: transform 300ms ease;
+      vertical-align: middle;
+      margin-inline-end: 1ex;
+    }
   }
   .running-title {
     align-self: center;
@@ -73,13 +82,10 @@ import InfoDialog from "@/components/info.astro";
     font-weight: 600;
     letter-spacing: 3%;
     transition: opacity 300ms ease;
-  }
-  [aria-hidden="true"] {
-    opacity: 0;
-  }
-  .designation {
-    font-weight: 400;
-    margin-inline-start: 0.25ch;
+    & > .designation {
+      font-weight: 400;
+      margin-inline-start: 0.25ch;
+    }
   }
   .squiggle-info-trigger {
     white-space: nowrap;
@@ -87,73 +93,83 @@ import InfoDialog from "@/components/info.astro";
     margin-inline-end: -1.25em;
     grid-column: 3;
     grid-row: 1;
+    color: #ffffffb2;
+    transition: opacity 300ms ease-in-out;
     &:hover {
-      background-image: linear-gradient(
-        to bottom right,
-        #ffffff14 50%,
-        #ffffff00
-      );
+      color: #ffffff;
       & > span {
         text-decoration: underline;
       }
     }
+    & > .info {
+      width: 1.15em;
+      height: auto;
+      vertical-align: middle;
+      margin-block-end: 0.15em;
+    }
   }
-  .info {
-    width: 1.15em;
-    height: auto;
-    vertical-align: middle;
-    margin-bottom: 0.15em;
-  }
+
   .contact-cta {
+    grid-column: 3;
+    grid-row: 1;
     opacity: 0;
     color: inherit;
     vertical-align: middle;
-    grid-column: 3;
-    grid-row: 1;
     text-align: end;
+    transition: all 300ms ease-in-out;
     & .text {
       display: inline-block;
+      vertical-align: middle;
     }
     & .logo {
+      vertical-align: middle;
+      margin-block-start: -0.75em;
       margin-inline-start: 0.5em;
-      translate: 0 calc(-50%);
-      transform: rotate(-135deg);
+      transform: translateY(-50%) rotate(-135deg);
+      transition: transform 300ms ease-in-out;
     }
   }
 </style>
 <script>
   // observe title
-  const logo = document.querySelector(".logo") as HTMLElement;
-  const logoText = document.querySelector("#logo-text") as HTMLElement;
+  const logoLink = document.querySelector("a.logo-link") as HTMLAnchorElement;
+  const logoLinkIcon = document.querySelector(
+    ".logo-link > .logo",
+  ) as HTMLElement;
+  const logoLinkTopText = document.querySelector(
+    ".logo-link > .top-text",
+  ) as HTMLElement;
   const runningTitle = document.querySelector(".running-title") as HTMLElement;
   const squiggleInfoTrigger = document.querySelector(
     ".squiggle-info-trigger",
   ) as HTMLElement;
   const contactCTA = document.querySelector(".contact-cta") as HTMLElement;
-
+  const contactIcon = document.querySelector(
+    ".contact-cta .logo",
+  ) as HTMLElement;
   const titleObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.boundingClientRect.top <= 0) {
+        logoLink.href = "#";
+        logoLinkIcon.style.transform = "translateX(0.3em) rotate(45deg)";
+        logoLinkTopText.ariaHidden = "false";
         runningTitle.style.opacity = "1";
-        logo.style.transform = "rotate(45deg)";
-        logoText.innerText = "Scroll to top";
-        logoText.classList.remove("sr-only");
-        logoText.style.opacity = "1";
         squiggleInfoTrigger.style.opacity = "0";
         squiggleInfoTrigger.style.pointerEvents = "none";
         contactCTA.style.opacity = "1";
         contactCTA.style.pointerEvents = "auto";
+        contactIcon.style.transform = "translateY(0%) rotate(-135deg)";
       }
       if (entry.boundingClientRect.bottom >= 0) {
+        logoLink.href = "/";
         runningTitle.style.opacity = "0";
-        logo.style.transform = "rotate(0deg)";
-        logoText.innerText = "home";
-        logoText.classList.add("sr-only");
-        logoText.style.opacity = "0";
+        logoLinkIcon.style.transform = "rotate(0deg)";
+        logoLinkTopText.ariaHidden = "true";
         squiggleInfoTrigger.style.opacity = "1";
         squiggleInfoTrigger.style.pointerEvents = "auto";
         contactCTA.style.opacity = "0";
         contactCTA.style.pointerEvents = "none";
+        contactIcon.style.transform = "translateY(-50%) rotate(-135deg)";
       }
     });
   });
