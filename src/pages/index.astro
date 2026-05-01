@@ -1,22 +1,15 @@
 ---
-import { Font } from "astro:assets";
-import Favicon from "@/components/favicon.astro";
 import Banner from "@/components/banner.astro";
 import Title from "@/components/title.astro";
 import Showcase from "@/components/showcase.astro";
 import About from "@/components/about.astro";
+import Head from "@/components/head.astro";
 ---
 
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <Favicon />
-    <Font cssVariable="--font-pp-neue-montreal" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
+    <Head />
     <title>Firas Razak ⸱ Product Design & Management</title>
-    <meta name="theme-color" content="#000" />
-    <meta name="color-scheme" content="dark" />
   </head>
   <body>
     <Banner />

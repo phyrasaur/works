@@ -1,0 +1,161 @@
+---
+import Head from "@/components/head.astro";
+import Nav from "@/components/nav.astro";
+---
+
+<html lang="en">
+  <head>
+    <Head />
+    <title>Firas Razak ⸱ Product Design & Management</title>
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <hgroup>
+        <p>Showcase 1 <span>/ 5</span></p>
+        <h1>Donation tracking: Concept to prototype</h1>
+      </hgroup>
+      <aside>
+        <h2>Summary</h2>
+        <p>
+          DonAid is a donation tracking service which serves as a response to
+          the trust issue in charitable giving. News of charity fraud, misuse of
+          funds, and opaque donation practices may undermine public trust in
+          corporate social responsibility (CSR) activities. To solve that, think
+          parcel tracking meets donation receipt
+        </p>
+      </aside>
+      <picture>
+        <img src="/images/donaid/hero.jpg" alt="" />
+      </picture>
+      <h2>Background</h2>
+      <p>
+        When I joined the project, the founder had spent years trying to build
+        this service with different technical teams. All attempts had repeatedly
+        failed to deliver the service he wanted to build. The issue was a lack
+        of shared understanding. despite the engineering effort. Plus, the
+        concept of donation tracking as a service doesn’t fit any conventional
+        product specification.
+      </p>
+      <h2>Roles</h2>
+      <p>
+        What started as product clarification over coffee had then evolved into
+        a cross-functional role spanning UX, service logic, and technical
+        delivery:
+      </p>
+      <ul>
+        <li>
+          <b>Product specification:</b> I started by breaking down an unwieldy brief
+          into a structured and practical documentation. This involved identifying
+          the core user stories, information architecture, and service design which
+          then reframing the product with a clear operating model. Once the basic
+          product spec was established, I moved into defining user flows and making
+          wireframes visualising the product spec to align with stakeholders.
+        </li>
+        <li>
+          <b>Product design and development:</b> As the project progressed, my role
+          expanded beyond product clarification into interface design, live prototyping,
+          managing development output, shaping data structures, and contributing directly
+          to implementation decisions and code where necessary. I first delivered
+          Figma design with example components written in React + TailwindCSS. As
+          I got more involved, I modeled the business in Prisma together with the
+          dev team and even contributed to the codebase written in NextJS.
+        </li>
+        <li>
+          <b>Product management/Interim CTO:</b> I worked closely across disciplines,
+          bridging founder priorities, product needs, and engineering realities. In
+          practice, this meant aligning stakeholders with different expectations and
+          linguistic fields, reviewing development output, identifying mismatches
+          between the intended product and what was actually being built, refining
+          underlying data relationships, and helping steer technical decisions to
+          keep the product coherent as a whole.
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>
+<style is:global>
+  :root {
+    --px: 3rem;
+    --py: 2rem;
+    --dvh: 100dvh;
+    --lvh: 100lvh;
+    --vh: 100vh;
+  }
+  @media screen and (min-width: 48rem) {
+    :root {
+      --px: 6rem;
+      --py: 4rem;
+    }
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family:
+      var(--font-pp-neue-montreal),
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      "Open Sans",
+      "Helvetica Neue",
+      sans-serif;
+    background-color: black;
+    color: #ffffffbf;
+    line-height: 1;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    font-size: inherit;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
+  }
+  ul {
+    padding: 0;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+    &:visited {
+      color: inherit;
+    }
+  }
+  button:hover {
+    cursor: pointer;
+  }
+  .contents {
+    display: contents;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>

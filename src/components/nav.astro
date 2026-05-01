@@ -1,0 +1,207 @@
+---
+import Logo from "@/graphics/waf.svg";
+import Info from "@/graphics/info.svg";
+import InfoDialog from "@/components/info.astro";
+---
+
+<header class="banner">
+  <a href="/" class="logo-link">
+    <Logo />
+    <span class="sr-only">Home</span>
+    <span class="top-text" aria-hidden="true">Scroll to top</span>
+  </a>
+  <p class="running-title" aria-hidden="true">
+    Firas Razak <span class="designation">Product Design & Management</span>
+  </p>
+  <button
+    type="button"
+    class="squiggle-info-trigger"
+    commandfor="info-dialog"
+    command="show-modal"
+  >
+    <span>Design Squiggle</span>
+    <Info />
+  </button>
+  <a class="contact-cta" href="/#contact"
+    ><span class="text">Contact</span> <Logo /></a
+  >
+</header>
+<InfoDialog />
+<style>
+  /* Reset */
+  a {
+    text-decoration: none;
+    &:visited {
+      color: inherit;
+    }
+  }
+  [aria-hidden="true"] {
+    transition: opacity 300ms ease-in-out;
+    opacity: 0;
+  }
+
+  .banner {
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr;
+    align-items: center;
+    padding: var(--py) var(--px) calc(var(--px) * 2);
+    background-image: linear-gradient(
+      to bottom,
+      #000000 0%,
+      #000000af 20%,
+      #00000057 50%,
+      #00000000 100%
+    );
+    backdrop-filter: blur(20px);
+    mask: linear-gradient(white, transparent);
+    position: sticky;
+    top: 0;
+    pointer-events: none;
+    & > * {
+      pointer-events: auto;
+    }
+  }
+  .logo-link {
+    width: max-content;
+    color: #ffffffb2;
+    &:hover {
+      color: #ffffff;
+    }
+    & > .logo {
+      box-sizing: content-box;
+      margin-top: 0.75rem;
+      transition: transform 300ms ease;
+      vertical-align: middle;
+      margin-inline-end: 1ex;
+    }
+  }
+  .running-title {
+    align-self: center;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 3%;
+    transition: opacity 300ms ease;
+    & > .designation {
+      font-weight: 400;
+      margin-inline-start: 0.25ch;
+    }
+  }
+  .squiggle-info-trigger {
+    white-space: nowrap;
+    padding: 1em 1.25em;
+    margin-inline-end: -1.25em;
+    grid-column: 3;
+    grid-row: 1;
+    color: #ffffffb2;
+    transition: opacity 300ms ease-in-out;
+    &:hover {
+      color: #ffffff;
+      & > span {
+        text-decoration: underline;
+      }
+    }
+    & > .info {
+      width: 1.15em;
+      height: auto;
+      vertical-align: middle;
+      margin-block-end: 0.15em;
+    }
+  }
+
+  .contact-cta {
+    grid-column: 3;
+    grid-row: 1;
+    opacity: 0;
+    color: inherit;
+    vertical-align: middle;
+    text-align: end;
+    transition: all 300ms ease-in-out;
+    & .text {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    & .logo {
+      vertical-align: middle;
+      margin-block-start: -0.75em;
+      margin-inline-start: 0.5em;
+      transform: translateY(-50%) rotate(-135deg);
+      transition: 300ms ease-in-out;
+    }
+  }
+</style>
+<script>
+  // calculate viewport
+  const styles = getComputedStyle(document.documentElement);
+  const dvh = parseFloat(styles.getPropertyValue("--dvh"));
+  const lvh = parseFloat(styles.getPropertyValue("--lvh"));
+  const vh = parseFloat(styles.getPropertyValue("--vh"));
+
+  // observe title
+  const logoLink = document.querySelector("a.logo-link") as HTMLAnchorElement;
+  const logoLinkIcon = document.querySelector(
+    ".logo-link > .logo",
+  ) as HTMLElement;
+  const logoLinkTopText = document.querySelector(
+    ".logo-link > .top-text",
+  ) as HTMLElement;
+  const runningTitle = document.querySelector(".running-title") as HTMLElement;
+  const squiggleInfoTrigger = document.querySelector(
+    ".squiggle-info-trigger",
+  ) as HTMLElement;
+  const contactCTA = document.querySelector(".contact-cta") as HTMLElement;
+  const contactIcon = document.querySelector(
+    ".contact-cta .logo",
+  ) as HTMLElement;
+  const titleObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          logoLink.href = "/";
+          runningTitle.style.opacity = "0";
+          logoLinkIcon.style.transform = "rotate(0deg)";
+          logoLinkTopText.ariaHidden = "true";
+          squiggleInfoTrigger.style.opacity = "1";
+          squiggleInfoTrigger.style.pointerEvents = "auto";
+          contactCTA.style.opacity = "0";
+          contactCTA.style.pointerEvents = "none";
+          contactIcon.style.transform = "translateY(-50%) rotate(-135deg)";
+        } else {
+          logoLink.href = "#";
+          logoLinkIcon.style.transform = "translateX(0.3em) rotate(45deg)";
+          logoLinkTopText.ariaHidden = "false";
+          runningTitle.style.opacity = "1";
+          squiggleInfoTrigger.style.opacity = "0";
+          squiggleInfoTrigger.style.pointerEvents = "none";
+          contactCTA.style.opacity = "1";
+          contactCTA.style.pointerEvents = "auto";
+          contactIcon.style.transform = "translateY(0%) rotate(-135deg)";
+        }
+      });
+    },
+    { rootMargin: "-120px" },
+  );
+  titleObserver.observe(document.querySelector("#title") as HTMLElement);
+
+  // observe contact
+  const contactCTALogo = document.querySelector(
+    ".contact-cta .logo",
+  ) as HTMLElement;
+  const contactObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          contactCTA.style.transform = "translateX(34px)";
+          contactCTALogo.style.transform = "rotate(-225deg)";
+          contactCTALogo.style.opacity = "0";
+        } else {
+          contactCTA.style.transform = "translateX(0)";
+          contactCTALogo.style.transform = "rotate(-135deg)";
+          contactCTALogo.style.opacity = "1";
+        }
+      });
+    },
+    { threshold: 0.5 },
+  );
+  contactObserver.observe(document.querySelector("#contact") as HTMLElement);
+</script>
