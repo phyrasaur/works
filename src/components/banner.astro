@@ -22,11 +22,11 @@ import InfoDialog from "@/components/info.astro";
     <span>Design Squiggle</span>
     <Info />
   </button>
-  <InfoDialog />
   <a class="contact-cta" href="/#contact"
     ><span class="text">Contact</span> <Logo /></a
   >
 </header>
+<InfoDialog />
 <style>
   /* Reset */
   a {
@@ -126,11 +126,17 @@ import InfoDialog from "@/components/info.astro";
       margin-block-start: -0.75em;
       margin-inline-start: 0.5em;
       transform: translateY(-50%) rotate(-135deg);
-      transition: transform 300ms ease-in-out;
+      transition: 300ms ease-in-out;
     }
   }
 </style>
 <script>
+  // calculate viewport
+  const styles = getComputedStyle(document.documentElement);
+  const dvh = parseFloat(styles.getPropertyValue("--dvh"));
+  const lvh = parseFloat(styles.getPropertyValue("--lvh"));
+  const vh = parseFloat(styles.getPropertyValue("--vh"));
+
   // observe title
   const logoLink = document.querySelector("a.logo-link") as HTMLAnchorElement;
   const logoLinkIcon = document.querySelector(
@@ -147,47 +153,55 @@ import InfoDialog from "@/components/info.astro";
   const contactIcon = document.querySelector(
     ".contact-cta .logo",
   ) as HTMLElement;
-  const titleObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.boundingClientRect.top <= 0) {
-        logoLink.href = "#";
-        logoLinkIcon.style.transform = "translateX(0.3em) rotate(45deg)";
-        logoLinkTopText.ariaHidden = "false";
-        runningTitle.style.opacity = "1";
-        squiggleInfoTrigger.style.opacity = "0";
-        squiggleInfoTrigger.style.pointerEvents = "none";
-        contactCTA.style.opacity = "1";
-        contactCTA.style.pointerEvents = "auto";
-        contactIcon.style.transform = "translateY(0%) rotate(-135deg)";
-      }
-      if (entry.boundingClientRect.bottom >= 0) {
-        logoLink.href = "/";
-        runningTitle.style.opacity = "0";
-        logoLinkIcon.style.transform = "rotate(0deg)";
-        logoLinkTopText.ariaHidden = "true";
-        squiggleInfoTrigger.style.opacity = "1";
-        squiggleInfoTrigger.style.pointerEvents = "auto";
-        contactCTA.style.opacity = "0";
-        contactCTA.style.pointerEvents = "none";
-        contactIcon.style.transform = "translateY(-50%) rotate(-135deg)";
-      }
-    });
-  });
+  const titleObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          logoLink.href = "/";
+          runningTitle.style.opacity = "0";
+          logoLinkIcon.style.transform = "rotate(0deg)";
+          logoLinkTopText.ariaHidden = "true";
+          squiggleInfoTrigger.style.opacity = "1";
+          squiggleInfoTrigger.style.pointerEvents = "auto";
+          contactCTA.style.opacity = "0";
+          contactCTA.style.pointerEvents = "none";
+          contactIcon.style.transform = "translateY(-50%) rotate(-135deg)";
+        } else {
+          logoLink.href = "#";
+          logoLinkIcon.style.transform = "translateX(0.3em) rotate(45deg)";
+          logoLinkTopText.ariaHidden = "false";
+          runningTitle.style.opacity = "1";
+          squiggleInfoTrigger.style.opacity = "0";
+          squiggleInfoTrigger.style.pointerEvents = "none";
+          contactCTA.style.opacity = "1";
+          contactCTA.style.pointerEvents = "auto";
+          contactIcon.style.transform = "translateY(0%) rotate(-135deg)";
+        }
+      });
+    },
+    { rootMargin: "-120px" },
+  );
   titleObserver.observe(document.querySelector("#title") as HTMLElement);
 
   // observe contact
   const contactCTALogo = document.querySelector(
     ".contact-cta .logo",
   ) as HTMLElement;
-  const contactObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.boundingClientRect.top <= 0) {
-        contactCTALogo.style.display = "none";
-      }
-      if (entry.boundingClientRect.bottom >= 0) {
-        contactCTALogo.style.display = "";
-      }
-    });
-  });
+  const contactObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          contactCTA.style.transform = "translateX(34px)";
+          contactCTALogo.style.transform = "rotate(-225deg)";
+          contactCTALogo.style.opacity = "0";
+        } else {
+          contactCTA.style.transform = "translateX(0)";
+          contactCTALogo.style.transform = "rotate(-135deg)";
+          contactCTALogo.style.opacity = "1";
+        }
+      });
+    },
+    { threshold: 0.5 },
+  );
   contactObserver.observe(document.querySelector("#contact") as HTMLElement);
 </script>
