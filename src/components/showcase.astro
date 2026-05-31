@@ -1,110 +1,312 @@
 ---
-const cases = [
+import hyperprintImage from "@/images/hyperprint-hero.jpg";
+import donaidImage from "@/images/donaid-hero.jpg";
+import wishfulMenuImage from "@/images/wishful-menu-hero.jpg";
+import hyperprintMark from "@/graphics/hyperprint-mark.png";
+import donaidMark from "@/graphics/donaid-mark.png";
+
+type ShowcaseItem = {
+  brand: string;
+  title: string;
+  service: string;
+  kind: string;
+  image: ImageMetadata;
+  markImage?: ImageMetadata;
+  mark: "hyperprint" | "donaid" | "wishful";
+  slug: string;
+  countLabel: string;
+};
+
+const showcaseItems: ShowcaseItem[] = [
   {
-    heading: "Rebranding printshop customer experience",
     brand: "Hyperprint",
-    topic: "Service design",
+    title: "Branding printshop customer experience",
+    service: "Service design",
+    kind: "Brand",
+    image: hyperprintImage,
+    markImage: hyperprintMark,
+    mark: "hyperprint",
     slug: "hyperprint",
+    countLabel: "1 / 3",
   },
   {
-    heading: "Wellness made social",
-    brand: "Wellverse",
-    topic: "Product Design",
-    slug: "wellverse",
-  },
-  {
-    heading: "Donation tracking conceptualised",
     brand: "DonAid",
-    topic: "Product Management",
+    title: "Donation tracking & audit conceptualised",
+    service: "Product management",
+    kind: "Brand",
+    image: donaidImage,
+    markImage: donaidMark,
+    mark: "donaid",
     slug: "donaid",
+    countLabel: "2 / 3",
+  },
+  {
+    brand: "Wishful Menu",
+    title: "Democracy in menu planning at a restaurant",
+    service: "Product design",
+    kind: "Brand",
+    image: wishfulMenuImage,
+    mark: "wishful",
+    slug: "wishful-menu",
+    countLabel: "3 / 3",
   },
 ];
-const totalCases = cases.length;
 ---
 
-<section aria-labelledby="showcase-title" id="showcase">
+<section aria-labelledby="showcase-title" id="showcase" class="showcase">
   <h2 class="sr-only" id="showcase-title">Showcase</h2>
-  <ul class="list">
+  <ul class="showcase-list">
     {
-      cases.map((caseItem, index, acc) => (
-        <li class="item">
-          <article class="preview">
-            <img
-              class="image"
-              src={`/src/images/${caseItem.slug}-hero.jpg`}
-              alt=""
-            />
-            <h3 class="heading">{caseItem.heading}</h3>
-            <p class="topic">{caseItem.topic}</p>
-            <p class="brand">
-              <span class="name">{caseItem.brand}</span>
-              <span class="label">Brand</span>
-            </p>
-            <p class="pagination">
-              <span class="page">
-                {index + 1} / {totalCases}
-              </span>
-              <span class="label">Showcase</span>
-            </p>
+      showcaseItems.map((item) => (
+        <li class="showcase-item">
+          <article class="showcase-card">
+            <header class="mobile-meta" aria-label={`${item.brand} metadata`}>
+              <p class="meta-group">
+                <span class="label">{item.kind}</span>
+                <span>{item.brand}</span>
+              </p>
+              <p class="meta-group align-end">
+                <span class="label">Showcase</span>
+                <span>{item.countLabel}</span>
+              </p>
+            </header>
+
+            <figure class="figure">
+              <img
+                class="image"
+                src={item.image.src}
+                width={item.image.width}
+                height={item.image.height}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption class={`project-mark ${item.mark}`}>
+                {item.markImage ? (
+                  <img
+                    class="mark-image"
+                    src={item.markImage.src}
+                    width={item.markImage.width}
+                    height={item.markImage.height}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  "wishful.menu"
+                )}
+              </figcaption>
+            </figure>
+
+            <footer class="project-footer">
+              <div class="project-copy">
+                <a href={`/${item.slug}`} class="title-link">
+                  <h3>{item.title}</h3>
+                  <span aria-hidden="true">›</span>
+                </a>
+                <p>{item.service}</p>
+              </div>
+
+              <p class="desktop-brand">
+                <span>{item.brand}</span>
+                <span class="label">{item.kind}</span>
+              </p>
+
+              <p class="desktop-pagination">
+                <span>{item.countLabel}</span>
+                <span class="label">Showcase</span>
+              </p>
+            </footer>
           </article>
         </li>
       ))
     }
   </ul>
 </section>
+
 <style>
-  [aria-labelledby="showcase-title"] {
+  .showcase {
     scroll-margin-top: 5rem;
-    .list {
-      & .item {
-        display: grid;
-      }
+  }
+
+  .showcase-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-gap);
+    margin: 0;
+    list-style: none;
+  }
+
+  .showcase-card {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: var(--px);
+    color: var(--text-strong);
+
+    @media (min-width: 64rem) {
+      gap: 1.5rem;
+      padding: var(--px);
     }
-    .preview {
-      padding: calc(var(--px) / 2) var(--px) var(--px);
-      display: grid;
-      grid-template-columns: minmax(0, 4fr) minmax(0, 1fr) minmax(0, 1fr);
-      grid-auto-flow: dense;
-      & .image {
-        grid-column: 1 / -1;
-        width: 100%;
-        max-height: 70vh;
-        height: auto;
-        object-fit: cover;
-        opacity: 50%;
-      }
-      & .heading {
-        font-size: 1.5em;
-        padding-top: 1.5rem;
-        grid-column: 1;
-        margin: 0;
-      }
-      & .topic {
-        font-size: 1.25em;
-        grid-column: 1;
-        padding-top: 0.5rem;
-      }
-      & .brand {
-        grid-column: 2;
-        grid-row: span 2;
-        display: grid;
-        padding-top: 1.5rem;
-        & .name {
-          font-size: 1.5em;
-        }
-      }
-      & .pagination {
-        grid-column: 3;
-        grid-row: span 2;
-        display: grid;
-        text-align: end;
-        padding-top: 1.5rem;
-        & .page {
-          font-size: 1.5em;
-        }
-      }
+  }
+
+  .mobile-meta,
+  .project-footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.5rem;
+  }
+
+  .mobile-meta {
+    @media (min-width: 64rem) {
+      display: none;
+    }
+  }
+
+  .meta-group,
+  .desktop-brand,
+  .desktop-pagination {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+    color: var(--text-strong);
+    font-size: 0.875rem;
+    line-height: 1;
+  }
+
+  .align-end,
+  .desktop-pagination {
+    align-items: end;
+    text-align: right;
+  }
+
+  .label {
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+
+  .figure {
+    position: relative;
+    height: clamp(24rem, 114vw, 25.625rem);
+    margin: 0;
+    overflow: hidden;
+    background: #111;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #000;
+      opacity: var(--overlay-opacity, 0.6);
+    }
+
+    @media (min-width: 64rem) {
+      height: auto;
+      aspect-ratio: 1728 / 723;
+    }
+  }
+
+  .showcase-item:nth-child(3) .figure {
+    --overlay-opacity: 0.8;
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-mark {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.2rem;
+    color: #fff;
+    line-height: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  .mark-image {
+    display: block;
+    width: auto;
+    height: clamp(1rem, 0.75rem + 1vw, 3.5rem);
+  }
+
+  .project-mark.wishful {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.5rem, 1rem + 2vw, 3.75rem);
+    font-weight: 400;
+  }
+
+  .project-footer {
+    align-items: end;
+
+    @media (min-width: 64rem) {
+      grid-template-columns: minmax(0, 1.7fr) minmax(16rem, 1fr) auto;
+      gap: 0.5rem;
+      align-items: start;
+    }
+  }
+
+  .project-copy {
+    min-width: 0;
+    grid-column: 1 / -1;
+
+    @media (min-width: 64rem) {
+      grid-column: auto;
+    }
+  }
+
+  .title-link {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 0.25rem;
+    color: var(--text-strong);
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  h3 {
+    max-width: 13.5ch;
+    color: inherit;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1;
+
+    @media (min-width: 64rem) {
+      max-width: none;
+      font-size: 2rem;
+    }
+  }
+
+  .project-copy p {
+    margin-top: 0.5rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1;
+
+    @media (min-width: 64rem) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .desktop-brand,
+  .desktop-pagination {
+    display: none;
+
+    @media (min-width: 64rem) {
+      display: flex;
+      font-size: 2rem;
+
       & .label {
-        color: #ffffff87;
+        font-size: 1.5rem;
       }
     }
   }

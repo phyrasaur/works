@@ -2,10 +2,10 @@
 
 ---
 
-<dialog id="info-dialog" class="info-dialog" closedby="any">
-  <form method="dialog">
-    <header>
-      <h2>Design Squiggle</h2>
+<dialog id="info-dialog" class="info-dialog" aria-labelledby="info-title">
+  <form method="dialog" class="info-panel">
+    <header class="info-header">
+      <h2 id="info-title">Design Squiggle</h2>
       <button class="close-dialog" aria-label="Close dialog">
         <svg
           width="24"
@@ -14,6 +14,7 @@
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
+          aria-hidden="true"
         >
           <path
             stroke-linecap="round"
@@ -22,94 +23,145 @@
         </svg>
       </button>
     </header>
-    <p>
-      The Design Squiggle is one of the clearest representations of how real
-      product work happens. It shows that every worthwhile outcome begins in
-      uncertainty, where ideas are loose, information is incomplete, and the
-      path forward is rarely obvious. Through exploration, testing, and repeated
-      refinement, that messy beginning gradually becomes a clear and effective
-      solution. A charming insult to anyone who believes good products arrive
-      fully formed.
-    </p>
-    <p>
-      That idea reflects how I work as a product designer. I do not expect
-      clarity at the start. My role is to create it. I move through ambiguity by
-      understanding users, questioning assumptions, shaping systems, and
-      refining ideas until they become something people can actually use. The
-      early mess is not something to avoid. It is where the real work begins.
-    </p>
-    <p>
-      It also reflects how I work as a product manager. Knowing how to code
-      helps me understand the work being delegated, make better decisions, and
-      collaborate more effectively with engineers. It gives me a clearer sense
-      of effort, constraints, and trade-offs without needing to control every
-      implementation detail like some doomed tyrant. AI adds another layer of
-      leverage by helping me research faster, explore ideas more broadly, and
-      move from concept to execution with greater speed while keeping judgment
-      at the center.
-    </p>
+
+    <div class="info-content">
+      <p>
+        The Design Squiggle by Damien Newman captures a familiar reality in
+        design work. The path to a good outcome rarely looks linear. Early
+        stages include uncertainty, competing signals, and imperfect first
+        attempts. Over time, the work narrows toward a decision and a usable
+        solution.
+      </p>
+      <p>
+        My process fits this shape across research, strategy, systems thinking,
+        interface design, and implementation. I use AI to speed up early
+        exploration when the problem definition still needs work. I map
+        constraints, test assumptions, and clarify what success looks like
+        before committing to detailed execution. The goal stays consistent:
+        reduce complexity into a direction a team can build.
+      </p>
+    </div>
   </form>
 </dialog>
+
 <style>
   .info-dialog {
+    width: min(100vw, 33.75rem);
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
     margin: 0 0 0 auto;
-    inset-block: 0;
-    max-width: 60ch;
-    height: 100%;
-    max-height: 100%;
+    padding: 0;
+    color: var(--text-strong);
+    background: #000;
+    border: 0;
+    border-left: 1px solid var(--hairline);
+    box-shadow: -49px 0 200px 87px #000000bf;
     overflow-y: auto;
-    border: none;
-    transition:
-      opacity 300ms ease-in-out,
-      transform 300ms ease-in-out,
-      display 300ms allow-discrete;
     opacity: 0;
-    transform: translateX(10%);
+    transform: translateX(100%);
+    transition:
+      opacity 300ms ease,
+      transform 300ms ease,
+      overlay 300ms ease allow-discrete,
+      display 300ms ease allow-discrete;
+
     &::backdrop {
-      background-image: linear-gradient(to right, transparent, #0000008b);
+      background: linear-gradient(to right, #00000012, #00000099);
       opacity: 0;
-      transition: inherit;
+      transition: opacity 300ms ease;
     }
-    &:open,
-    &[open] {
-      pointer-events: all;
+
+    &:open {
       opacity: 1;
-      transform: translateX(0%);
+      transform: translateX(0);
+
       &::backdrop {
         opacity: 1;
       }
+
       @starting-style {
         opacity: 0;
-        transform: translateX(10%);
+        transform: translateX(100%);
+
         &::backdrop {
           opacity: 0;
         }
       }
     }
-    & > form {
-      display: grid;
-      row-gap: 1em;
-      padding: var(--py);
-      & > header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        & > h2 {
-          font-size: 1.25em;
-        }
-        & > button {
-          & > svg {
-            vertical-align: top;
-            width: 1.5em;
-            height: 1.5em;
-          }
-        }
-      }
-      & > p {
-        letter-spacing: 0.015em;
-        color: #ffffffd6;
-        line-height: 1.5;
+
+    @media (prefers-reduced-motion: reduce) {
+      &,
+      &::backdrop {
+        transition-duration: 1ms;
       }
     }
   }
+
+  .info-panel {
+    box-sizing: border-box;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+    padding: var(--px);
+
+    @media (min-width: 64rem) {
+      gap: 3.5rem;
+      padding: 6.25rem;
+    }
+  }
+
+  .info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    & h2 {
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1;
+    }
+  }
+
+  .close-dialog {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    color: var(--text-strong);
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+    color: var(--text-strong);
+    font-size: clamp(1rem, 0.8rem + 0.5vw, 1.25rem);
+    letter-spacing: 0.03em;
+    line-height: 1.35;
+
+    & p {
+      opacity: 0.9;
+    }
+  }
 </style>
+
+<script>
+  const infoDialog = document.getElementById("info-dialog");
+
+  if (infoDialog instanceof HTMLDialogElement) {
+    infoDialog.addEventListener("click", (event) => {
+      if (event.target === infoDialog) {
+        infoDialog.close();
+      }
+    });
+  }
+</script>

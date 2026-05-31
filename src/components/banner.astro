@@ -4,204 +4,274 @@ import Info from "@/graphics/info.svg";
 import InfoDialog from "@/components/info.astro";
 ---
 
-<header class="banner">
-  <a href="/" class="logo-link">
+<header class="banner" data-site-header>
+  <a href="/" class="logo-link" data-logo-link>
     <Logo />
     <span class="sr-only">Home</span>
     <span class="top-text" aria-hidden="true">Scroll to top</span>
   </a>
+
   <p class="running-title" aria-hidden="true">
     Firas Razak <span class="designation">Product Design & Management</span>
   </p>
+
   <button
     type="button"
     class="squiggle-info-trigger"
-    commandfor="info-dialog"
-    command="show-modal"
+    data-dialog-trigger="info-dialog"
+    aria-haspopup="dialog"
   >
     <span>Design Squiggle</span>
     <Info />
   </button>
-  <a class="contact-cta" href="/#contact"
-    ><span class="text">Contact</span> <Logo /></a
-  >
-</header>
-<InfoDialog />
-<style>
-  /* Reset */
-  a {
-    text-decoration: none;
-    &:visited {
-      color: inherit;
-    }
-  }
-  [aria-hidden="true"] {
-    transition: opacity 300ms ease-in-out;
-    opacity: 0;
-  }
 
+  <a class="contact-cta" href="/#contact">
+    <span class="text">Contact</span>
+    <Logo />
+  </a>
+</header>
+
+<InfoDialog />
+
+<style>
   .banner {
-    z-index: 10;
-    display: grid;
-    grid-template-columns: 1fr 10fr 1fr;
-    align-items: center;
-    padding: var(--py) var(--px) calc(var(--px) * 2);
-    background-image: linear-gradient(
-      to bottom,
-      #000000 0%,
-      #000000af 20%,
-      #00000057 50%,
-      #00000000 100%
-    );
-    backdrop-filter: blur(20px);
-    mask: linear-gradient(white, transparent);
     position: sticky;
     top: 0;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: start;
+    padding: 1.75rem var(--px) 3rem;
     pointer-events: none;
-    & > * {
-      pointer-events: auto;
+    background-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 34%,
+      #000000b8 58%,
+      #00000000 100%
+    );
+
+    @media (min-width: 64rem) {
+      align-items: center;
+      padding: 6rem var(--px) 12rem;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+      mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
     }
-  }
-  .logo-link {
-    width: max-content;
-    color: #ffffffb2;
-    &:hover {
-      color: #ffffff;
-    }
-    & > .logo {
-      box-sizing: content-box;
-      margin-top: 0.75rem;
-      transition: transform 300ms ease;
-      vertical-align: middle;
-      margin-inline-end: 1ex;
-    }
-  }
-  .running-title {
-    align-self: center;
-    text-align: center;
-    font-weight: 600;
-    letter-spacing: 3%;
-    transition: opacity 300ms ease;
-    & > .designation {
-      font-weight: 400;
-      margin-inline-start: 0.25ch;
-    }
-  }
-  .squiggle-info-trigger {
-    white-space: nowrap;
-    padding: 1em 1.25em;
-    margin-inline-end: -1.25em;
-    grid-column: 3;
-    grid-row: 1;
-    color: #ffffffb2;
-    transition: opacity 300ms ease-in-out;
-    &:hover {
-      color: #ffffff;
-      & > span {
-        text-decoration: underline;
+
+    @media (prefers-reduced-motion: reduce) {
+      &,
+      & * {
+        transition-duration: 1ms;
       }
     }
-    & > .info {
-      width: 1.15em;
+  }
+
+  .logo-link {
+    position: relative;
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: var(--text-strong);
+    pointer-events: auto;
+    & .logo {
+      width: 1.25rem;
       height: auto;
-      vertical-align: middle;
-      margin-block-end: 0.15em;
+      transition:
+        transform 280ms ease,
+        opacity 280ms ease;
+
+      @media (min-width: 64rem) {
+        width: 1.5rem;
+      }
+    }
+
+    & .top-text {
+      opacity: 0;
+      color: var(--text-muted);
+      transition: opacity 280ms ease;
+    }
+  }
+
+  .running-title {
+    align-self: center;
+    justify-self: center;
+    display: none;
+    opacity: 0;
+    color: var(--text-strong);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: opacity 280ms ease;
+
+    & .designation {
+      margin-inline-start: 0.25ch;
+      font-weight: 400;
+      color: var(--text-normal);
+    }
+
+    @media (min-width: 64rem) {
+      display: block;
+    }
+  }
+
+  .squiggle-info-trigger {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 0.125rem;
+    padding: 0;
+    color: var(--text-strong);
+    text-align: right;
+    transition:
+      opacity 280ms ease,
+      color 280ms ease;
+    pointer-events: auto;
+    & span {
+      max-width: 4rem;
+      font-size: 0.875rem;
+      line-height: 1.1;
+    }
+
+    & .info {
+      width: 0.75rem;
+      height: auto;
+    }
+
+    &:hover {
+      color: #fff;
+    }
+
+    @media (min-width: 64rem) {
+      position: static;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+
+      & span {
+        max-width: none;
+        font-size: inherit;
+        line-height: 1;
+      }
+
+      & .info {
+        width: 1.25rem;
+      }
     }
   }
 
   .contact-cta {
     grid-column: 3;
     grid-row: 1;
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     opacity: 0;
-    color: inherit;
-    vertical-align: middle;
-    text-align: end;
-    transition: all 300ms ease-in-out;
-    & .text {
-      display: inline-block;
-      vertical-align: middle;
-    }
+    pointer-events: none;
+    color: var(--text-strong);
+    transition:
+      opacity 280ms ease,
+      transform 280ms ease;
+
     & .logo {
-      vertical-align: middle;
-      margin-block-start: -0.75em;
-      margin-inline-start: 0.5em;
-      transform: translateY(-50%) rotate(-135deg);
-      transition: 300ms ease-in-out;
+      margin-top: -0.25rem;
+      width: 1rem;
+      height: auto;
+      transform: rotate(-135deg);
+      transition:
+        opacity 280ms ease,
+        transform 280ms ease;
+
+      @media (min-width: 64rem) {
+        width: 1.5rem;
+      }
+    }
+
+    @media (min-width: 64rem) {
+      position: static;
+    }
+  }
+
+  .banner.is-past-hero {
+    & .logo-link {
+      & .logo {
+        transform: translateX(0.3em) rotate(45deg);
+      }
+
+      & .top-text {
+        opacity: 1;
+      }
+    }
+
+    & .running-title {
+      opacity: 1;
+    }
+
+    & .squiggle-info-trigger {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    & .contact-cta {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  .banner.is-at-contact {
+    & .contact-cta {
+      transform: translateX(2.125rem);
+      opacity: 0;
+      pointer-events: none;
+      & .logo {
+        transform: rotate(-225deg);
+      }
     }
   }
 </style>
+
 <script>
-  // calculate viewport
-  const styles = getComputedStyle(document.documentElement);
-  const dvh = parseFloat(styles.getPropertyValue("--dvh"));
-  const lvh = parseFloat(styles.getPropertyValue("--lvh"));
-  const vh = parseFloat(styles.getPropertyValue("--vh"));
+  const header = document.querySelector("[data-site-header]");
+  const logoLink = document.querySelector("[data-logo-link]");
+  const hero = document.querySelector("[data-hero]");
+  const contact = document.querySelector("#contact");
 
-  // observe title
-  const logoLink = document.querySelector("a.logo-link") as HTMLAnchorElement;
-  const logoLinkIcon = document.querySelector(
-    ".logo-link > .logo",
-  ) as HTMLElement;
-  const logoLinkTopText = document.querySelector(
-    ".logo-link > .top-text",
-  ) as HTMLElement;
-  const runningTitle = document.querySelector(".running-title") as HTMLElement;
-  const squiggleInfoTrigger = document.querySelector(
-    ".squiggle-info-trigger",
-  ) as HTMLElement;
-  const contactCTA = document.querySelector(".contact-cta") as HTMLElement;
-  const contactIcon = document.querySelector(
-    ".contact-cta .logo",
-  ) as HTMLElement;
-  const titleObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          logoLink.href = "/";
-          runningTitle.style.opacity = "0";
-          logoLinkIcon.style.transform = "rotate(0deg)";
-          logoLinkTopText.ariaHidden = "true";
-          squiggleInfoTrigger.style.opacity = "1";
-          squiggleInfoTrigger.style.pointerEvents = "auto";
-          contactCTA.style.opacity = "0";
-          contactCTA.style.pointerEvents = "none";
-          contactIcon.style.transform = "translateY(-50%) rotate(-135deg)";
-        } else {
-          logoLink.href = "#";
-          logoLinkIcon.style.transform = "translateX(0.3em) rotate(45deg)";
-          logoLinkTopText.ariaHidden = "false";
-          runningTitle.style.opacity = "1";
-          squiggleInfoTrigger.style.opacity = "0";
-          squiggleInfoTrigger.style.pointerEvents = "none";
-          contactCTA.style.opacity = "1";
-          contactCTA.style.pointerEvents = "auto";
-          contactIcon.style.transform = "translateY(0%) rotate(-135deg)";
-        }
-      });
-    },
-    { rootMargin: "-120px" },
-  );
-  titleObserver.observe(document.querySelector("#title") as HTMLElement);
+  if (header && logoLink && hero) {
+    const titleObserver = new IntersectionObserver(
+      ([entry]) => {
+        const isPastHero = !entry.isIntersecting;
+        header.classList.toggle("is-past-hero", isPastHero);
+        logoLink.setAttribute("href", isPastHero ? "#" : "/");
+      },
+      { rootMargin: "-120px" },
+    );
 
-  // observe contact
-  const contactCTALogo = document.querySelector(
-    ".contact-cta .logo",
-  ) as HTMLElement;
-  const contactObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          contactCTA.style.transform = "translateX(34px)";
-          contactCTALogo.style.transform = "rotate(-225deg)";
-          contactCTALogo.style.opacity = "0";
-        } else {
-          contactCTA.style.transform = "translateX(0)";
-          contactCTALogo.style.transform = "rotate(-135deg)";
-          contactCTALogo.style.opacity = "1";
-        }
-      });
-    },
-    { threshold: 0.5 },
-  );
-  contactObserver.observe(document.querySelector("#contact") as HTMLElement);
+    titleObserver.observe(hero);
+  }
+
+  if (header && contact) {
+    const contactObserver = new IntersectionObserver(
+      ([entry]) => {
+        header.classList.toggle("is-at-contact", entry.isIntersecting);
+      },
+      { threshold: 0.5 },
+    );
+
+    contactObserver.observe(contact);
+  }
+
+  document.querySelectorAll("[data-dialog-trigger]").forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      const dialogId = trigger.getAttribute("data-dialog-trigger");
+      const dialog = dialogId ? document.getElementById(dialogId) : undefined;
+
+      if (dialog instanceof HTMLDialogElement) {
+        dialog.showModal();
+      }
+    });
+  });
 </script>
