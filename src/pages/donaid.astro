@@ -76,16 +76,25 @@ import Nav from "@/components/nav.astro";
 </html>
 <style is:global>
   :root {
-    --px: 3rem;
-    --py: 2rem;
+    --page-pad: 1.5rem;
+    --page-pad-lg: 6rem;
+    --section-gap: 0.25rem;
+    --text-strong: #ffffffe6;
+    --text-normal: #ffffffbf;
+    --text-muted: #ffffff80;
+    --text-dim: #ffffff66;
+    --hairline: #ffffff40;
+    --surface: #000;
+    --px: var(--page-pad);
+    --py: 1.5rem;
     --dvh: 100dvh;
     --lvh: 100lvh;
     --vh: 100vh;
   }
   @media screen and (min-width: 48rem) {
     :root {
-      --px: 6rem;
-      --py: 4rem;
+      --px: var(--page-pad-lg);
+      --py: 6rem;
     }
   }
   html {

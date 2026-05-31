@@ -22,16 +22,25 @@ import Head from "@/components/head.astro";
 </html>
 <style is:global>
   :root {
-    --px: 3rem;
-    --py: 2rem;
+    --page-pad: 1.5rem;
+    --page-pad-lg: 6rem;
+    --section-gap: 0.25rem;
+    --text-strong: #ffffffe6;
+    --text-normal: #ffffffbf;
+    --text-muted: #ffffff80;
+    --text-dim: #ffffff66;
+    --hairline: #ffffff40;
+    --surface: #000;
+    --px: var(--page-pad);
+    --py: 1.5rem;
     --dvh: 100dvh;
     --lvh: 100lvh;
     --vh: 100vh;
   }
   @media screen and (min-width: 48rem) {
     :root {
-      --px: 6rem;
-      --py: 4rem;
+      --px: var(--page-pad-lg);
+      --py: 6rem;
     }
   }
   html {
@@ -52,16 +61,23 @@ import Head from "@/components/head.astro";
       "Helvetica Neue",
       sans-serif;
     background-color: black;
-    color: #ffffffbf;
+    color: var(--text-normal);
     line-height: 1;
     font-size: 0.875rem;
     margin: 0;
+  }
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-gap);
   }
   button {
     background-color: transparent;
     border: none;
     border-radius: 0;
     font-size: inherit;
+    color: inherit;
+    font-family: inherit;
   }
   h1,
   h2,
