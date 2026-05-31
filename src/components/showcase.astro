@@ -71,7 +71,10 @@ const showcaseItems: ShowcaseItem[] = [
               </p>
             </header>
 
-            <figure class="figure">
+            <figure
+              class:list={["figure", item.mark === "donaid" && "donaid-transition-source"]}
+              data-showcase-hero={item.mark === "donaid" ? "donaid" : undefined}
+            >
               <img
                 class="image"
                 src={item.image.src}
@@ -100,7 +103,7 @@ const showcaseItems: ShowcaseItem[] = [
 
             <footer class="project-footer">
               <div class="project-copy">
-                <a href={`/${item.slug}`} class="title-link">
+                <a href={`/${item.slug}`} class="title-link" data-showcase-link>
                   <h3>{item.title}</h3>
                   <span aria-hidden="true">›</span>
                 </a>
