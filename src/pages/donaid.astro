@@ -1,82 +1,119 @@
 ---
 import Head from "@/components/head.astro";
 import Nav from "@/components/nav.astro";
-
-const caseFacts = [
-  { label: "Project", value: "DonAid" },
-  { label: "Type", value: "Donation tracking platform" },
-  { label: "Focus", value: "Product strategy, service design, UI, and prototype delivery" },
-  { label: "Role", value: "Product designer, product manager, and interim technical lead" },
-];
-
-const pageSections = [
-  { href: "#summary", label: "Summary" },
-  { href: "#background", label: "Background" },
-  { href: "#problem", label: "Problem" },
-  { href: "#role", label: "Role" },
-  { href: "#approach", label: "Approach" },
-  { href: "#system", label: "System" },
-  { href: "#outcome", label: "Outcome" },
-  { href: "#reflection", label: "Reflection" },
-];
+import heroImage from "@/images/donaid-hero.jpg";
 
 const roleItems = [
+  "Product strategy",
+  "Service design",
+  "User experience",
+  "Interface design",
+  "Product management",
+];
+
+const techItems = [
+  "Confluence",
+  "Jira",
+  "Figma",
+  "Tailwind CSS",
+  "Next.js",
+  "Prisma",
+  "PostgreSQL",
+  "AWS",
+];
+
+const problemItems = [
   {
-    title: "Product specification",
-    copy: "I broke down an unwieldy brief into structured product documentation, clarified the operating model, identified user stories, mapped information architecture, and translated the service logic into wireframes that stakeholders could understand and challenge.",
+    label: "One",
+    title: "Incomprehensible brief",
+    copy: "The dev brief consisted of 50+ interlinked documents with the data modelling in a 30-tabs spreadsheet. Critical business logic was buried in walls of text.",
   },
   {
-    title: "Product design and development",
-    copy: "As the project progressed, I moved from product clarification into interface design, live prototyping, data modelling, implementation support, and hands-on product decisions across the Next.js prototype.",
+    label: "Two",
+    title: "Built from ground up",
+    copy: "Spanning across accounting, banking, legal trust, logistics, e-commerce, and CSR, every domain had to be modelled from scratch with no room for heuristics.",
   },
   {
-    title: "Product management and interim technical leadership",
-    copy: "I bridged founder priorities, product needs, and engineering realities by reviewing development output, identifying mismatches between the intended product and what was being built, and steering technical decisions toward a coherent system.",
+    label: "Three",
+    title: "Product feasibility",
+    copy: "Open banking access varies by country and bank. There was no guarantee the data flow we needed would even be available.",
   },
 ];
 
-const approachItems = [
+const workshopFigures = [
   {
-    title: "Clarify the product promise",
-    copy: "The first task was to translate the founder's ambition into a service people could understand: parcel tracking logic applied to charitable giving, where every donation could be tagged, followed, reported, and reconciled.",
+    title: "Money versus data flows",
+    copy: "To emphasise that DonAid doesn’t collect money, I mapped out the money and reporting flows.",
   },
   {
-    title: "Map the donation lifecycle",
-    copy: "I mapped the operational journey from donation tagging to acknowledgement, merchant remittance, trustee reconciliation, settlement advice, and public confirmation so the platform had a clear source of truth at every stage.",
-  },
-  {
-    title: "Design for multiple actors",
-    copy: "The service had to work across merchants, charities, trustees, administrators, auditors, and public donors. The design work focused on making each actor's responsibility visible without exposing unnecessary operational complexity.",
-  },
-  {
-    title: "Prototype the operational system",
-    copy: "The prototype was not just a screen mockup. It had to demonstrate how donations become records, how reports are generated, how money movement is reconciled, and how transparency is communicated back to the public.",
+    title: "Comparing donor journeys",
+    copy: "I compared a typical user journey with the proposed donation tracking from the donor’s perspective to clarify how donation tracking works.",
   },
 ];
 
-const systemItems = [
-  "Donation tags connect point-of-sale transactions to a traceable public record.",
-  "Acknowledgement reports group donations by active merchant-charity partnership.",
-  "Remittance records group merchant payments that must later be received and reconciled.",
-  "Settlement advice helps charities understand what was collected, received, and released.",
-  "Public tracking pages turn back-office movement into plain-language transparency for donors.",
+const feasibilityFigures = [
+  {
+    title: "Surveying available banking data",
+    copy: "CSV bank statements are easier to sanitise than PDFs, and cut dev effort if we build our own ingestion.",
+  },
+  {
+    title: "Messaging services",
+    copy: "We decided to use WhatsApp API directly, no middleware markup, lower cost per transaction.",
+  },
 ];
 
-const outcomeItems = [
-  "Reframed DonAid from a vague charity-tech idea into a concrete donation tracking service.",
-  "Produced product documentation, service flows, UI direction, and prototype logic for stakeholder alignment.",
-  "Helped expose mismatches between intended service behaviour and implementation assumptions.",
-  "Built a clearer foundation for demonstrating donation transparency, reporting, and reconciliation.",
+const scopingFigures = [
+  {
+    title: "Simplifying donation status: Demo vs MVP",
+    copy: "Edge cases were scoped out of Demo and MVP, pushed to later phases.",
+  },
+  {
+    title: "Information architecture",
+    copy: "Sitemap covering the product and marketing pages, prioritised by stakeholder’s needs.",
+  },
+];
+
+const coreFeatures = [
+  {
+    title: "Donation tagging",
+    copy: "Upon a successful donation transaction with the campaign partner, the POS then requests a unique tag for the donation to be printed as a QR code in the receipt which allows the donor to track the progress of the donation.",
+  },
+  {
+    title: "Public tracking",
+    copy: "Akin to parcel tracking, the donation progress is laid out in a timeline. A summary of the current status at the top provides a general overview of the donation. The tracker can get a notification on WhatsApp for the progress of the donation.",
+  },
+  {
+    title: "Reporting",
+    copy: "Each step generates a unique report. Donation transactions are batched into an acknowledgement report, compiled into a remittance report for the campaign partner, then closed with a settlement advice once the trustee releases funds to the charity.",
+  },
+];
+
+const insightItems = [
+  {
+    label: "One",
+    title: "Product clarity for team alignment",
+    copy: "The earlier teams failed because there was no shared understanding of the product, not for lack of effort.",
+  },
+  {
+    label: "Two",
+    title: "Design is thinking made visual",
+    copy: "Diagrams and designs turned abstract explanations into artefacts the team could see, challenge, improve, and execute.",
+  },
+  {
+    label: "Three",
+    title: "Cross-functional fluency mitigates risks",
+    copy: "Working across product, design, and engineering helped me spot gaps early before they became costly mistakes.",
+  },
 ];
 ---
 
 <html lang="en">
   <head>
     <Head />
-    <title>DonAid — Donation tracking case study | Firas Razak</title>
+    <title>DonAid — Donation tracking & audit conceptualised | Firas Razak</title>
     <meta
       name="description"
-      content="A product design and management case study for DonAid, a donation tracking platform designed to make charitable giving more transparent and traceable."
+      content="A product design and management case study about conceptualising DonAid, a donation tracking and audit platform for transparent charitable giving."
     />
   </head>
   <body>
@@ -86,188 +123,265 @@ const outcomeItems = [
       <article aria-labelledby="case-title">
         <header>
           <p>Showcase 2 <span>/ 3</span></p>
-          <h1 id="case-title">Donation tracking: Concept to prototype</h1>
-          <p>
-            DonAid is a donation tracking service designed to make charitable
-            giving more transparent by connecting donation records, merchant
-            remittances, charity reporting, and public-facing confirmation.
-          </p>
+          <h1 id="case-title">Donation tracking &amp; audit conceptualised</h1>
 
-          <dl aria-label="Case study details">
-            {caseFacts.map((fact) => (
-              <div>
-                <dt>{fact.label}</dt>
-                <dd>{fact.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </header>
-
-        <nav aria-label="Case study sections">
-          <h2>Contents</h2>
-          <ol>
-            {pageSections.map((section) => (
-              <li>
-                <a href={section.href}>{section.label}</a>
-              </li>
-            ))}
-          </ol>
-        </nav>
-
-        <figure>
-          <img
-            src="/images/donaid/hero.jpg"
-            alt="DonAid donation tracking interface showcase"
-          />
-          <figcaption>
-            DonAid turns donation collection, reporting, remittance, and
-            reconciliation into a traceable service workflow.
-          </figcaption>
-        </figure>
-
-        <section id="summary" aria-labelledby="summary-title">
-          <h2 id="summary-title">Summary</h2>
-          <p>
-            DonAid responds to the trust problem in charitable giving. News of
-            charity fraud, misuse of funds, and opaque donation practices can
-            undermine public confidence in corporate social responsibility
-            campaigns. The product reframes donation reporting as a trackable
-            service: donation receipt meets parcel tracking, but for the full
-            lifecycle of charitable funds.
-          </p>
-        </section>
-
-        <section id="background" aria-labelledby="background-title">
-          <h2 id="background-title">Background</h2>
-          <p>
-            When I joined the project, the founder had spent years trying to
-            build the service with different technical teams. Several attempts
-            had failed to deliver the intended product. The issue was not simply
-            engineering effort. It was a lack of shared understanding around how
-            donation tracking should work as an operational service.
-          </p>
-          <p>
-            Donation tracking does not fit neatly into a conventional product
-            specification. It involves transaction records, partnership rules,
-            reporting periods, money movement, reconciliation, public trust, and
-            accountability between organisations that do not usually share one
-            system.
-          </p>
-        </section>
-
-        <section id="problem" aria-labelledby="problem-title">
-          <h2 id="problem-title">Problem</h2>
-          <p>
-            The original idea had a strong social promise but too many undefined
-            relationships. A donation could be described as a receipt, a pledge,
-            a transaction, a report item, a merchant liability, a charity income
-            source, or a public proof point depending on who was looking at it.
-          </p>
-          <p>
-            Without a clear model, teams could build screens and still miss the
-            product. The work needed to clarify what each actor was responsible
-            for, when records should be created, how reports should be grouped,
-            and how the public could verify progress without reading an internal
-            accounting manual, because apparently donors do not enjoy spelunking
-            through operational sludge.
-          </p>
-        </section>
-
-        <section id="role" aria-labelledby="role-title">
-          <h2 id="role-title">Role</h2>
-          <p>
-            What started as product clarification over coffee evolved into a
-            cross-functional role spanning UX, service logic, documentation,
-            stakeholder alignment, and technical delivery.
-          </p>
-          <ul>
-            {roleItems.map((item) => (
-              <li>
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section id="approach" aria-labelledby="approach-title">
-          <h2 id="approach-title">Approach</h2>
-          <ol>
-            {approachItems.map((item) => (
-              <li>
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section id="system" aria-labelledby="system-title">
-          <h2 id="system-title">System model</h2>
-          <p>
-            The core design challenge was to make the donation lifecycle legible
-            across both money flow and reporting flow. The platform needed to
-            show how a donation moved from collection to confirmation while
-            preserving a clear audit trail.
-          </p>
-          <ul>
-            {systemItems.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section aria-labelledby="screens-title">
-          <h2 id="screens-title">Designed experience</h2>
-          <p>
-            The interface work focused on turning operational states into a
-            product experience: dashboards for internal users, report views for
-            partners, and public tracking pages for donors who need a simple
-            answer to where their contribution went.
-          </p>
+          <aside aria-labelledby="summary-title">
+            <h2 id="summary-title">Summary</h2>
+            <p>
+              <strong>Public trust in charitable giving</strong> is often shaken
+              by concerns over fraud, misuse of funds, and opaque money
+              handling. These issues can <strong>turn an act of goodwill into a
+              leap of faith</strong> for donors.
+            </p>
+            <p>
+              By making <strong>donation traceable, like parcel tracking</strong>,
+              donors and partners can see how money moves from collection to
+              charity.
+            </p>
+          </aside>
 
           <figure>
             <img
-              src="/images/donaid/hero.jpg"
-              alt="DonAid interface composition"
+              src={heroImage.src}
+              width={heroImage.width}
+              height={heroImage.height}
+              alt="DonAid donation tracking case study hero image"
             />
+            <figcaption>DonAid</figcaption>
+          </figure>
+        </header>
+
+        <section aria-labelledby="background-title">
+          <h2 id="background-title">Background</h2>
+          <p>
+            3 development attempts had failed, and other prospective agencies
+            were unresponsive. Without a clear specification, previous teams were
+            forced to guess, often mistaking the donation tracking system for a
+            standard donation platform. The issue was in comprehension, not
+            engineering.
+          </p>
+
+          <dl>
+            <div>
+              <dt>Role</dt>
+              <dd>
+                <ul>
+                  {roleItems.map((item) => <li>{item}</li>)}
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>Tech</dt>
+              <dd>
+                <ul>
+                  {techItems.map((item) => <li>{item}</li>)}
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section aria-labelledby="problems-title">
+          <h2 id="problems-title">Problems</h2>
+          <ol>
+            {problemItems.map((problem) => (
+              <li>
+                <p>{problem.label}</p>
+                <h3>{problem.title}</h3>
+                <p>{problem.copy}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section aria-labelledby="product-workshop-title">
+          <h2 id="product-workshop-title">Product workshop</h2>
+          <p>
+            To start, I ran daily sessions with the founder until we reached
+            enough shared understanding of the product. I then simplified the
+            original material into a 7-page product brief to be sent to
+            development agencies for quotation. After the rewrite,
+            <strong> agency response rate increased from 10% to 80%</strong>.
+          </p>
+
+          <div>
+            {workshopFigures.map((figure) => (
+              <figure>
+                <div role="img" aria-label={figure.title}></div>
+                <figcaption>
+                  <strong>{figure.title}</strong>
+                  <span>{figure.copy}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        <section aria-labelledby="feasibility-title">
+          <h2 id="feasibility-title">Feasibility study</h2>
+          <p>
+            I surveyed banking and messaging integrations to map what could be
+            automated, what needed vendor buy-in, and what required a manual
+            fallback. Where banks moved too slow, I proposed processing the
+            banking side manually as an interim workaround.
+          </p>
+
+          <div>
+            {feasibilityFigures.map((figure) => (
+              <figure>
+                <div role="img" aria-label={figure.title}></div>
+                <figcaption>
+                  <strong>{figure.title}</strong>
+                  <span>{figure.copy}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        <section aria-labelledby="work-scoping-title">
+          <h2 id="work-scoping-title">Work scoping</h2>
+          <p>
+            I split the brief into Demo, MVP, and Feature Complete phases. I
+            also shifted the founder’s mindset to agile workflow.
+          </p>
+
+          <div>
+            {scopingFigures.map((figure) => (
+              <figure>
+                <div role="img" aria-label={figure.title}></div>
+                <figcaption>
+                  <strong>{figure.title}</strong>
+                  <span>{figure.copy}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        <section aria-labelledby="interface-design-title">
+          <h2 id="interface-design-title">Interface design</h2>
+          <p>
+            Design was not in the agency’s scope. I stepped in and delivered
+            interfaces and flow diagrams in sync with dev milestones.
+          </p>
+
+          <figure>
+            <div role="img" aria-label="Sketching wireframes"></div>
             <figcaption>
-              Interface direction for the donation tracking and transparency
-              experience.
+              <strong>Sketching wireframes:</strong>
+              <span>
+                Throughout my product workshops with the founder, I sketched
+                wireframes and flow diagrams ad-hoc to build shared
+                understanding. The high-fidelity design was later reviewed and
+                approved in Figma before I handed over code as React TypeScript
+                components, styled with Tailwind CSS, to the dev team.
+              </span>
             </figcaption>
           </figure>
         </section>
 
-        <section id="outcome" aria-labelledby="outcome-title">
-          <h2 id="outcome-title">Outcome</h2>
+        <section aria-labelledby="engineering-check-ins-title">
+          <h2 id="engineering-check-ins-title">Engineering check-ins</h2>
           <p>
-            The work gave DonAid a clearer product foundation: a service model,
-            a stakeholder-facing prototype, and a more coherent explanation of
-            how donation tracking could operate beyond a static receipt.
+            I ran weekly check-ins, taking progress reports from the dev team
+            while handing over design for the next task. I bridged the founder
+            and dev across system design, business logic, architecture, and
+            acceptance criteria.
           </p>
-          <ul>
-            {outcomeItems.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
         </section>
 
-        <section id="reflection" aria-labelledby="reflection-title">
-          <h2 id="reflection-title">Reflection</h2>
+        <section aria-labelledby="core-feature-title">
+          <h2 id="core-feature-title">Product core feature</h2>
           <p>
-            DonAid taught me that some products fail not because the idea is
-            weak, but because the operating model is invisible. Before a team
-            can design screens or write production code, everyone needs to agree
-            on what the product is actually tracking, what each status means,
-            and which moments require proof.
+            DonAid’s main scope is to verify a donation after the transaction
+            and track the money received from a campaign partner to the auditing
+            trustee and finally released to the charity.
           </p>
+
+          <figure>
+            <div role="img" aria-label="Service blueprint"></div>
+            <figcaption>
+              <strong>Service blueprint:</strong>
+              <span>Aligning teams and stakeholders for what DonAid is.</span>
+            </figcaption>
+          </figure>
+
+          <div>
+            {coreFeatures.map((feature) => (
+              <section aria-labelledby={`${feature.title.toLowerCase().replaceAll(" ", "-")}-title`}>
+                <h3 id={`${feature.title.toLowerCase().replaceAll(" ", "-")}-title`}>
+                  {feature.title}
+                </h3>
+                <p>{feature.copy}</p>
+                <figure>
+                  <div role="img" aria-label={feature.title}></div>
+                </figure>
+              </section>
+            ))}
+          </div>
+        </section>
+
+        <section aria-labelledby="outcome-title">
+          <h2 id="outcome-title">Outcome</h2>
           <p>
-            My contribution was to turn that ambiguity into a working product
-            language: part service blueprint, part reporting system, part public
-            trust mechanism, and part prototype that made the concept easier to
-            test, discuss, and build.
+            The final delivery hit a foreseeable delay for the bank integration
+            scope since the founder and the team had agreed to push ahead
+            despite the flag to omit it.
+          </p>
+
+          <figure>
+            <div role="img" aria-label="Demo homepage"></div>
+            <figcaption>
+              <strong>Demo homepage:</strong>
+              <span>
+                Five demo sites for different types of donation collection by
+                partnership.
+              </span>
+            </figcaption>
+          </figure>
+
+          <p>
+            After the demo deployment, the founder and I had conducted a
+            market-fit demonstration. <strong>All 32 attendants</strong> from
+            various <strong>charity organisations</strong>
+            <strong> expressed interest</strong> in the product and demonstrated
+            <strong> a thorough understanding</strong> how donation tracking
+            works.
           </p>
         </section>
+
+        <section aria-labelledby="insights-title">
+          <h2 id="insights-title">Insights</h2>
+          <ol>
+            {insightItems.map((insight) => (
+              <li>
+                <p>{insight.label}</p>
+                <h3>{insight.title}</h3>
+                <p>{insight.copy}</p>
+                <figure>
+                  <div role="img" aria-label={insight.title}></div>
+                </figure>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <footer>
+          <nav aria-label="Contact links">
+            <ul>
+              <li><a href="/resume.pdf" download>Resume</a></li>
+              <li><a href="https://linkedin.com/in/firasrazak">@firasrazak</a></li>
+              <li><a href="mailto:hi@firas.works">hi@firas.works</a></li>
+            </ul>
+          </nav>
+
+          <a href="/wishful-menu" aria-label="Next showcase: Wishful Menu">
+            <span>Showcase 3 <span>/ 3</span></span>
+            <strong>Wishful Menu</strong>
+            <span>Democracy in menu planning at a restaurant</span>
+          </a>
+        </footer>
       </article>
     </main>
   </body>
