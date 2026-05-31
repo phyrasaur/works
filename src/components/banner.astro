@@ -41,7 +41,7 @@ import InfoDialog from "@/components/info.astro";
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: start;
-    padding: 1.75rem 1.25rem 3rem var(--px);
+    padding: 1.75rem var(--px) 3rem;
     pointer-events: none;
     background-image: linear-gradient(
       to bottom,
@@ -115,9 +115,6 @@ import InfoDialog from "@/components/info.astro";
   }
 
   .squiggle-info-trigger {
-    position: fixed;
-    top: 1.75rem;
-    right: 1.25rem;
     grid-column: 3;
     grid-row: 1;
     justify-self: end;
@@ -235,7 +232,6 @@ import InfoDialog from "@/components/info.astro";
       }
     }
   }
-
 </style>
 
 <script>

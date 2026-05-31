@@ -85,6 +85,7 @@ import Nav from "@/components/nav.astro";
     --text-dim: #ffffff66;
     --hairline: #ffffff40;
     --surface: #000;
+    --page-max: 120rem;
     --px: var(--page-pad);
     --py: 1.5rem;
     --dvh: 100dvh;
@@ -118,6 +119,13 @@ import Nav from "@/components/nav.astro";
     line-height: 1;
     font-size: 0.875rem;
     margin: 0;
+  }
+  body > .banner,
+  main {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--page-max);
+    margin-inline: auto;
   }
   button {
     background-color: transparent;

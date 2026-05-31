@@ -27,27 +27,23 @@ import Squiggle from "@/graphics/squiggle.astro";
 <style>
   .hero {
     box-sizing: border-box;
-    min-height: 29.125rem;
+    min-height: calc(100lvh - var(--px) * 8);
     display: grid;
-    grid-template-rows: minmax(16rem, 1fr) auto;
     padding-block: 1.5rem;
     color: var(--text-strong);
-
+    grid-template-rows: 1fr;
+    @media (min-width: 48rem) {
+      min-height: calc(100lvh - var(--px) * 3);
+    }
     @media (min-width: 64rem) {
-      min-height: 44.125rem;
+      min-height: calc(100lvh - var(--px) * 5);
       padding: 0 var(--px) 0;
-      grid-template-rows: minmax(39.875rem, 1fr) 4.25rem;
     }
   }
 
   .squiggle-stage {
     display: grid;
     align-items: center;
-    overflow: hidden;
-
-    @media (min-width: 64rem) {
-      overflow: visible;
-    }
   }
 
   .hero-footer {
@@ -56,7 +52,6 @@ import Squiggle from "@/graphics/squiggle.astro";
     align-items: end;
     gap: 0.75rem;
     padding-inline: var(--px);
-
     @media (min-width: 64rem) {
       padding-inline: 0;
     }
