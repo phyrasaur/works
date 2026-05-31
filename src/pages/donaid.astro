@@ -1,177 +1,274 @@
 ---
 import Head from "@/components/head.astro";
 import Nav from "@/components/nav.astro";
+
+const caseFacts = [
+  { label: "Project", value: "DonAid" },
+  { label: "Type", value: "Donation tracking platform" },
+  { label: "Focus", value: "Product strategy, service design, UI, and prototype delivery" },
+  { label: "Role", value: "Product designer, product manager, and interim technical lead" },
+];
+
+const pageSections = [
+  { href: "#summary", label: "Summary" },
+  { href: "#background", label: "Background" },
+  { href: "#problem", label: "Problem" },
+  { href: "#role", label: "Role" },
+  { href: "#approach", label: "Approach" },
+  { href: "#system", label: "System" },
+  { href: "#outcome", label: "Outcome" },
+  { href: "#reflection", label: "Reflection" },
+];
+
+const roleItems = [
+  {
+    title: "Product specification",
+    copy: "I broke down an unwieldy brief into structured product documentation, clarified the operating model, identified user stories, mapped information architecture, and translated the service logic into wireframes that stakeholders could understand and challenge.",
+  },
+  {
+    title: "Product design and development",
+    copy: "As the project progressed, I moved from product clarification into interface design, live prototyping, data modelling, implementation support, and hands-on product decisions across the Next.js prototype.",
+  },
+  {
+    title: "Product management and interim technical leadership",
+    copy: "I bridged founder priorities, product needs, and engineering realities by reviewing development output, identifying mismatches between the intended product and what was being built, and steering technical decisions toward a coherent system.",
+  },
+];
+
+const approachItems = [
+  {
+    title: "Clarify the product promise",
+    copy: "The first task was to translate the founder's ambition into a service people could understand: parcel tracking logic applied to charitable giving, where every donation could be tagged, followed, reported, and reconciled.",
+  },
+  {
+    title: "Map the donation lifecycle",
+    copy: "I mapped the operational journey from donation tagging to acknowledgement, merchant remittance, trustee reconciliation, settlement advice, and public confirmation so the platform had a clear source of truth at every stage.",
+  },
+  {
+    title: "Design for multiple actors",
+    copy: "The service had to work across merchants, charities, trustees, administrators, auditors, and public donors. The design work focused on making each actor's responsibility visible without exposing unnecessary operational complexity.",
+  },
+  {
+    title: "Prototype the operational system",
+    copy: "The prototype was not just a screen mockup. It had to demonstrate how donations become records, how reports are generated, how money movement is reconciled, and how transparency is communicated back to the public.",
+  },
+];
+
+const systemItems = [
+  "Donation tags connect point-of-sale transactions to a traceable public record.",
+  "Acknowledgement reports group donations by active merchant-charity partnership.",
+  "Remittance records group merchant payments that must later be received and reconciled.",
+  "Settlement advice helps charities understand what was collected, received, and released.",
+  "Public tracking pages turn back-office movement into plain-language transparency for donors.",
+];
+
+const outcomeItems = [
+  "Reframed DonAid from a vague charity-tech idea into a concrete donation tracking service.",
+  "Produced product documentation, service flows, UI direction, and prototype logic for stakeholder alignment.",
+  "Helped expose mismatches between intended service behaviour and implementation assumptions.",
+  "Built a clearer foundation for demonstrating donation transparency, reporting, and reconciliation.",
+];
 ---
 
 <html lang="en">
   <head>
     <Head />
-    <title>Firas Razak ⸱ Product Design & Management</title>
+    <title>DonAid — Donation tracking case study | Firas Razak</title>
+    <meta
+      name="description"
+      content="A product design and management case study for DonAid, a donation tracking platform designed to make charitable giving more transparent and traceable."
+    />
   </head>
   <body>
     <Nav />
+
     <main>
-      <hgroup>
-        <p>Showcase 1 <span>/ 5</span></p>
-        <h1>Donation tracking: Concept to prototype</h1>
-      </hgroup>
-      <aside>
-        <h2>Summary</h2>
-        <p>
-          DonAid is a donation tracking service which serves as a response to
-          the trust issue in charitable giving. News of charity fraud, misuse of
-          funds, and opaque donation practices may undermine public trust in
-          corporate social responsibility (CSR) activities. To solve that, think
-          parcel tracking meets donation receipt
-        </p>
-      </aside>
-      <picture>
-        <img src="/images/donaid/hero.jpg" alt="" />
-      </picture>
-      <h2>Background</h2>
-      <p>
-        When I joined the project, the founder had spent years trying to build
-        this service with different technical teams. All attempts had repeatedly
-        failed to deliver the service he wanted to build. The issue was a lack
-        of shared understanding. despite the engineering effort. Plus, the
-        concept of donation tracking as a service doesn’t fit any conventional
-        product specification.
-      </p>
-      <h2>Roles</h2>
-      <p>
-        What started as product clarification over coffee had then evolved into
-        a cross-functional role spanning UX, service logic, and technical
-        delivery:
-      </p>
-      <ul>
-        <li>
-          <b>Product specification:</b> I started by breaking down an unwieldy brief
-          into a structured and practical documentation. This involved identifying
-          the core user stories, information architecture, and service design which
-          then reframing the product with a clear operating model. Once the basic
-          product spec was established, I moved into defining user flows and making
-          wireframes visualising the product spec to align with stakeholders.
-        </li>
-        <li>
-          <b>Product design and development:</b> As the project progressed, my role
-          expanded beyond product clarification into interface design, live prototyping,
-          managing development output, shaping data structures, and contributing directly
-          to implementation decisions and code where necessary. I first delivered
-          Figma design with example components written in React + TailwindCSS. As
-          I got more involved, I modeled the business in Prisma together with the
-          dev team and even contributed to the codebase written in NextJS.
-        </li>
-        <li>
-          <b>Product management/Interim CTO:</b> I worked closely across disciplines,
-          bridging founder priorities, product needs, and engineering realities. In
-          practice, this meant aligning stakeholders with different expectations and
-          linguistic fields, reviewing development output, identifying mismatches
-          between the intended product and what was actually being built, refining
-          underlying data relationships, and helping steer technical decisions to
-          keep the product coherent as a whole.
-        </li>
-      </ul>
+      <article aria-labelledby="case-title">
+        <header>
+          <p>Showcase 2 <span>/ 3</span></p>
+          <h1 id="case-title">Donation tracking: Concept to prototype</h1>
+          <p>
+            DonAid is a donation tracking service designed to make charitable
+            giving more transparent by connecting donation records, merchant
+            remittances, charity reporting, and public-facing confirmation.
+          </p>
+
+          <dl aria-label="Case study details">
+            {caseFacts.map((fact) => (
+              <div>
+                <dt>{fact.label}</dt>
+                <dd>{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </header>
+
+        <nav aria-label="Case study sections">
+          <h2>Contents</h2>
+          <ol>
+            {pageSections.map((section) => (
+              <li>
+                <a href={section.href}>{section.label}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <figure>
+          <img
+            src="/images/donaid/hero.jpg"
+            alt="DonAid donation tracking interface showcase"
+          />
+          <figcaption>
+            DonAid turns donation collection, reporting, remittance, and
+            reconciliation into a traceable service workflow.
+          </figcaption>
+        </figure>
+
+        <section id="summary" aria-labelledby="summary-title">
+          <h2 id="summary-title">Summary</h2>
+          <p>
+            DonAid responds to the trust problem in charitable giving. News of
+            charity fraud, misuse of funds, and opaque donation practices can
+            undermine public confidence in corporate social responsibility
+            campaigns. The product reframes donation reporting as a trackable
+            service: donation receipt meets parcel tracking, but for the full
+            lifecycle of charitable funds.
+          </p>
+        </section>
+
+        <section id="background" aria-labelledby="background-title">
+          <h2 id="background-title">Background</h2>
+          <p>
+            When I joined the project, the founder had spent years trying to
+            build the service with different technical teams. Several attempts
+            had failed to deliver the intended product. The issue was not simply
+            engineering effort. It was a lack of shared understanding around how
+            donation tracking should work as an operational service.
+          </p>
+          <p>
+            Donation tracking does not fit neatly into a conventional product
+            specification. It involves transaction records, partnership rules,
+            reporting periods, money movement, reconciliation, public trust, and
+            accountability between organisations that do not usually share one
+            system.
+          </p>
+        </section>
+
+        <section id="problem" aria-labelledby="problem-title">
+          <h2 id="problem-title">Problem</h2>
+          <p>
+            The original idea had a strong social promise but too many undefined
+            relationships. A donation could be described as a receipt, a pledge,
+            a transaction, a report item, a merchant liability, a charity income
+            source, or a public proof point depending on who was looking at it.
+          </p>
+          <p>
+            Without a clear model, teams could build screens and still miss the
+            product. The work needed to clarify what each actor was responsible
+            for, when records should be created, how reports should be grouped,
+            and how the public could verify progress without reading an internal
+            accounting manual, because apparently donors do not enjoy spelunking
+            through operational sludge.
+          </p>
+        </section>
+
+        <section id="role" aria-labelledby="role-title">
+          <h2 id="role-title">Role</h2>
+          <p>
+            What started as product clarification over coffee evolved into a
+            cross-functional role spanning UX, service logic, documentation,
+            stakeholder alignment, and technical delivery.
+          </p>
+          <ul>
+            {roleItems.map((item) => (
+              <li>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section id="approach" aria-labelledby="approach-title">
+          <h2 id="approach-title">Approach</h2>
+          <ol>
+            {approachItems.map((item) => (
+              <li>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section id="system" aria-labelledby="system-title">
+          <h2 id="system-title">System model</h2>
+          <p>
+            The core design challenge was to make the donation lifecycle legible
+            across both money flow and reporting flow. The platform needed to
+            show how a donation moved from collection to confirmation while
+            preserving a clear audit trail.
+          </p>
+          <ul>
+            {systemItems.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section aria-labelledby="screens-title">
+          <h2 id="screens-title">Designed experience</h2>
+          <p>
+            The interface work focused on turning operational states into a
+            product experience: dashboards for internal users, report views for
+            partners, and public tracking pages for donors who need a simple
+            answer to where their contribution went.
+          </p>
+
+          <figure>
+            <img
+              src="/images/donaid/hero.jpg"
+              alt="DonAid interface composition"
+            />
+            <figcaption>
+              Interface direction for the donation tracking and transparency
+              experience.
+            </figcaption>
+          </figure>
+        </section>
+
+        <section id="outcome" aria-labelledby="outcome-title">
+          <h2 id="outcome-title">Outcome</h2>
+          <p>
+            The work gave DonAid a clearer product foundation: a service model,
+            a stakeholder-facing prototype, and a more coherent explanation of
+            how donation tracking could operate beyond a static receipt.
+          </p>
+          <ul>
+            {outcomeItems.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section id="reflection" aria-labelledby="reflection-title">
+          <h2 id="reflection-title">Reflection</h2>
+          <p>
+            DonAid taught me that some products fail not because the idea is
+            weak, but because the operating model is invisible. Before a team
+            can design screens or write production code, everyone needs to agree
+            on what the product is actually tracking, what each status means,
+            and which moments require proof.
+          </p>
+          <p>
+            My contribution was to turn that ambiguity into a working product
+            language: part service blueprint, part reporting system, part public
+            trust mechanism, and part prototype that made the concept easier to
+            test, discuss, and build.
+          </p>
+        </section>
+      </article>
     </main>
   </body>
 </html>
-<style is:global>
-  :root {
-    --page-pad: 1.5rem;
-    --page-pad-lg: 6rem;
-    --section-gap: 0.25rem;
-    --text-strong: #ffffffe6;
-    --text-normal: #ffffffbf;
-    --text-muted: #ffffff80;
-    --text-dim: #ffffff66;
-    --hairline: #ffffff40;
-    --surface: #000;
-    --page-max: 120rem;
-    --px: var(--page-pad);
-    --py: 1.5rem;
-    --dvh: 100dvh;
-    --lvh: 100lvh;
-    --vh: 100vh;
-
-    @media screen and (min-width: 48rem) {
-      --px: var(--page-pad-lg);
-      --py: 6rem;
-    }
-  }
-  html {
-    scroll-behavior: smooth;
-  }
-  body {
-    font-family:
-      var(--font-pp-neue-montreal),
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      Oxygen,
-      Ubuntu,
-      Cantarell,
-      "Open Sans",
-      "Helvetica Neue",
-      sans-serif;
-    background-color: black;
-    color: #ffffffbf;
-    line-height: 1;
-    font-size: 0.875rem;
-    margin: 0;
-  }
-  body > .banner,
-  main {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: var(--page-max);
-    margin-inline: auto;
-  }
-  button {
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
-    font-size: inherit;
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p {
-    margin: 0;
-  }
-  ul {
-    padding: 0;
-  }
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-  a {
-    color: inherit;
-    text-decoration: none;
-    &:visited {
-      color: inherit;
-    }
-  }
-  button:hover {
-    cursor: pointer;
-  }
-  .contents {
-    display: contents;
-  }
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-    border-width: 0;
-  }
-</style>
