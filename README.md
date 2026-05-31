@@ -1,43 +1,102 @@
-# Astro Starter Kit: Minimal
+# Works
+
+Personal portfolio site for **Firas Razak**, focused on product design, product management, service design, and multidisciplinary case studies.
+
+Built with [Astro](https://astro.build/) as a mostly-static, fast-loading portfolio. The current homepage presents a hero section, showcase cards, and contact/about section.
+
+## Featured work
+
+The homepage currently highlights three showcase projects:
+
+- **Hyperprint** — branding printshop customer experience
+- **DonAid** — donation tracking and audit conceptualisation
+- **Wishful Menu** — democratic menu planning for a restaurant experience
+
+## Tech stack
+
+- **Astro 6**
+- **TypeScript** via Astro strict config
+- **PNPM** for package management
+- **Prettier** with `prettier-plugin-astro`
+- **Local font loading** through Astro font assets
+- **Static assets** in `src/images`, `src/graphics`, and `public`
+
+## Requirements
 
 ```sh
-pnpm create astro@latest -- --template minimal
+node >= 22.12.0
+pnpm
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Getting started
 
-## 🚀 Project Structure
+Install dependencies:
 
-Inside of your Astro project, you'll see the following folders and files:
+```sh
+pnpm install
+```
 
-```text
-/
-├── public/
+Start the local dev server:
+
+```sh
+pnpm dev
+```
+
+Astro will serve the site at:
+
+```txt
+http://localhost:4321
+```
+
+## Available scripts
+
+| Command | Description |
+| --- | --- |
+| `pnpm dev` | Start the Astro development server |
+| `pnpm build` | Build the production site to `dist/` |
+| `pnpm preview` | Preview the production build locally |
+| `pnpm astro` | Run Astro CLI commands |
+
+## Project structure
+
+```txt
+.
+├── public/              # Public static files, including favicon and downloadable assets
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/      # Astro components for homepage sections and UI pieces
+│   ├── fonts/           # Local font files loaded through Astro config
+│   ├── graphics/        # SVGs and brand marks
+│   ├── images/          # Project showcase imagery
+│   └── pages/           # Astro routes
+├── astro.config.mjs     # Astro configuration
+├── package.json         # Scripts, dependencies, and Node engine
+└── tsconfig.json        # TypeScript and path alias config
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Path aliases
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+The project uses `@/*` as an alias for `src/*`.
 
-Any static assets, like images, can be placed in the `public/` directory.
+Example:
 
-## 🧞 Commands
+```astro
+---
+import Banner from "@/components/banner.astro";
+---
+```
 
-All commands are run from the root of the project, from a terminal:
+## Deployment notes
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+This project currently uses Astro's default static build output. Unless an adapter is added later, deployment can target any static host that can serve the generated `dist/` folder.
 
-## 👀 Want to learn more?
+Good fits include:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Cloudflare Pages
+- Netlify
+- Vercel
+- GitHub Pages
+- Any static web server
+
+## Repository status
+
+This is an active portfolio build. The README is intentionally practical rather than pretending this is still an untouched starter template, because we do occasionally evolve past boilerplate as a species.
