@@ -51,8 +51,18 @@ import InfoDialog from "@/components/info.astro";
       #00000000 100%
     );
 
-    & > * {
-      pointer-events: auto;
+    @media (min-width: 64rem) {
+      align-items: center;
+      padding: 6rem var(--px) 12rem;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+      mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &,
+      & * {
+        transition-duration: 1ms;
+      }
     }
   }
 
@@ -60,23 +70,22 @@ import InfoDialog from "@/components/info.astro";
     position: relative;
     display: inline-flex;
     align-items: flex-start;
-    gap: 0.5rem;
-    width: max-content;
+    gap: 0.75rem;
     color: var(--text-strong);
-
+    pointer-events: auto;
     & .logo {
       width: 1.25rem;
       height: auto;
       transition:
         transform 280ms ease,
         opacity 280ms ease;
+
+      @media (min-width: 64rem) {
+        width: 1.5rem;
+      }
     }
 
     & .top-text {
-      position: absolute;
-      top: 0.15rem;
-      left: 1.75rem;
-      width: max-content;
       opacity: 0;
       color: var(--text-muted);
       transition: opacity 280ms ease;
@@ -99,6 +108,10 @@ import InfoDialog from "@/components/info.astro";
       font-weight: 400;
       color: var(--text-normal);
     }
+
+    @media (min-width: 64rem) {
+      display: block;
+    }
   }
 
   .squiggle-info-trigger {
@@ -118,7 +131,7 @@ import InfoDialog from "@/components/info.astro";
     transition:
       opacity 280ms ease,
       color 280ms ease;
-
+    pointer-events: auto;
     & span {
       max-width: 4rem;
       font-size: 0.875rem;
@@ -133,12 +146,27 @@ import InfoDialog from "@/components/info.astro";
     &:hover {
       color: #fff;
     }
+
+    @media (min-width: 64rem) {
+      position: static;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+
+      & span {
+        max-width: none;
+        font-size: inherit;
+        line-height: 1;
+      }
+
+      & .info {
+        width: 1.25rem;
+      }
+    }
   }
 
   .contact-cta {
-    position: fixed;
-    top: 1.75rem;
-    right: 1.25rem;
     grid-column: 3;
     grid-row: 1;
     justify-self: end;
@@ -153,12 +181,21 @@ import InfoDialog from "@/components/info.astro";
       transform 280ms ease;
 
     & .logo {
+      margin-top: -0.25rem;
       width: 1rem;
       height: auto;
       transform: rotate(-135deg);
       transition:
         opacity 280ms ease,
         transform 280ms ease;
+
+      @media (min-width: 64rem) {
+        width: 1.5rem;
+      }
+    }
+
+    @media (min-width: 64rem) {
+      position: static;
     }
   }
 
@@ -191,63 +228,14 @@ import InfoDialog from "@/components/info.astro";
   .banner.is-at-contact {
     & .contact-cta {
       transform: translateX(2.125rem);
-
+      opacity: 0;
+      pointer-events: none;
       & .logo {
-        opacity: 0;
         transform: rotate(-225deg);
       }
     }
   }
 
-  @media (min-width: 64rem) {
-    .banner {
-      align-items: center;
-      padding: 6rem var(--px) 12rem;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
-      mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
-    }
-
-    .logo-link .logo {
-      width: 1.5rem;
-    }
-
-    .running-title {
-      display: block;
-    }
-
-    .squiggle-info-trigger {
-      position: static;
-      flex-direction: row;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 1rem;
-
-      & span {
-        max-width: none;
-        font-size: inherit;
-        line-height: 1;
-      }
-
-      & .info {
-        width: 1.25rem;
-      }
-    }
-
-    .contact-cta .logo {
-      width: 1.5rem;
-    }
-
-    .contact-cta {
-      position: static;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .banner *,
-    .banner {
-      transition-duration: 1ms;
-    }
-  }
 </style>
 
 <script>
@@ -283,9 +271,7 @@ import InfoDialog from "@/components/info.astro";
   document.querySelectorAll("[data-dialog-trigger]").forEach((trigger) => {
     trigger.addEventListener("click", () => {
       const dialogId = trigger.getAttribute("data-dialog-trigger");
-      const dialog = dialogId
-        ? document.getElementById(dialogId)
-        : undefined;
+      const dialog = dialogId ? document.getElementById(dialogId) : undefined;
 
       if (dialog instanceof HTMLDialogElement) {
         dialog.showModal();

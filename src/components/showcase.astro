@@ -144,6 +144,11 @@ const showcaseItems: ShowcaseItem[] = [
     gap: 0.75rem;
     padding: var(--px);
     color: var(--text-strong);
+
+    @media (min-width: 64rem) {
+      gap: 1.5rem;
+      padding: var(--px);
+    }
   }
 
   .mobile-meta,
@@ -151,6 +156,12 @@ const showcaseItems: ShowcaseItem[] = [
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 0.5rem;
+  }
+
+  .mobile-meta {
+    @media (min-width: 64rem) {
+      display: none;
+    }
   }
 
   .meta-group,
@@ -189,6 +200,11 @@ const showcaseItems: ShowcaseItem[] = [
       inset: 0;
       background: #000;
       opacity: var(--overlay-opacity, 0.6);
+    }
+
+    @media (min-width: 64rem) {
+      height: auto;
+      aspect-ratio: 1728 / 723;
     }
   }
 
@@ -229,11 +245,21 @@ const showcaseItems: ShowcaseItem[] = [
 
   .project-footer {
     align-items: end;
+
+    @media (min-width: 64rem) {
+      grid-template-columns: minmax(0, 1.7fr) minmax(16rem, 1fr) auto;
+      gap: 0.5rem;
+      align-items: start;
+    }
   }
 
   .project-copy {
     min-width: 0;
     grid-column: 1 / -1;
+
+    @media (min-width: 64rem) {
+      grid-column: auto;
+    }
   }
 
   .title-link {
@@ -253,6 +279,11 @@ const showcaseItems: ShowcaseItem[] = [
     font-size: 1.5rem;
     font-weight: 500;
     line-height: 1;
+
+    @media (min-width: 64rem) {
+      max-width: none;
+      font-size: 2rem;
+    }
   }
 
   .project-copy p {
@@ -260,49 +291,17 @@ const showcaseItems: ShowcaseItem[] = [
     color: var(--text-muted);
     font-weight: 500;
     line-height: 1;
+
+    @media (min-width: 64rem) {
+      font-size: 1.5rem;
+    }
   }
 
   .desktop-brand,
   .desktop-pagination {
     display: none;
-  }
 
-  @media (min-width: 64rem) {
-    .showcase-card {
-      gap: 1.5rem;
-      padding: var(--px);
-    }
-
-    .mobile-meta {
-      display: none;
-    }
-
-    .figure {
-      height: auto;
-      aspect-ratio: 1728 / 723;
-    }
-
-    .project-footer {
-      grid-template-columns: minmax(0, 1.7fr) minmax(16rem, 1fr) auto;
-      gap: 0.5rem;
-      align-items: start;
-    }
-
-    .project-copy {
-      grid-column: auto;
-    }
-
-    h3 {
-      max-width: none;
-      font-size: 2rem;
-    }
-
-    .project-copy p {
-      font-size: 1.5rem;
-    }
-
-    .desktop-brand,
-    .desktop-pagination {
+    @media (min-width: 64rem) {
       display: flex;
       font-size: 2rem;
 

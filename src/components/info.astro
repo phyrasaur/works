@@ -89,6 +89,13 @@
         }
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      &,
+      &::backdrop {
+        transition-duration: 1ms;
+      }
+    }
   }
 
   .info-panel {
@@ -98,6 +105,11 @@
     flex-direction: column;
     gap: 3.5rem;
     padding: var(--px);
+
+    @media (min-width: 64rem) {
+      gap: 3.5rem;
+      padding: 6.25rem;
+    }
   }
 
   .info-header {
@@ -138,20 +150,6 @@
 
     & p {
       opacity: 0.9;
-    }
-  }
-
-  @media (min-width: 64rem) {
-    .info-panel {
-      gap: 3.5rem;
-      padding: 6.25rem;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .info-dialog,
-    .info-dialog::backdrop {
-      transition-duration: 1ms;
     }
   }
 </style>
