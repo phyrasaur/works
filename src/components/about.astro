@@ -1,23 +1,15 @@
 ---
-import Logo from "@/graphics/waf.svg";
+
 ---
 
 <footer id="contact" class="contact-section" aria-labelledby="contact-title">
-  <div class="contact-heading">
-    <Logo />
-    <hgroup>
-      <h2 id="contact-title">Firas Razak</h2>
-      <p>Product Design & Management</p>
-    </hgroup>
-    <a href="#contact" class="desktop-contact-link">Contact</a>
-    <p class="mobile-contact-label" aria-hidden="true">Contact</p>
-  </div>
-
   <div class="contact-body">
     <section class="about-copy" aria-label="About Firas Razak">
       <p class="definition">
         <dfn>Firas</dfn>
-        <span> - n. (Arabic) an intuitive, insightful, perspicacious person</span>
+        <span>
+          - n. (Arabic) an intuitive, insightful, perspicacious person</span
+        >
       </p>
       <p class="claim">
         A multidisciplinary product designer who turns ambiguous ideas into
@@ -100,66 +92,6 @@ import Logo from "@/graphics/waf.svg";
       min-height: 68.1875rem;
       gap: 4.5rem;
       padding-block: 6rem 10rem;
-    }
-  }
-
-  .contact-heading {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-
-    & .logo {
-      width: 1.25rem;
-      height: auto;
-    }
-
-    & hgroup {
-      display: none;
-    }
-
-    @media (min-width: 64rem) {
-      align-items: center;
-
-      & .logo {
-        width: 2.25rem;
-      }
-
-      & hgroup {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        font-size: 1.25rem;
-        letter-spacing: 0.02em;
-
-        & h2 {
-          font-size: inherit;
-          font-weight: 700;
-        }
-
-        & p {
-          color: var(--text-normal);
-        }
-      }
-    }
-  }
-
-  .desktop-contact-link {
-    display: none;
-
-    @media (min-width: 64rem) {
-      display: inline-grid;
-      grid-template-columns: auto 4.5rem;
-      align-items: center;
-      gap: 1rem;
-      margin-inline-end: -6rem;
-      color: var(--text-strong);
-      font-size: 1.25rem;
-
-      &::after {
-        content: "";
-        border-top: 1px solid var(--hairline);
-      }
     }
   }
 

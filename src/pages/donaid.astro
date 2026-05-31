@@ -18,34 +18,7 @@ import outcomeImage from "@/images/donaid/outcome.jpg";
 import clariteamImage from "@/images/donaid/clariteam.svg?url";
 import thinkpencilImage from "@/images/donaid/thinkpencil.svg?url";
 import vitruvianImage from "@/images/donaid/vitruvian.svg?url";
-
-const workshopFigures = [
-  {
-    image: journeyImage,
-    title: "Comparing donor journeys",
-    body: "I compared a typical user journey with the proposed donation tracking from the donor's perspective to clarify how donation tracking works.",
-    className: "wide",
-  },
-  {
-    image: flowsImage,
-    title: "Money versus data flows",
-    body: "To emphasise that DonAid does not collect money, I mapped out the money and reporting flows.",
-    className: "span-two",
-  },
-];
-
-const feasibilityFigures = [
-  {
-    image: bankingImage,
-    title: "Automated banking data",
-    body: "CSR bank statements were explored for automatic transaction retrieval.",
-  },
-  {
-    image: manualProcessImage,
-    title: "Messaging providers",
-    body: "I surveyed providers that could notify donors through WhatsApp after each donation status change.",
-  },
-];
+import Nav from "@/components/nav.astro";
 
 const processFigures = [
   {
@@ -118,8 +91,8 @@ const insights = [
     image: vitruvianImage,
     title: "Cross-functional fluency mitigates risks",
     body: "Working across product, design, and engineering helped me spot gaps early before they became costly mistakes.",
-import Nav from "@/components/nav.astro";
-import heroImage from "@/images/donaid-hero.jpg";
+  },
+];
 
 const roleItems = [
   "Product strategy",
@@ -160,23 +133,29 @@ const problemItems = [
 
 const workshopFigures = [
   {
-    title: "Money versus data flows",
-    copy: "To emphasise that DonAid doesn’t collect money, I mapped out the money and reporting flows.",
+    image: journeyImage,
+    title: "Comparing donor journeys",
+    body: "I compared a typical user journey with the proposed donation tracking from the donor's perspective to clarify how donation tracking works.",
+    className: "wide",
   },
   {
-    title: "Comparing donor journeys",
-    copy: "I compared a typical user journey with the proposed donation tracking from the donor’s perspective to clarify how donation tracking works.",
+    image: flowsImage,
+    title: "Money versus data flows",
+    body: "To emphasise that DonAid does not collect money, I mapped out the money and reporting flows.",
+    className: "span-two",
   },
 ];
 
 const feasibilityFigures = [
   {
-    title: "Surveying available banking data",
-    copy: "CSV bank statements are easier to sanitise than PDFs, and cut dev effort if we build our own ingestion.",
+    image: bankingImage,
+    title: "Automated banking data",
+    body: "CSR bank statements were explored for automatic transaction retrieval.",
   },
   {
-    title: "Messaging services",
-    copy: "We decided to use WhatsApp API directly, no middleware markup, lower cost per transaction.",
+    image: manualProcessImage,
+    title: "Messaging providers",
+    body: "I surveyed providers that could notify donors through WhatsApp after each donation status change.",
   },
 ];
 
@@ -272,36 +251,42 @@ const insightItems = [
         <div class="lede">
           <p class="lede-title">Summary</p>
           <p>
-            <strong>Public trust in charitable giving</strong> is often shaken
-            by concerns over fraud, misuse of funds, and opaque money handling.
-            These issues can <strong>turn an act of goodwill into a leap of faith</strong>
+            <strong>Public trust in charitable giving</strong> is often shaken by
+            concerns over fraud, misuse of funds, and opaque money handling. These
+            issues can <strong
+              >turn an act of goodwill into a leap of faith</strong
+            >
             for donors.
           </p>
           <p>
             By making <strong>donation traceable, like parcel tracking</strong>,
-            donors and partners can see how money moves from collection to charity.
+            donors and partners can see how money moves from collection to
+            charity.
           </p>
         </div>
       </section>
 
-      <section class="case-section background" aria-labelledby="background-title">
+      <section
+        class="case-section background"
+        aria-labelledby="background-title"
+      >
         <h2 id="background-title">Background</h2>
         <div class="background-grid">
           <p class="section-copy">
-            3 development attempts had failed, and other prospective agencies were
-            unresponsive. Without a clear specification, previous teams were forced
-            to guess, often mistaking the donation tracking system for a standard
-            donation platform. The issue was in comprehension, not engineering.
+            3 development attempts had failed, and other prospective agencies
+            were unresponsive. Without a clear specification, previous teams
+            were forced to guess, often mistaking the donation tracking system
+            for a standard donation platform. The issue was in comprehension,
+            not engineering.
           </p>
           <p class="mini-meta">
             <strong>Role</strong>
-            Product strategy, service design, user experience, interface design,
-            product management
+            Product strategy, service design, user experience, interface design, product
+            management
           </p>
           <p class="mini-meta">
             <strong>Tech</strong>
-            Confluence, Jira, Figma, Tailwind CSS, Next.js, Prisma, PostgreSQL,
-            AWS
+            Confluence, Jira, Figma, Tailwind CSS, Next.js, Prisma, PostgreSQL, AWS
           </p>
         </div>
       </section>
@@ -322,13 +307,16 @@ const insightItems = [
         </div>
       </section>
 
-      <section class="case-section dense-section" aria-labelledby="workshop-title">
+      <section
+        class="case-section dense-section"
+        aria-labelledby="workshop-title"
+      >
         <h2 id="workshop-title">Product workshop</h2>
         <p class="section-copy">
-          To start, I ran daily sessions with the founder until we reached enough
-          shared understanding of the product. I then simplified the original
-          material into a 7-page product brief to be sent to development agencies
-          for quotation. After the rewrite,
+          To start, I ran daily sessions with the founder until we reached
+          enough shared understanding of the product. I then simplified the
+          original material into a 7-page product brief to be sent to
+          development agencies for quotation. After the rewrite,
           <strong>agency response rate increased from 10% to 80%.</strong>
         </p>
         <div class="media-grid workshop-grid">
@@ -353,13 +341,16 @@ const insightItems = [
         </div>
       </section>
 
-      <section class="case-section dense-section" aria-labelledby="feasibility-title">
+      <section
+        class="case-section dense-section"
+        aria-labelledby="feasibility-title"
+      >
         <h2 id="feasibility-title">Feasibility study</h2>
         <p class="section-copy">
           I surveyed banking and messaging integrations to map what could be
           automated, what needed vendor buy-in, and what required a manual
-          fallback. Where banks moved too slow, I proposed processing the banking
-          side manually as an interim workaround.
+          fallback. Where banks moved too slow, I proposed processing the
+          banking side manually as an interim workaround.
         </p>
         <div class="media-grid two-col">
           {
@@ -383,7 +374,10 @@ const insightItems = [
         </div>
       </section>
 
-      <section class="case-section dense-section" aria-labelledby="process-title">
+      <section
+        class="case-section dense-section"
+        aria-labelledby="process-title"
+      >
         <h2 id="process-title">Work scoping</h2>
         <p class="section-copy">
           I split the brief into domains, MVP and post-launch scope to keep the
@@ -411,7 +405,10 @@ const insightItems = [
         </div>
       </section>
 
-      <section class="case-section interface-design" aria-labelledby="interface-title">
+      <section
+        class="case-section interface-design"
+        aria-labelledby="interface-title"
+      >
         <h2 id="interface-title">Interface design</h2>
         <p class="section-copy">
           Design was not in the agency's scope. I stepped in and delivered
@@ -429,8 +426,8 @@ const insightItems = [
           />
           <figcaption>
             <strong>Sketching wireframes:</strong>
-            Wireframes helped translate the product logic into screens the team
-            could estimate, build, and critique.
+            Wireframes helped translate the product logic into screens the team could
+            estimate, build, and critique.
           </figcaption>
         </figure>
       </section>
@@ -438,19 +435,22 @@ const insightItems = [
       <section class="case-section" aria-labelledby="checkins-title">
         <h2 id="checkins-title">Engineering check-ins</h2>
         <p class="section-copy">
-          I ran weekly check-ins, taking progress reports from the dev team while
-          handing over design for the next task. I bridged the founder and dev
-          across system design, business logic, architecture, and acceptance
+          I ran weekly check-ins, taking progress reports from the dev team
+          while handing over design for the next task. I bridged the founder and
+          dev across system design, business logic, architecture, and acceptance
           criteria.
         </p>
       </section>
 
-      <section class="case-section dense-section" aria-labelledby="features-title">
+      <section
+        class="case-section dense-section"
+        aria-labelledby="features-title"
+      >
         <h2 id="features-title">Product core feature</h2>
         <p class="section-copy">
           DonAid's main scope is to verify a donation after the transaction and
-          track the money received from a campaign partner to the auditing trustee
-          and finally released to the charity.
+          track the money received from a campaign partner to the auditing
+          trustee and finally released to the charity.
         </p>
         <figure class="media-card blueprint">
           <img
@@ -489,7 +489,10 @@ const insightItems = [
         </div>
       </section>
 
-      <section class="case-section dense-section" aria-labelledby="outcome-title">
+      <section
+        class="case-section dense-section"
+        aria-labelledby="outcome-title"
+      >
         <h2 id="outcome-title">Outcome</h2>
         <p class="section-copy">
           The final delivery hit a foreseeable delay for the bank integration
@@ -511,11 +514,11 @@ const insightItems = [
           </figcaption>
         </figure>
         <p class="pull-quote">
-          After the demo deployment, the founder and I had conducted a market-fit
-          demonstration. <strong>All 32 attendants</strong> from various
-          <strong>charity organisations expressed interest</strong> in the
-          product and demonstrated a <strong>thorough understanding</strong> of
-          how donation tracking works.
+          After the demo deployment, the founder and I had conducted a
+          market-fit demonstration. <strong>All 32 attendants</strong> from various
+          <strong>charity organisations expressed interest</strong> in the product
+          and demonstrated a <strong>thorough understanding</strong> of how donation
+          tracking works.
         </p>
       </section>
 
@@ -1523,281 +1526,4 @@ const insightItems = [
       grid-column: 1 / -1;
     }
   }
-
 </style>
-    <title>DonAid — Donation tracking & audit conceptualised | Firas Razak</title>
-    <meta
-      name="description"
-      content="A product design and management case study about conceptualising DonAid, a donation tracking and audit platform for transparent charitable giving."
-    />
-  </head>
-  <body>
-    <Nav />
-
-    <main>
-      <article aria-labelledby="case-title">
-        <header>
-          <p>Showcase 2 <span>/ 3</span></p>
-          <h1 id="case-title">Donation tracking &amp; audit conceptualised</h1>
-
-          <aside aria-labelledby="summary-title">
-            <h2 id="summary-title">Summary</h2>
-            <p>
-              <strong>Public trust in charitable giving</strong> is often shaken
-              by concerns over fraud, misuse of funds, and opaque money
-              handling. These issues can <strong>turn an act of goodwill into a
-              leap of faith</strong> for donors.
-            </p>
-            <p>
-              By making <strong>donation traceable, like parcel tracking</strong>,
-              donors and partners can see how money moves from collection to
-              charity.
-            </p>
-          </aside>
-
-          <figure>
-            <img
-              src={heroImage.src}
-              width={heroImage.width}
-              height={heroImage.height}
-              alt="DonAid donation tracking case study hero image"
-            />
-            <figcaption>DonAid</figcaption>
-          </figure>
-        </header>
-
-        <section aria-labelledby="background-title">
-          <h2 id="background-title">Background</h2>
-          <p>
-            3 development attempts had failed, and other prospective agencies
-            were unresponsive. Without a clear specification, previous teams were
-            forced to guess, often mistaking the donation tracking system for a
-            standard donation platform. The issue was in comprehension, not
-            engineering.
-          </p>
-
-          <dl>
-            <div>
-              <dt>Role</dt>
-              <dd>
-                <ul>
-                  {roleItems.map((item) => <li>{item}</li>)}
-                </ul>
-              </dd>
-            </div>
-            <div>
-              <dt>Tech</dt>
-              <dd>
-                <ul>
-                  {techItems.map((item) => <li>{item}</li>)}
-                </ul>
-              </dd>
-            </div>
-          </dl>
-        </section>
-
-        <section aria-labelledby="problems-title">
-          <h2 id="problems-title">Problems</h2>
-          <ol>
-            {problemItems.map((problem) => (
-              <li>
-                <p>{problem.label}</p>
-                <h3>{problem.title}</h3>
-                <p>{problem.copy}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section aria-labelledby="product-workshop-title">
-          <h2 id="product-workshop-title">Product workshop</h2>
-          <p>
-            To start, I ran daily sessions with the founder until we reached
-            enough shared understanding of the product. I then simplified the
-            original material into a 7-page product brief to be sent to
-            development agencies for quotation. After the rewrite,
-            <strong> agency response rate increased from 10% to 80%</strong>.
-          </p>
-
-          <div>
-            {workshopFigures.map((figure) => (
-              <figure>
-                <div role="img" aria-label={figure.title}></div>
-                <figcaption>
-                  <strong>{figure.title}</strong>
-                  <span>{figure.copy}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </section>
-
-        <section aria-labelledby="feasibility-title">
-          <h2 id="feasibility-title">Feasibility study</h2>
-          <p>
-            I surveyed banking and messaging integrations to map what could be
-            automated, what needed vendor buy-in, and what required a manual
-            fallback. Where banks moved too slow, I proposed processing the
-            banking side manually as an interim workaround.
-          </p>
-
-          <div>
-            {feasibilityFigures.map((figure) => (
-              <figure>
-                <div role="img" aria-label={figure.title}></div>
-                <figcaption>
-                  <strong>{figure.title}</strong>
-                  <span>{figure.copy}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </section>
-
-        <section aria-labelledby="work-scoping-title">
-          <h2 id="work-scoping-title">Work scoping</h2>
-          <p>
-            I split the brief into Demo, MVP, and Feature Complete phases. I
-            also shifted the founder’s mindset to agile workflow.
-          </p>
-
-          <div>
-            {scopingFigures.map((figure) => (
-              <figure>
-                <div role="img" aria-label={figure.title}></div>
-                <figcaption>
-                  <strong>{figure.title}</strong>
-                  <span>{figure.copy}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </section>
-
-        <section aria-labelledby="interface-design-title">
-          <h2 id="interface-design-title">Interface design</h2>
-          <p>
-            Design was not in the agency’s scope. I stepped in and delivered
-            interfaces and flow diagrams in sync with dev milestones.
-          </p>
-
-          <figure>
-            <div role="img" aria-label="Sketching wireframes"></div>
-            <figcaption>
-              <strong>Sketching wireframes:</strong>
-              <span>
-                Throughout my product workshops with the founder, I sketched
-                wireframes and flow diagrams ad-hoc to build shared
-                understanding. The high-fidelity design was later reviewed and
-                approved in Figma before I handed over code as React TypeScript
-                components, styled with Tailwind CSS, to the dev team.
-              </span>
-            </figcaption>
-          </figure>
-        </section>
-
-        <section aria-labelledby="engineering-check-ins-title">
-          <h2 id="engineering-check-ins-title">Engineering check-ins</h2>
-          <p>
-            I ran weekly check-ins, taking progress reports from the dev team
-            while handing over design for the next task. I bridged the founder
-            and dev across system design, business logic, architecture, and
-            acceptance criteria.
-          </p>
-        </section>
-
-        <section aria-labelledby="core-feature-title">
-          <h2 id="core-feature-title">Product core feature</h2>
-          <p>
-            DonAid’s main scope is to verify a donation after the transaction
-            and track the money received from a campaign partner to the auditing
-            trustee and finally released to the charity.
-          </p>
-
-          <figure>
-            <div role="img" aria-label="Service blueprint"></div>
-            <figcaption>
-              <strong>Service blueprint:</strong>
-              <span>Aligning teams and stakeholders for what DonAid is.</span>
-            </figcaption>
-          </figure>
-
-          <div>
-            {coreFeatures.map((feature) => (
-              <section aria-labelledby={`${feature.title.toLowerCase().replaceAll(" ", "-")}-title`}>
-                <h3 id={`${feature.title.toLowerCase().replaceAll(" ", "-")}-title`}>
-                  {feature.title}
-                </h3>
-                <p>{feature.copy}</p>
-                <figure>
-                  <div role="img" aria-label={feature.title}></div>
-                </figure>
-              </section>
-            ))}
-          </div>
-        </section>
-
-        <section aria-labelledby="outcome-title">
-          <h2 id="outcome-title">Outcome</h2>
-          <p>
-            The final delivery hit a foreseeable delay for the bank integration
-            scope since the founder and the team had agreed to push ahead
-            despite the flag to omit it.
-          </p>
-
-          <figure>
-            <div role="img" aria-label="Demo homepage"></div>
-            <figcaption>
-              <strong>Demo homepage:</strong>
-              <span>
-                Five demo sites for different types of donation collection by
-                partnership.
-              </span>
-            </figcaption>
-          </figure>
-
-          <p>
-            After the demo deployment, the founder and I had conducted a
-            market-fit demonstration. <strong>All 32 attendants</strong> from
-            various <strong>charity organisations</strong>
-            <strong> expressed interest</strong> in the product and demonstrated
-            <strong> a thorough understanding</strong> how donation tracking
-            works.
-          </p>
-        </section>
-
-        <section aria-labelledby="insights-title">
-          <h2 id="insights-title">Insights</h2>
-          <ol>
-            {insightItems.map((insight) => (
-              <li>
-                <p>{insight.label}</p>
-                <h3>{insight.title}</h3>
-                <p>{insight.copy}</p>
-                <figure>
-                  <div role="img" aria-label={insight.title}></div>
-                </figure>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <footer>
-          <nav aria-label="Contact links">
-            <ul>
-              <li><a href="/resume.pdf" download>Resume</a></li>
-              <li><a href="https://linkedin.com/in/firasrazak">@firasrazak</a></li>
-              <li><a href="mailto:hi@firas.works">hi@firas.works</a></li>
-            </ul>
-          </nav>
-
-          <a href="/wishful-menu" aria-label="Next showcase: Wishful Menu">
-            <span>Showcase 3 <span>/ 3</span></span>
-            <strong>Wishful Menu</strong>
-            <span>Democracy in menu planning at a restaurant</span>
-          </a>
-        </footer>
-      </article>
-    </main>
-  </body>
-</html>
