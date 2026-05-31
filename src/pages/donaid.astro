@@ -1,5 +1,123 @@
 ---
 import Head from "@/components/head.astro";
+import Logo from "@/graphics/waf.svg";
+import donaidMark from "@/graphics/donaid-mark.png";
+import heroImage from "@/images/donaid/hero.jpg";
+import journeyImage from "@/images/donaid/journey.jpg";
+import flowsImage from "@/images/donaid/flows.jpg";
+import bankingImage from "@/images/donaid/banking.jpg";
+import manualProcessImage from "@/images/donaid/manual-process.jpg";
+import schemaImage from "@/images/donaid/schema.jpg";
+import donorFlowImage from "@/images/donaid/donor-flow.jpg";
+import wireframesImage from "@/images/donaid/wireframes.jpg";
+import blueprintImage from "@/images/donaid/blueprint.jpg";
+import taggingImage from "@/images/donaid/tagging.jpg";
+import trackingImage from "@/images/donaid/tracking.jpg";
+import reportingImage from "@/images/donaid/reporting.jpg";
+import outcomeImage from "@/images/donaid/outcome.jpg";
+import clariteamImage from "@/images/donaid/clariteam.svg?url";
+import thinkpencilImage from "@/images/donaid/thinkpencil.svg?url";
+import vitruvianImage from "@/images/donaid/vitruvian.svg?url";
+
+const workshopFigures = [
+  {
+    image: journeyImage,
+    title: "Comparing donor journeys",
+    body: "I compared a typical user journey with the proposed donation tracking from the donor's perspective to clarify how donation tracking works.",
+    className: "wide",
+  },
+  {
+    image: flowsImage,
+    title: "Money versus data flows",
+    body: "To emphasise that DonAid does not collect money, I mapped out the money and reporting flows.",
+    className: "span-two",
+  },
+];
+
+const feasibilityFigures = [
+  {
+    image: bankingImage,
+    title: "Automated banking data",
+    body: "CSR bank statements were explored for automatic transaction retrieval.",
+  },
+  {
+    image: manualProcessImage,
+    title: "Messaging providers",
+    body: "I surveyed providers that could notify donors through WhatsApp after each donation status change.",
+  },
+];
+
+const processFigures = [
+  {
+    image: schemaImage,
+    title: "Data modelling",
+    body: "Entity relationships were mapped to translate accounting, donation, trustee, and reporting logic.",
+    className: "span-two",
+  },
+  {
+    image: donorFlowImage,
+    title: "Donor flow",
+    body: "I mapped the steps from donation receipt to public tracking to test if the concept held together.",
+  },
+];
+
+const problems = [
+  {
+    label: "One",
+    title: "Incomprehensible brief:",
+    body: "The dev brief consisted of 50+ interlinked documents with the data modelling in a 30-tabs spreadsheet. Critical business logic was buried in walls of text.",
+  },
+  {
+    label: "Two",
+    title: "Built from ground up:",
+    body: "Spanning across accounting, banking, legal trust, logistics, e-commerce, and CSR, every domain had to be modelled from scratch with no room for heuristics.",
+  },
+  {
+    label: "Three",
+    title: "Product feasibility:",
+    body: "Open banking access varies by country and bank. There was no guarantee the data flow we needed would even be available.",
+  },
+];
+
+const features = [
+  {
+    label: "Feature one",
+    title: "Donation tagging",
+    body: "Upon a successful donation transaction with the campaign partner, the POS requests a unique tag for the donation to be printed as a QR code in the receipt.",
+    image: taggingImage,
+  },
+  {
+    label: "Feature two",
+    title: "Public tracking",
+    body: "Akin to parcel tracking, donation progress is laid out in a timeline. The tracker can get a WhatsApp notification as the donation moves.",
+    image: trackingImage,
+  },
+  {
+    label: "Feature three",
+    title: "Reporting",
+    body: "Each step generates a unique report, from transaction acknowledgement to remittance report and final settlement advice.",
+    image: reportingImage,
+  },
+];
+
+const insights = [
+  {
+    label: "Insight one",
+    image: clariteamImage,
+    title: "Product clarity for team alignment",
+    body: "The earlier teams failed because there was no shared understanding of the product, not for lack of effort.",
+  },
+  {
+    label: "Insight two",
+    image: thinkpencilImage,
+    title: "Design is thinking made visual",
+    body: "Diagrams and designs turned abstract explanations into artefacts the team could see, challenge, improve, and execute.",
+  },
+  {
+    label: "Insight three",
+    image: vitruvianImage,
+    title: "Cross-functional fluency mitigates risks",
+    body: "Working across product, design, and engineering helped me spot gaps early before they became costly mistakes.",
 import Nav from "@/components/nav.astro";
 import heroImage from "@/images/donaid-hero.jpg";
 
@@ -110,6 +228,1303 @@ const insightItems = [
 <html lang="en">
   <head>
     <Head />
+    <title>DonAid - Firas Razak</title>
+  </head>
+  <body>
+    <main class="article">
+      <header class="article-header">
+        <a href="/" class="home-link" aria-label="Back to home">
+          <Logo />
+        </a>
+        <p class="site-title" aria-hidden="true">
+          <strong>Firas Razak</strong>
+          <span>Product Design &amp; Management</span>
+        </p>
+        <button type="button" class="close-link" data-showcase-close>
+          <span>Close showcase</span>
+          <span aria-hidden="true">x</span>
+        </button>
+      </header>
+
+      <section class="preview" aria-labelledby="page-title">
+        <p class="kicker">
+          <span>Showcase 2</span>
+          <span>/ 3</span>
+        </p>
+        <h1 id="page-title">Donation tracking & audit conceptualised</h1>
+        <figure class="hero-figure" data-showcase-detail-hero="donaid">
+          <img
+            src={heroImage.src}
+            width={heroImage.width}
+            height={heroImage.height}
+            alt=""
+            decoding="async"
+          />
+          <figcaption>
+            <img
+              src={donaidMark.src}
+              width={donaidMark.width}
+              height={donaidMark.height}
+              alt="DonAid"
+            />
+          </figcaption>
+        </figure>
+        <div class="lede">
+          <p class="lede-title">Summary</p>
+          <p>
+            <strong>Public trust in charitable giving</strong> is often shaken
+            by concerns over fraud, misuse of funds, and opaque money handling.
+            These issues can <strong>turn an act of goodwill into a leap of faith</strong>
+            for donors.
+          </p>
+          <p>
+            By making <strong>donation traceable, like parcel tracking</strong>,
+            donors and partners can see how money moves from collection to charity.
+          </p>
+        </div>
+      </section>
+
+      <section class="case-section background" aria-labelledby="background-title">
+        <h2 id="background-title">Background</h2>
+        <div class="background-grid">
+          <p class="section-copy">
+            3 development attempts had failed, and other prospective agencies were
+            unresponsive. Without a clear specification, previous teams were forced
+            to guess, often mistaking the donation tracking system for a standard
+            donation platform. The issue was in comprehension, not engineering.
+          </p>
+          <p class="mini-meta">
+            <strong>Role</strong>
+            Product strategy, service design, user experience, interface design,
+            product management
+          </p>
+          <p class="mini-meta">
+            <strong>Tech</strong>
+            Confluence, Jira, Figma, Tailwind CSS, Next.js, Prisma, PostgreSQL,
+            AWS
+          </p>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="problems-title">
+        <h2 id="problems-title">Problems</h2>
+        <div class="numbered-list">
+          {
+            problems.map((problem) => (
+              <article class="numbered-row">
+                <p class="side-label">{problem.label}</p>
+                <p>
+                  <strong>{problem.title}</strong> {problem.body}
+                </p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="case-section dense-section" aria-labelledby="workshop-title">
+        <h2 id="workshop-title">Product workshop</h2>
+        <p class="section-copy">
+          To start, I ran daily sessions with the founder until we reached enough
+          shared understanding of the product. I then simplified the original
+          material into a 7-page product brief to be sent to development agencies
+          for quotation. After the rewrite,
+          <strong>agency response rate increased from 10% to 80%.</strong>
+        </p>
+        <div class="media-grid workshop-grid">
+          {
+            workshopFigures.map((figure) => (
+              <figure class:list={["media-card", figure.className]}>
+                <img
+                  src={figure.image.src}
+                  width={figure.image.width}
+                  height={figure.image.height}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>
+                  <strong>{figure.title}</strong>
+                  {figure.body}
+                </figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="case-section dense-section" aria-labelledby="feasibility-title">
+        <h2 id="feasibility-title">Feasibility study</h2>
+        <p class="section-copy">
+          I surveyed banking and messaging integrations to map what could be
+          automated, what needed vendor buy-in, and what required a manual
+          fallback. Where banks moved too slow, I proposed processing the banking
+          side manually as an interim workaround.
+        </p>
+        <div class="media-grid two-col">
+          {
+            feasibilityFigures.map((figure) => (
+              <figure class="media-card">
+                <img
+                  src={figure.image.src}
+                  width={figure.image.width}
+                  height={figure.image.height}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>
+                  <strong>{figure.title}</strong>
+                  {figure.body}
+                </figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="case-section dense-section" aria-labelledby="process-title">
+        <h2 id="process-title">Work scoping</h2>
+        <p class="section-copy">
+          I split the brief into domains, MVP and post-launch scope to keep the
+          product coherent while the technical team estimated effort and risk.
+        </p>
+        <div class="media-grid process-grid">
+          {
+            processFigures.map((figure) => (
+              <figure class:list={["media-card", figure.className]}>
+                <img
+                  src={figure.image.src}
+                  width={figure.image.width}
+                  height={figure.image.height}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>
+                  <strong>{figure.title}:</strong>
+                  {figure.body}
+                </figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="case-section interface-design" aria-labelledby="interface-title">
+        <h2 id="interface-title">Interface design</h2>
+        <p class="section-copy">
+          Design was not in the agency's scope. I stepped in and delivered
+          wireframes and flow diagrams to meet both stakeholder needs and
+          technical constraints.
+        </p>
+        <figure class="media-card interface-figure">
+          <img
+            src={wireframesImage.src}
+            width={wireframesImage.width}
+            height={wireframesImage.height}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>
+            <strong>Sketching wireframes:</strong>
+            Wireframes helped translate the product logic into screens the team
+            could estimate, build, and critique.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section" aria-labelledby="checkins-title">
+        <h2 id="checkins-title">Engineering check-ins</h2>
+        <p class="section-copy">
+          I ran weekly check-ins, taking progress reports from the dev team while
+          handing over design for the next task. I bridged the founder and dev
+          across system design, business logic, architecture, and acceptance
+          criteria.
+        </p>
+      </section>
+
+      <section class="case-section dense-section" aria-labelledby="features-title">
+        <h2 id="features-title">Product core feature</h2>
+        <p class="section-copy">
+          DonAid's main scope is to verify a donation after the transaction and
+          track the money received from a campaign partner to the auditing trustee
+          and finally released to the charity.
+        </p>
+        <figure class="media-card blueprint">
+          <img
+            src={blueprintImage.src}
+            width={blueprintImage.width}
+            height={blueprintImage.height}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>
+            <strong>Service blueprint:</strong>
+            Aligning teams and stakeholders for what DonAid is
+          </figcaption>
+        </figure>
+        <div class="feature-list">
+          {
+            features.map((feature) => (
+              <article class="feature-row">
+                <p class="side-label">{feature.label}</p>
+                <div class="feature-copy">
+                  <h3>{feature.title}</h3>
+                  <p>{feature.body}</p>
+                </div>
+                <img
+                  src={feature.image.src}
+                  width={feature.image.width}
+                  height={feature.image.height}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="case-section dense-section" aria-labelledby="outcome-title">
+        <h2 id="outcome-title">Outcome</h2>
+        <p class="section-copy">
+          The final delivery hit a foreseeable delay for the bank integration
+          scope since the founder and the team had agreed to push ahead despite
+          the flag to omit it.
+        </p>
+        <figure class="media-card outcome-card">
+          <img
+            src={outcomeImage.src}
+            width={outcomeImage.width}
+            height={outcomeImage.height}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>
+            <strong>Demo homepage:</strong>
+            Five demo sites for different types of donation collection by partnership
+          </figcaption>
+        </figure>
+        <p class="pull-quote">
+          After the demo deployment, the founder and I had conducted a market-fit
+          demonstration. <strong>All 32 attendants</strong> from various
+          <strong>charity organisations expressed interest</strong> in the
+          product and demonstrated a <strong>thorough understanding</strong> of
+          how donation tracking works.
+        </p>
+      </section>
+
+      <section class="case-section insights" aria-labelledby="insights-title">
+        <h2 id="insights-title">Insights</h2>
+        <div class="insight-list">
+          {
+            insights.map((insight) => (
+              <article class="insight-row">
+                <p class="side-label">{insight.label}</p>
+                <div>
+                  <img
+                    src={insight.image}
+                    width="297"
+                    height="326"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <h3>{insight.title}</h3>
+                  <p>{insight.body}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <footer class="article-footer">
+        <a href="/" class="home-link" aria-label="Back to home">
+          <Logo />
+        </a>
+        <a class="next-showcase" href="/wishful-menu">
+          <span class="kicker"><span>Showcase 3</span><span>/ 3</span></span>
+          <strong>Wishful Menu</strong>
+          <span>Democracy in menu planning at a restaurant</span>
+        </a>
+        <nav aria-label="Contact links">
+          <a href="/resume.pdf">Resume</a>
+          <a href="https://www.linkedin.com/in/firasrazak/">@firasrazak</a>
+          <a href="mailto:hi@firas.works">hi@firas.works</a>
+        </nav>
+      </footer>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --page-pad: 1.5rem;
+    --page-pad-lg: 6rem;
+    --section-gap: 0.25rem;
+    --text-strong: #ffffffe6;
+    --text-normal: #ffffffbf;
+    --text-muted: #ffffff80;
+    --text-dim: #ffffff66;
+    --hairline: #ffffff40;
+    --surface: #000;
+    --page-max: 120rem;
+    --px: var(--page-pad);
+    --py: 1.5rem;
+    --dvh: 100dvh;
+    --lvh: 100lvh;
+    --vh: 100vh;
+
+    @media screen and (min-width: 48rem) {
+      --px: var(--page-pad-lg);
+      --py: 6rem;
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: black;
+    color: var(--text-normal);
+    font-family:
+      var(--font-pp-neue-montreal),
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      "Open Sans",
+      "Helvetica Neue",
+      sans-serif;
+    font-size: 0.875rem;
+    line-height: 1;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  figure {
+    margin: 0;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: inherit;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>
+
+<style>
+  .article {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100%;
+    max-width: var(--page-max);
+    min-height: 100vh;
+    margin-inline: auto;
+    background: #000;
+  }
+
+  .article-header,
+  .preview,
+  .case-section,
+  .article-footer {
+    box-sizing: border-box;
+    width: 100%;
+    padding-inline: var(--px);
+  }
+
+  .article-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1.5rem;
+    color: var(--text-strong);
+  }
+
+  @media (min-width: 64rem) {
+    .article-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      min-height: 14.25rem;
+      padding: 6rem var(--px);
+    }
+  }
+
+  .home-link {
+    display: inline-flex;
+    width: 1.5rem;
+    color: var(--text-strong);
+  }
+
+  @media (min-width: 64rem) {
+    .home-link {
+      width: 2.25rem;
+    }
+  }
+
+  .home-link :global(.logo) {
+    width: 100%;
+    height: auto;
+  }
+
+  .close-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-size: 0.875rem;
+    font: inherit;
+    color: var(--text-strong);
+    cursor: pointer;
+  }
+
+  .site-title {
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .site-title {
+      display: inline-flex;
+      gap: 0.75rem;
+      align-items: center;
+      justify-self: center;
+      color: #fff;
+      font-size: 1.25rem;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .site-title strong {
+      font-weight: 700;
+    }
+
+    .site-title span {
+      color: var(--text-normal);
+    }
+
+    .close-link {
+      justify-self: end;
+      gap: 0.5rem;
+      font-size: 1.25rem;
+    }
+  }
+
+  .preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 64rem) {
+    .preview {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.75rem 1.5rem;
+      padding: 0 var(--px);
+    }
+  }
+
+  .kicker {
+    display: inline-flex;
+    gap: 0.25rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  @media (min-width: 64rem) {
+    .kicker {
+      grid-column: 1 / span 2;
+      font-size: 1.5rem;
+    }
+  }
+
+  .kicker span + span {
+    color: var(--text-dim);
+  }
+
+  h1 {
+    max-width: 18rem;
+    color: var(--text-strong);
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  @media (min-width: 64rem) {
+    h1 {
+      grid-column: 1 / span 2;
+      max-width: 56.25rem;
+      font-size: 4rem;
+    }
+  }
+
+  .hero-figure {
+    position: relative;
+    aspect-ratio: 312 / 185;
+    overflow: hidden;
+    background: #111;
+  }
+
+  @media (min-width: 64rem) {
+    .hero-figure {
+      grid-column: 1 / -1;
+      height: auto;
+      margin-top: 1.75rem;
+      aspect-ratio: 1728 / 723;
+    }
+  }
+
+  .hero-figure::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #000;
+    opacity: 0.59;
+  }
+
+  .hero-figure > img {
+    width: 100%;
+    height: 128%;
+    object-fit: cover;
+    transform: translateY(-11%);
+  }
+
+  .hero-figure figcaption {
+    position: absolute;
+    z-index: 1;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero-figure figcaption img {
+    width: 8.25rem;
+  }
+
+  @media (min-width: 64rem) {
+    .hero-figure figcaption img {
+      width: 27.5rem;
+    }
+  }
+
+  .lede {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.25;
+  }
+
+  .lede-title {
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .lede {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+      gap: 1.75rem;
+      color: #fff;
+      font-size: 1.25rem;
+      letter-spacing: 0.03em;
+      line-height: 1.41;
+    }
+
+    .lede-title {
+      display: block;
+      color: var(--text-strong);
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+  }
+
+  strong {
+    color: var(--text-strong);
+    font-weight: 700;
+  }
+
+  .case-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-block: 1.875rem;
+  }
+
+  @media (min-width: 64rem) {
+    .case-section {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2.25rem 1.5rem;
+      padding: 6rem var(--px);
+    }
+
+    .case-section.background,
+    .case-section.dense-section:nth-of-type(4),
+    .case-section.dense-section:nth-of-type(5),
+    .case-section.dense-section:nth-of-type(6),
+    .case-section[aria-labelledby="checkins-title"] {
+      align-items: start;
+    }
+  }
+
+  .dense-section {
+    padding-block: 0.75rem;
+  }
+
+  @media (min-width: 64rem) {
+    .dense-section {
+      padding-block: 6rem;
+    }
+  }
+
+  h2 {
+    color: var(--text-strong);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  @media (min-width: 64rem) {
+    h2 {
+      grid-column: 1 / -1;
+      font-size: 3rem;
+    }
+
+    .background h2,
+    .case-section[aria-labelledby="workshop-title"] h2,
+    .case-section[aria-labelledby="feasibility-title"] h2,
+    .case-section[aria-labelledby="process-title"] h2,
+    .case-section[aria-labelledby="checkins-title"] h2 {
+      grid-column: 2 / -1;
+    }
+
+    .interface-design h2 {
+      grid-column: 1 / -1;
+    }
+  }
+
+  h3 {
+    color: var(--text-strong);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  @media (min-width: 64rem) {
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .section-copy {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.25;
+  }
+
+  @media (min-width: 64rem) {
+    .section-copy {
+      grid-column: 2 / -1;
+      color: var(--text-normal);
+      font-size: 1.875rem;
+      letter-spacing: 0.03em;
+      line-height: 1.25;
+    }
+
+    .case-section[aria-labelledby="features-title"] > .section-copy,
+    .case-section[aria-labelledby="outcome-title"] > .section-copy,
+    .interface-design > .section-copy {
+      grid-column: 1 / span 2;
+    }
+  }
+
+  .background-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem 0.75rem;
+  }
+
+  @media (min-width: 64rem) {
+    .background-grid {
+      display: contents;
+    }
+  }
+
+  .background-grid .section-copy {
+    grid-column: 1 / -1;
+  }
+
+  .mini-meta,
+  figcaption {
+    color: var(--text-muted);
+    font-size: 0.625rem;
+    letter-spacing: 0.03em;
+    line-height: 1.35;
+  }
+
+  .mini-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  @media (min-width: 64rem) {
+    .mini-meta,
+    figcaption {
+      font-size: 1.25rem;
+      letter-spacing: 0.03em;
+      line-height: 1.35;
+    }
+
+    .mini-meta {
+      gap: 0.25rem;
+    }
+
+    .mini-meta:nth-of-type(2) {
+      grid-column: 2;
+    }
+
+    .mini-meta:nth-of-type(3) {
+      grid-column: 3;
+    }
+  }
+
+  .numbered-list,
+  .feature-list,
+  .insight-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 64rem) {
+    .numbered-list {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-list,
+    .insight-list {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .numbered-row,
+  .feature-row,
+  .insight-row {
+    display: grid;
+    grid-template-columns: 0.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: start;
+  }
+
+  .numbered-row > p:last-child {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    line-height: 1.25;
+  }
+
+  @media (min-width: 64rem) {
+    .numbered-row {
+      grid-template-columns: 1.75rem minmax(0, 1fr);
+      gap: 1.5rem;
+      align-self: start;
+    }
+
+    .numbered-row > p:last-child {
+      color: var(--text-normal);
+      font-size: 1.875rem;
+      letter-spacing: 0.03em;
+      line-height: 1.25;
+    }
+  }
+
+  .side-label {
+    width: max-content;
+    color: var(--text-muted);
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    text-transform: uppercase;
+    transform: rotate(-90deg) translateX(-100%);
+    transform-origin: left top;
+  }
+
+  @media (min-width: 64rem) {
+    .side-label {
+      font-size: 1.25rem;
+      letter-spacing: 0.03em;
+    }
+  }
+
+  .media-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 64rem) {
+    .media-grid {
+      grid-column: 1 / -1;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .case-section[aria-labelledby="feasibility-title"] .media-grid,
+    .case-section[aria-labelledby="process-title"] .media-grid {
+      grid-column: 2 / -1;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .workshop-grid,
+  .process-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .media-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+  }
+
+  @media (min-width: 64rem) {
+    .media-card {
+      gap: 0.75rem;
+    }
+  }
+
+  .media-card.wide,
+  .media-card.span-two {
+    grid-column: 1 / -1;
+  }
+
+  .workshop-grid .span-two {
+    grid-column: span 2;
+  }
+
+  @media (min-width: 64rem) {
+    .workshop-grid .wide {
+      grid-column: 1;
+    }
+
+    .workshop-grid .span-two {
+      grid-column: 2 / -1;
+    }
+
+    .process-grid .span-two {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .media-card img {
+    width: 100%;
+    height: auto;
+    opacity: 0.85;
+    object-fit: cover;
+  }
+
+  @media (min-width: 64rem) {
+    .media-card img {
+      opacity: 0.9;
+    }
+  }
+
+  .workshop-grid .wide img {
+    height: 8.4375rem;
+  }
+
+  .workshop-grid .span-two img {
+    height: 13.25rem;
+  }
+
+  @media (min-width: 64rem) {
+    .workshop-grid .wide img {
+      height: 37.5rem;
+    }
+
+    .workshop-grid .span-two img {
+      height: 32rem;
+    }
+  }
+
+  .two-col .media-card img {
+    aspect-ratio: 1.28;
+  }
+
+  @media (min-width: 64rem) {
+    .two-col .media-card img {
+      aspect-ratio: 560 / 395;
+    }
+  }
+
+  .process-grid .span-two img {
+    height: 7.5rem;
+  }
+
+  .process-grid .media-card:not(.span-two) img {
+    aspect-ratio: 0.72;
+  }
+
+  @media (min-width: 64rem) {
+    .process-grid .span-two img {
+      height: 28rem;
+    }
+
+    .process-grid .media-card:not(.span-two) img {
+      aspect-ratio: 560 / 420;
+    }
+  }
+
+  .media-card img,
+  .feature-row img {
+    object-fit: cover;
+  }
+
+  .blueprint img {
+    height: 6rem;
+  }
+
+  @media (min-width: 64rem) {
+    .blueprint {
+      grid-column: 1 / -1;
+    }
+
+    .blueprint img {
+      height: auto;
+      aspect-ratio: 1728 / 438;
+    }
+
+    .interface-figure {
+      grid-column: 1 / -1;
+    }
+
+    .interface-figure img {
+      width: 100%;
+      height: 32rem;
+      object-fit: cover;
+    }
+  }
+
+  .feature-row {
+    grid-template-columns: 0.5rem minmax(0, 1.35fr) minmax(5.5rem, 0.65fr);
+    padding-block: 0.75rem;
+  }
+
+  @media (min-width: 64rem) {
+    .feature-list {
+      display: flex;
+      gap: 5rem;
+      padding-top: 2.25rem;
+    }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      padding-block: 0;
+      align-items: center;
+    }
+
+    .feature-row .side-label {
+      display: none;
+    }
+
+    .feature-row img {
+      grid-column: 2;
+      justify-self: center;
+    }
+
+    .feature-row:nth-child(2) .feature-copy {
+      grid-column: 1;
+      grid-row: 1;
+      text-align: right;
+    }
+
+    .feature-row:nth-child(1) .feature-copy,
+    .feature-row:nth-child(3) .feature-copy {
+      grid-column: 3;
+      grid-row: 1;
+    }
+  }
+
+  .feature-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .feature-copy p {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    line-height: 1.25;
+  }
+
+  @media (min-width: 64rem) {
+    .feature-copy {
+      gap: 1rem;
+    }
+
+    .feature-copy p {
+      color: var(--text-normal);
+      font-size: 1.25rem;
+      line-height: 1.35;
+    }
+  }
+
+  .feature-row img {
+    width: 100%;
+    height: 12rem;
+    align-self: start;
+    opacity: 0.9;
+  }
+
+  @media (min-width: 64rem) {
+    .feature-row img {
+      width: min(100%, 35rem);
+      height: auto;
+      max-height: 48rem;
+    }
+
+    .feature-row:nth-child(2) img {
+      width: 22.5rem;
+    }
+  }
+
+  .feature-row:nth-child(3) img {
+    height: 7.875rem;
+  }
+
+  @media (min-width: 64rem) {
+    .feature-row:nth-child(3) img {
+      height: auto;
+    }
+  }
+
+  .outcome-card img {
+    aspect-ratio: 16 / 9;
+  }
+
+  @media (min-width: 64rem) {
+    .outcome-card {
+      grid-column: 1 / -1;
+    }
+
+    .outcome-card img {
+      aspect-ratio: 1728 / 675;
+    }
+  }
+
+  .pull-quote {
+    padding-block: 0.75rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.15;
+  }
+
+  @media (min-width: 64rem) {
+    .pull-quote {
+      grid-column: 1 / span 2;
+      padding-block: 0;
+      color: var(--text-normal);
+      font-size: 1.875rem;
+      line-height: 1.25;
+    }
+  }
+
+  .insights {
+    padding-top: 1.5rem;
+  }
+
+  @media (min-width: 64rem) {
+    .insights {
+      padding-top: 6rem;
+    }
+  }
+
+  .insight-row {
+    gap: 0.5rem;
+  }
+
+  @media (min-width: 64rem) {
+    .insight-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .insight-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .insight-row .side-label {
+      width: auto;
+      transform: none;
+    }
+  }
+
+  .insight-row > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .insight-row img {
+    width: 100%;
+    border: 1px solid var(--hairline);
+    opacity: 0.85;
+  }
+
+  @media (min-width: 64rem) {
+    .insight-row img {
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+  }
+
+  .insight-row h3 {
+    max-width: 15rem;
+    font-size: 0.875rem;
+    line-height: 1.2;
+  }
+
+  @media (min-width: 64rem) {
+    .insight-row h3 {
+      max-width: 28rem;
+      font-size: 1.5rem;
+    }
+  }
+
+  .insight-row p:last-child {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+
+  @media (min-width: 64rem) {
+    .insight-row p:last-child {
+      color: var(--text-normal);
+      font-size: 1.25rem;
+    }
+  }
+
+  .article-footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1rem 0.5rem;
+    padding-block: 1.5rem;
+    color: var(--text-strong);
+  }
+
+  @media (min-width: 64rem) {
+    .article-footer {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      min-height: 18.75rem;
+      padding: 6rem var(--px);
+      align-items: end;
+    }
+  }
+
+  .next-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .next-showcase strong {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+  }
+
+  .next-showcase > span:last-child {
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+
+  .article-footer nav {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    color: var(--text-strong);
+    font-size: 0.75rem;
+  }
+
+  @media (min-width: 64rem) {
+    .next-showcase {
+      grid-column: 3;
+      align-self: start;
+    }
+
+    .next-showcase strong,
+    .next-showcase > span:last-child,
+    .article-footer nav {
+      font-size: 1.25rem;
+    }
+
+    .article-footer nav {
+      grid-column: 1 / -1;
+    }
+  }
+
+</style>
     <title>DonAid — Donation tracking & audit conceptualised | Firas Razak</title>
     <meta
       name="description"

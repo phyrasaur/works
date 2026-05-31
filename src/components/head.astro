@@ -1,5 +1,6 @@
 ---
 import { Font } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <meta charset="utf-8" />
@@ -10,3 +11,230 @@ import { Font } from "astro:assets";
 <meta name="generator" content={Astro.generator} />
 <meta name="theme-color" content="#000" />
 <meta name="color-scheme" content="dark" />
+<ClientRouter fallback="animate" />
+
+<style is:global>
+  @keyframes showcase-sheet-in {
+    from {
+      clip-path: inset(100% 0 0 round 1.25rem 1.25rem 0 0);
+      transform: translateY(22vh);
+    }
+    to {
+      clip-path: inset(0 0 0 round 0);
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes showcase-sheet-out {
+    from {
+      clip-path: inset(0 0 0 round 0);
+      transform: translateY(0);
+    }
+    to {
+      clip-path: inset(100% 0 0 round 1.25rem 1.25rem 0 0);
+      transform: translateY(22vh);
+    }
+  }
+
+  @keyframes showcase-modal-in {
+    from {
+      opacity: 0;
+      transform: translateY(2rem) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes showcase-modal-out {
+    from {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(2rem) scale(0.985);
+    }
+  }
+
+  @keyframes showcase-page-hold {
+    from,
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  [data-showcase-hero="donaid"],
+  [data-showcase-detail-hero="donaid"] {
+    view-transition-name: donaid-hero;
+    contain: layout;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html[data-astro-transition]::view-transition-group(root) {
+      animation-duration: 420ms;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html[data-astro-transition]::view-transition-old(root),
+    html[data-astro-transition]::view-transition-new(root) {
+      animation-duration: 420ms;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      backface-visibility: hidden;
+      mix-blend-mode: normal;
+    }
+
+    html[data-showcase-transition]::view-transition-group(donaid-hero) {
+      animation-duration: 520ms;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 3;
+    }
+
+    html[data-showcase-transition]::view-transition-image-pair(donaid-hero),
+    html[data-showcase-transition]::view-transition-old(donaid-hero),
+    html[data-showcase-transition]::view-transition-new(donaid-hero) {
+      height: 100%;
+      overflow: hidden;
+      mix-blend-mode: normal;
+    }
+
+    html[data-showcase-transition]::view-transition-old(donaid-hero),
+    html[data-showcase-transition]::view-transition-new(donaid-hero) {
+      animation-duration: 520ms;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html[data-showcase-transition="open"]::view-transition-old(root) {
+      animation-name: showcase-page-hold;
+    }
+
+    html[data-showcase-transition="open"]::view-transition-new(root) {
+      animation-name: showcase-sheet-in;
+      box-shadow: 0 -1.5rem 4rem #000000a6;
+      transform-origin: bottom center;
+    }
+
+    html[data-showcase-transition="close"]::view-transition-old(root) {
+      animation-name: showcase-sheet-out;
+      box-shadow: 0 -1.5rem 4rem #000000a6;
+      transform-origin: bottom center;
+      z-index: 1;
+    }
+
+    html[data-showcase-transition="close"]::view-transition-new(root) {
+      animation-name: showcase-page-hold;
+    }
+
+    @media (min-width: 48rem) {
+      html[data-showcase-transition="open"]::view-transition-new(root) {
+        animation-name: showcase-modal-in;
+      }
+
+      html[data-showcase-transition="close"]::view-transition-old(root) {
+        animation-name: showcase-modal-out;
+      }
+    }
+  }
+</style>
+
+<script>
+  import { navigate } from "astro:transitions/client";
+
+  const ENTRY_KEY = "firas.showcaseEntry";
+  const HOME_PATHS = new Set(["/", "/index.html"]);
+  const SHOWCASE_PATHS = new Set(["/donaid", "/donaid/"]);
+
+  const getClosest = (target: EventTarget | null, selector: string) => {
+    return target instanceof Element ? target.closest(selector) : null;
+  };
+
+  const isModifiedClick = (event: MouseEvent) => {
+    return event.button !== 0 || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey;
+  };
+
+  const isHomeUrl = (url: URL) => {
+    return url.origin === location.origin && HOME_PATHS.has(url.pathname);
+  };
+
+  const isShowcaseUrl = (url: URL) => {
+    return url.origin === location.origin && SHOWCASE_PATHS.has(url.pathname);
+  };
+
+  const readEntry = () => {
+    try {
+      const raw = sessionStorage.getItem(ENTRY_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  };
+
+  document.addEventListener("click", (event) => {
+    if (!(event instanceof MouseEvent) || isModifiedClick(event)) {
+      return;
+    }
+
+    const showcaseLink = getClosest(event.target, "a[data-showcase-link]");
+    if (showcaseLink instanceof HTMLAnchorElement) {
+      const href = new URL(showcaseLink.href, location.href);
+
+      if (isShowcaseUrl(href) && isHomeUrl(new URL(location.href))) {
+        document.documentElement.dataset.showcaseTransition = "open";
+        sessionStorage.setItem(
+          ENTRY_KEY,
+          JSON.stringify({
+            from: location.href,
+            to: href.pathname,
+            createdAt: Date.now(),
+          }),
+        );
+      }
+    }
+
+    const closeButton = getClosest(event.target, "[data-showcase-close]");
+    if (!(closeButton instanceof HTMLElement)) {
+      return;
+    }
+
+    event.preventDefault();
+    const entry = readEntry();
+    const cameFromHome =
+      entry &&
+      entry.to === location.pathname &&
+      Date.now() - entry.createdAt < 1000 * 60 * 30 &&
+      isHomeUrl(new URL(entry.from, location.href)) &&
+      history.length > 1;
+
+    if (cameFromHome) {
+      history.back();
+      return;
+    }
+
+    navigate("/#showcase");
+  });
+
+  document.addEventListener("astro:before-preparation", (event) => {
+    const transitionEvent = event as Event & { from?: URL; to?: URL };
+
+    if (!transitionEvent.from || !transitionEvent.to) {
+      return;
+    }
+
+    if (isHomeUrl(transitionEvent.from) && isShowcaseUrl(transitionEvent.to)) {
+      document.documentElement.dataset.showcaseTransition = "open";
+      return;
+    }
+
+    if (isShowcaseUrl(transitionEvent.from) && isHomeUrl(transitionEvent.to)) {
+      document.documentElement.dataset.showcaseTransition = "close";
+    }
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    window.setTimeout(() => {
+      delete document.documentElement.dataset.showcaseTransition;
+    }, 700);
+  });
+</script>
