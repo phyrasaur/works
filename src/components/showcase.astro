@@ -71,12 +71,9 @@ const showcaseItems: ShowcaseItem[] = [
               </p>
             </header>
 
-            <figure
-              class:list={["figure", item.mark === "donaid" && "donaid-transition-source"]}
-              data-showcase-hero={item.mark === "donaid" ? "donaid" : undefined}
-            >
+            <figure class="figure">
               <img
-                class="image"
+                class={`image ${item.mark}`}
                 src={item.image.src}
                 width={item.image.width}
                 height={item.image.height}
@@ -103,7 +100,7 @@ const showcaseItems: ShowcaseItem[] = [
 
             <footer class="project-footer">
               <div class="project-copy">
-                <a href={`/${item.slug}`} class="title-link" data-showcase-link>
+                <a href={`/${item.slug}`} class="title-link">
                   <h3>{item.title}</h3>
                   <span aria-hidden="true">›</span>
                 </a>
@@ -219,6 +216,7 @@ const showcaseItems: ShowcaseItem[] = [
     width: 100%;
     height: 100%;
     object-fit: cover;
+    {{showCaseItems.map((item) => `&.${item.mark} { view-transition-name: ${item.mark}; }`)}}
   }
 
   .project-mark {

@@ -46,20 +46,22 @@
 
 <style>
   .info-dialog {
-    width: min(100vw, 33.75rem);
+    box-sizing: border-box;
+    inset: auto 0 0;
+    width: 100%;
     max-width: none;
-    height: 100dvh;
-    max-height: none;
-    margin: 0 0 0 auto;
+    height: auto;
+    max-height: 100dvh;
+    margin: auto 0 0;
     padding: 0;
     color: var(--text-strong);
     background: #000;
     border: 0;
-    border-left: 1px solid var(--hairline);
-    box-shadow: -49px 0 200px 87px #000000bf;
+    border-top: 1px solid var(--hairline);
+    box-shadow: 0 -2rem 5rem #000000bf;
     overflow-y: auto;
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateY(100%);
     transition:
       opacity 300ms ease,
       transform 300ms ease,
@@ -67,14 +69,14 @@
       display 300ms ease allow-discrete;
 
     &::backdrop {
-      background: linear-gradient(to right, #00000012, #00000099);
+      background: linear-gradient(to bottom, #00000031, #00000099);
       opacity: 0;
       transition: opacity 300ms ease;
     }
 
     &:open {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
 
       &::backdrop {
         opacity: 1;
@@ -82,7 +84,7 @@
 
       @starting-style {
         opacity: 0;
-        transform: translateX(100%);
+        transform: translateY(100%);
 
         &::backdrop {
           opacity: 0;
@@ -96,17 +98,42 @@
         transition-duration: 1ms;
       }
     }
+
+    @media (min-width: 64rem) {
+      inset: 0 0 0 auto;
+      width: min(100vw, 33.75rem);
+      height: 100dvh;
+      max-height: none;
+      margin: 0 0 0 auto;
+      border-top: 0;
+      border-left: 1px solid var(--hairline);
+      box-shadow: -49px 0 200px 87px #000000bf;
+      transform: translateX(100%);
+
+      &::backdrop {
+        background: linear-gradient(to right, #00000012, #00000099);
+      }
+
+      &:open {
+        transform: translateX(0);
+
+        @starting-style {
+          transform: translateX(100%);
+        }
+      }
+    }
   }
 
   .info-panel {
     box-sizing: border-box;
-    min-height: 100%;
+    min-height: auto;
     display: flex;
     flex-direction: column;
     gap: 3.5rem;
     padding: var(--px);
 
     @media (min-width: 64rem) {
+      min-height: 100%;
       gap: 3.5rem;
       padding: 6.25rem;
     }
@@ -159,9 +186,7 @@
 
   if (infoDialog instanceof HTMLDialogElement) {
     infoDialog.addEventListener("click", (event) => {
-      if (event.target === infoDialog) {
-        infoDialog.close();
-      }
+      if (event.target === infoDialog) infoDialog.close();
     });
   }
 </script>

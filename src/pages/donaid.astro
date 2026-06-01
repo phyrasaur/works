@@ -18,7 +18,6 @@ import outcomeImage from "@/images/donaid/outcome.jpg";
 import clariteamImage from "@/images/donaid/clariteam.svg?url";
 import thinkpencilImage from "@/images/donaid/thinkpencil.svg?url";
 import vitruvianImage from "@/images/donaid/vitruvian.svg?url";
-import Nav from "@/components/nav.astro";
 
 const processFigures = [
   {
@@ -219,10 +218,10 @@ const insightItems = [
           <strong>Firas Razak</strong>
           <span>Product Design &amp; Management</span>
         </p>
-        <button type="button" class="close-link" data-showcase-close>
+        <a href="/#showcase" class="close-link">
           <span>Close showcase</span>
           <span aria-hidden="true">x</span>
-        </button>
+        </a>
       </header>
 
       <section class="preview" aria-labelledby="page-title">
@@ -231,7 +230,7 @@ const insightItems = [
           <span>/ 3</span>
         </p>
         <h1 id="page-title">Donation tracking & audit conceptualised</h1>
-        <figure class="hero-figure" data-showcase-detail-hero="donaid">
+        <figure class="hero-figure">
           <img
             src={heroImage.src}
             width={heroImage.width}
@@ -565,98 +564,6 @@ const insightItems = [
     </main>
   </body>
 </html>
-
-<style is:global>
-  :root {
-    --page-pad: 1.5rem;
-    --page-pad-lg: 6rem;
-    --section-gap: 0.25rem;
-    --text-strong: #ffffffe6;
-    --text-normal: #ffffffbf;
-    --text-muted: #ffffff80;
-    --text-dim: #ffffff66;
-    --hairline: #ffffff40;
-    --surface: #000;
-    --page-max: 120rem;
-    --px: var(--page-pad);
-    --py: 1.5rem;
-    --dvh: 100dvh;
-    --lvh: 100lvh;
-    --vh: 100vh;
-
-    @media screen and (min-width: 48rem) {
-      --px: var(--page-pad-lg);
-      --py: 6rem;
-    }
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    margin: 0;
-    background-color: black;
-    color: var(--text-normal);
-    font-family:
-      var(--font-pp-neue-montreal),
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      Oxygen,
-      Ubuntu,
-      Cantarell,
-      "Open Sans",
-      "Helvetica Neue",
-      sans-serif;
-    font-size: 0.875rem;
-    line-height: 1;
-  }
-
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
-  h1,
-  h2,
-  h3,
-  p,
-  figure {
-    margin: 0;
-  }
-
-  img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  a:visited {
-    color: inherit;
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-    border-width: 0;
-  }
-</style>
-
 <style>
   .article {
     display: flex;
@@ -836,6 +743,7 @@ const insightItems = [
     height: 128%;
     object-fit: cover;
     transform: translateY(-11%);
+    view-transition-name: donaid;
   }
 
   .hero-figure figcaption {

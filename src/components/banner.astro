@@ -4,8 +4,8 @@ import Info from "@/graphics/info.svg";
 import InfoDialog from "@/components/info.astro";
 ---
 
-<header class="banner" data-site-header>
-  <a href="/" class="logo-link" data-logo-link>
+<header class="banner">
+  <a href="/" class="logo-link">
     <Logo />
     <span class="sr-only">Home</span>
     <span class="top-text" aria-hidden="true">Scroll to top</span>
@@ -18,7 +18,8 @@ import InfoDialog from "@/components/info.astro";
   <button
     type="button"
     class="squiggle-info-trigger"
-    data-dialog-trigger="info-dialog"
+    command="show-modal"
+    commandfor="info-dialog"
     aria-haspopup="dialog"
   >
     <span>Design Squiggle</span>
@@ -41,7 +42,7 @@ import InfoDialog from "@/components/info.astro";
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: start;
-    padding: 1.75rem var(--px) 3rem;
+    padding: var(--px) var(--py);
     pointer-events: none;
     background-image: linear-gradient(
       to bottom,
@@ -56,13 +57,6 @@ import InfoDialog from "@/components/info.astro";
       padding: 6rem var(--px) 12rem;
       grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
       mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      &,
-      & * {
-        transition-duration: 1ms;
-      }
     }
   }
 
@@ -129,6 +123,7 @@ import InfoDialog from "@/components/info.astro";
       opacity 280ms ease,
       color 280ms ease;
     pointer-events: auto;
+    will-change: opacity;
     & span {
       max-width: 4rem;
       font-size: 0.875rem;
@@ -223,21 +218,31 @@ import InfoDialog from "@/components/info.astro";
   }
 
   .banner.is-at-contact {
+    & .logo-link {
+      & .logo {
+        transform: translateX(0) rotate(0deg);
+      }
+
+      & .top-text {
+        opacity: 0;
+      }
+    }
     & .contact-cta {
-      transform: translateX(2.125rem);
-      opacity: 0;
+      opacity: 0.5;
+      transform: translate(1.5rem, 1rem) rotate(-90deg) scale(2);
       pointer-events: none;
       & .logo {
         transform: rotate(-225deg);
+        opacity: 0;
       }
     }
   }
 </style>
 
 <script>
-  const header = document.querySelector("[data-site-header]");
-  const logoLink = document.querySelector("[data-logo-link]");
-  const hero = document.querySelector("[data-hero]");
+  const header = document.querySelector(".banner");
+  const logoLink = document.querySelector(".logo-link");
+  const hero = document.querySelector(".hero");
   const contact = document.querySelector("#contact");
 
   if (header && logoLink && hero) {
@@ -247,7 +252,7 @@ import InfoDialog from "@/components/info.astro";
         header.classList.toggle("is-past-hero", isPastHero);
         logoLink.setAttribute("href", isPastHero ? "#" : "/");
       },
-      { rootMargin: "-120px" },
+      { rootMargin: "0px 0px -120px" },
     );
 
     titleObserver.observe(hero);
@@ -264,14 +269,10 @@ import InfoDialog from "@/components/info.astro";
     contactObserver.observe(contact);
   }
 
-  document.querySelectorAll("[data-dialog-trigger]").forEach((trigger) => {
-    trigger.addEventListener("click", () => {
-      const dialogId = trigger.getAttribute("data-dialog-trigger");
-      const dialog = dialogId ? document.getElementById(dialogId) : undefined;
-
-      if (dialog instanceof HTMLDialogElement) {
-        dialog.showModal();
-      }
+  const infoDialog = document.getElementById("info-dialog");
+  document
+    .querySelector(".squiggle-info-trigger")
+    ?.addEventListener("click", () => {
+      if (infoDialog instanceof HTMLDialogElement) infoDialog.showModal();
     });
-  });
 </script>
