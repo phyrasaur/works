@@ -3,15 +3,10 @@ import type { ShowcaseDetails } from "@/types/showcase";
 
 type Props = {
   showcase: ShowcaseDetails;
-  overlayOpacity?: number;
   headingId?: string;
 };
 
-const {
-  showcase,
-  overlayOpacity = 0.59,
-  headingId = "page-title",
-} = Astro.props;
+const { showcase, headingId = "page-title" } = Astro.props;
 
 const { item } = showcase;
 ---
@@ -22,7 +17,7 @@ const { item } = showcase;
     <span>{`/ ${showcase.total}`}</span>
   </p>
   <h1 id={headingId}>{item.title}</h1>
-  <figure class="hero-figure" style={`--hero-overlay-opacity: ${overlayOpacity}`}>
+  <figure class="hero-figure">
     <img
       src={item.image.src}
       width={item.image.width}
@@ -62,11 +57,11 @@ const { item } = showcase;
   }
 
   h1 {
-    max-width: 18rem;
-    color: var(--text-strong);
+    color: var(--text-normal);
     font-size: 1.75rem;
     font-weight: 400;
     line-height: 1;
+    text-wrap: balance;
   }
 
   .preview {
@@ -81,30 +76,34 @@ const { item } = showcase;
   .hero-figure {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 312 / 185;
+    height: 30lvh;
     background: #111;
-  }
-
-  .hero-figure::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: #000;
-    opacity: var(--hero-overlay-opacity, 0.59);
+    display: grid;
+    @media (min-width: 64rem) {
+      height: auto;
+      aspect-ratio: 7 / 3;
+    }
   }
 
   .hero-figure > img {
     width: 100%;
-    height: 128%;
+    height: 100%;
     object-fit: cover;
-    transform: translateY(-11%);
+    opacity: 0.3;
   }
 
   .hero-figure figcaption {
     position: absolute;
     z-index: 1;
-    inset: 50% auto auto 50%;
-    transform: translate(-50%, -50%);
+    inset: 0;
+    display: grid;
+    & img {
+      place-self: center;
+      max-width: 35%;
+      @media (min-width: 64rem) {
+        max-width: 15%;
+      }
+    }
   }
 
   .hero-mark {
@@ -141,6 +140,7 @@ const { item } = showcase;
     .preview {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: auto auto 1fr;
       gap: 1.75rem 1.5rem;
       padding: 0 var(--px);
     }
@@ -159,7 +159,7 @@ const { item } = showcase;
 
     .lede {
       grid-column: 3;
-      grid-row: 1 / span 2;
+      grid-row: 1 / span 3;
       gap: 1.75rem;
       color: #fff;
       font-size: 1.25rem;
