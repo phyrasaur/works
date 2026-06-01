@@ -20,7 +20,7 @@ import { Font } from "astro:assets";
     --section-gap: 0.25rem;
     --text-strong: #ffffffe6;
     --text-normal: #ffffffbf;
-    --text-muted: #ffffff80;
+    --text-muted: #ffffff9e;
     --text-dim: #ffffff66;
     --hairline: #ffffff40;
     --surface: #000;
@@ -32,7 +32,10 @@ import { Font } from "astro:assets";
     --vh: 100vh;
 
     @media screen and (min-width: 48rem) {
-      --px: var(--page-pad-lg);
+      --px: 6rem;
+      --py: 2.5rem;
+    }
+    @media screen and (min-width: 96rem) {
       --py: 6rem;
     }
   }

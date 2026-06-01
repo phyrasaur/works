@@ -32,12 +32,17 @@ import Squiggle from "@/graphics/squiggle.astro";
     padding-block: 1.5rem;
     color: var(--text-strong);
     grid-template-rows: 1fr;
+    transition: opacity 600ms;
+    opacity: 1;
     @media (min-width: 48rem) {
       min-height: calc(100lvh - var(--px) * 3);
     }
     @media (min-width: 64rem) {
       min-height: calc(100lvh - var(--px) * 5);
       padding: 0 var(--px) 0;
+    }
+    &.is-past-hero {
+      opacity: 0;
     }
   }
 
