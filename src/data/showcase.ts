@@ -1,8 +1,9 @@
 import hyperprintImage from "@/images/hyperprint-hero.jpg";
 import donaidImage from "@/images/donaid-hero.jpg";
-import wishfulMenuImage from "@/images/wishful-menu-hero.jpg";
-import hyperprintMark from "@/graphics/hyperprint-mark.png";
-import donaidMark from "@/graphics/donaid-mark.png";
+import wishfulImage from "@/images/wishful-hero.jpg";
+import hyperprintMark from "@/graphics/hyperprint.svg";
+import donaidMark from "@/graphics/donaid.svg";
+import wishfulMark from "@/graphics/wishful.svg";
 import type { ShowcaseItem } from "@/types/showcase";
 
 export const showcaseItems: ShowcaseItem[] = [
@@ -12,9 +13,7 @@ export const showcaseItems: ShowcaseItem[] = [
     service: "Service design",
     image: hyperprintImage,
     markImage: hyperprintMark,
-    mark: "hyperprint",
     slug: "hyperprint",
-    countLabel: "1 / 3",
   },
   {
     brand: "DonAid",
@@ -22,17 +21,14 @@ export const showcaseItems: ShowcaseItem[] = [
     service: "Product management",
     image: donaidImage,
     markImage: donaidMark,
-    mark: "donaid",
     slug: "donaid",
-    countLabel: "2 / 3",
   },
   {
     brand: "Wishful Menu",
     title: "Democracy in menu planning at a restaurant",
     service: "Product design",
-    image: wishfulMenuImage,
-    mark: "wishful",
-    slug: "wishful-menu",
-    countLabel: "3 / 3",
+    image: wishfulImage,
+    markImage: wishfulMark,
+    slug: "wishful",
   },
 ];

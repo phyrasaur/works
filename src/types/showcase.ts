@@ -3,8 +3,6 @@ export type ShowcaseItem = {
   title: string;
   service: string;
   image: ImageMetadata;
-  markImage?: ImageMetadata;
-  mark: "hyperprint" | "donaid" | "wishful";
+  markImage: ImageMetadata;
   slug: string;
-  countLabel: string;
 };
