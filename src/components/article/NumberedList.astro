@@ -1,0 +1,22 @@
+---
+import type { ArticleNumberedItem } from "@/types/article";
+
+type Props = {
+  items: ArticleNumberedItem[];
+};
+
+const { items } = Astro.props;
+---
+
+<div class="numbered-list">
+  {
+    items.map((item) => (
+      <article class="numbered-row">
+        <p class="side-label">{item.label}</p>
+        <p>
+          <strong>{item.title}</strong> {item.body}
+        </p>
+      </article>
+    ))
+  }
+</div>

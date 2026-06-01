@@ -1,0 +1,33 @@
+---
+type Props = {
+  id: string;
+  title: string;
+  dense?: boolean;
+  titleOffset?: boolean;
+  alignStart?: boolean;
+  class?: string;
+};
+
+const {
+  id,
+  title,
+  dense = false,
+  titleOffset = false,
+  alignStart = false,
+  class: className,
+} = Astro.props;
+---
+
+<section
+  class:list={[
+    "case-section",
+    dense && "dense-section",
+    titleOffset && "title-offset",
+    alignStart && "align-start",
+    className,
+  ]}
+  aria-labelledby={id}
+>
+  <h2 id={id}>{title}</h2>
+  <slot />
+</section>

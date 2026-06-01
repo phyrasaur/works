@@ -1,0 +1,23 @@
+---
+import Logo from "@/graphics/waf.svg";
+
+type Props = {
+  closeHref?: string;
+};
+
+const { closeHref = "/#showcase" } = Astro.props;
+---
+
+<header class="article-header">
+  <a href="/" class="home-link" aria-label="Back to home">
+    <Logo />
+  </a>
+  <p class="site-title" aria-hidden="true">
+    <strong>Firas Razak</strong>
+    <span>Product Design &amp; Management</span>
+  </p>
+  <a href={closeHref} class="close-link">
+    <span>Close showcase</span>
+    <span aria-hidden="true">x</span>
+  </a>
+</header>

@@ -1,0 +1,75 @@
+---
+type Props = {
+  showcaseNumber: number;
+  showcaseTotal: number;
+  title: string;
+  heroImage: ImageMetadata;
+  markImage: ImageMetadata;
+  markAlt: string;
+  headingId?: string;
+  overlayOpacity?: number;
+  viewTransitionName?: string;
+  imageHeight?: string;
+  imageTranslateY?: string;
+  markWidth?: string;
+  markWidthLarge?: string;
+};
+
+const {
+  showcaseNumber,
+  showcaseTotal,
+  title,
+  heroImage,
+  markImage,
+  markAlt,
+  headingId = "page-title",
+  overlayOpacity = 0.59,
+  viewTransitionName,
+  imageHeight = "128%",
+  imageTranslateY = "-11%",
+  markWidth = "8.25rem",
+  markWidthLarge = "27.5rem",
+} = Astro.props;
+
+const figureStyle = `--hero-overlay-opacity: ${overlayOpacity}`;
+const imageStyle = [
+  `--hero-image-height: ${imageHeight}`,
+  `--hero-image-y: ${imageTranslateY}`,
+  viewTransitionName ? `view-transition-name: ${viewTransitionName}` : "",
+]
+  .filter(Boolean)
+  .join("; ");
+const markStyle = `--hero-mark-width: ${markWidth}; --hero-mark-width-lg: ${markWidthLarge}`;
+---
+
+<section class="preview" aria-labelledby={headingId}>
+  <p class="kicker">
+    <span>{`Showcase ${showcaseNumber}`}</span>
+    <span>{`/ ${showcaseTotal}`}</span>
+  </p>
+  <h1 id={headingId}>{title}</h1>
+  <figure class="hero-figure" style={figureStyle}>
+    <img
+      src={heroImage.src}
+      width={heroImage.width}
+      height={heroImage.height}
+      alt=""
+      decoding="async"
+      style={imageStyle}
+    />
+    <figcaption>
+      <img
+        class="hero-mark"
+        src={markImage.src}
+        width={markImage.width}
+        height={markImage.height}
+        alt={markAlt}
+        style={markStyle}
+      />
+    </figcaption>
+  </figure>
+  <div class="lede">
+    <p class="lede-title">Summary</p>
+    <slot name="summary" />
+  </div>
+</section>

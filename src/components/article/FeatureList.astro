@@ -1,0 +1,31 @@
+---
+import type { ArticleFeature } from "@/types/article";
+
+type Props = {
+  features: ArticleFeature[];
+};
+
+const { features } = Astro.props;
+---
+
+<div class="feature-list">
+  {
+    features.map((feature) => (
+      <article class="feature-row">
+        <p class="side-label">{feature.label}</p>
+        <div class="feature-copy">
+          <h3>{feature.title}</h3>
+          <p>{feature.body}</p>
+        </div>
+        <img
+          src={feature.image.src}
+          width={feature.image.width}
+          height={feature.image.height}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </article>
+    ))
+  }
+</div>
