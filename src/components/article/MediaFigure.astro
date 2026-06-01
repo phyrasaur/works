@@ -1,0 +1,27 @@
+---
+import type { ArticleFigure } from "@/types/article";
+
+type Props = {
+  figure: ArticleFigure;
+  titleSuffix?: string;
+  class?: string;
+};
+
+const { figure, titleSuffix = "", class: className } = Astro.props;
+---
+
+<figure class:list={["media-card", figure.className, className]}>
+  <img
+    src={figure.image.src}
+    width={figure.image.width}
+    height={figure.image.height}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption>
+    <strong>{figure.title}{titleSuffix}</strong>
+    {" "}
+    {figure.body}
+  </figcaption>
+</figure>

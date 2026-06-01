@@ -1,0 +1,33 @@
+---
+import type { ArticleImage, ArticleInsight } from "@/types/article";
+
+type Props = {
+  insights: ArticleInsight[];
+};
+
+const { insights } = Astro.props;
+const imageSrc = (image: ArticleImage) =>
+  typeof image === "string" ? image : image.src;
+---
+
+<div class="insight-list">
+  {
+    insights.map((insight) => (
+      <article class="insight-row">
+        <p class="side-label">{insight.label}</p>
+        <div>
+          <img
+            src={imageSrc(insight.image)}
+            width="297"
+            height="326"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <h3>{insight.title}</h3>
+          <p>{insight.body}</p>
+        </div>
+      </article>
+    ))
+  }
+</div>

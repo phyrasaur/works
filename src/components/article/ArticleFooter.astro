@@ -1,0 +1,29 @@
+---
+import Logo from "@/graphics/waf.svg";
+import type { ArticleNextShowcase } from "@/types/article";
+
+type Props = {
+  next: ArticleNextShowcase;
+};
+
+const { next } = Astro.props;
+---
+
+<footer class="article-footer">
+  <a href="/" class="home-link" aria-label="Back to home">
+    <Logo />
+  </a>
+  <a class="next-showcase" href={next.href}>
+    <span class="kicker">
+      <span>{`Showcase ${next.showcaseNumber}`}</span>
+      <span>{`/ ${next.showcaseTotal}`}</span>
+    </span>
+    <strong>{next.brand}</strong>
+    <span>{next.title}</span>
+  </a>
+  <nav aria-label="Contact links">
+    <a href="/resume.pdf">Resume</a>
+    <a href="https://www.linkedin.com/in/firasrazak/">@firasrazak</a>
+    <a href="mailto:hi@firas.works">hi@firas.works</a>
+  </nav>
+</footer>

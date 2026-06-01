@@ -1,0 +1,22 @@
+---
+import type { ArticleMetaItem } from "@/types/article";
+
+type Props = {
+  body: string;
+  meta: ArticleMetaItem[];
+};
+
+const { body, meta } = Astro.props;
+---
+
+<div class="background-grid">
+  <p class="section-copy">{body}</p>
+  {
+    meta.map((item) => (
+      <p class="mini-meta">
+        <strong>{item.label}</strong>
+        {item.body}
+      </p>
+    ))
+  }
+</div>
