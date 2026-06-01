@@ -27,3 +27,99 @@ const { next } = Astro.props;
     <a href="mailto:hi@firas.works">hi@firas.works</a>
   </nav>
 </footer>
+
+<style>
+  .article-footer {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1rem 0.5rem;
+    width: 100%;
+    padding: 1.5rem var(--px);
+    color: var(--text-strong);
+  }
+
+  .home-link {
+    display: inline-flex;
+    width: 1.5rem;
+    color: var(--text-strong);
+  }
+
+  .home-link :global(.logo) {
+    width: 100%;
+    height: auto;
+  }
+
+  .kicker {
+    display: inline-flex;
+    gap: 0.25rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .kicker span + span {
+    color: var(--text-dim);
+  }
+
+  .next-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .next-showcase strong {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+  }
+
+  .next-showcase > span:last-child {
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+
+  nav {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    color: var(--text-strong);
+    font-size: 0.75rem;
+  }
+
+  @media (min-width: 64rem) {
+    .article-footer {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      min-height: 18.75rem;
+      padding: 6rem var(--px);
+      align-items: end;
+    }
+
+    .home-link {
+      width: 2.25rem;
+    }
+
+    .kicker {
+      font-size: 1.5rem;
+    }
+
+    .next-showcase {
+      grid-column: 3;
+      align-self: start;
+    }
+
+    .next-showcase strong,
+    .next-showcase > span:last-child,
+    nav {
+      font-size: 1.25rem;
+    }
+
+    nav {
+      grid-column: 1 / -1;
+    }
+  }
+</style>
