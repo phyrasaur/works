@@ -25,3 +25,138 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
     {figure.body}
   </figcaption>
 </figure>
+
+<style>
+  .media-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+  }
+
+  .media-card.wide,
+  .media-card.span-two {
+    grid-column: 1 / -1;
+  }
+
+  .media-card img {
+    width: 100%;
+    height: auto;
+    opacity: 0.85;
+    object-fit: cover;
+  }
+
+  figcaption {
+    color: var(--text-muted);
+    font-size: 0.625rem;
+    letter-spacing: 0.03em;
+    line-height: 1.35;
+  }
+
+  :global(.workshop-grid) .media-card.span-two {
+    grid-column: span 2;
+  }
+
+  :global(.workshop-grid) .media-card.wide img {
+    height: 8.4375rem;
+  }
+
+  :global(.workshop-grid) .media-card.span-two img {
+    height: 13.25rem;
+  }
+
+  :global(.media-grid.two-col) .media-card img {
+    aspect-ratio: 1.28;
+  }
+
+  :global(.process-grid) .media-card.span-two img {
+    height: 7.5rem;
+  }
+
+  :global(.process-grid) .media-card:not(.span-two) img {
+    aspect-ratio: 0.72;
+  }
+
+  .blueprint img {
+    height: 6rem;
+  }
+
+  .outcome-card img {
+    aspect-ratio: 16 / 9;
+  }
+
+  @media (min-width: 64rem) {
+    .media-card {
+      gap: 0.75rem;
+    }
+
+    .media-card img {
+      opacity: 0.9;
+    }
+
+    figcaption {
+      font-size: 1.25rem;
+      letter-spacing: 0.03em;
+      line-height: 1.35;
+    }
+
+    :global(.workshop-grid) .media-card.wide {
+      grid-column: 1;
+    }
+
+    :global(.workshop-grid) .media-card.span-two {
+      grid-column: 2 / -1;
+    }
+
+    :global(.process-grid) .media-card.span-two {
+      grid-column: 1 / -1;
+    }
+
+    :global(.workshop-grid) .media-card.wide img {
+      height: 37.5rem;
+    }
+
+    :global(.workshop-grid) .media-card.span-two img {
+      height: 32rem;
+    }
+
+    :global(.media-grid.two-col) .media-card img {
+      aspect-ratio: 560 / 395;
+    }
+
+    :global(.process-grid) .media-card.span-two img {
+      height: 28rem;
+    }
+
+    :global(.process-grid) .media-card:not(.span-two) img {
+      aspect-ratio: 560 / 420;
+    }
+
+    .blueprint {
+      grid-column: 1 / -1;
+    }
+
+    .blueprint img {
+      height: auto;
+      aspect-ratio: 1728 / 438;
+    }
+
+    .interface-figure {
+      grid-column: 1 / -1;
+    }
+
+    .interface-figure img {
+      width: 100%;
+      height: 32rem;
+      object-fit: cover;
+    }
+
+    .outcome-card {
+      grid-column: 1 / -1;
+    }
+
+    .outcome-card img {
+      aspect-ratio: 1728 / 675;
+    }
+  }
+</style>

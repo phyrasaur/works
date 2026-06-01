@@ -9,70 +9,17 @@ import FeatureList from "@/components/article/FeatureList.astro";
 import InsightList from "@/components/article/InsightList.astro";
 import MediaFigure from "@/components/article/MediaFigure.astro";
 import NumberedList from "@/components/article/NumberedList.astro";
-import {
-  donaidFeatures,
-  donaidFeasibilityFigures,
-  donaidInsights,
-  donaidProblems,
-  donaidProcessFigures,
-  donaidWorkshopFigures,
-} from "@/data/donaid";
-import donaidMark from "@/graphics/donaid.svg";
-import heroImage from "@/images/donaid/hero.jpg";
-import wireframesImage from "@/images/donaid/wireframes.jpg";
-import blueprintImage from "@/images/donaid/blueprint.jpg";
-import outcomeImage from "@/images/donaid/outcome.jpg";
+import { donaid } from "@/data/donaid";
+import { getNextShowcase, getShowcase } from "@/data/showcase";
 
-const backgroundMeta = [
-  {
-    label: "Role",
-    body: "Product strategy, service design, user experience, interface design, product management",
-  },
-  {
-    label: "Tech",
-    body: "Confluence, Jira, Figma, Tailwind CSS, Next.js, Prisma, PostgreSQL, AWS",
-  },
-];
-
-const interfaceFigure = {
-  image: wireframesImage,
-  title: "Sketching wireframes",
-  body: "Wireframes helped translate the product logic into screens the team could estimate, build, and critique.",
-};
-
-const blueprintFigure = {
-  image: blueprintImage,
-  title: "Service blueprint",
-  body: "Aligning teams and stakeholders for what DonAid is",
-};
-
-const outcomeFigure = {
-  image: outcomeImage,
-  title: "Demo homepage",
-  body: "Five demo sites for different types of donation collection by partnership",
-};
-
-const nextShowcase = {
-  href: "/wishful-menu",
-  showcaseNumber: 3,
-  showcaseTotal: 3,
-  brand: "Wishful Menu",
-  title: "Democracy in menu planning at a restaurant",
-};
+const currentShowcase = getShowcase("donaid");
+const nextShowcase = getNextShowcase("donaid");
 ---
 
 <ArticleShell title="DonAid - Firas Razak">
   <ArticleHeader />
 
-  <ArticleHero
-    showcaseNumber={2}
-    showcaseTotal={3}
-    title="Donation tracking & audit conceptualised"
-    heroImage={heroImage}
-    markImage={donaidMark}
-    markAlt="DonAid"
-    viewTransitionName="donaid"
-  >
+  <ArticleHero showcase={currentShowcase}>
     <Fragment slot="summary">
       <p>
         <strong>Public trust in charitable giving</strong> is often shaken by concerns
@@ -92,17 +39,18 @@ const nextShowcase = {
     id="background-title"
     title="Background"
     class="background"
-    titleOffset
     alignStart
   >
-    <BackgroundMeta
-      body="3 development attempts had failed, and other prospective agencies were unresponsive. Without a clear specification, previous teams were forced to guess, often mistaking the donation tracking system for a standard donation platform. The issue was in comprehension, not engineering."
-      meta={backgroundMeta}
-    />
+    <BackgroundMeta meta={donaid.backgroundMeta}>
+      3 development attempts had failed, and other prospective agencies were
+      unresponsive. Without a clear specification, previous teams were forced to
+      guess, often mistaking the donation tracking system for a standard
+      donation platform. The issue was in comprehension, not engineering.
+    </BackgroundMeta>
   </ArticleSection>
 
   <ArticleSection id="problems-title" title="Problems">
-    <NumberedList items={donaidProblems} />
+    <NumberedList items={donaid.problems} />
   </ArticleSection>
 
   <ArticleSection
@@ -120,7 +68,7 @@ const nextShowcase = {
       <strong>agency response rate increased from 10% to 80%.</strong>
     </p>
     <div class="media-grid workshop-grid">
-      {donaidWorkshopFigures.map((figure) => <MediaFigure figure={figure} />)}
+      {donaid.workshopFigures.map((figure) => <MediaFigure figure={figure} />)}
     </div>
   </ArticleSection>
 
@@ -139,7 +87,7 @@ const nextShowcase = {
     </p>
     <div class="media-grid two-col">
       {
-        donaidFeasibilityFigures.map((figure) => (
+        donaid.feasibilityFigures.map((figure) => (
           <MediaFigure figure={figure} />
         ))
       }
@@ -159,7 +107,7 @@ const nextShowcase = {
     </p>
     <div class="media-grid process-grid two-col">
       {
-        donaidProcessFigures.map((figure) => (
+        donaid.processFigures.map((figure) => (
           <MediaFigure figure={figure} titleSuffix=":" />
         ))
       }
@@ -177,7 +125,7 @@ const nextShowcase = {
       constraints.
     </p>
     <MediaFigure
-      figure={interfaceFigure}
+      figure={donaid.interfaceFigure}
       titleSuffix=":"
       class="interface-figure"
     />
@@ -203,8 +151,12 @@ const nextShowcase = {
       track the money received from a campaign partner to the auditing trustee
       and finally released to the charity.
     </p>
-    <MediaFigure figure={blueprintFigure} titleSuffix=":" class="blueprint" />
-    <FeatureList features={donaidFeatures} />
+    <MediaFigure
+      figure={donaid.blueprintFigure}
+      titleSuffix=":"
+      class="blueprint"
+    />
+    <FeatureList features={donaid.features} />
   </ArticleSection>
 
   <ArticleSection id="outcome-title" title="Outcome" dense>
@@ -213,7 +165,11 @@ const nextShowcase = {
       since the founder and the team had agreed to push ahead despite the flag
       to omit it.
     </p>
-    <MediaFigure figure={outcomeFigure} titleSuffix=":" class="outcome-card" />
+    <MediaFigure
+      figure={donaid.outcomeFigure}
+      titleSuffix=":"
+      class="outcome-card"
+    />
     <p class="pull-quote">
       After the demo deployment, the founder and I had conducted a market-fit
       demonstration. <strong>All 32 attendants</strong> from various
@@ -224,8 +180,57 @@ const nextShowcase = {
   </ArticleSection>
 
   <ArticleSection id="insights-title" title="Insights" class="insights">
-    <InsightList insights={donaidInsights} />
+    <InsightList insights={donaid.insights} />
   </ArticleSection>
 
   <ArticleFooter next={nextShowcase} />
 </ArticleShell>
+
+<style is:global>
+  .article .media-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .article .workshop-grid,
+  .article .process-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .article .pull-quote {
+    padding-block: 0.75rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.15;
+  }
+
+  .article .insights {
+    padding-top: 1.5rem;
+  }
+
+  @media (min-width: 64rem) {
+    .article .media-grid {
+      grid-column: 1 / -1;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .article .media-grid.two-col {
+      grid-column: 2 / -1;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .article .pull-quote {
+      grid-column: 1 / span 2;
+      padding-block: 0;
+      color: var(--text-normal);
+      font-size: 1.875rem;
+      line-height: 1.25;
+    }
+
+    .article .insights {
+      padding-top: 6rem;
+    }
+  }
+</style>

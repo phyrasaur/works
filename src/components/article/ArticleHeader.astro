@@ -21,3 +21,81 @@ const { closeHref = "/#showcase" } = Astro.props;
     <span aria-hidden="true">x</span>
   </a>
 </header>
+
+<style>
+  .article-header {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.5rem var(--px);
+    color: var(--text-strong);
+  }
+
+  .home-link {
+    display: inline-flex;
+    width: 1.5rem;
+    color: var(--text-strong);
+  }
+
+  .home-link :global(.logo) {
+    width: 100%;
+    height: auto;
+  }
+
+  .close-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--text-strong);
+    font: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  .site-title {
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .article-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      min-height: 14.25rem;
+      padding: 6rem var(--px);
+    }
+
+    .home-link {
+      width: 2.25rem;
+    }
+
+    .site-title {
+      display: inline-flex;
+      gap: 0.75rem;
+      align-items: center;
+      justify-self: center;
+      color: #fff;
+      font-size: 1.25rem;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .site-title strong {
+      font-weight: 700;
+    }
+
+    .site-title span {
+      color: var(--text-normal);
+    }
+
+    .close-link {
+      justify-self: end;
+      gap: 0.5rem;
+      font-size: 1.25rem;
+    }
+  }
+</style>
