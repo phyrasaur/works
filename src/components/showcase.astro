@@ -1,56 +1,5 @@
 ---
-import hyperprintImage from "@/images/hyperprint-hero.jpg";
-import donaidImage from "@/images/donaid-hero.jpg";
-import wishfulMenuImage from "@/images/wishful-menu-hero.jpg";
-import hyperprintMark from "@/graphics/hyperprint-mark.png";
-import donaidMark from "@/graphics/donaid-mark.png";
-
-type ShowcaseItem = {
-  brand: string;
-  title: string;
-  service: string;
-  kind: string;
-  image: ImageMetadata;
-  markImage?: ImageMetadata;
-  mark: "hyperprint" | "donaid" | "wishful";
-  slug: string;
-  countLabel: string;
-};
-
-const showcaseItems: ShowcaseItem[] = [
-  {
-    brand: "Hyperprint",
-    title: "Branding printshop customer experience",
-    service: "Service design",
-    kind: "Brand",
-    image: hyperprintImage,
-    markImage: hyperprintMark,
-    mark: "hyperprint",
-    slug: "hyperprint",
-    countLabel: "1 / 3",
-  },
-  {
-    brand: "DonAid",
-    title: "Donation tracking & audit conceptualised",
-    service: "Product management",
-    kind: "Brand",
-    image: donaidImage,
-    markImage: donaidMark,
-    mark: "donaid",
-    slug: "donaid",
-    countLabel: "2 / 3",
-  },
-  {
-    brand: "Wishful Menu",
-    title: "Democracy in menu planning at a restaurant",
-    service: "Product design",
-    kind: "Brand",
-    image: wishfulMenuImage,
-    mark: "wishful",
-    slug: "wishful-menu",
-    countLabel: "3 / 3",
-  },
-];
+import { showcaseItems } from "@/data/showcase";
 ---
 
 <section aria-labelledby="showcase-title" id="showcase" class="showcase">
@@ -216,7 +165,18 @@ const showcaseItems: ShowcaseItem[] = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    {{showCaseItems.map((item) => `&.${item.mark} { view-transition-name: ${item.mark}; }`)}}
+  }
+
+  .image.hyperprint {
+    view-transition-name: hyperprint;
+  }
+
+  .image.donaid {
+    view-transition-name: donaid;
+  }
+
+  .image.wishful {
+    view-transition-name: wishful;
   }
 
   .project-mark {

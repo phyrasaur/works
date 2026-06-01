@@ -1,11 +1,11 @@
 ---
-
+import { infoContent } from "@/data/info";
 ---
 
 <dialog id="info-dialog" class="info-dialog" aria-labelledby="info-title">
   <form method="dialog" class="info-panel">
     <header class="info-header">
-      <h2 id="info-title">Design Squiggle</h2>
+      <h2 id="info-title">{infoContent.title}</h2>
       <button class="close-dialog" aria-label="Close dialog">
         <svg
           width="24"
@@ -25,21 +25,7 @@
     </header>
 
     <div class="info-content">
-      <p>
-        The Design Squiggle by Damien Newman captures a familiar reality in
-        design work. The path to a good outcome rarely looks linear. Early
-        stages include uncertainty, competing signals, and imperfect first
-        attempts. Over time, the work narrows toward a decision and a usable
-        solution.
-      </p>
-      <p>
-        My process fits this shape across research, strategy, systems thinking,
-        interface design, and implementation. I use AI to speed up early
-        exploration when the problem definition still needs work. I map
-        constraints, test assumptions, and clarify what success looks like
-        before committing to detailed execution. The goal stays consistent:
-        reduce complexity into a direction a team can build.
-      </p>
+      {infoContent.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
     </div>
   </form>
 </dialog>
