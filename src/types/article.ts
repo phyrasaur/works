@@ -1,38 +1,38 @@
-export type ArticleImage = ImageMetadata | string;
+export type ImageSource = ImageMetadata | string;
 
-export type ArticleFigure = {
+export type Figure = {
   image: ImageMetadata;
   title: string;
   body: string;
   className?: string;
 };
 
-export type ArticleFeature = {
+export type Feature = {
   label: string;
   title: string;
   body: string;
   image: ImageMetadata;
 };
 
-export type ArticleInsight = {
+export type Insight = {
   label: string;
-  image: ArticleImage;
+  image: ImageSource;
   title: string;
   body: string;
 };
 
-export type ArticleMetaItem = {
+export type MetaItem = {
   label: string;
   body: string;
 };
 
-export type ArticleNumberedItem = {
+export type NumberedItem = {
   label: string;
   title: string;
   body: string;
 };
 
-export type ArticleNextShowcase = {
+export type NextShowcase = {
   href: string;
   showcaseNumber: number;
   showcaseTotal: number;

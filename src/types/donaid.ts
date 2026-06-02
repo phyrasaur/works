@@ -1,20 +1,20 @@
 import type {
-  ArticleFeature,
-  ArticleFigure,
-  ArticleInsight,
-  ArticleMetaItem,
-  ArticleNumberedItem,
+  Feature,
+  Figure,
+  Insight,
+  MetaItem,
+  NumberedItem,
 } from "@/types/article";
 
 export type DonaidData = {
-  backgroundMeta: ArticleMetaItem[];
-  problems: ArticleNumberedItem[];
-  workshopFigures: ArticleFigure[];
-  feasibilityFigures: ArticleFigure[];
-  processFigures: ArticleFigure[];
-  interfaceFigure: ArticleFigure;
-  blueprintFigure: ArticleFigure;
-  features: ArticleFeature[];
-  outcomeFigure: ArticleFigure;
-  insights: ArticleInsight[];
+  backgroundMeta: MetaItem[];
+  problems: NumberedItem[];
+  workshopFigures: Figure[];
+  feasibilityFigures: Figure[];
+  processFigures: Figure[];
+  interfaceFigure: Figure;
+  blueprintFigure: Figure;
+  features: Feature[];
+  outcomeFigure: Figure;
+  insights: Insight[];
 };

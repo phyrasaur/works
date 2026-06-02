@@ -1,12 +1,12 @@
 ---
-import type { ArticleImage, ArticleInsight } from "@/types/article";
+import type { ImageSource, Insight } from "@/types/article";
 
 type Props = {
-  insights: ArticleInsight[];
+  insights: Insight[];
 };
 
 const { insights } = Astro.props;
-const imageSrc = (image: ArticleImage) =>
+const imageSrc = (image: ImageSource) =>
   typeof image === "string" ? image : image.src;
 ---
 

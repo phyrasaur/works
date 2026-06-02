@@ -1,0 +1,258 @@
+---
+import Footer from "@/components/article/Footer.astro";
+import Header from "@/components/article/Header.astro";
+import Hero from "@/components/article/Hero.astro";
+import Section from "@/components/article/Section.astro";
+import Shell from "@/components/article/Shell.astro";
+import BackgroundMeta from "@/components/article/BackgroundMeta.astro";
+import ComparisonTable from "@/components/article/ComparisonTable.astro";
+import InsightList from "@/components/article/InsightList.astro";
+import MediaFigure from "@/components/article/MediaFigure.astro";
+import { hyperprint } from "@/data/hyperprint";
+import { getNextShowcase, getShowcase } from "@/data/showcase";
+
+const currentShowcase = getShowcase("hyperprint");
+const nextShowcase = getNextShowcase("hyperprint");
+---
+
+<Shell title="Hyperprint - Firas Razak">
+  <Header
+    runningTitle={currentShowcase.item.brand}
+    runningSubtitle={currentShowcase.item.title}
+  />
+
+  <Hero showcase={currentShowcase}>
+    <Fragment slot="summary">
+      <p>
+        A brand refresh for a printshop expanded into service design, operations
+        optimisation, and digitalisation across key touchpoints. These changes
+        contributed to annual sales <strong>growth from RM100k to RM300k</strong
+        >. Furthermore, a proposal of an <strong>online printshop</strong> design
+        hopefully may accelerate the brand growth in the future.
+      </p>
+    </Fragment>
+  </Hero>
+
+  <Section
+    id="background-title"
+    title="Background"
+    class="article-section--background"
+    alignStart
+  >
+    <BackgroundMeta meta={hyperprint.backgroundMeta}>
+      A local printshop wanted a brand refresh after the closure of two branches
+      to focus on its main location. To realise the brand promise, we worked
+      together to streamline the brand, service, operations, and digital
+      transformation. Real brand name is anonymised.
+    </BackgroundMeta>
+  </Section>
+
+  <Section
+    id="problem-title"
+    title="Problem"
+    class="article-section--hyperprint-problem"
+  >
+    <p class="article__section-copy article__section-copy--start">
+      <strong>Brand v Reality:</strong> A brand refresh could give the printshop a
+      facelift, but the experience could still be inconsistent across calls, counter
+      visits, and follow-ups.
+    </p>
+    <ComparisonTable
+      columns={hyperprint.problemColumns}
+      rows={hyperprint.problemRows}
+    />
+    <p class="article__section-copy article__section-copy--wide">
+      <strong>Misalignment impacted brand trust and loyalty,</strong> reduced repeat
+      business, and pushed the shop into price-based competition. Internally, knowledge
+      silos and reliance on experienced staff led to inefficient and inconsistent
+      performance.
+    </p>
+  </Section>
+
+  <Section
+    id="workshop-title"
+    title="Brand workshop"
+    dense
+    titleOffset
+    alignStart
+  >
+    <p class="article__section-copy">
+      In a collaborative brand workshop, we explored how to bridge the gap
+      between the shop's brand promise and its internal capabilities. We defined
+      the operational standards needed to ensure the day-to-day customer
+      experience matched the new brand identity.
+    </p>
+    <div class="article__media-grid article__media-grid--workshop">
+      {
+        hyperprint.workshopFigures.map((figure) => (
+          <MediaFigure figure={figure} titleSuffix=":" />
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section
+    id="transformation-title"
+    title="Digital Transformation"
+    dense
+    titleOffset
+    alignStart
+  >
+    <p class="article__section-copy">
+      Digitalisation and automation turned the brand promise into consistent
+      service: faster turnaround, fewer errors, and clearer status updates
+      customers could trust.
+    </p>
+    <div class="article__media-grid article__media-grid--two-column">
+      {
+        hyperprint.transformationFigures.map((figure) => (
+          <MediaFigure figure={figure} titleSuffix=":" />
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section
+    id="digital-service-title"
+    title="Digital Service"
+    class="article-section--hyperprint-digital-service"
+  >
+    <p class="article__section-copy article__section-copy--start">
+      To complete the brand refresh, I proposed an online printshop to replace
+      manual counter consultations and expand customer base.
+    </p>
+    <MediaFigure
+      figure={hyperprint.digitalServiceHero}
+      titleSuffix=":"
+      class="media-card--service-hero"
+    />
+    <div class="hyperprint-service-list">
+      {
+        hyperprint.digitalServiceFigures.map((figure) => (
+          <MediaFigure
+            figure={figure}
+            titleSuffix=":"
+            class="media-card--service-detail"
+          />
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section id="outcome-title" title="Outcome" dense>
+    <p class="article__section-copy article__section-copy--start">
+      <strong>Annual sales grew from RM100k to RM300k</strong> after we tightened
+      service and operations, standardising day-to-day workflows, reducing knowledge
+      silos, and making the experience more consistent across touchpoints.
+    </p>
+    <p class="article__section-copy article__section-copy--start">
+      The proposed self-service online printshop directly addresses the
+      recurring pain points we surfaced earlier: slow quotation, inconsistent
+      pricing, and manual follow-ups, reducing the need for in-person
+      consultations. The concepts were well received, and I look forward to
+      seeing them implemented.
+    </p>
+  </Section>
+
+  <Section
+    id="insights-title"
+    title="Insights"
+    class="article-section--insights"
+  >
+    <InsightList insights={hyperprint.insights} />
+  </Section>
+
+  <Footer next={nextShowcase} />
+</Shell>
+
+<style is:global>
+  .article {
+    & .article__media-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+
+      @media (min-width: 64rem) {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+      }
+
+      &.article__media-grid--workshop {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      &.article__media-grid--two-column {
+        @media (min-width: 64rem) {
+          grid-column: 2 / -1;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+    }
+
+    & .article__section-copy--wide {
+      @media (min-width: 64rem) {
+        grid-column: 1 / -1;
+        max-width: none;
+      }
+    }
+
+    & .media-card--service-hero {
+      @media (min-width: 64rem) {
+        grid-column: 1 / -1;
+      }
+    }
+
+    & .hyperprint-service-list {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      @media (min-width: 64rem) {
+        grid-column: 1 / -1;
+        gap: 3rem;
+        padding-top: 1.5rem;
+      }
+
+      & .media-card {
+        @media (min-width: 64rem) {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 1.5rem;
+          align-items: end;
+        }
+      }
+
+      & .media-card__image {
+        @media (min-width: 64rem) {
+          grid-column: 1 / span 2;
+        }
+      }
+
+      & .media-card__caption {
+        @media (min-width: 64rem) {
+          grid-column: 3;
+        }
+      }
+    }
+  }
+
+  .article-section {
+    &.article-section--hyperprint-problem {
+      gap: 1.5rem;
+
+      @media (min-width: 64rem) {
+        gap: 2.25rem 1.5rem;
+      }
+    }
+
+    &.article-section--insights {
+      padding-top: 1.5rem;
+
+      @media (min-width: 64rem) {
+        padding-top: 6rem;
+      }
+    }
+  }
+</style>

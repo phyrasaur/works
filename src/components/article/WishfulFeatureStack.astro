@@ -1,0 +1,103 @@
+---
+import MediaFigure from "@/components/article/MediaFigure.astro";
+import type { Figure } from "@/types/article";
+
+type WishfulFeature = {
+  label: string;
+  title: string;
+  figures: Figure[];
+};
+
+type Props = {
+  features: WishfulFeature[];
+};
+
+const { features } = Astro.props;
+---
+
+<div class="wishful-feature-stack">
+  {
+    features.map((feature) => (
+      <article class="wishful-feature">
+        <p class="wishful-feature__label">{feature.label}</p>
+        <div class="wishful-feature__content">
+          <h3 class="wishful-feature__title">{feature.title}</h3>
+          {feature.figures.map((figure) => (
+            <MediaFigure
+              figure={figure}
+              titleSuffix=":"
+              class="media-card--wishful-concept"
+            />
+          ))}
+        </div>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .wishful-feature-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @media (min-width: 64rem) {
+      grid-column: 1 / -1;
+      gap: 2.25rem;
+    }
+
+    & .wishful-feature {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.5rem;
+
+      @media (min-width: 64rem) {
+        grid-template-columns: 1.5rem minmax(0, 1fr);
+        gap: 2.25rem;
+      }
+    }
+
+    & .wishful-feature__label {
+      color: var(--text-muted);
+      font-size: 0.625rem;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      text-transform: uppercase;
+
+      @media (min-width: 64rem) {
+        width: 1.5rem;
+        font-size: 1.5rem;
+        letter-spacing: 0.1em;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+      }
+    }
+
+    & .wishful-feature__content {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 0.75rem;
+
+      @media (min-width: 64rem) {
+        gap: 1.5rem;
+      }
+    }
+
+    & .wishful-feature__title {
+      color: var(--text-strong);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      line-height: 1.25;
+
+      @media (min-width: 64rem) {
+        font-size: 2.25rem;
+      }
+    }
+  }
+
+  :global(.media-card--wishful-concept .media-card__image) {
+    border: 1px solid var(--hairline);
+  }
+</style>
