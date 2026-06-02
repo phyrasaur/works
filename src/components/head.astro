@@ -15,8 +15,6 @@ import { Font } from "astro:assets";
     navigation: auto;
   }
   :root {
-    --page-pad: 1.5rem;
-    --page-pad-lg: 6rem;
     --section-gap: 0.25rem;
     --text-strong: #ffffffe6;
     --text-normal: #ffffffbf;
@@ -25,17 +23,18 @@ import { Font } from "astro:assets";
     --hairline: #ffffff40;
     --surface: #000;
     --page-max: 120rem;
-    --px: var(--page-pad);
+    --px: 1.5rem;
     --py: 1.5rem;
     --dvh: 100dvh;
     --lvh: 100lvh;
     --vh: 100vh;
 
     @media screen and (min-width: 48rem) {
-      --px: 6rem;
+      --px: 3.5rem;
       --py: 2.5rem;
     }
     @media screen and (min-width: 96rem) {
+      --px: 6rem;
       --py: 6rem;
     }
   }

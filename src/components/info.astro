@@ -40,13 +40,13 @@ import { infoContent } from "@/data/info";
     max-height: 100dvh;
     margin: auto 0 0;
     padding: 0;
-    color: var(--text-strong);
     background: #000;
     border: 0;
     border-top: 1px solid var(--hairline);
     box-shadow: 0 -2rem 5rem #000000bf;
     overflow-y: auto;
     opacity: 0;
+    color: var(--text-normal);
     transform: translateY(100%);
     transition:
       opacity 300ms ease,
@@ -114,26 +114,24 @@ import { infoContent } from "@/data/info";
       min-height: auto;
       display: flex;
       flex-direction: column;
-      gap: 3.5rem;
-      padding: var(--px);
+      gap: var(--section-gap);
+      padding: var(--py) var(--px);
 
       @media (min-width: 64rem) {
         min-height: 100%;
-        gap: 3.5rem;
-        padding: 6.25rem;
       }
     }
 
     & .info-dialog__header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
       gap: 1rem;
+      margin-bottom: 2rem;
 
       & h2 {
-        font-size: 1.25rem;
+        font-size: 1.75rem;
         font-weight: 400;
-        line-height: 1;
+        line-height: 1.1;
       }
     }
 
@@ -144,7 +142,6 @@ import { infoContent } from "@/data/info";
       width: 1.5rem;
       height: 1.5rem;
       padding: 0;
-      color: var(--text-strong);
 
       &:hover {
         color: #fff;
@@ -154,14 +151,16 @@ import { infoContent } from "@/data/info";
     & .info-dialog__content {
       display: flex;
       flex-direction: column;
-      gap: 2.25rem;
-      color: var(--text-strong);
-      font-size: clamp(1rem, 0.8rem + 0.5vw, 1.25rem);
+      gap: 1rem;
+      font-size: 1rem;
       letter-spacing: 0.03em;
       line-height: 1.35;
+      @media (min-width: 64rem) {
+        font-size: 1.25rem;
+      }
 
       & p {
-        opacity: 0.9;
+        max-width: 56ch;
       }
     }
   }
