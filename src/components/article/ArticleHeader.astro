@@ -9,14 +9,14 @@ const { closeHref = "/#showcase" } = Astro.props;
 ---
 
 <header class="article-header">
-  <a href="/" class="home-link" aria-label="Back to home">
+  <a href="/" class="article-header__home" aria-label="Back to home">
     <Logo />
   </a>
-  <p class="site-title" aria-hidden="true">
+  <p class="article-header__site-title" aria-hidden="true">
     <strong>Firas Razak</strong>
     <span>Product Design &amp; Management</span>
   </p>
-  <a href={closeHref} class="close-link">
+  <a href={closeHref} class="article-header__close">
     <span>Close showcase</span>
     <span aria-hidden="true">x</span>
   </a>
@@ -31,69 +31,67 @@ const { closeHref = "/#showcase" } = Astro.props;
     width: 100%;
     padding: var(--py) var(--px);
     color: var(--text-strong);
-  }
 
-  .home-link {
-    display: inline-flex;
-    width: 1.5rem;
-    color: var(--text-strong);
-  }
-
-  .home-link :global(.logo) {
-    width: 100%;
-    height: auto;
-  }
-
-  .close-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: var(--text-strong);
-    font: inherit;
-    font-size: 0.875rem;
-    cursor: pointer;
-  }
-
-  .site-title {
-    display: none;
-  }
-
-  @media (min-width: 64rem) {
-    .article-header {
+    @media (min-width: 64rem) {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     }
 
-    .home-link {
-      width: 2.25rem;
-    }
-
-    .site-title {
+    & .article-header__home {
       display: inline-flex;
-      gap: 0.75rem;
+      width: 1.5rem;
+      color: var(--text-strong);
+
+      @media (min-width: 64rem) {
+        width: 2.25rem;
+      }
+    }
+
+    & .article-header__home :global(.logo) {
+      width: 100%;
+      height: auto;
+    }
+
+    & .article-header__site-title {
+      display: none;
+
+      @media (min-width: 64rem) {
+        display: inline-flex;
+        gap: 0.75rem;
+        align-items: center;
+        justify-self: center;
+        color: #fff;
+        font-size: 1.25rem;
+        letter-spacing: 0.02em;
+        line-height: 1;
+      }
+
+      & strong {
+        font-weight: 700;
+      }
+
+      & span {
+        color: var(--text-normal);
+      }
+    }
+
+    & .article-header__close {
+      display: inline-flex;
       align-items: center;
-      justify-self: center;
-      color: #fff;
-      font-size: 1.25rem;
-      letter-spacing: 0.02em;
-      line-height: 1;
-    }
+      gap: 0.25rem;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--text-strong);
+      font: inherit;
+      font-size: 0.875rem;
+      cursor: pointer;
 
-    .site-title strong {
-      font-weight: 700;
-    }
-
-    .site-title span {
-      color: var(--text-normal);
-    }
-
-    .close-link {
-      justify-self: end;
-      gap: 0.5rem;
-      font-size: 1.25rem;
+      @media (min-width: 64rem) {
+        justify-self: end;
+        gap: 0.5rem;
+        font-size: 1.25rem;
+      }
     }
   }
 </style>

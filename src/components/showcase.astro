@@ -5,25 +5,28 @@ const itemCount = showcaseItems.length;
 
 <section aria-labelledby="showcase-title" id="showcase" class="showcase">
   <h2 class="sr-only" id="showcase-title">Showcase</h2>
-  <ul class="showcase-list">
+  <ul class="showcase__list">
     {
       showcaseItems.map((item, index) => (
-        <li class="showcase-item">
-          <article class="showcase-card">
-            <header class="mobile-meta" aria-label={`${item.brand} metadata`}>
-              <p class="meta-group">
-                <span class="label">Brand</span>
+        <li class="showcase__item">
+          <article class="showcase__card">
+            <header
+              class="showcase__meta showcase__meta--mobile"
+              aria-label={`${item.brand} metadata`}
+            >
+              <p class="showcase__meta-group">
+                <span class="showcase__label">Brand</span>
                 <span>{item.brand}</span>
               </p>
-              <p class="meta-group">
-                <span class="label">Showcase</span>
+              <p class="showcase__meta-group">
+                <span class="showcase__label">Showcase</span>
                 <span>{`${index + 1} / ${itemCount}`}</span>
               </p>
             </header>
 
-            <figure class="figure">
+            <figure class="showcase__figure">
               <img
-                class={`image ${item.slug}`}
+                class={`showcase__image showcase__image--${item.slug}`}
                 src={item.image.src}
                 width={item.image.width}
                 height={item.image.height}
@@ -31,10 +34,10 @@ const itemCount = showcaseItems.length;
                 loading="lazy"
                 decoding="async"
               />
-              <figcaption class={`project-mark ${item.slug}`}>
-                <a href={`/${item.slug}`} class="caption-link">
+              <figcaption class={`showcase__mark showcase__mark--${item.slug}`}>
+                <a href={`/${item.slug}`} class="showcase__mark-link">
                   <img
-                    class="mark-image"
+                    class="showcase__mark-image"
                     src={item.markImage.src}
                     width={item.markImage.width}
                     height={item.markImage.height}
@@ -46,13 +49,13 @@ const itemCount = showcaseItems.length;
               </figcaption>
             </figure>
 
-            <footer class="project-footer">
-              <div class="project-copy">
-                <h3 class="title-text">
+            <footer class="showcase__footer">
+              <div class="showcase__copy">
+                <h3 class="showcase__title">
                   {item.title}
-                  <a href={`/${item.slug}`} class="title-link">
+                  <a href={`/${item.slug}`} class="showcase__title-link">
                     <span class="sr-only">Read showcase</span>
-                    <span class="title-arrow" aria-hidden="true">
+                    <span class="showcase__title-arrow" aria-hidden="true">
                       ›
                     </span>
                   </a>
@@ -60,14 +63,14 @@ const itemCount = showcaseItems.length;
                 <p>{item.service}</p>
               </div>
 
-              <p class="desktop-brand">
+              <p class="showcase__desktop-brand">
                 <span>{item.brand}</span>
-                <span class="label">Brand</span>
+                <span class="showcase__label">Brand</span>
               </p>
 
-              <p class="desktop-pagination">
+              <p class="showcase__desktop-count">
                 <span>{`${index + 1} / ${itemCount}`}</span>
-                <span class="label">Showcase</span>
+                <span class="showcase__label">Showcase</span>
               </p>
             </footer>
           </article>
@@ -80,174 +83,195 @@ const itemCount = showcaseItems.length;
 <style>
   .showcase {
     scroll-margin-top: 5rem;
-  }
 
-  .showcase-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--section-gap);
-    margin: 0;
-    list-style: none;
-  }
-
-  .showcase-item {
-    position: relative;
-  }
-
-  .showcase-card {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: var(--px);
-    color: var(--text-strong);
-
-    @media (min-width: 64rem) {
-      gap: 1.5rem;
-      padding: var(--py) var(--px);
+    & .showcase__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--section-gap);
+      margin: 0;
+      list-style: none;
     }
-  }
-  .project-footer {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 0.5rem;
-  }
 
-  .mobile-meta {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
-    @media (min-width: 64rem) {
+    & .showcase__item {
+      position: relative;
+    }
+
+    & .showcase__card {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: var(--px);
+      color: var(--text-strong);
+
+      @media (min-width: 64rem) {
+        gap: 1.5rem;
+        padding: var(--py) var(--px);
+      }
+    }
+
+    & .showcase__meta {
+      &.showcase__meta--mobile {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+
+        @media (min-width: 64rem) {
+          display: none;
+        }
+      }
+    }
+
+    & .showcase__meta-group {
+      display: grid;
+      gap: 0.25rem;
+
+      &:last-child {
+        text-align: end;
+      }
+    }
+
+    & .showcase__label {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    & .showcase__figure {
+      position: relative;
+      height: 60lvh;
+      margin: 0;
+      overflow: hidden;
+      background: #111;
+
+      @media (min-width: 64rem) {
+        height: auto;
+        aspect-ratio: 7 / 3;
+      }
+    }
+
+    & .showcase__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.3;
+      transition: opacity 0.3s ease;
+
+      &:hover {
+        opacity: 0.5;
+      }
+
+      &.showcase__image--hyperprint {
+        view-transition-name: hyperprint;
+      }
+
+      &.showcase__image--donaid {
+        view-transition-name: donaid;
+      }
+
+      &.showcase__image--wishful {
+        view-transition-name: wishful;
+      }
+    }
+
+    & .showcase__mark {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      display: grid;
+
+      &.showcase__mark--wishful {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(1.5rem, 1rem + 2vw, 3.75rem);
+        font-weight: 400;
+      }
+    }
+
+    & .showcase__mark-link {
+      display: grid;
+    }
+
+    & .showcase__mark-image {
+      place-self: center;
+      max-width: 35%;
+
+      @media (min-width: 64rem) {
+        max-width: 15%;
+      }
+    }
+
+    & .showcase__footer {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.5rem;
+      font-size: clamp(1.25rem, 1.5vw, 2.5rem);
+
+      @media (min-width: 64rem) {
+        grid-template-columns: minmax(0, 1.7fr) minmax(16rem, 1fr) auto;
+        gap: 0.5rem;
+      }
+    }
+
+    & .showcase__copy {
+      & > p {
+        margin-top: 0.5rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        line-height: 1;
+        font-size: 0.9em;
+
+        @media (min-width: 64rem) {
+          font-size: 0.75em;
+        }
+      }
+    }
+
+    & .showcase__title {
+      color: var(--text-strong);
+      font-weight: 500;
+      line-height: 1.1;
+      text-wrap: balance;
+      position: relative;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    & .showcase__title-link {
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
+    }
+
+    & .showcase__desktop-brand,
+    & .showcase__desktop-count {
       display: none;
+
+      @media (min-width: 64rem) {
+        display: block;
+        font-size: clamp(1.25rem, 1.5vw, 2.5rem);
+        line-height: 1.1;
+        color: var(--text-normal);
+
+        & span {
+          display: block;
+        }
+
+        & .showcase__label {
+          color: var(--text-dim);
+          margin-top: 0.5rem;
+          font-size: 0.75em;
+          line-height: 1;
+        }
+      }
     }
-  }
-  .meta-group {
-    display: grid;
-    gap: 0.25rem;
-    &:last-child {
+
+    & .showcase__desktop-count {
       text-align: end;
     }
-  }
-
-  .label {
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    font-weight: 500;
-  }
-
-  .figure {
-    position: relative;
-    height: 60lvh;
-    margin: 0;
-    overflow: hidden;
-    background: #111;
-
-    @media (min-width: 64rem) {
-      height: auto;
-      aspect-ratio: 7 / 3;
-    }
-  }
-  .image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.3;
-    transition: opacity 0.3s ease;
-    &:hover {
-      opacity: 0.5;
-    }
-    &.hyperprint {
-      view-transition-name: hyperprint;
-    }
-    &.donaid {
-      view-transition-name: donaid;
-    }
-    &.wishful {
-      view-transition-name: wishful;
-    }
-  }
-
-  .project-mark {
-    position: absolute;
-    z-index: 1;
-    inset: 0;
-    display: grid;
-  }
-  .caption-link {
-    display: grid;
-  }
-
-  .mark-image {
-    place-self: center;
-    max-width: 35%;
-    @media (min-width: 64rem) {
-      max-width: 15%;
-    }
-  }
-
-  .project-mark.wishful {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(1.5rem, 1rem + 2vw, 3.75rem);
-    font-weight: 400;
-  }
-
-  .project-footer {
-    font-size: clamp(1.25rem, 1.5vw, 2.5rem);
-    @media (min-width: 64rem) {
-      grid-template-columns: minmax(0, 1.7fr) minmax(16rem, 1fr) auto;
-      gap: 0.5rem;
-    }
-  }
-  .title-text {
-    color: var(--text-strong);
-    font-weight: 500;
-    line-height: 1.1;
-    text-wrap: balance;
-    position: relative;
-    &:hover {
-      color: #fff;
-    }
-  }
-  .title-link::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-  }
-
-  .project-copy > p {
-    margin-top: 0.5rem;
-    color: var(--text-muted);
-    font-weight: 500;
-    line-height: 1;
-    font-size: 0.9em;
-
-    @media (min-width: 64rem) {
-      font-size: 0.75em;
-    }
-  }
-
-  .desktop-brand,
-  .desktop-pagination {
-    display: none;
-
-    @media (min-width: 64rem) {
-      display: block;
-      font-size: clamp(1.25rem, 1.5vw, 2.5rem);
-      line-height: 1.1;
-      color: var(--text-normal);
-      & span {
-        display: block;
-      }
-      & .label {
-        color: var(--text-dim);
-        margin-top: 0.5rem;
-        font-size: 0.75em;
-        line-height: 1;
-      }
-    }
-  }
-  .desktop-pagination {
-    text-align: end;
   }
 </style>

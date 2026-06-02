@@ -38,7 +38,7 @@ const nextShowcase = getNextShowcase("donaid");
   <ArticleSection
     id="background-title"
     title="Background"
-    class="background"
+    class="article-section--background"
     alignStart
   >
     <BackgroundMeta meta={donaid.backgroundMeta}>
@@ -60,14 +60,14 @@ const nextShowcase = getNextShowcase("donaid");
     titleOffset
     alignStart
   >
-    <p class="section-copy">
+    <p class="article__section-copy">
       To start, I ran daily sessions with the founder until we reached enough
       shared understanding of the product. I then simplified the original
       material into a 7-page product brief to be sent to development agencies
       for quotation. After the rewrite,
       <strong>agency response rate increased from 10% to 80%.</strong>
     </p>
-    <div class="media-grid workshop-grid">
+    <div class="article__media-grid article__media-grid--workshop">
       {donaid.workshopFigures.map((figure) => <MediaFigure figure={figure} />)}
     </div>
   </ArticleSection>
@@ -79,13 +79,13 @@ const nextShowcase = getNextShowcase("donaid");
     titleOffset
     alignStart
   >
-    <p class="section-copy">
+    <p class="article__section-copy">
       I surveyed banking and messaging integrations to map what could be
       automated, what needed vendor buy-in, and what required a manual fallback.
       Where banks moved too slow, I proposed processing the banking side
       manually as an interim workaround.
     </p>
-    <div class="media-grid two-col">
+    <div class="article__media-grid article__media-grid--two-column">
       {
         donaid.feasibilityFigures.map((figure) => (
           <MediaFigure figure={figure} />
@@ -101,11 +101,11 @@ const nextShowcase = getNextShowcase("donaid");
     titleOffset
     alignStart
   >
-    <p class="section-copy">
+    <p class="article__section-copy">
       I split the brief into Demo, MVP, and Feature Complete phases. I also
       shifted the founder's mindset to agile workflow.
     </p>
-    <div class="media-grid two-col">
+    <div class="article__media-grid article__media-grid--two-column">
       {donaid.processFigures.map((figure) => <MediaFigure figure={figure} />)}
     </div>
   </ArticleSection>
@@ -113,16 +113,16 @@ const nextShowcase = getNextShowcase("donaid");
   <ArticleSection
     id="interface-title"
     title="Interface design"
-    class="interface-design"
+    class="article-section--interface-design"
   >
-    <p class="section-copy start">
+    <p class="article__section-copy article__section-copy--start">
       Design was not in the agency's scope. I stepped in and delivered
       interfaces and flow diagrams in sync with dev milestones.
     </p>
     <MediaFigure
       figure={donaid.interfaceFigure}
       titleSuffix=":"
-      class="interface-figure"
+      class="media-card--interface"
     />
   </ArticleSection>
 
@@ -132,7 +132,7 @@ const nextShowcase = getNextShowcase("donaid");
     titleOffset
     alignStart
   >
-    <p class="section-copy">
+    <p class="article__section-copy">
       I ran weekly check-ins, taking progress reports from the dev team while
       handing over design for the next task. I bridged the founder and dev
       across system design, business logic, architecture, and acceptance
@@ -141,7 +141,7 @@ const nextShowcase = getNextShowcase("donaid");
   </ArticleSection>
 
   <ArticleSection id="features-title" title="Product core feature" dense>
-    <p class="section-copy start">
+    <p class="article__section-copy article__section-copy--start">
       DonAid's main scope is to verify a donation after the transaction and
       track the money received from a campaign partner to the auditing trustee
       and finally released to the charity.
@@ -149,13 +149,13 @@ const nextShowcase = getNextShowcase("donaid");
     <MediaFigure
       figure={donaid.blueprintFigure}
       titleSuffix=":"
-      class="blueprint"
+      class="media-card--blueprint"
     />
     <FeatureList features={donaid.features} />
   </ArticleSection>
 
   <ArticleSection id="outcome-title" title="Outcome" dense>
-    <p class="section-copy start">
+    <p class="article__section-copy article__section-copy--start">
       The final delivery hit a foreseeable delay for the bank integration scope
       since the founder and the team had agreed to push ahead despite the flag
       to omit it.
@@ -163,9 +163,9 @@ const nextShowcase = getNextShowcase("donaid");
     <MediaFigure
       figure={donaid.outcomeFigure}
       titleSuffix=":"
-      class="outcome-card"
+      class="media-card--outcome"
     />
-    <p class="pull-quote">
+    <p class="article__pull-quote">
       After the demo deployment, the founder and I had conducted a market-fit
       demonstration. <strong>All 32 attendants</strong> from various
       <strong>charity organisations expressed interest</strong> in the product and
@@ -174,7 +174,11 @@ const nextShowcase = getNextShowcase("donaid");
     </p>
   </ArticleSection>
 
-  <ArticleSection id="insights-title" title="Insights" class="insights">
+  <ArticleSection
+    id="insights-title"
+    title="Insights"
+    class="article-section--insights"
+  >
     <InsightList insights={donaid.insights} />
   </ArticleSection>
 
@@ -182,50 +186,53 @@ const nextShowcase = getNextShowcase("donaid");
 </ArticleShell>
 
 <style is:global>
-  .article .media-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-  }
-
-  .article .workshop-grid,
-  .article .process-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .article .pull-quote {
-    padding-block: 0.75rem;
-    color: var(--text-muted);
-    font-size: 1rem;
-    line-height: 1.15;
-  }
-
-  .article .insights {
-    padding-top: 1.5rem;
-  }
-
-  @media (min-width: 64rem) {
-    .article .media-grid {
-      grid-column: 1 / -1;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.5rem;
-    }
-
-    .article .media-grid.two-col {
-      grid-column: 2 / -1;
+  .article {
+    & .article__media-grid {
+      display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+
+      @media (min-width: 64rem) {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+      }
+
+      &.article__media-grid--workshop {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      &.article__media-grid--two-column {
+        @media (min-width: 64rem) {
+          grid-column: 2 / -1;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
     }
 
-    .article .pull-quote {
-      grid-column: 1 / span 2;
-      padding-block: 0;
-      color: var(--text-normal);
-      font-size: 1.875rem;
-      line-height: 1.25;
-    }
+    & .article__pull-quote {
+      padding-block: 0.75rem;
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.15;
 
-    .article .insights {
-      padding-top: 6rem;
+      @media (min-width: 64rem) {
+        grid-column: 1 / span 2;
+        padding-block: 0;
+        color: var(--text-normal);
+        font-size: 1.875rem;
+        line-height: 1.25;
+      }
+    }
+  }
+
+  .article-section {
+    &.article-section--insights {
+      padding-top: 1.5rem;
+
+      @media (min-width: 64rem) {
+        padding-top: 6rem;
+      }
     }
   }
 </style>

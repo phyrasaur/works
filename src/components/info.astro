@@ -3,10 +3,10 @@ import { infoContent } from "@/data/info";
 ---
 
 <dialog id="info-dialog" class="info-dialog" aria-labelledby="info-title">
-  <form method="dialog" class="info-panel">
-    <header class="info-header">
+  <form method="dialog" class="info-dialog__panel">
+    <header class="info-dialog__header">
       <h2 id="info-title">{infoContent.title}</h2>
-      <button class="close-dialog" aria-label="Close dialog">
+      <button class="info-dialog__close" aria-label="Close dialog">
         <svg
           width="24"
           height="24"
@@ -24,7 +24,7 @@ import { infoContent } from "@/data/info";
       </button>
     </header>
 
-    <div class="info-content">
+    <div class="info-dialog__content">
       {infoContent.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
     </div>
   </form>
@@ -108,61 +108,61 @@ import { infoContent } from "@/data/info";
         }
       }
     }
-  }
 
-  .info-panel {
-    box-sizing: border-box;
-    min-height: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 3.5rem;
-    padding: var(--px);
-
-    @media (min-width: 64rem) {
-      min-height: 100%;
+    & .info-dialog__panel {
+      box-sizing: border-box;
+      min-height: auto;
+      display: flex;
+      flex-direction: column;
       gap: 3.5rem;
-      padding: 6.25rem;
+      padding: var(--px);
+
+      @media (min-width: 64rem) {
+        min-height: 100%;
+        gap: 3.5rem;
+        padding: 6.25rem;
+      }
     }
-  }
 
-  .info-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    & .info-dialog__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
 
-    & h2 {
-      font-size: 1.25rem;
-      font-weight: 400;
-      line-height: 1;
+      & h2 {
+        font-size: 1.25rem;
+        font-weight: 400;
+        line-height: 1;
+      }
     }
-  }
 
-  .close-dialog {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.5rem;
-    height: 1.5rem;
-    padding: 0;
-    color: var(--text-strong);
+    & .info-dialog__close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      padding: 0;
+      color: var(--text-strong);
 
-    &:hover {
-      color: #fff;
+      &:hover {
+        color: #fff;
+      }
     }
-  }
 
-  .info-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2.25rem;
-    color: var(--text-strong);
-    font-size: clamp(1rem, 0.8rem + 0.5vw, 1.25rem);
-    letter-spacing: 0.03em;
-    line-height: 1.35;
+    & .info-dialog__content {
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
+      color: var(--text-strong);
+      font-size: clamp(1rem, 0.8rem + 0.5vw, 1.25rem);
+      letter-spacing: 0.03em;
+      line-height: 1.35;
 
-    & p {
-      opacity: 0.9;
+      & p {
+        opacity: 0.9;
+      }
     }
   }
 </style>

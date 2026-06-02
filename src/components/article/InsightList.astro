@@ -13,10 +13,11 @@ const imageSrc = (image: ArticleImage) =>
 <div class="insight-list">
   {
     insights.map((insight) => (
-      <article class="insight-row">
-        <p class="side-label">{insight.label}</p>
-        <div>
+      <article class="insight-list__item">
+        <p class="insight-list__label">{insight.label}</p>
+        <div class="insight-list__copy">
           <img
+            class="insight-list__image"
             src={imageSrc(insight.image)}
             width="297"
             height="326"
@@ -24,8 +25,8 @@ const imageSrc = (image: ArticleImage) =>
             loading="lazy"
             decoding="async"
           />
-          <h3>{insight.title}</h3>
-          <p>{insight.body}</p>
+          <h3 class="insight-list__title">{insight.title}</h3>
+          <p class="insight-list__body">{insight.body}</p>
         </div>
       </article>
     ))
@@ -37,86 +38,84 @@ const imageSrc = (image: ArticleImage) =>
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-  }
 
-  .insight-row {
-    display: grid;
-    grid-template-columns: 0.5rem minmax(0, 1fr);
-    gap: 0.5rem;
-    align-items: start;
-  }
-
-  .side-label {
-    width: max-content;
-    color: var(--text-muted);
-    font-size: 0.5rem;
-    letter-spacing: 0.1em;
-    line-height: 1;
-    text-transform: uppercase;
-    transform: rotate(-90deg) translateX(-100%);
-    transform-origin: left top;
-  }
-
-  .insight-row > div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .insight-row img {
-    width: 100%;
-    border: 1px solid var(--hairline);
-    opacity: 0.85;
-  }
-
-  h3 {
-    max-width: 15rem;
-    color: var(--text-strong);
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.2;
-  }
-
-  .insight-row p:last-child {
-    color: var(--text-muted);
-    font-size: 0.875rem;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 64rem) {
-    .insight-list {
+    @media (min-width: 64rem) {
       grid-column: 1 / -1;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.5rem;
     }
 
-    .insight-row {
+    & .insight-list__item {
+      display: grid;
+      grid-template-columns: 0.5rem minmax(0, 1fr);
+      gap: 0.5rem;
+      align-items: start;
+
+      @media (min-width: 64rem) {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+    }
+
+    & .insight-list__label {
+      width: max-content;
+      color: var(--text-muted);
+      font-size: 0.5rem;
+      letter-spacing: 0.1em;
+      line-height: 1;
+      text-transform: uppercase;
+      transform: rotate(-90deg) translateX(-100%);
+      transform-origin: left top;
+
+      @media (min-width: 64rem) {
+        width: auto;
+        font-size: 1.25rem;
+        letter-spacing: 0.03em;
+        transform: none;
+      }
+    }
+
+    & .insight-list__copy {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.5rem;
     }
 
-    .side-label {
-      width: auto;
-      font-size: 1.25rem;
-      letter-spacing: 0.03em;
-      transform: none;
+    & .insight-list__image {
+      width: 100%;
+      border: 1px solid var(--hairline);
+      opacity: 0.85;
+
+      @media (min-width: 64rem) {
+        aspect-ratio: 1;
+        object-fit: cover;
+      }
     }
 
-    .insight-row img {
-      aspect-ratio: 1;
-      object-fit: cover;
+    & .insight-list__title {
+      max-width: 15rem;
+      color: var(--text-strong);
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 1.2;
+
+      @media (min-width: 64rem) {
+        max-width: 28rem;
+        font-size: 1.5rem;
+      }
     }
 
-    h3 {
-      max-width: 28rem;
-      font-size: 1.5rem;
-    }
+    & .insight-list__body {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.35;
 
-    .insight-row p:last-child {
-      color: var(--text-normal);
-      font-size: 1.25rem;
+      @media (min-width: 64rem) {
+        color: var(--text-normal);
+        font-size: 1.25rem;
+      }
     }
   }
 </style>
