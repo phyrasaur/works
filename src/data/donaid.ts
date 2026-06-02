@@ -1,15 +1,15 @@
-import journeyImage from "@/images/donaid/journey.jpg";
-import flowsImage from "@/images/donaid/flows.jpg";
+import moneyFlowsImage from "@/images/donaid/before-after-tracking.png";
+import userJourneyImage from "@/images/donaid/user-story-journey.png";
 import bankingImage from "@/images/donaid/banking.jpg";
-import manualProcessImage from "@/images/donaid/manual-process.jpg";
-import schemaImage from "@/images/donaid/schema.jpg";
-import donorFlowImage from "@/images/donaid/donor-flow.jpg";
-import wireframesImage from "@/images/donaid/wireframes.jpg";
-import blueprintImage from "@/images/donaid/blueprint.jpg";
-import outcomeImage from "@/images/donaid/outcome.jpg";
-import taggingImage from "@/images/donaid/tagging.jpg";
-import trackingImage from "@/images/donaid/tracking.jpg";
-import reportingImage from "@/images/donaid/reporting.jpg";
+import whatsappImage from "@/images/donaid/whatsapp.jpg";
+import statusImage from "@/images/donaid/status.jpg";
+import sitemapImage from "@/images/donaid/sitemap.jpg";
+import wireframeSketchImage from "@/images/donaid/wireframe-sketch.png";
+import blueprintImage from "@/images/donaid/blueprint.png";
+import demoImage from "@/images/donaid/demo.png";
+import receiptImage from "@/images/donaid/receipt.png";
+import trackingImage from "@/images/donaid/tracking.png";
+import reportImage from "@/images/donaid/report.png";
 import clariteamImage from "@/images/donaid/clariteam.svg";
 import thinkpencilImage from "@/images/donaid/thinkpencil.svg";
 import vitruvianImage from "@/images/donaid/vitruvian.svg";
@@ -45,47 +45,46 @@ export const donaid: DonaidData = {
   ],
   workshopFigures: [
     {
-      image: journeyImage,
-      title: "Comparing donor journeys",
-      body: "I compared a typical user journey with the proposed donation tracking from the donor's perspective to clarify how donation tracking works.",
+      image: moneyFlowsImage,
+      title: "Money versus data flows",
+      body: "To emphasise that DonAid doesn't collect money, I mapped out the money and reporting flows",
       className: "wide",
     },
     {
-      image: flowsImage,
-      title: "Money versus data flows",
-      body: "To emphasise that DonAid does not collect money, I mapped out the money and reporting flows.",
+      image: userJourneyImage,
+      title: "Comparing donor journeys",
+      body: "I compared a typical user journey with the proposed donation tracking from the donor's perspective to clarify how donation tracking works",
       className: "span-two",
     },
   ],
   feasibilityFigures: [
     {
       image: bankingImage,
-      title: "Automated banking data",
-      body: "CSR bank statements were explored for automatic transaction retrieval.",
+      title: "Surveying available banking data",
+      body: "CSV bank statements are easier to sanitise than PDFs, and cut dev effort if we build our own ingestion",
     },
     {
-      image: manualProcessImage,
-      title: "Messaging providers",
-      body: "I surveyed providers that could notify donors through WhatsApp after each donation status change.",
+      image: whatsappImage,
+      title: "Messaging services",
+      body: "We decided to use WhatsApp API directly, no middleware markup, lower cost per transaction",
     },
   ],
   processFigures: [
     {
-      image: schemaImage,
-      title: "Data modelling",
-      body: "Entity relationships were mapped to translate accounting, donation, trustee, and reporting logic.",
-      className: "span-two",
+      image: statusImage,
+      title: "Simplifying donation status: Demo vs MVP",
+      body: "Edge cases were scoped out of Demo and MVP, pushed to later phases.",
     },
     {
-      image: donorFlowImage,
-      title: "Donor flow",
-      body: "I mapped the steps from donation receipt to public tracking to test if the concept held together.",
+      image: sitemapImage,
+      title: "Information architecture",
+      body: "Sitemap covering the product and marketing pages, prioritised by stakeholder's needs.",
     },
   ],
   interfaceFigure: {
-    image: wireframesImage,
+    image: wireframeSketchImage,
     title: "Sketching wireframes",
-    body: "Wireframes helped translate the product logic into screens the team could estimate, build, and critique.",
+    body: "Throughout my product workshops with the founder, I sketched wireframes and flow diagrams ad-hoc to build shared understanding. The high-fidelity design was later reviewed and approved in Figma before I handed over code as React TypeScript components, styled with Tailwind CSS, to the dev team.",
   },
   blueprintFigure: {
     image: blueprintImage,
@@ -96,24 +95,24 @@ export const donaid: DonaidData = {
     {
       label: "Feature one",
       title: "Donation tagging",
-      body: "Upon a successful donation transaction with the campaign partner, the POS requests a unique tag for the donation to be printed as a QR code in the receipt.",
-      image: taggingImage,
+      body: "Upon a successful donation transaction with the campaign partner, the POS then requests a unique tag for the donation to be printed as a QR code in the receipt which allows the donor to track the progress of the donation",
+      image: receiptImage,
     },
     {
       label: "Feature two",
       title: "Public tracking",
-      body: "Akin to parcel tracking, donation progress is laid out in a timeline. The tracker can get a WhatsApp notification as the donation moves.",
+      body: "Akin to parcel tracking, the donation progress is laid out in a timeline. A summary of the current status at the top provides a general overview of the donation. The tracker can get a notification on WhatsApp for the progress of the donation",
       image: trackingImage,
     },
     {
       label: "Feature three",
       title: "Reporting",
-      body: "Each step generates a unique report, from transaction acknowledgement to remittance report and final settlement advice.",
-      image: reportingImage,
+      body: "Each step generates a unique report. Donation transactions are batched into an acknowledgement report, compiled into a remittance report for the campaign partner, then closed with a settlement advice once the trustee releases funds to the charity.",
+      image: reportImage,
     },
   ],
   outcomeFigure: {
-    image: outcomeImage,
+    image: demoImage,
     title: "Demo homepage",
     body: "Five demo sites for different types of donation collection by partnership",
   },

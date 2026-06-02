@@ -1,5 +1,5 @@
 import hyperprintImage from "@/images/hyperprint-hero.jpg";
-import donaidImage from "@/images/donaid-hero.jpg";
+import donaidImage from "@/images/donaid/hero.jpg";
 import wishfulImage from "@/images/wishful-hero.jpg";
 import hyperprintMark from "@/graphics/hyperprint.svg";
 import donaidMark from "@/graphics/donaid.svg";
@@ -49,7 +49,9 @@ export function getShowcase(slug: string): ShowcaseDetails {
 }
 
 export function getNextShowcase(currentSlug: string): ArticleNextShowcase {
-  const currentIndex = showcaseItems.findIndex((item) => item.slug === currentSlug);
+  const currentIndex = showcaseItems.findIndex(
+    (item) => item.slug === currentSlug,
+  );
   const nextIndex =
     currentIndex === -1 ? 0 : (currentIndex + 1) % showcaseItems.length;
   const nextItem = showcaseItems[nextIndex];
