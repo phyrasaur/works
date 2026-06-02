@@ -10,9 +10,11 @@ import demoImage from "@/images/donaid/demo.png";
 import receiptImage from "@/images/donaid/receipt.png";
 import trackingImage from "@/images/donaid/tracking.png";
 import reportImage from "@/images/donaid/report.png";
-import clariteamImage from "@/images/donaid/clariteam.svg";
-import thinkpencilImage from "@/images/donaid/thinkpencil.svg";
-import vitruvianImage from "@/images/donaid/vitruvian.svg";
+import {
+  clariteamImage,
+  thinkpencilImage,
+  vitruvianImage,
+} from "@/data/insightImages";
 import type { DonaidData } from "@/types/donaid";
 
 export const donaid: DonaidData = {

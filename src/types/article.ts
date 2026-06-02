@@ -1,4 +1,8 @@
-export type ImageSource = ImageMetadata | string;
+export type InsightImage = {
+  markup: string;
+  width: number;
+  height: number;
+};
 
 export type Figure = {
   image: ImageMetadata;
@@ -16,7 +20,7 @@ export type Feature = {
 
 export type Insight = {
   label: string;
-  image: ImageSource;
+  image: InsightImage;
   title: string;
   body: string;
 };

@@ -6,9 +6,11 @@ import productCustomisationImage from "@/images/hyperprint/product-customisation
 import serviceBlueprintImage from "@/images/hyperprint/service-blueprint.png";
 import standardisedFormsImage from "@/images/hyperprint/standardised-forms.png";
 import vendorCostingImage from "@/images/hyperprint/vendor-costing.png";
-import clariteamImage from "@/images/donaid/clariteam.svg";
-import thinkpencilImage from "@/images/donaid/thinkpencil.svg";
-import vitruvianImage from "@/images/donaid/vitruvian.svg";
+import {
+  clariteamImage,
+  thinkpencilImage,
+  vitruvianImage,
+} from "@/data/insightImages";
 
 export const hyperprint = {
   backgroundMeta: [

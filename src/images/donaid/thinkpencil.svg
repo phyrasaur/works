@@ -1,16 +1,16 @@
-<svg width="687" height="755" viewBox="0 0 687 755" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="687" height="755" viewBox="0 0 687 755" fill="none" stroke="currentColor" stroke-width="1" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_2017_23)">
-<path d="M192 568H495L343.5 411L192 568Z" stroke="white" stroke-linejoin="bevel"/>
-<path d="M192 755L192 568" stroke="white"/>
-<path d="M495 755L495 568" stroke="white"/>
-<path d="M406 755L406 568" stroke="white"/>
-<path d="M344 411L344 0" stroke="white"/>
-<path d="M280 755L280 568" stroke="white"/>
-<circle cx="343.5" cy="87.5" r="394" stroke="white"/>
+<path d="M192 568H495L343.5 411L192 568Z" stroke-linejoin="bevel"/>
+<path d="M192 755L192 568"/>
+<path d="M495 755L495 568"/>
+<path d="M406 755L406 568"/>
+<path d="M344 411L344 0"/>
+<path d="M280 755L280 568"/>
+<circle cx="343.5" cy="87.5" r="394"/>
 </g>
 <defs>
 <clipPath id="clip0_2017_23">
-<rect width="687" height="755" fill="white"/>
+<rect width="687" height="755" fill="white" stroke="none"/>
 </clipPath>
 </defs>
 </svg>
