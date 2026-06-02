@@ -6,12 +6,9 @@ import productCustomisationImage from "@/images/hyperprint/product-customisation
 import serviceBlueprintImage from "@/images/hyperprint/service-blueprint.png";
 import standardisedFormsImage from "@/images/hyperprint/standardised-forms.png";
 import vendorCostingImage from "@/images/hyperprint/vendor-costing.png";
-import {
-  clariteamImage,
-  thinkpencilImage,
-  vitruvianImage,
-} from "@/data/insightImages";
-
+import ClariteamImage from "@/images/donaid/clariteam.svg";
+import ThinkpencilImage from "@/images/donaid/thinkpencil.svg";
+import VitruvianImage from "@/images/donaid/vitruvian.svg";
 export const hyperprint = {
   backgroundMeta: [
     {
@@ -112,19 +109,19 @@ export const hyperprint = {
   insights: [
     {
       label: "Insight one",
-      image: clariteamImage,
+      image: ClariteamImage,
       title: "Brand strength in business operations",
       body: "Visual identity matters, but a brand promise is only materialised from a streamlined operation on the floor.",
     },
     {
       label: "Insight two",
-      image: thinkpencilImage,
+      image: ThinkpencilImage,
       title: "Service design goes beyond paper",
       body: "Journey maps and blueprints are useful exploratory artefacts, but practically, fixing day-to-day processes has a bigger impact than any diagram.",
     },
     {
       label: "Insight three",
-      image: vitruvianImage,
+      image: VitruvianImage,
       title: "Good design comes from life observation",
       body: "UI design is just the surface; the actual product was built directly from observing where customers got stuck and where staff had to repeat themselves.",
     },

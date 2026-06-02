@@ -10,11 +10,9 @@ import demoImage from "@/images/donaid/demo.png";
 import receiptImage from "@/images/donaid/receipt.png";
 import trackingImage from "@/images/donaid/tracking.png";
 import reportImage from "@/images/donaid/report.png";
-import {
-  clariteamImage,
-  thinkpencilImage,
-  vitruvianImage,
-} from "@/data/insightImages";
+import ClariteamImage from "@/images/donaid/clariteam.svg";
+import ThinkpencilImage from "@/images/donaid/thinkpencil.svg";
+import VitruvianImage from "@/images/donaid/vitruvian.svg";
 import type { DonaidData } from "@/types/donaid";
 
 export const donaid: DonaidData = {
@@ -121,19 +119,19 @@ export const donaid: DonaidData = {
   insights: [
     {
       label: "Insight one",
-      image: clariteamImage,
+      image: ClariteamImage,
       title: "Product clarity for team alignment",
       body: "The earlier teams failed because there was no shared understanding of the product, not for lack of effort.",
     },
     {
       label: "Insight two",
-      image: thinkpencilImage,
+      image: ThinkpencilImage,
       title: "Design is thinking made visual",
       body: "Diagrams and designs turned abstract explanations into artefacts the team could see, challenge, improve, and execute.",
     },
     {
       label: "Insight three",
-      image: vitruvianImage,
+      image: VitruvianImage,
       title: "Cross-functional fluency mitigates risks",
       body: "Working across product, design, and engineering helped me spot gaps early before they became costly mistakes.",
     },

@@ -1,8 +1,4 @@
-export type InsightImage = {
-  markup: string;
-  width: number;
-  height: number;
-};
+import type { SvgComponent } from "astro/types";
 
 export type Figure = {
   image: ImageMetadata;
@@ -20,7 +16,7 @@ export type Feature = {
 
 export type Insight = {
   label: string;
-  image: InsightImage;
+  image: SvgComponent;
   title: string;
   body: string;
 };
