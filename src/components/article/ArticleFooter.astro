@@ -10,18 +10,18 @@ const { next } = Astro.props;
 ---
 
 <footer class="article-footer">
-  <a href="/" class="home-link" aria-label="Back to home">
+  <a href="/" class="article-footer__home" aria-label="Back to home">
     <Logo />
   </a>
-  <a class="next-showcase" href={next.href}>
-    <span class="kicker">
+  <a class="article-footer__next" href={next.href}>
+    <span class="article-footer__kicker">
       <span>{`Showcase ${next.showcaseNumber}`}</span>
       <span>{`/ ${next.showcaseTotal}`}</span>
     </span>
     <strong>{next.brand}</strong>
     <span>{next.title}</span>
   </a>
-  <nav aria-label="Contact links">
+  <nav class="article-footer__links" aria-label="Contact links">
     <a href="/resume.pdf">Resume</a>
     <a href="https://www.linkedin.com/in/firasrazak/">@firasrazak</a>
     <a href="mailto:hi@firas.works">hi@firas.works</a>
@@ -37,61 +37,8 @@ const { next } = Astro.props;
     width: 100%;
     padding: 1.5rem var(--px);
     color: var(--text-strong);
-  }
 
-  .home-link {
-    display: inline-flex;
-    width: 1.5rem;
-    color: var(--text-strong);
-  }
-
-  .home-link :global(.logo) {
-    width: 100%;
-    height: auto;
-  }
-
-  .kicker {
-    display: inline-flex;
-    gap: 0.25rem;
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 1;
-  }
-
-  .kicker span + span {
-    color: var(--text-dim);
-  }
-
-  .next-showcase {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    align-items: flex-end;
-    text-align: right;
-  }
-
-  .next-showcase strong {
-    color: var(--text-muted);
-    font-size: 0.75rem;
-  }
-
-  .next-showcase > span:last-child {
-    font-size: 0.75rem;
-    line-height: 1;
-  }
-
-  nav {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: space-between;
-    gap: 0.75rem;
-    color: var(--text-strong);
-    font-size: 0.75rem;
-  }
-
-  @media (min-width: 64rem) {
-    .article-footer {
+    @media (min-width: 64rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.5rem;
       min-height: 18.75rem;
@@ -99,27 +46,78 @@ const { next } = Astro.props;
       align-items: end;
     }
 
-    .home-link {
-      width: 2.25rem;
+    & .article-footer__home {
+      display: inline-flex;
+      width: 1.5rem;
+      color: var(--text-strong);
+
+      @media (min-width: 64rem) {
+        width: 2.25rem;
+      }
     }
 
-    .kicker {
-      font-size: 1.5rem;
+    & .article-footer__home :global(.logo) {
+      width: 100%;
+      height: auto;
     }
 
-    .next-showcase {
-      grid-column: 3;
-      align-self: start;
+    & .article-footer__kicker {
+      display: inline-flex;
+      gap: 0.25rem;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1;
+
+      & span + span {
+        color: var(--text-dim);
+      }
+
+      @media (min-width: 64rem) {
+        font-size: 1.5rem;
+      }
     }
 
-    .next-showcase strong,
-    .next-showcase > span:last-child,
-    nav {
-      font-size: 1.25rem;
+    & .article-footer__next {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      align-items: flex-end;
+      text-align: right;
+
+      & strong {
+        color: var(--text-muted);
+        font-size: 0.75rem;
+      }
+
+      & > span:last-child {
+        font-size: 0.75rem;
+        line-height: 1;
+      }
+
+      @media (min-width: 64rem) {
+        grid-column: 3;
+        align-self: start;
+
+        & strong,
+        & > span:last-child {
+          font-size: 1.25rem;
+        }
+      }
     }
 
-    nav {
+    & .article-footer__links {
       grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      color: var(--text-strong);
+      font-size: 0.75rem;
+
+      @media (min-width: 64rem) {
+        grid-column: 1 / -1;
+        font-size: 1.25rem;
+      }
     }
   }
 </style>

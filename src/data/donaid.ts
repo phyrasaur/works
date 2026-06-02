@@ -48,13 +48,13 @@ export const donaid: DonaidData = {
       image: moneyFlowsImage,
       title: "Money versus data flows",
       body: "To emphasise that DonAid doesn't collect money, I mapped out the money and reporting flows",
-      className: "wide",
+      className: "media-card--workshop-lead",
     },
     {
       image: userJourneyImage,
       title: "Comparing donor journeys",
       body: "I compared a typical user journey with the proposed donation tracking from the donor's perspective to clarify how donation tracking works",
-      className: "span-two",
+      className: "media-card--workshop-detail",
     },
   ],
   feasibilityFigures: [

@@ -12,6 +12,7 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
 
 <figure class:list={["media-card", figure.className, className]}>
   <img
+    class="media-card__image"
     src={figure.image.src}
     width={figure.image.width}
     height={figure.image.height}
@@ -19,7 +20,7 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
     loading="lazy"
     decoding="async"
   />
-  <figcaption>
+  <figcaption class="media-card__caption">
     <strong>{figure.title}{titleSuffix}</strong>
     {" "}
     {figure.body}
@@ -32,67 +33,59 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
     flex-direction: column;
     gap: 0.25rem;
     min-width: 0;
-  }
 
-  .media-card.wide,
-  .media-card.span-two {
-    grid-column: 1 / -1;
-  }
-
-  .media-card img {
-    width: 100%;
-    height: auto;
-    opacity: 0.85;
-  }
-
-  figcaption {
-    color: var(--text-muted);
-    font-size: 0.625rem;
-    letter-spacing: 0.03em;
-    line-height: 1.35;
-  }
-
-  :global(.workshop-grid) .media-card.span-two {
-    grid-column: span 2;
-  }
-
-  @media (min-width: 64rem) {
-    .media-card {
+    @media (min-width: 64rem) {
       gap: 0.75rem;
     }
 
-    .media-card img {
-      opacity: 0.9;
+    &.media-card--workshop-lead,
+    &.media-card--workshop-detail {
+      grid-column: 1 / -1;
     }
 
-    figcaption {
-      font-size: 1.25rem;
+    &.media-card--blueprint,
+    &.media-card--interface,
+    &.media-card--outcome {
+      @media (min-width: 64rem) {
+        grid-column: 1 / -1;
+      }
+    }
+
+    & .media-card__image {
+      width: 100%;
+      height: auto;
+      opacity: 0.85;
+
+      @media (min-width: 64rem) {
+        opacity: 0.9;
+      }
+    }
+
+    & .media-card__caption {
+      color: var(--text-muted);
+      font-size: 0.625rem;
       letter-spacing: 0.03em;
       line-height: 1.35;
-    }
 
-    :global(.workshop-grid) .media-card.wide {
-      grid-column: 1;
+      @media (min-width: 64rem) {
+        font-size: 1.25rem;
+        letter-spacing: 0.03em;
+        line-height: 1.35;
+      }
     }
+  }
 
-    :global(.workshop-grid) .media-card.span-two {
+  :global(.article__media-grid--workshop) .media-card--workshop-detail {
+    grid-column: span 2;
+
+    @media (min-width: 64rem) {
       grid-column: 2 / -1;
     }
+  }
 
-    :global(.process-grid) .media-card.span-two {
-      grid-column: 1 / -1;
-    }
-
-    .blueprint {
-      grid-column: 1 / -1;
-    }
-
-    .interface-figure {
-      grid-column: 1 / -1;
-    }
-
-    .outcome-card {
-      grid-column: 1 / -1;
+  :global(.article__media-grid--workshop) .media-card--workshop-lead {
+    @media (min-width: 64rem) {
+      grid-column: 1;
     }
   }
 </style>

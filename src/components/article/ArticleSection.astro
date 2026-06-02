@@ -20,62 +20,66 @@ const {
 
 <section
   class:list={[
-    "case-section",
-    dense && "dense-section",
-    titleOffset && "title-offset",
-    alignStart && "align-start",
+    "article-section",
+    dense && "article-section--dense",
+    titleOffset && "article-section--title-offset",
+    alignStart && "article-section--align-start",
     className,
   ]}
   aria-labelledby={id}
 >
-  <h2 id={id}>{title}</h2>
+  <h2 id={id} class="article-section__title">{title}</h2>
   <slot />
 </section>
 
 <style>
-  h2 {
-    color: var(--text-strong);
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 1;
-  }
-
-  .case-section {
+  .article-section {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     width: 100%;
     padding: 1.875rem var(--px);
-  }
 
-  .case-section.dense-section {
-    padding-block: 0.75rem;
-  }
-
-  @media (min-width: 64rem) {
-    h2 {
-      grid-column: 1 / -1;
-      font-size: 3rem;
-    }
-
-    .case-section {
+    @media (min-width: 64rem) {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 2.25rem 1.5rem;
       padding: 6rem var(--px);
     }
 
-    .case-section.title-offset > h2 {
-      grid-column: 2 / -1;
+    & .article-section__title {
+      color: var(--text-strong);
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1;
+
+      @media (min-width: 64rem) {
+        grid-column: 1 / -1;
+        font-size: 3rem;
+      }
     }
 
-    .case-section.align-start {
-      align-items: start;
+    &.article-section--dense {
+      padding-block: 0.75rem;
+
+      @media (min-width: 64rem) {
+        padding-block: 6rem;
+      }
     }
 
-    .case-section.dense-section {
-      padding-block: 6rem;
+    &.article-section--title-offset {
+      & > .article-section__title {
+        @media (min-width: 64rem) {
+          grid-column: 2 / -1;
+        }
+      }
+    }
+
+    &.article-section--align-start {
+      @media (min-width: 64rem) {
+        align-items: start;
+      }
     }
   }
 </style>
