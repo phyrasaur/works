@@ -1,38 +1,35 @@
-<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 297 326.298" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="vitruvian">
-<g clip-path="url(#clip0_0_6)">
-<ellipse id="Ellipse 1" cx="148.5" cy="23.1201" rx="22.6201" ry="22.6201" stroke="var(--stroke-0, white)"/>
-<path id="Ellipse 15" d="M178.014 312.011C178.014 319.15 172.227 324.937 165.088 324.937C157.949 324.937 152.162 319.15 152.162 312.011" stroke="var(--stroke-0, white)"/>
-<path id="Ellipse 18" d="M249.967 279.443C251.329 281.49 252.122 283.947 252.122 286.59C252.122 293.729 246.335 299.516 239.196 299.516C234.592 299.516 230.55 297.109 228.26 293.484" stroke="var(--stroke-0, white)"/>
-<path id="Ellipse 29" d="M46.9854 279.514C45.6532 281.547 44.8785 283.978 44.8785 286.59C44.8785 293.729 50.6655 299.516 57.8042 299.516C62.4085 299.516 66.4505 297.109 68.7402 293.484" stroke="var(--stroke-0, white)"/>
-<path id="Ellipse 20" d="M263.915 34.7072C267.571 32.4619 270.003 28.4698 270.003 23.9192C270.003 16.8995 264.215 11.2089 257.077 11.2089C254.273 11.2089 251.655 12.0869 249.537 13.5786" stroke="var(--stroke-0, white)"/>
-<path id="Ellipse 21" d="M19.4578 82.7313C12.3191 82.7313 6.53205 76.9442 6.53205 69.8055C6.53205 62.6668 12.3191 56.8797 19.4578 56.8797" stroke="var(--stroke-0, white)"/>
-<path id="Ellipse 23" d="M277.542 82.7313C284.681 82.7313 290.468 76.9442 290.468 69.8055C290.468 62.6668 284.681 56.8797 277.542 56.8797" stroke="var(--stroke-0, white)"/>
-<path id="Ellipse 17" d="M152.162 176.29C152.162 174.149 150.426 172.413 148.285 172.413C146.143 172.413 144.407 174.149 144.407 176.29" stroke="var(--stroke-0, white)"/>
-<path id="Ellipse 16" d="M144.407 312.442C144.407 319.581 138.716 325.368 131.697 325.368C124.677 325.368 118.986 319.581 118.986 312.442" stroke="var(--stroke-0, white)"/>
-<circle id="Ellipse 14" cx="148.715" cy="143.545" r="181.753" stroke="var(--stroke-0, white)"/>
-<path id="Vector 1" d="M152.162 312.873V176.29" stroke="var(--stroke-0, white)"/>
-<path id="Vector 9" d="M19.0269 56.8797L277.111 56.8797" stroke="var(--stroke-0, white)"/>
-<path id="Vector 10" d="M19.0269 82.7313L119.202 82.7313" stroke="var(--stroke-0, white)"/>
-<path id="Vector 18" d="M177.798 82.7313L277.111 82.7313" stroke="var(--stroke-0, white)"/>
-<path id="Vector 2" d="M144.407 312.873V176.29" stroke="var(--stroke-0, white)"/>
-<path id="Vector 7" d="M228.209 293.484L151.301 173.921" stroke="var(--stroke-0, white)"/>
-<path id="Vector 12" d="M68.7912 293.484L145.269 173.921" stroke="var(--stroke-0, white)"/>
-<path id="Vector 11" d="M249.951 279.481L178.032 167.673" stroke="var(--stroke-0, white)"/>
-<path id="Vector 13" d="M46.991 279.481L118.911 167.673" stroke="var(--stroke-0, white)"/>
-<path id="Vector 17" d="M263.971 34.6909L178.014 82.7312" stroke="var(--stroke-0, white)"/>
-<path id="Vector 20" d="M33.2447 34.6913L118.986 82.7313" stroke="var(--stroke-0, white)"/>
-<path id="Vector 19" d="M249.537 13.5784L174.567 56.8798" stroke="var(--stroke-0, white)"/>
-<path id="Ellipse 31" d="M33.3009 34.7072C29.6453 32.4619 27.2133 28.4698 27.2133 23.9192C27.2133 16.8995 33.0004 11.2089 40.1391 11.2089C42.9431 11.2089 45.561 12.0869 47.6792 13.5786" stroke="var(--stroke-0, white)"/>
-<path id="Vector 23" d="M47.6791 13.5784L122.649 56.8798" stroke="var(--stroke-0, white)"/>
-<path id="Vector 3" d="M119.208 312.873L119.208 82.6504" stroke="var(--stroke-0, white)"/>
-<path id="Vector 4" d="M177.792 312.873L177.792 82.6504" stroke="var(--stroke-0, white)"/>
-</g>
-<rect x="0.5" y="0.5" width="296" height="325.298" stroke="var(--stroke-0, white)"/>
+<svg width="687" height="755" viewBox="0 0 687 755" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_2017_31)">
+<circle cx="343.5" cy="52.5" r="52.5" stroke="white"/>
+<path d="M412 723C412 739.569 398.569 753 382 753C365.431 753 352 739.569 352 723" stroke="white"/>
+<path d="M579 647.411C582.159 652.163 584 657.866 584 664C584 680.569 570.568 694 554 694C543.314 694 533.932 688.413 528.618 680" stroke="white"/>
+<path d="M107.89 647.577C104.798 652.295 103 657.938 103 664C103 680.569 116.432 694 133 694C143.686 694 153.068 688.413 158.382 680" stroke="white"/>
+<path d="M611.371 55.5384C619.856 50.3271 625.5 41.0618 625.5 30.5C625.5 14.2076 612.069 1 595.5 1C588.992 1 582.916 3.03784 578 6.5" stroke="white"/>
+<path d="M44 167C27.4315 167 14 153.569 14 137C14 120.431 27.4315 107 44 107" stroke="white"/>
+<path d="M643 167C659.569 167 673 153.569 673 137C673 120.431 659.569 107 643 107" stroke="white"/>
+<path d="M352 408C352 403.029 347.971 399 343 399C338.029 399 334 403.029 334 408" stroke="white"/>
+<path d="M334 724C334 740.569 320.792 754 304.5 754C288.208 754 275 740.569 275 724" stroke="white"/>
+<circle cx="344" cy="332" r="422.5" stroke="white"/>
+<path d="M352 725V408" stroke="white"/>
+<path d="M43 107L642 107" stroke="white"/>
+<path d="M43 167L275.5 167" stroke="white"/>
+<path d="M411.5 167H642" stroke="white"/>
+<path d="M334 725V408" stroke="white"/>
+<path d="M528.5 680L350 402.5" stroke="white"/>
+<path d="M158.5 680L336 402.5" stroke="white"/>
+<path d="M578.964 647.5L412.042 388" stroke="white"/>
+<path d="M107.903 647.5L274.824 388" stroke="white"/>
+<path d="M611.501 55.5008L412 167" stroke="white"/>
+<path d="M75.9988 55.5017L275 167" stroke="white"/>
+<path d="M578 6.5L404 107" stroke="white"/>
+<path d="M76.1288 55.5384C67.6443 50.3271 61.9998 41.0618 61.9998 30.5C61.9998 14.2076 75.4313 1 91.9998 1C98.508 1 104.584 3.03784 109.5 6.5" stroke="white"/>
+<path d="M109.5 6.5L283.5 107" stroke="white"/>
+<path d="M275 725L275 167" stroke="white"/>
+<path d="M412 725L412 167" stroke="white"/>
 </g>
 <defs>
-<clipPath id="clip0_0_6">
-<rect x="0.5" y="0.5" width="296" height="325.298" fill="white"/>
+<clipPath id="clip0_2017_31">
+<rect width="687" height="755" fill="white"/>
 </clipPath>
 </defs>
 </svg>
