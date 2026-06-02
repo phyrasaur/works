@@ -4,7 +4,7 @@ import wishfulImage from "@/images/wishful-hero.jpg";
 import hyperprintMark from "@/graphics/hyperprint.svg";
 import donaidMark from "@/graphics/donaid.svg";
 import wishfulMark from "@/graphics/wishful.svg";
-import type { ArticleNextShowcase } from "@/types/article";
+import type { NextShowcase } from "@/types/article";
 import type { ShowcaseDetails, ShowcaseItem } from "@/types/showcase";
 
 export const showcaseItems: ShowcaseItem[] = [
@@ -48,7 +48,7 @@ export function getShowcase(slug: string): ShowcaseDetails {
   };
 }
 
-export function getNextShowcase(currentSlug: string): ArticleNextShowcase {
+export function getNextShowcase(currentSlug: string): NextShowcase {
   const currentIndex = showcaseItems.findIndex(
     (item) => item.slug === currentSlug,
   );

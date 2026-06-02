@@ -1,0 +1,179 @@
+---
+import Footer from "@/components/article/Footer.astro";
+import Header from "@/components/article/Header.astro";
+import Hero from "@/components/article/Hero.astro";
+import Section from "@/components/article/Section.astro";
+import Shell from "@/components/article/Shell.astro";
+import BackgroundMeta from "@/components/article/BackgroundMeta.astro";
+import ImageBlock from "@/components/article/ImageBlock.astro";
+import WishfulFeatureStack from "@/components/article/WishfulFeatureStack.astro";
+import { getNextShowcase, getShowcase } from "@/data/showcase";
+import { wishful } from "@/data/wishful";
+
+const currentShowcase = getShowcase("wishful");
+const nextShowcase = getNextShowcase("wishful");
+---
+
+<Shell title="Wishful Menu - Firas Razak">
+  <Header
+    runningTitle={currentShowcase.item.brand}
+    runningSubtitle={currentShowcase.item.title}
+  />
+
+  <Hero showcase={currentShowcase}>
+    <Fragment slot="summary">
+      <p>
+        A <strong>portion-aware menu planning</strong> and ordering terminal supports
+        a hybrid restaurant and diet clinic. Dieticians can plan menus and demonstrate
+        what a meal looks like at a specific portion size. Customers then practise
+        that skill in context by ordering from a menu the kitchen can execute consistently,
+        while <strong>still protecting restaurant margins.</strong>
+      </p>
+    </Fragment>
+  </Hero>
+
+  <Section
+    id="background-title"
+    title="Background"
+    class="article-section--background"
+    alignStart
+  >
+    <BackgroundMeta meta={wishful.backgroundMeta}>
+      I am a registered dietitian with a career in tech. I have long wondered
+      how I could bring a unique perspective to nutrition and technology with my
+      background. In this showcase, I explored how nutrition education and
+      restaurant operations could be integrated into a digital product that
+      brings the hospital kitchen model to the public.
+    </BackgroundMeta>
+  </Section>
+
+  <Section
+    id="problem-title"
+    title="Problem"
+    class="article-section--wishful-problem"
+  >
+    <p class="article__section-copy article__section-copy--start">
+      <strong>Ecosystem map:</strong> Nutrition education and restaurant ordering
+      operate in silos, so counselling rarely translates into portion-aware, consistent
+      customisation at the point of sale.
+    </p>
+    <ImageBlock
+      image={wishful.ecosystemImage}
+      class="article-image-block--wishful-diagram"
+    />
+    <div class="wishful-subsections">
+      {
+        wishful.problemSubsections.map((section) => (
+          <section class="wishful-subsection">
+            <h3 class="wishful-subsection__title">{section.title}</h3>
+            <p class="wishful-subsection__body">{section.body}</p>
+          </section>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section
+    id="bridging-title"
+    title="Bridging the worlds"
+    class="article-section--wishful-bridge"
+  >
+    <p class="article__section-copy article__section-copy--start">
+      Nutrition guidance needs to be built into the ordering process, so clients
+      can use it while choosing and customising a meal. A portion-aware POS can
+      translate nutrition education into concrete portioning and ingredient
+      choices, while keeping orders consistent and structured enough for the
+      kitchen to execute and profitable enough to sustain.
+    </p>
+    <ImageBlock
+      image={wishful.bridgingWorldsImage}
+      class="article-image-block--wishful-diagram"
+    />
+  </Section>
+
+  <Section
+    id="product-concept-title"
+    title="Product concept"
+    class="article-section--wishful-product"
+  >
+    <p class="article__section-copy article__section-copy--start">
+      A menu planning and ordering system spans three touchpoints: a marketing
+      landing page, a portion-aware ordering terminal, and a menu planner for
+      dietitians:
+    </p>
+    <WishfulFeatureStack features={wishful.conceptFeatures} />
+  </Section>
+
+  <Section id="conclusion-title" title="Conclusion" dense>
+    <p class="article__section-copy article__section-copy--start">
+      This concept turns nutrition education into a real-world skill: customers
+      learn by ordering with portion guidance embedded into the flow. By
+      connecting the dietitian's logic to the terminal and kitchen workflow,
+      "healthy eating" feels easy and practical: clearer choices, more
+      consistent portions, and more measurable outcomes.
+    </p>
+  </Section>
+
+  <Footer next={nextShowcase} />
+</Shell>
+
+<style is:global>
+  .article {
+    & .wishful-subsections {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      @media (min-width: 64rem) {
+        grid-column: 2 / -1;
+        gap: 2.25rem;
+      }
+    }
+
+    & .wishful-subsection {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    & .wishful-subsection__title {
+      color: var(--text-strong);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1;
+
+      @media (min-width: 64rem) {
+        font-size: 2.25rem;
+      }
+    }
+
+    & .wishful-subsection__body {
+      max-width: 56ch;
+      color: var(--text-normal);
+      font-size: 0.875rem;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+
+      @media (min-width: 64rem) {
+        font-size: 1.5rem;
+        letter-spacing: 0.03em;
+      }
+
+      @media (min-width: 80rem) {
+        font-size: 1.75rem;
+      }
+    }
+  }
+
+  .article-section {
+    &.article-section--wishful-problem,
+    &.article-section--wishful-bridge,
+    &.article-section--wishful-product {
+      gap: 1.5rem;
+
+      @media (min-width: 64rem) {
+        gap: 2.25rem 1.5rem;
+      }
+    }
+  }
+</style>

@@ -1,9 +1,9 @@
 ---
-import ArticleFooter from "@/components/article/ArticleFooter.astro";
-import ArticleHeader from "@/components/article/ArticleHeader.astro";
-import ArticleHero from "@/components/article/ArticleHero.astro";
-import ArticleSection from "@/components/article/ArticleSection.astro";
-import ArticleShell from "@/components/article/ArticleShell.astro";
+import Footer from "@/components/article/Footer.astro";
+import Header from "@/components/article/Header.astro";
+import Hero from "@/components/article/Hero.astro";
+import Section from "@/components/article/Section.astro";
+import Shell from "@/components/article/Shell.astro";
 import BackgroundMeta from "@/components/article/BackgroundMeta.astro";
 import FeatureList from "@/components/article/FeatureList.astro";
 import InsightList from "@/components/article/InsightList.astro";
@@ -16,13 +16,13 @@ const currentShowcase = getShowcase("donaid");
 const nextShowcase = getNextShowcase("donaid");
 ---
 
-<ArticleShell title="DonAid - Firas Razak">
-  <ArticleHeader
+<Shell title="DonAid - Firas Razak">
+  <Header
     runningTitle={currentShowcase.item.brand}
     runningSubtitle={currentShowcase.item.title}
   />
 
-  <ArticleHero showcase={currentShowcase}>
+  <Hero showcase={currentShowcase}>
     <Fragment slot="summary">
       <p>
         <strong>Public trust in charitable giving</strong> is often shaken by concerns
@@ -30,9 +30,9 @@ const nextShowcase = getNextShowcase("donaid");
         an act of goodwill into a leap of faith for donors. Donations are untraceable.
       </p>
     </Fragment>
-  </ArticleHero>
+  </Hero>
 
-  <ArticleSection
+  <Section
     id="background-title"
     title="Background"
     class="article-section--background"
@@ -44,13 +44,13 @@ const nextShowcase = getNextShowcase("donaid");
       guess, often mistaking the donation tracking system for a standard
       donation platform. The issue was in comprehension, not engineering.
     </BackgroundMeta>
-  </ArticleSection>
+  </Section>
 
-  <ArticleSection id="problems-title" title="Problems">
+  <Section id="problems-title" title="Problems">
     <NumberedList items={donaid.problems} />
-  </ArticleSection>
+  </Section>
 
-  <ArticleSection
+  <Section
     id="workshop-title"
     title="Product workshop"
     dense
@@ -67,9 +67,9 @@ const nextShowcase = getNextShowcase("donaid");
     <div class="article__media-grid article__media-grid--workshop">
       {donaid.workshopFigures.map((figure) => <MediaFigure figure={figure} />)}
     </div>
-  </ArticleSection>
+  </Section>
 
-  <ArticleSection
+  <Section
     id="feasibility-title"
     title="Feasibility study"
     dense
@@ -89,15 +89,9 @@ const nextShowcase = getNextShowcase("donaid");
         ))
       }
     </div>
-  </ArticleSection>
+  </Section>
 
-  <ArticleSection
-    id="process-title"
-    title="Work scoping"
-    dense
-    titleOffset
-    alignStart
-  >
+  <Section id="process-title" title="Work scoping" dense titleOffset alignStart>
     <p class="article__section-copy">
       I split the brief into Demo, MVP, and Feature Complete phases. I also
       shifted the founder's mindset to agile workflow.
@@ -105,9 +99,9 @@ const nextShowcase = getNextShowcase("donaid");
     <div class="article__media-grid article__media-grid--two-column">
       {donaid.processFigures.map((figure) => <MediaFigure figure={figure} />)}
     </div>
-  </ArticleSection>
+  </Section>
 
-  <ArticleSection
+  <Section
     id="interface-title"
     title="Interface design"
     class="article-section--interface-design"
@@ -121,9 +115,9 @@ const nextShowcase = getNextShowcase("donaid");
       titleSuffix=":"
       class="media-card--interface"
     />
-  </ArticleSection>
+  </Section>
 
-  <ArticleSection
+  <Section
     id="checkins-title"
     title="Engineering check-ins"
     titleOffset
@@ -135,9 +129,9 @@ const nextShowcase = getNextShowcase("donaid");
       across system design, business logic, architecture, and acceptance
       criteria.
     </p>
-  </ArticleSection>
+  </Section>
 
-  <ArticleSection id="features-title" title="Product core feature" dense>
+  <Section id="features-title" title="Product core feature" dense>
     <p class="article__section-copy article__section-copy--start">
       DonAid's main scope is to verify a donation after the transaction and
       track the money received from a campaign partner to the auditing trustee
@@ -149,9 +143,9 @@ const nextShowcase = getNextShowcase("donaid");
       class="media-card--blueprint"
     />
     <FeatureList features={donaid.features} />
-  </ArticleSection>
+  </Section>
 
-  <ArticleSection id="outcome-title" title="Outcome" dense>
+  <Section id="outcome-title" title="Outcome" dense>
     <p class="article__section-copy article__section-copy--start">
       The final delivery hit a foreseeable delay for the bank integration scope
       since the founder and the team had agreed to push ahead despite the flag
@@ -169,18 +163,18 @@ const nextShowcase = getNextShowcase("donaid");
       demonstrated a <strong>thorough understanding</strong> how donation tracking
       works.
     </p>
-  </ArticleSection>
+  </Section>
 
-  <ArticleSection
+  <Section
     id="insights-title"
     title="Insights"
     class="article-section--insights"
   >
     <InsightList insights={donaid.insights} />
-  </ArticleSection>
+  </Section>
 
-  <ArticleFooter next={nextShowcase} />
-</ArticleShell>
+  <Footer next={nextShowcase} />
+</Shell>
 
 <style is:global>
   .article {

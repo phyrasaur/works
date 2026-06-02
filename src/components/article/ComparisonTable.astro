@@ -1,0 +1,98 @@
+---
+type ComparisonRow = {
+  label: string;
+  cells: string[];
+};
+
+type Props = {
+  columns: string[];
+  rows: ComparisonRow[];
+  class?: string;
+};
+
+const { columns, rows, class: className } = Astro.props;
+---
+
+<div class:list={["comparison-table", className]}>
+  <table>
+    <thead>
+      <tr>
+        {columns.map((column) => <th scope="col">{column}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((row) => (
+          <tr>
+            <th scope="row">{row.label}</th>
+            {row.cells.map((cell, index) => (
+              <td data-label={columns[index + 1]}>{cell}</td>
+            ))}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .comparison-table {
+    width: 100%;
+    overflow-x: auto;
+    color: var(--text-normal);
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    line-height: 1.35;
+
+    @media (min-width: 64rem) {
+      grid-column: 1 / -1;
+      overflow: visible;
+      font-size: 1.5rem;
+      letter-spacing: 0.03em;
+      line-height: 1.25;
+    }
+
+    @media (min-width: 80rem) {
+      font-size: 1.875rem;
+    }
+
+    & table {
+      width: 100%;
+      min-width: 48rem;
+      border-collapse: collapse;
+
+      @media (min-width: 64rem) {
+        min-width: 0;
+      }
+    }
+
+    & th,
+    & td {
+      padding: 0.75rem 0.75rem 0.75rem 0;
+      border-top: 1px solid var(--hairline);
+      text-align: left;
+      vertical-align: top;
+
+      @media (min-width: 64rem) {
+        padding: 0.75rem 1.5rem 0.75rem 0;
+      }
+    }
+
+    & thead th {
+      border-top: 0;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    & tbody th {
+      width: 18%;
+      color: var(--text-strong);
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    & td {
+      color: var(--text-normal);
+    }
+  }
+</style>

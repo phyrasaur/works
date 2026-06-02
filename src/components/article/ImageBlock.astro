@@ -1,0 +1,41 @@
+---
+type Props = {
+  image: ImageMetadata;
+  alt?: string;
+  class?: string;
+};
+
+const { image, alt = "", class: className } = Astro.props;
+---
+
+<figure class:list={["article-image-block", className]}>
+  <img
+    class="article-image-block__image"
+    src={image.src}
+    width={image.width}
+    height={image.height}
+    alt={alt}
+    loading="lazy"
+    decoding="async"
+  />
+</figure>
+
+<style>
+  .article-image-block {
+    min-width: 0;
+
+    @media (min-width: 64rem) {
+      grid-column: 1 / -1;
+    }
+
+    & .article-image-block__image {
+      width: 100%;
+      height: auto;
+      opacity: 0.85;
+
+      @media (min-width: 64rem) {
+        opacity: 0.9;
+      }
+    }
+  }
+</style>
