@@ -29,7 +29,7 @@ const { closeHref = "/#showcase" } = Astro.props;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 1.5rem var(--px);
+    padding: var(--py) var(--px);
     color: var(--text-strong);
   }
 
@@ -65,8 +65,6 @@ const { closeHref = "/#showcase" } = Astro.props;
     .article-header {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-      min-height: 14.25rem;
-      padding: 6rem var(--px);
     }
 
     .home-link {
