@@ -102,15 +102,11 @@ const nextShowcase = getNextShowcase("donaid");
     alignStart
   >
     <p class="section-copy">
-      I split the brief into domains, MVP and post-launch scope to keep the
-      product coherent while the technical team estimated effort and risk.
+      I split the brief into Demo, MVP, and Feature Complete phases. I also
+      shifted the founder's mindset to agile workflow.
     </p>
     <div class="media-grid process-grid two-col">
-      {
-        donaid.processFigures.map((figure) => (
-          <MediaFigure figure={figure} titleSuffix=":" />
-        ))
-      }
+      {donaid.processFigures.map((figure) => <MediaFigure figure={figure} />)}
     </div>
   </ArticleSection>
 
@@ -121,8 +117,7 @@ const nextShowcase = getNextShowcase("donaid");
   >
     <p class="section-copy start">
       Design was not in the agency's scope. I stepped in and delivered
-      wireframes and flow diagrams to meet both stakeholder needs and technical
-      constraints.
+      interfaces and flow diagrams in sync with dev milestones.
     </p>
     <MediaFigure
       figure={donaid.interfaceFigure}
@@ -174,7 +169,7 @@ const nextShowcase = getNextShowcase("donaid");
       After the demo deployment, the founder and I had conducted a market-fit
       demonstration. <strong>All 32 attendants</strong> from various
       <strong>charity organisations expressed interest</strong> in the product and
-      demonstrated a <strong>thorough understanding</strong> of how donation tracking
+      demonstrated a <strong>thorough understanding</strong> how donation tracking
       works.
     </p>
   </ArticleSection>
