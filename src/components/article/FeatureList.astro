@@ -78,14 +78,9 @@ const { features } = Astro.props;
 
   .feature-row img {
     width: 100%;
-    height: 12rem;
+    height: auto;
     align-self: start;
     opacity: 0.9;
-    object-fit: cover;
-  }
-
-  .feature-row:nth-child(3) img {
-    height: 7.875rem;
   }
 
   @media (min-width: 64rem) {
@@ -119,15 +114,10 @@ const { features } = Astro.props;
       justify-self: center;
       width: min(100%, 35rem);
       height: auto;
-      max-height: 48rem;
     }
 
     .feature-row:nth-child(2) img {
       width: 22.5rem;
-    }
-
-    .feature-row:nth-child(3) img {
-      height: auto;
     }
 
     .feature-row:nth-child(2) .feature-copy {
