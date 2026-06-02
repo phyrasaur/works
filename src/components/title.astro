@@ -27,6 +27,8 @@ import Squiggle from "@/graphics/squiggle.astro";
 <style>
   .hero {
     box-sizing: border-box;
+    scroll-margin-top: calc(var(--py) * 2 + 3rem);
+    scroll-snap-align: start;
     min-height: calc(100lvh - var(--px) * 8);
     display: grid;
     padding-block: 1.5rem;
