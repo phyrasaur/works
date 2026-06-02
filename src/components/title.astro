@@ -1,11 +1,11 @@
 ---
 import Logo from "@/graphics/waf.svg";
-import Squiggle from "@/graphics/squiggle.astro";
+import Squiggle from "@/graphics/squiggle.svg";
 ---
 
 <section class="hero" aria-labelledby="title">
   <div class="hero__squiggle" aria-hidden="true">
-    <Squiggle />
+    <Squiggle class="squiggle" />
   </div>
 
   <div class="hero__footer">
@@ -50,6 +50,19 @@ import Squiggle from "@/graphics/squiggle.astro";
     & .hero__squiggle {
       display: grid;
       align-items: center;
+    }
+
+    & .squiggle {
+      align-self: center;
+      width: 100vw;
+      height: auto;
+      color: var(--text-normal, #ffffffbf);
+      overflow: visible;
+
+      @media (min-width: 64rem) {
+        width: 100%;
+        margin-block: 0;
+      }
     }
 
     & .hero__footer {
