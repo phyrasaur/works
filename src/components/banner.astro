@@ -2,9 +2,34 @@
 import Logo from "@/graphics/waf.svg";
 import Info from "@/graphics/info.svg";
 import InfoDialog from "@/components/info.astro";
+
+type Props = {
+  variant?: "home" | "article";
+  heroSelector?: string;
+  runningTitle?: string;
+  runningSubtitle?: string;
+  ctaHref?: string;
+  ctaLabel?: string;
+  contactHref?: string;
+};
+
+const {
+  variant = "home",
+  heroSelector = ".hero",
+  runningTitle = "Firas Razak",
+  runningSubtitle = "Product Design & Management",
+  ctaHref = "/#showcase",
+  ctaLabel = "showcases",
+  contactHref = "#contact",
+} = Astro.props;
+
+const isHome = variant === "home";
 ---
 
-<header class="site-banner">
+<header
+  class:list={["site-banner", `site-banner--${variant}`]}
+  data-hero-selector={heroSelector}
+>
   <a href="/" class="site-banner__logo-link">
     <Logo />
     <span class="sr-only">Home</span>
@@ -12,29 +37,43 @@ import InfoDialog from "@/components/info.astro";
   </a>
 
   <p class="site-banner__title" aria-hidden="true">
-    Firas Razak <span class="site-banner__designation"
-      >Product Design & Management</span
-    >
+    <strong>{runningTitle}</strong>
+    {
+      runningSubtitle && (
+        <span class="site-banner__designation">{runningSubtitle}</span>
+      )
+    }
   </p>
 
-  <button
-    type="button"
-    class="site-banner__info-button"
-    command="show-modal"
-    commandfor="info-dialog"
-    aria-haspopup="dialog"
-  >
-    <span>Design Squiggle</span>
-    <Info />
-  </button>
+  {
+    isHome ? (
+      <button
+        type="button"
+        class="site-banner__info-button"
+        command="show-modal"
+        commandfor="info-dialog"
+        aria-haspopup="dialog"
+      >
+        <span>Design Squiggle</span>
+        <Info />
+      </button>
+    ) : (
+      <a
+        href={ctaHref}
+        class="site-banner__info-button site-banner__showcases-link"
+      >
+        <span>{ctaLabel}</span>
+      </a>
+    )
+  }
 
-  <a class="site-banner__contact" href="/#contact">
+  <a class="site-banner__contact" href={contactHref}>
     <span class="site-banner__contact-text">Contact</span>
     <Logo />
   </a>
 </header>
 
-<InfoDialog />
+{isHome && <InfoDialog />}
 
 <style>
   .site-banner {
@@ -90,10 +129,19 @@ import InfoDialog from "@/components/info.astro";
       font-size: 1rem;
       font-weight: 600;
       letter-spacing: 0.03em;
+      max-width: min(48rem, 44vw);
+      overflow: hidden;
+      text-align: center;
+      text-overflow: ellipsis;
       transition: opacity 280ms ease;
+      white-space: nowrap;
 
       @media (min-width: 64rem) {
         display: block;
+      }
+
+      & strong {
+        font-weight: inherit;
       }
     }
 
@@ -113,6 +161,7 @@ import InfoDialog from "@/components/info.astro";
       gap: 0.125rem;
       padding: 0;
       color: var(--text-strong);
+      font: inherit;
       text-align: right;
       transition: opacity 300ms;
       pointer-events: auto;
@@ -149,6 +198,17 @@ import InfoDialog from "@/components/info.astro";
         & .info {
           width: 1.25rem;
         }
+      }
+    }
+
+    & .site-banner__showcases-link {
+      flex-direction: row;
+      align-items: center;
+      gap: 0;
+
+      & span {
+        max-width: none;
+        line-height: 1;
       }
     }
 
@@ -239,40 +299,49 @@ import InfoDialog from "@/components/info.astro";
 </style>
 
 <script>
-  const header = document.querySelector(".site-banner");
-  const logoLink = document.querySelector(".site-banner__logo-link");
-  const hero = document.querySelector(".hero");
-  const contact = document.querySelector("#contact");
+  document.querySelectorAll(".site-banner").forEach((header) => {
+    const logoLink = header.querySelector(".site-banner__logo-link");
+    const heroSelector = header.getAttribute("data-hero-selector") || ".hero";
+    const hero = document.querySelector(heroSelector);
+    const contactLink = header.querySelector(".site-banner__contact");
+    const contactHref = contactLink?.getAttribute("href");
+    const contactId = contactHref?.startsWith("#")
+      ? contactHref.slice(1)
+      : undefined;
+    const contact = contactId ? document.getElementById(contactId) : null;
 
-  if (header && logoLink && hero) {
-    const titleObserver = new IntersectionObserver(
-      ([entry]) => {
-        const isPastHero = !entry.isIntersecting;
-        header.classList.toggle("is-past-hero", isPastHero);
-        hero.classList.toggle("is-past-hero", isPastHero);
-        logoLink.setAttribute("href", isPastHero ? "#" : "/");
-      },
-      { rootMargin: "0px", threshold: 0.25 },
-    );
+    if (logoLink && hero) {
+      const titleObserver = new IntersectionObserver(
+        ([entry]) => {
+          const isPastHero = !entry.isIntersecting;
+          header.classList.toggle("is-past-hero", isPastHero);
+          hero.classList.toggle("is-past-hero", isPastHero);
+          logoLink.setAttribute("href", isPastHero ? "#" : "/");
+        },
+        { rootMargin: "0px", threshold: 0.25 },
+      );
 
-    titleObserver.observe(hero);
-  }
+      titleObserver.observe(hero);
+    }
 
-  if (header && contact) {
-    const contactObserver = new IntersectionObserver(
-      ([entry]) => {
-        header.classList.toggle("is-at-contact", entry.isIntersecting);
-      },
-      { threshold: 0.75 },
-    );
+    if (contact) {
+      const contactObserver = new IntersectionObserver(
+        ([entry]) => {
+          header.classList.toggle("is-at-contact", entry.isIntersecting);
+        },
+        { threshold: 0.75 },
+      );
 
-    contactObserver.observe(contact);
-  }
+      contactObserver.observe(contact);
+    }
+  });
 
   const infoDialog = document.getElementById("info-dialog");
   document
-    .querySelector(".site-banner__info-button")
-    ?.addEventListener("click", () => {
-      if (infoDialog instanceof HTMLDialogElement) infoDialog.showModal();
+    .querySelectorAll(".site-banner__info-button[commandfor='info-dialog']")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        if (infoDialog instanceof HTMLDialogElement) infoDialog.showModal();
+      });
     });
 </script>

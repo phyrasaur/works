@@ -9,7 +9,7 @@ type Props = {
 const { next } = Astro.props;
 ---
 
-<footer class="article-footer">
+<footer id="contact" class="article-footer">
   <a href="/" class="article-footer__home" aria-label="Back to home">
     <Logo />
   </a>
@@ -36,6 +36,7 @@ const { next } = Astro.props;
     gap: 1rem 0.5rem;
     width: 100%;
     padding: 1.5rem var(--px);
+    scroll-margin-top: 5rem;
     color: var(--text-strong);
 
     @media (min-width: 64rem) {
