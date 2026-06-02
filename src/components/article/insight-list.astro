@@ -47,9 +47,9 @@ const { insights } = Astro.props;
       align-items: start;
 
       @media (min-width: 64rem) {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
+        grid-template-columns: 1.75rem minmax(0, 1fr);
+        gap: 1.5rem;
+        align-self: start;
       }
     }
 
@@ -64,10 +64,8 @@ const { insights } = Astro.props;
       transform-origin: left top;
 
       @media (min-width: 64rem) {
-        width: auto;
         font-size: 1.25rem;
         letter-spacing: 0.03em;
-        transform: none;
       }
     }
 
