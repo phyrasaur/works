@@ -47,39 +47,37 @@ const {
       gap: 2.25rem 1.5rem;
       padding: 6rem var(--px);
     }
+  }
 
-    & .article-section__title {
-      color: var(--text-strong);
-      font-size: 1.25rem;
-      font-weight: 400;
-      line-height: 1;
+  .article-section__title {
+    color: var(--text-strong);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1;
 
-      @media (min-width: 64rem) {
-        grid-column: 1 / -1;
-        font-size: 3rem;
-      }
+    @media (min-width: 64rem) {
+      grid-column: 1 / -1;
+      font-size: 3rem;
     }
+  }
 
-    &.article-section--dense {
-      padding-block: 0.75rem;
+  .article-section--dense {
+    padding-block: 0.75rem;
 
-      @media (min-width: 64rem) {
-        padding-block: 6rem;
-      }
+    @media (min-width: 64rem) {
+      padding-block: 6rem;
     }
+  }
 
-    &.article-section--title-offset {
-      & > .article-section__title {
-        @media (min-width: 64rem) {
-          grid-column: 2 / -1;
-        }
-      }
+  .article-section--title-offset > .article-section__title {
+    @media (min-width: 64rem) {
+      grid-column: 2 / -1;
     }
+  }
 
-    &.article-section--align-start {
-      @media (min-width: 64rem) {
-        align-items: start;
-      }
+  .article-section--align-start {
+    @media (min-width: 64rem) {
+      align-items: start;
     }
   }
 </style>

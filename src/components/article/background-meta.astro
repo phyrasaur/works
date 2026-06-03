@@ -31,39 +31,39 @@ const { meta } = Astro.props;
     @media (min-width: 64rem) {
       display: contents;
     }
+  }
 
-    & .background-meta__copy {
-      grid-column: 1 / -1;
-      max-width: 56ch;
-    }
+  .background-meta__copy {
+    grid-column: 1 / -1;
+    max-width: 56ch;
+  }
 
-    & .background-meta__item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.125rem;
-      color: var(--text-muted);
-      font-size: 0.625rem;
+  .background-meta__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    color: var(--text-muted);
+    font-size: 0.625rem;
+    letter-spacing: 0.03em;
+    line-height: 1.35;
+
+    @media (min-width: 64rem) {
+      gap: 0.25rem;
+      font-size: 1.25rem;
       letter-spacing: 0.03em;
       line-height: 1.35;
+    }
+  }
 
-      @media (min-width: 64rem) {
-        gap: 0.25rem;
-        font-size: 1.25rem;
-        letter-spacing: 0.03em;
-        line-height: 1.35;
-      }
+  .background-meta__item:nth-of-type(2) {
+    @media (min-width: 64rem) {
+      grid-column: 2;
+    }
+  }
 
-      &:nth-of-type(2) {
-        @media (min-width: 64rem) {
-          grid-column: 2;
-        }
-      }
-
-      &:nth-of-type(3) {
-        @media (min-width: 64rem) {
-          grid-column: 3;
-        }
-      }
+  .background-meta__item:nth-of-type(3) {
+    @media (min-width: 64rem) {
+      grid-column: 3;
     }
   }
 </style>

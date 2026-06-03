@@ -54,35 +54,8 @@ import { infoContent } from "@/data/info";
       overlay 300ms ease allow-discrete,
       display 300ms ease allow-discrete;
 
-    &::backdrop {
-      background: linear-gradient(to bottom, #00000031, #00000099);
-      opacity: 0;
-      transition: opacity 300ms ease;
-    }
-
-    &:open {
-      opacity: 1;
-      transform: translateY(0);
-
-      &::backdrop {
-        opacity: 1;
-      }
-
-      @starting-style {
-        opacity: 0;
-        transform: translateY(100%);
-
-        &::backdrop {
-          opacity: 0;
-        }
-      }
-    }
-
     @media (prefers-reduced-motion: reduce) {
-      &,
-      &::backdrop {
-        transition-duration: 1ms;
-      }
+      transition-duration: 1ms;
     }
 
     @media (min-width: 64rem) {
@@ -95,74 +68,111 @@ import { infoContent } from "@/data/info";
       border-left: 1px solid var(--hairline);
       box-shadow: -49px 0 200px 87px #000000bf;
       transform: translateX(100%);
+    }
+  }
 
-      &::backdrop {
-        background: linear-gradient(to right, #00000012, #00000099);
-      }
+  .info-dialog::backdrop {
+    background: linear-gradient(to bottom, #00000031, #00000099);
+    opacity: 0;
+    transition: opacity 300ms ease;
 
-      &:open {
-        transform: translateX(0);
-
-        @starting-style {
-          transform: translateX(100%);
-        }
-      }
+    @media (prefers-reduced-motion: reduce) {
+      transition-duration: 1ms;
     }
 
-    & .info-dialog__panel {
-      box-sizing: border-box;
-      min-height: auto;
-      display: flex;
-      flex-direction: column;
-      gap: var(--section-gap);
-      padding: var(--py) var(--px);
+    @media (min-width: 64rem) {
+      background: linear-gradient(to right, #00000012, #00000099);
+    }
+  }
 
-      @media (min-width: 64rem) {
-        min-height: 100%;
+  .info-dialog:open {
+    opacity: 1;
+    transform: translateY(0);
+
+    @media (min-width: 64rem) {
+      transform: translateX(0);
+    }
+  }
+
+  .info-dialog:open::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    .info-dialog:open {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+  }
+
+  @starting-style {
+    .info-dialog:open::backdrop {
+      opacity: 0;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    @starting-style {
+      .info-dialog:open {
+        transform: translateX(100%);
       }
     }
+  }
 
-    & .info-dialog__header {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 2rem;
+  .info-dialog__panel {
+    box-sizing: border-box;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-gap);
+    padding: var(--py) var(--px);
 
-      & h2 {
-        font-size: 1.75rem;
-        font-weight: 400;
-        line-height: 1.1;
-      }
+    @media (min-width: 64rem) {
+      min-height: 100%;
     }
+  }
 
-    & .info-dialog__close {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 1.5rem;
-      height: 1.5rem;
-      padding: 0;
+  .info-dialog__header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
 
-      &:hover {
-        color: #fff;
-      }
+  .info-dialog__header h2 {
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  .info-dialog__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+  }
+
+  .info-dialog__close:hover {
+    color: #fff;
+  }
+
+  .info-dialog__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+    line-height: 1.35;
+
+    @media (min-width: 64rem) {
+      font-size: 1.25rem;
     }
+  }
 
-    & .info-dialog__content {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      font-size: 1rem;
-      letter-spacing: 0.03em;
-      line-height: 1.35;
-      @media (min-width: 64rem) {
-        font-size: 1.25rem;
-      }
-
-      & p {
-        max-width: 56ch;
-      }
-    }
+  .info-dialog__content p {
+    max-width: 56ch;
   }
 </style>
 

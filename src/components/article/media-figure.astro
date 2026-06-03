@@ -37,42 +37,34 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
     @media (min-width: 64rem) {
       gap: 0.75rem;
     }
+  }
 
-    & .media-card__image {
-      width: 100%;
-      height: auto;
-      opacity: 0.85;
+  .media-card__image {
+    width: 100%;
+    height: auto;
+    opacity: 0.85;
 
-      @media (min-width: 64rem) {
-        opacity: 0.9;
-      }
+    @media (min-width: 64rem) {
+      opacity: 0.9;
     }
+  }
 
-    & .media-card__caption {
-      color: var(--text-muted);
-      font-size: 0.625rem;
+  .media-card__caption {
+    color: var(--text-muted);
+    font-size: 0.625rem;
+    letter-spacing: 0.03em;
+    line-height: 1.35;
+
+    @media (min-width: 64rem) {
+      font-size: 1.25rem;
       letter-spacing: 0.03em;
       line-height: 1.35;
-
-      @media (min-width: 64rem) {
-        font-size: 1.25rem;
-        letter-spacing: 0.03em;
-        line-height: 1.35;
-      }
     }
+  }
 
-    &.media-card--workshop-lead,
-    &.media-card--workshop-detail {
-      grid-column: 1 / -1;
-    }
-
-    &.media-card--blueprint,
-    &.media-card--interface,
-    &.media-card--outcome {
-      @media (min-width: 64rem) {
-        grid-column: 1 / -1;
-      }
-    }
+  .media-card--workshop-lead,
+  .media-card--workshop-detail {
+    grid-column: 1 / -1;
   }
 
   :global(.article__media-grid--workshop) .media-card--workshop-detail {
@@ -80,6 +72,24 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
 
     @media (min-width: 64rem) {
       grid-column: 2 / -1;
+    }
+  }
+
+  .media-card--blueprint {
+    @media (min-width: 64rem) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .media-card--interface {
+    @media (min-width: 64rem) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .media-card--outcome {
+    @media (min-width: 64rem) {
+      grid-column: 1 / -1;
     }
   }
 
