@@ -39,71 +39,71 @@ const { insights } = Astro.props;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.5rem;
     }
+  }
 
-    & .insight-list__item {
-      display: grid;
-      grid-template-columns: 0.5rem minmax(0, 1fr);
-      gap: 0.5rem;
-      align-items: start;
+  .insight-list__item {
+    display: grid;
+    grid-template-columns: 0.5rem minmax(0, 1fr);
+    gap: 0.5rem;
+    align-items: start;
 
-      @media (min-width: 64rem) {
-        grid-template-columns: 1.75rem minmax(0, 1fr);
-        gap: 1.5rem;
-        align-self: start;
-      }
-    }
-
-    & .insight-list__label {
-      width: max-content;
-      color: var(--text-muted);
-      font-size: 0.5rem;
-      letter-spacing: 0.1em;
-      line-height: 1;
-      text-transform: uppercase;
-      transform: rotate(-90deg) translateX(-100%);
-      transform-origin: left top;
-
-      @media (min-width: 64rem) {
-        font-size: 1.25rem;
-        letter-spacing: 0.03em;
-      }
-    }
-
-    & .insight-list__copy {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    & .insight-list__image {
+    @media (min-width: 64rem) {
+      grid-template-columns: 1.75rem minmax(0, 1fr);
+      gap: 1.5rem;
       align-self: start;
-      max-width: 100%;
-      height: auto;
-      border: 1px solid currentColor;
     }
+  }
 
-    & .insight-list__title {
-      max-width: 15rem;
-      color: var(--text-strong);
-      font-size: 0.875rem;
-      font-weight: 400;
-      line-height: 1.2;
+  .insight-list__label {
+    width: max-content;
+    color: var(--text-muted);
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    text-transform: uppercase;
+    transform: rotate(-90deg) translateX(-100%);
+    transform-origin: left top;
 
-      @media (min-width: 64rem) {
-        max-width: 28rem;
-        font-size: 1.5rem;
-      }
+    @media (min-width: 64rem) {
+      font-size: 1.25rem;
+      letter-spacing: 0.03em;
     }
+  }
 
-    & .insight-list__body {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      line-height: 1.35;
+  .insight-list__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
-      @media (min-width: 64rem) {
-        color: var(--text-normal);
-        font-size: 1.25rem;
-      }
+  .insight-list__image {
+    align-self: start;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid currentColor;
+  }
+
+  .insight-list__title {
+    max-width: 15rem;
+    color: var(--text-strong);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.2;
+
+    @media (min-width: 64rem) {
+      max-width: 28rem;
+      font-size: 1.5rem;
+    }
+  }
+
+  .insight-list__body {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.35;
+
+    @media (min-width: 64rem) {
+      color: var(--text-normal);
+      font-size: 1.25rem;
     }
   }
 </style>

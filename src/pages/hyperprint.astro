@@ -171,93 +171,89 @@ const previousShowcase = getPreviousShowcase("hyperprint");
 </Shell>
 
 <style is:global>
-  .article {
-    & .article__section-copy--wide {
-      @media (min-width: 64rem) {
-        grid-column: 1 / -1;
-        max-width: none;
-      }
-    }
+  .article__media-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
 
-    & .article__media-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
-
-      @media (min-width: 64rem) {
-        grid-column: 1 / -1;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1.5rem;
-      }
-
-      &.article__media-grid--workshop {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      &.article__media-grid--two-column {
-        @media (min-width: 64rem) {
-          grid-column: 2 / -1;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
-    }
-
-    & .media-card--service-hero {
-      @media (min-width: 64rem) {
-        grid-column: 1 / -1;
-      }
-    }
-
-    & .hyperprint-service-list {
-      display: flex;
-      width: 100%;
-      flex-direction: column;
+    @media (min-width: 64rem) {
+      grid-column: 1 / -1;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.5rem;
-
-      @media (min-width: 64rem) {
-        grid-column: 1 / -1;
-        gap: 3rem;
-        padding-top: 1.5rem;
-      }
-
-      & .media-card {
-        @media (min-width: 64rem) {
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 1.5rem;
-          align-items: end;
-        }
-      }
-
-      & .media-card__image {
-        @media (min-width: 64rem) {
-          grid-column: 1 / span 2;
-        }
-      }
-
-      & .media-card__caption {
-        @media (min-width: 64rem) {
-          grid-column: 3;
-        }
-      }
     }
   }
 
-  .article-section {
-    &.article-section--hyperprint-problem {
-      gap: 1.5rem;
+  .article__media-grid--workshop {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 
-      @media (min-width: 64rem) {
-        gap: 2.25rem 1.5rem;
-      }
-    }
+  .article .hyperprint-service-list {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 1.5rem;
 
-    &.article-section--insights {
+    @media (min-width: 64rem) {
+      grid-column: 1 / -1;
+      gap: 3rem;
       padding-top: 1.5rem;
+    }
+  }
 
-      @media (min-width: 64rem) {
-        padding-top: 6rem;
-      }
+  .article-section--hyperprint-problem {
+    gap: 1.5rem;
+
+    @media (min-width: 64rem) {
+      gap: 2.25rem 1.5rem;
+    }
+  }
+
+  .article-section--insights {
+    padding-top: 1.5rem;
+
+    @media (min-width: 64rem) {
+      padding-top: 6rem;
+    }
+  }
+
+  .article__section-copy--wide {
+    @media (min-width: 64rem) {
+      grid-column: 1 / -1;
+      max-width: none;
+    }
+  }
+
+  .article__media-grid--two-column {
+    @media (min-width: 64rem) {
+      grid-column: 2 / -1;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .article .media-card--service-hero {
+    @media (min-width: 64rem) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .article .hyperprint-service-list .media-card {
+    @media (min-width: 64rem) {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      align-items: end;
+    }
+  }
+
+  .article .hyperprint-service-list .media-card__image {
+    @media (min-width: 64rem) {
+      grid-column: 1 / span 2;
+    }
+  }
+
+  .article .hyperprint-service-list .media-card__caption {
+    @media (min-width: 64rem) {
+      grid-column: 3;
     }
   }
 </style>

@@ -36,145 +36,154 @@ import Squiggle from "@/graphics/squiggle.svg";
     grid-template-rows: 1fr;
     transition: opacity 600ms;
     opacity: 1;
+
     @media (min-width: 48rem) {
       min-height: calc(100lvh - var(--px) * 3);
     }
+
     @media (min-width: 64rem) {
       min-height: calc(100lvh - var(--px) * 5);
       padding: 0 var(--px) 0;
     }
+  }
 
-    & .hero__squiggle {
-      display: grid;
-      align-items: center;
+  .hero__squiggle {
+    display: grid;
+    align-items: center;
+  }
+
+  .hero .squiggle {
+    align-self: center;
+    width: 100vw;
+    height: auto;
+    color: var(--text-normal, #ffffffbf);
+    overflow: visible;
+
+    @media (min-width: 64rem) {
+      width: 100%;
+      margin-block: 0;
     }
+  }
 
-    & .squiggle {
-      align-self: center;
-      width: 100vw;
-      height: auto;
-      color: var(--text-normal, #ffffffbf);
-      overflow: visible;
+  .hero__footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 0.75rem;
+    padding-inline: var(--px);
 
-      @media (min-width: 64rem) {
-        width: 100%;
-        margin-block: 0;
-      }
+    @media (min-width: 64rem) {
+      padding-inline: 0;
     }
+  }
 
-    & .hero__footer {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: end;
+  .hero__profile {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.125rem;
+    font-size: 0.875rem;
+    line-height: 1;
+
+    @media (min-width: 64rem) {
+      flex-direction: row;
       gap: 0.75rem;
-      padding-inline: var(--px);
-
-      @media (min-width: 64rem) {
-        padding-inline: 0;
-      }
+      font-size: 1rem;
     }
+  }
 
-    & .hero__profile {
-      display: flex;
-      min-width: 0;
-      flex-direction: column;
-      gap: 0.125rem;
-      font-size: 0.875rem;
-      line-height: 1;
+  .hero__profile h1 {
+    font-size: inherit;
+    font-weight: 500;
+  }
 
-      & h1 {
-        font-size: inherit;
-        font-weight: 500;
-      }
+  .hero__profile p {
+    color: var(--text-muted);
+    line-height: 1.2;
+    letter-spacing: 0.03em;
+  }
 
-      & p {
-        color: var(--text-muted);
-        line-height: 1.2;
-        letter-spacing: 0.03em;
-      }
+  .hero__links {
+    display: grid;
+    place-items: end;
 
-      @media (min-width: 64rem) {
-        flex-direction: row;
-        gap: 0.75rem;
-        font-size: 1rem;
-      }
+    @media (min-width: 64rem) {
+      gap: 2.25rem;
     }
+  }
 
-    & .hero__links {
+  .hero__link--showcase {
+    display: none;
+
+    @media (min-width: 64rem) {
       display: grid;
       place-items: end;
-
-      @media (min-width: 64rem) {
-        gap: 2.25rem;
-      }
+      gap: 0.25rem;
     }
+  }
 
-    & .hero__link {
-      @media (min-width: 64rem) {
-        position: relative;
+  .hero__link--contact {
+    display: grid;
+    place-items: end;
+    gap: 0.5rem;
+    color: var(--text-normal);
+    font-size: 1rem;
+  }
 
-        &::after {
-          position: absolute;
-          top: 50%;
-          left: calc(100% + 1rem);
-          content: "";
-          width: 5rem;
-          border-top: 1px solid var(--hairline);
-        }
+  .hero__link--contact span {
+    writing-mode: sideways-lr;
+    text-align: right;
+    line-height: 1;
 
-        &:hover {
-          color: #fff;
-        }
-      }
-
-      &.hero__link--showcase {
-        display: none;
-
-        @media (min-width: 64rem) {
-          display: grid;
-          place-items: end;
-          gap: 0.25rem;
-        }
-      }
-
-      &.hero__link--contact {
-        display: grid;
-        place-items: end;
-        gap: 0.5rem;
-        color: var(--text-normal);
-        font-size: 1rem;
-
-        & span {
-          writing-mode: sideways-lr;
-          text-align: right;
-          line-height: 1;
-        }
-
-        & .logo {
-          width: 0.85em;
-          height: auto;
-          transform: rotate(-135deg) translateX(0.15em);
-        }
-
-        @media (min-width: 64rem) {
-          & span {
-            writing-mode: horizontal-tb;
-          }
-
-          & .hero__link-muted,
-          & .logo {
-            display: none;
-          }
-        }
-      }
-
-      & .hero__link-muted {
-        color: var(--text-muted);
-      }
+    @media (min-width: 64rem) {
+      writing-mode: horizontal-tb;
     }
+  }
 
-    &.is-past-hero {
-      opacity: 0;
+  .hero__link--contact .logo {
+    width: 0.85em;
+    height: auto;
+    transform: rotate(-135deg) translateX(0.15em);
+
+    @media (min-width: 64rem) {
+      display: none;
+    }
+  }
+
+  .hero__link .hero__link-muted {
+    color: var(--text-muted);
+  }
+
+  .hero.is-past-hero {
+    opacity: 0;
+  }
+
+  .hero__link {
+    @media (min-width: 64rem) {
+      position: relative;
+    }
+  }
+
+  .hero__link::after {
+    @media (min-width: 64rem) {
+      position: absolute;
+      top: 50%;
+      left: calc(100% + 1rem);
+      content: "";
+      width: 5rem;
+      border-top: 1px solid var(--hairline);
+    }
+  }
+
+  .hero__link:hover {
+    @media (min-width: 64rem) {
+      color: #fff;
+    }
+  }
+
+  .hero__link--contact .hero__link-muted {
+    @media (min-width: 64rem) {
+      display: none;
     }
   }
 </style>

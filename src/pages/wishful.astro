@@ -141,128 +141,138 @@ const previousShowcase = getPreviousShowcase("wishful");
 </Shell>
 
 <style is:global>
-  .article {
-    & .wishful-subsections {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+  .article .wishful-subsections {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 
-      @media (min-width: 64rem) {
-        grid-column: 2 / -1;
-        gap: 2.25rem;
-      }
-    }
-
-    & .wishful-subsection {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    & .wishful-subsection__title {
-      color: var(--text-strong);
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1;
-
-      @media (min-width: 64rem) {
-        font-size: 2.25rem;
-      }
-    }
-
-    & .wishful-subsection__body {
-      max-width: 56ch;
-      color: var(--text-normal);
-      font-size: 0.875rem;
-      letter-spacing: 0.02em;
-      line-height: 1.4;
-
-      @media (min-width: 64rem) {
-        font-size: 1.5rem;
-        letter-spacing: 0.03em;
-      }
-
-      @media (min-width: 80rem) {
-        font-size: 1.75rem;
-      }
-    }
-
-    & .wishful-feature-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-
-      @media (min-width: 64rem) {
-        grid-column: 1 / -1;
-        gap: 2.25rem;
-      }
-    }
-
-    & .wishful-feature {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0.5rem;
-
-      @media (min-width: 64rem) {
-        grid-template-columns: 1.5rem minmax(0, 1fr);
-        gap: 2.25rem;
-      }
-    }
-
-    & .wishful-feature__label {
-      color: var(--text-muted);
-      font-size: 0.625rem;
-      letter-spacing: 0.1em;
-      line-height: 1;
-      text-transform: uppercase;
-
-      @media (min-width: 64rem) {
-        align-self: start;
-        width: 1.5rem;
-        font-size: 1.5rem;
-        letter-spacing: 0.1em;
-        writing-mode: vertical-rl;
-        transform: rotate(180deg);
-      }
-    }
-
-    & .wishful-feature__content {
-      display: flex;
-      min-width: 0;
-      flex-direction: column;
-      gap: 0.75rem;
-
-      @media (min-width: 64rem) {
-        gap: 1.5rem;
-      }
-    }
-
-    & .wishful-feature__title {
-      color: var(--text-strong);
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: 0.03em;
-      line-height: 1.25;
-
-      @media (min-width: 64rem) {
-        font-size: 2.25rem;
-      }
-    }
-
-    & .media-card--wishful-concept .media-card__image {
-      border: 1px solid var(--hairline);
+    @media (min-width: 64rem) {
+      grid-column: 2 / -1;
+      gap: 2.25rem;
     }
   }
 
-  .article-section {
-    &.article-section--wishful-problem,
-    &.article-section--wishful-bridge,
-    &.article-section--wishful-product {
-      gap: 1.5rem;
+  .article .wishful-subsection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
-      @media (min-width: 64rem) {
-        gap: 2.25rem 1.5rem;
-      }
+  .article .wishful-subsection__title {
+    color: var(--text-strong);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+
+    @media (min-width: 64rem) {
+      font-size: 2.25rem;
+    }
+  }
+
+  .article .wishful-subsection__body {
+    max-width: 56ch;
+    color: var(--text-normal);
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+
+    @media (min-width: 64rem) {
+      font-size: 1.5rem;
+      letter-spacing: 0.03em;
+    }
+
+    @media (min-width: 80rem) {
+      font-size: 1.75rem;
+    }
+  }
+
+  .article .wishful-feature-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @media (min-width: 64rem) {
+      grid-column: 1 / -1;
+      gap: 2.25rem;
+    }
+  }
+
+  .article .wishful-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+
+    @media (min-width: 64rem) {
+      grid-template-columns: 1.5rem minmax(0, 1fr);
+      gap: 2.25rem;
+    }
+  }
+
+  .article .wishful-feature__label {
+    color: var(--text-muted);
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    text-transform: uppercase;
+
+    @media (min-width: 64rem) {
+      align-self: start;
+      width: 1.5rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+  }
+
+  .article .wishful-feature__content {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    @media (min-width: 64rem) {
+      gap: 1.5rem;
+    }
+  }
+
+  .article .wishful-feature__title {
+    color: var(--text-strong);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    line-height: 1.25;
+
+    @media (min-width: 64rem) {
+      font-size: 2.25rem;
+    }
+  }
+
+  .article .media-card--wishful-concept .media-card__image {
+    border: 1px solid var(--hairline);
+  }
+
+  .article-section--wishful-problem,
+  .article-section--wishful-bridge,
+  .article-section--wishful-product {
+    gap: 1.5rem;
+  }
+
+  .article-section--wishful-problem {
+    @media (min-width: 64rem) {
+      gap: 2.25rem 1.5rem;
+    }
+  }
+
+  .article-section--wishful-bridge {
+    @media (min-width: 64rem) {
+      gap: 2.25rem 1.5rem;
+    }
+  }
+
+  .article-section--wishful-product {
+    @media (min-width: 64rem) {
+      gap: 2.25rem 1.5rem;
     }
   }
 </style>

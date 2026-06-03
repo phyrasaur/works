@@ -82,146 +82,146 @@ const nextLabel = previousLabel;
       padding: calc(var(--py) * 2) var(--px) var(--py);
       align-items: end;
     }
+  }
 
-    & .article-footer__previous {
-      grid-column: 1;
-      align-self: stretch;
-      display: grid;
-      grid-template-rows: 7em 1fr;
-      justify-items: start;
-      color: var(--text-normal);
-      font-size: 1rem;
-      line-height: 1.5;
-      text-align: left;
+  .article-footer__previous {
+    grid-column: 1;
+    align-self: stretch;
+    display: grid;
+    grid-template-rows: 7em 1fr;
+    justify-items: start;
+    color: var(--text-normal);
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: left;
 
-      @media (min-width: 64rem) {
-        font-size: clamp(1.5rem, 2.5vw, 3rem);
-      }
+    @media (min-width: 64rem) {
+      font-size: clamp(1.5rem, 2.5vw, 3rem);
     }
+  }
 
-    & .article-footer__next {
-      align-self: stretch;
-      grid-column: 2;
-      display: grid;
-      grid-template-rows: 7em 1fr;
-      justify-items: end;
-      color: var(--text-normal);
-      font-size: 1rem;
-      line-height: 1.5;
-      text-align: right;
+  .article-footer__next {
+    align-self: stretch;
+    grid-column: 2;
+    display: grid;
+    grid-template-rows: 7em 1fr;
+    justify-items: end;
+    color: var(--text-normal);
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: right;
 
-      @media (min-width: 64rem) {
-        grid-column: 3;
-        font-size: clamp(1.5rem, 2.5vw, 3rem);
-      }
+    @media (min-width: 64rem) {
+      grid-column: 3;
+      font-size: clamp(1.5rem, 2.5vw, 3rem);
     }
+  }
 
-    & .article-footer__next .article-footer__kicker {
-      writing-mode: sideways-lr;
+  .article-footer__next .article-footer__kicker {
+    writing-mode: sideways-lr;
+  }
+
+  .article-footer__kicker {
+    display: inline-flex;
+    gap: 0.25rem;
+    justify-content: space-between;
+    writing-mode: vertical-lr;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 1em;
+
+    @media (min-width: 64rem) {
+      font-size: 0.6em;
     }
+  }
 
-    & .article-footer__kicker {
-      display: inline-flex;
-      gap: 0.25rem;
-      justify-content: space-between;
-      writing-mode: vertical-lr;
-      color: var(--text-dim);
-      font-size: 0.75rem;
-      font-weight: 600;
-      line-height: 1;
-      margin-bottom: 1em;
+  .article-footer__brand {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 400;
 
-      @media (min-width: 64rem) {
-        font-size: 0.6em;
-      }
+    @media (min-width: 64rem) {
+      font-size: 0.8em;
     }
+  }
 
-    & .article-footer__brand {
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      font-weight: 400;
+  .article-footer__title-row {
+    align-self: center;
+    display: grid;
+    gap: 0.5rem;
+    align-items: start;
+  }
 
-      @media (min-width: 64rem) {
-        font-size: 0.8em;
-      }
+  .article-footer__previous-icon {
+    position: absolute;
+    inset-inline-start: calc(-2.5 * var(--footer-icon-offset));
+    color: var(--text-strong);
+    width: 0.625rem;
+    height: auto;
+    transform: translateY(50%) rotate(-45deg);
+
+    @media (min-width: 64rem) {
+      width: 1rem;
     }
+  }
 
-    & .article-footer__title-row {
-      align-self: center;
-      display: grid;
-      gap: 0.5rem;
-      align-items: start;
+  .article-footer__title {
+    display: block;
+    max-width: 60ch;
+    font-size: inherit;
+    line-height: 1;
+    position: relative;
+  }
+
+  .article-footer__next-icon {
+    position: absolute;
+    inset-inline-start: calc(100% + var(--footer-icon-offset));
+    color: var(--text-strong);
+    width: 0.625rem;
+    height: auto;
+    transform: translateY(-100%) rotate(135deg);
+
+    @media (min-width: 64rem) {
+      width: 1rem;
     }
+  }
 
-    & .article-footer__previous-icon {
-      position: absolute;
-      inset-inline-start: calc(-2.5 * var(--footer-icon-offset));
-      color: var(--text-strong);
-      width: 0.625rem;
-      height: auto;
-      transform: translateY(50%) rotate(-45deg);
+  .article-footer__links {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    color: var(--text-strong);
+    font-size: 0.75rem;
 
-      @media (min-width: 64rem) {
-        width: 1rem;
-      }
-    }
-
-    & .article-footer__title {
-      display: block;
-      max-width: 60ch;
-      font-size: inherit;
-      line-height: 1;
-      position: relative;
-    }
-
-    & .article-footer__next-icon {
-      position: absolute;
-      inset-inline-start: calc(100% + var(--footer-icon-offset));
-      color: var(--text-strong);
-      width: 0.625rem;
-      height: auto;
-      transform: translateY(-100%) rotate(135deg);
-
-      @media (min-width: 64rem) {
-        width: 1rem;
-      }
-    }
-
-    & .article-footer__links {
+    @media (min-width: 64rem) {
       grid-column: 1 / -1;
-      display: flex;
-      justify-content: space-between;
-      gap: 0.75rem;
-      color: var(--text-strong);
-      font-size: 0.75rem;
-
-      @media (min-width: 64rem) {
-        grid-column: 1 / -1;
-        font-size: 1.25rem;
-      }
+      font-size: 1.25rem;
     }
+  }
 
-    & .article-footer__previous .article-footer__title {
-      text-align: left;
+  .article-footer__previous .article-footer__title {
+    text-align: left;
+  }
+
+  .article-footer__next .article-footer__title {
+    justify-self: end;
+    text-align: right;
+  }
+
+  .article-footer__previous .article-footer__title-row {
+    @media (min-width: 64rem) {
+      margin-inline-start: -1.25rem;
+      padding-inline-start: 1.25rem;
     }
+  }
 
-    & .article-footer__previous .article-footer__title-row {
-      @media (min-width: 64rem) {
-        margin-inline-start: -1.25rem;
-        padding-inline-start: 1.25rem;
-      }
-    }
-
-    & .article-footer__next .article-footer__title {
-      justify-self: end;
-      text-align: right;
-    }
-
-    & .article-footer__next .article-footer__title-row {
-      @media (min-width: 64rem) {
-        margin-inline-end: -1.25rem;
-        padding-inline-end: 1.25rem;
-      }
+  .article-footer__next .article-footer__title-row {
+    @media (min-width: 64rem) {
+      margin-inline-end: -1.25rem;
+      padding-inline-end: 1.25rem;
     }
   }
 </style>

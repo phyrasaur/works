@@ -27,15 +27,15 @@ const { image, alt = "", class: className } = Astro.props;
     @media (min-width: 64rem) {
       grid-column: 1 / -1;
     }
+  }
 
-    & .article-image-block__image {
-      width: 100%;
-      height: auto;
-      opacity: 0.85;
+  .article-image-block__image {
+    width: 100%;
+    height: auto;
+    opacity: 0.85;
 
-      @media (min-width: 64rem) {
-        opacity: 0.9;
-      }
+    @media (min-width: 64rem) {
+      opacity: 0.9;
     }
   }
 </style>
