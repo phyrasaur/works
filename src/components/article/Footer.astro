@@ -66,7 +66,7 @@ const { next } = Astro.props;
       display: inline-flex;
       gap: 0.25rem;
       color: var(--text-muted);
-      font-size: 0.8em;
+      font-size: 0.75rem;
       font-weight: 600;
       line-height: 1;
       margin-bottom: 1em;
@@ -85,14 +85,18 @@ const { next } = Astro.props;
       flex-direction: column;
       align-items: flex-end;
       color: var(--text-normal);
-      font-size: 1rem;
-      line-height: 1;
+      font-size: 1.5rem;
+      line-height: 1.5;
       text-align: right;
 
       & .article-footer__brand {
         color: var(--text-muted);
-        font-size: inherit;
+        font-size: 0.75rem;
         font-weight: 400;
+
+        @media (min-width: 64rem) {
+          font-size: 0.8em;
+        }
       }
 
       & .article-footer__title {
