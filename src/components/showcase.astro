@@ -241,6 +241,15 @@ const itemCount = showcaseItems.length;
     z-index: 1;
   }
 
+  .showcase__title-link:focus-visible {
+    outline: none;
+  }
+
+  .showcase__title-link:focus-visible::after {
+    outline: 2px solid #fff;
+    outline-offset: 0.25rem;
+  }
+
   .showcase__desktop-brand,
   .showcase__desktop-count {
     display: none;

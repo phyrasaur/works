@@ -14,9 +14,9 @@ import { Font } from "astro:assets";
   :root {
     --section-gap: 0.25rem;
     --text-strong: #ffffffe6;
-    --text-normal: #ffffffbf;
-    --text-muted: #ffffff9e;
-    --text-dim: #ffffff66;
+    --text-normal: #ffffffd1;
+    --text-muted: #ffffffb3;
+    --text-dim: #ffffff8a;
     --hairline: #ffffff40;
     --surface: #000;
     --page-max: 120rem;
@@ -115,6 +115,11 @@ import { Font } from "astro:assets";
 
   a:visited {
     color: inherit;
+  }
+
+  :where(a, button):focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 0.25rem;
   }
 
   button:hover {
