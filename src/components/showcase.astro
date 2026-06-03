@@ -151,7 +151,6 @@ const itemCount = showcaseItems.length;
       margin: 0;
       overflow: hidden;
       background: #111;
-
       @media (min-width: 64rem) {
         height: auto;
         aspect-ratio: 7 / 3;
@@ -164,10 +163,6 @@ const itemCount = showcaseItems.length;
       object-fit: cover;
       opacity: 0.3;
       transition: opacity 0.3s ease;
-
-      &:hover {
-        opacity: 0.5;
-      }
 
       &.showcase__image--hyperprint {
         view-transition-name: hyperprint;
@@ -237,6 +232,7 @@ const itemCount = showcaseItems.length;
 
       &:hover {
         color: #fff;
+        text-decoration: underline;
       }
     }
 

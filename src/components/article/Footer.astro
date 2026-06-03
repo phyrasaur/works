@@ -8,9 +8,11 @@ type Props = {
 };
 
 const { next, previous } = Astro.props;
-const previousLabel =
-  previous.showcaseNumber === previous.showcaseTotal ? "Last" : "Previous";
-const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
+// const previousLabel =
+//   previous.showcaseNumber === previous.showcaseTotal ? "Last" : "Previous";
+// const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
+const previousLabel = "Showcase";
+const nextLabel = previousLabel;
 ---
 
 <footer id="next-showcase" class="article-footer">
@@ -20,15 +22,15 @@ const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
     aria-label={`${previousLabel} case study: ${previous.brand}`}
   >
     <span class="article-footer__kicker">
-      <span>{`${previousLabel} ${previous.showcaseNumber}`}</span>
-      <span>{`/ ${previous.showcaseTotal}`}</span>
+      <span>{previousLabel}</span>
+      <span>{`${previous.showcaseNumber} / ${previous.showcaseTotal}`}</span>
     </span>
-    <strong class="article-footer__brand">{previous.brand}</strong>
     <span class="article-footer__title-row">
-      <span class="article-footer__previous-icon" aria-hidden="true">
-        <Logo />
+      <strong class="article-footer__brand">{previous.brand}</strong>
+      <span class="article-footer__title">
+        <Logo class="article-footer__previous-icon" aria-hidden="true" />
+        {previous.title}
       </span>
-      <span class="article-footer__title">{previous.title}</span>
     </span>
   </a>
   <a
@@ -37,14 +39,14 @@ const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
     aria-label={`${nextLabel} case study: ${next.brand}`}
   >
     <span class="article-footer__kicker">
-      <span>{`${next.showcaseNumber}/${next.showcaseTotal}`}</span>
+      <span>{`${next.showcaseNumber} / ${next.showcaseTotal}`}</span>
       <span>{nextLabel}</span>
     </span>
-    <strong class="article-footer__brand">{next.brand}</strong>
     <span class="article-footer__title-row">
-      <span class="article-footer__title">{next.title}</span>
-      <span class="article-footer__next-icon" aria-hidden="true">
-        <Logo />
+      <strong class="article-footer__brand">{next.brand}</strong>
+      <span class="article-footer__title">
+        {next.title}
+        <Logo class="article-footer__next-icon" aria-hidden="true" />
       </span>
     </span>
   </a>
@@ -67,7 +69,7 @@ const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
     column-gap: 0.5rem;
     width: 100%;
     min-height: 100svh;
-    padding: var(--py) var(--px);
+    padding: calc(var(--py) * 4) var(--px) var(--py);
     scroll-margin-top: 5rem;
     color: var(--text-strong);
 
@@ -77,16 +79,16 @@ const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
       grid-template-columns: repeat(3, minmax(0, 1fr));
       row-gap: var(--py);
       column-gap: 1.5rem;
-      padding: var(--py) var(--px);
+      padding: calc(var(--py) * 2) var(--px) var(--py);
       align-items: end;
     }
 
     & .article-footer__previous {
       grid-column: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      align-self: center;
+      align-self: stretch;
+      display: grid;
+      grid-template-rows: 7em 1fr;
+      justify-items: start;
       color: var(--text-normal);
       font-size: 1rem;
       line-height: 1.5;
@@ -98,11 +100,11 @@ const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
     }
 
     & .article-footer__next {
+      align-self: stretch;
       grid-column: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      align-self: center;
+      display: grid;
+      grid-template-rows: 7em 1fr;
+      justify-items: end;
       color: var(--text-normal);
       font-size: 1rem;
       line-height: 1.5;
@@ -115,22 +117,19 @@ const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
     }
 
     & .article-footer__next .article-footer__kicker {
-      transform: rotate(180deg);
+      writing-mode: sideways-lr;
     }
 
     & .article-footer__kicker {
       display: inline-flex;
       gap: 0.25rem;
-      writing-mode: vertical-rl;
-      color: var(--text-muted);
+      justify-content: space-between;
+      writing-mode: vertical-lr;
+      color: var(--text-dim);
       font-size: 0.75rem;
       font-weight: 600;
       line-height: 1;
       margin-bottom: 1em;
-
-      & span + span {
-        color: var(--text-dim);
-      }
 
       @media (min-width: 64rem) {
         font-size: 0.6em;
@@ -148,32 +147,22 @@ const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
     }
 
     & .article-footer__title-row {
-      align-self: stretch;
+      align-self: center;
       display: grid;
-      grid-template-columns: minmax(0, 1fr);
       gap: 0.5rem;
       align-items: start;
-      position: relative;
     }
 
     & .article-footer__previous-icon {
-      display: inline-flex;
       position: absolute;
-      inset-inline-end: calc(100% + var(--footer-icon-offset));
+      inset-inline-start: calc(-2.5 * var(--footer-icon-offset));
       color: var(--text-strong);
-
-      & :global(.logo) {
-        width: 0.625rem;
-        height: auto;
-        transform: translateY(100%) rotate(-45deg);
-      }
+      width: 0.625rem;
+      height: auto;
+      transform: translateY(50%) rotate(-45deg);
 
       @media (min-width: 64rem) {
         width: 1rem;
-
-        & :global(.logo) {
-          width: 0.75rem;
-        }
       }
     }
 
@@ -182,26 +171,19 @@ const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
       max-width: 60ch;
       font-size: inherit;
       line-height: 1;
+      position: relative;
     }
 
     & .article-footer__next-icon {
-      display: inline-flex;
       position: absolute;
       inset-inline-start: calc(100% + var(--footer-icon-offset));
       color: var(--text-strong);
-
-      & :global(.logo) {
-        width: 0.625rem;
-        height: auto;
-        transform: translateY(100%) rotate(135deg);
-      }
+      width: 0.625rem;
+      height: auto;
+      transform: translateY(-100%) rotate(135deg);
 
       @media (min-width: 64rem) {
         width: 1rem;
-
-        & :global(.logo) {
-          width: 0.75rem;
-        }
       }
     }
 
