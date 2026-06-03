@@ -49,7 +49,7 @@ const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
     </span>
   </a>
   <nav class="article-footer__links" aria-label="Contact links">
-    <a href="/resume.pdf">Resume</a>
+    <a href="/resume.pdf">resume.pdf</a>
     <a href="https://www.linkedin.com/in/firasrazak/">@firasrazak</a>
     <a href="mailto:hi@firas.works">hi@firas.works</a>
   </nav>
@@ -62,7 +62,7 @@ const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
     box-sizing: border-box;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 1rem 0.5rem;
+    gap: var(--px) 0.5rem;
     width: 100%;
     padding: 1.5rem var(--px);
     scroll-margin-top: 5rem;
@@ -72,7 +72,7 @@ const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
       --footer-icon-offset: calc(var(--px) / 6);
 
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.5rem;
+      gap: var(--px) 1.5rem;
       min-height: 18.75rem;
       padding: 6rem var(--px);
       align-items: end;
