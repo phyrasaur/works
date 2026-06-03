@@ -9,7 +9,7 @@ type Props = {
 const { next } = Astro.props;
 ---
 
-<footer id="contact" class="article-footer">
+<footer id="next-showcase" class="article-footer">
   <a href="/" class="article-footer__home" aria-label="Back to home">
     <Logo />
   </a>
@@ -18,8 +18,8 @@ const { next } = Astro.props;
       <span>{`Showcase ${next.showcaseNumber}`}</span>
       <span>{`/ ${next.showcaseTotal}`}</span>
     </span>
-    <strong>{next.brand}</strong>
-    <span>{next.title}</span>
+    <strong class="article-footer__brand">{next.brand}</strong>
+    <span class="article-footer__title">{next.title}</span>
   </a>
   <nav class="article-footer__links" aria-label="Contact links">
     <a href="/resume.pdf">Resume</a>
@@ -66,44 +66,45 @@ const { next } = Astro.props;
       display: inline-flex;
       gap: 0.25rem;
       color: var(--text-muted);
-      font-size: 0.75rem;
+      font-size: 0.8em;
       font-weight: 600;
       line-height: 1;
+      margin-bottom: 1em;
 
       & span + span {
         color: var(--text-dim);
       }
 
       @media (min-width: 64rem) {
-        font-size: 1.5rem;
+        font-size: 0.6em;
       }
     }
 
     & .article-footer__next {
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
       align-items: flex-end;
+      color: var(--text-normal);
+      font-size: 1rem;
+      line-height: 1;
       text-align: right;
 
-      & strong {
+      & .article-footer__brand {
         color: var(--text-muted);
-        font-size: 0.75rem;
+        font-size: inherit;
+        font-weight: 400;
       }
 
-      & > span:last-child {
-        font-size: 0.75rem;
+      & .article-footer__title {
+        max-width: 60ch;
+        font-size: inherit;
         line-height: 1;
       }
 
       @media (min-width: 64rem) {
         grid-column: 3;
         align-self: start;
-
-        & strong,
-        & > span:last-child {
-          font-size: 1.25rem;
-        }
+        font-size: clamp(1.5rem, 2.5vw, 3rem);
       }
     }
 
