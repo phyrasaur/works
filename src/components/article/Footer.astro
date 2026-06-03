@@ -1,25 +1,52 @@
 ---
 import Logo from "@/graphics/waf.svg";
-import type { NextShowcase } from "@/types/article";
+import type { ShowcaseLink } from "@/types/article";
 
 type Props = {
-  next: NextShowcase;
+  next: ShowcaseLink;
+  previous: ShowcaseLink;
 };
 
-const { next } = Astro.props;
+const { next, previous } = Astro.props;
+const previousLabel =
+  previous.showcaseNumber === previous.showcaseTotal ? "Last" : "Previous";
+const nextLabel = next.showcaseNumber === 1 ? "First" : "Next";
 ---
 
 <footer id="next-showcase" class="article-footer">
-  <a href="/" class="article-footer__home" aria-label="Back to home">
-    <Logo />
-  </a>
-  <a class="article-footer__next" href={next.href}>
+  <a
+    class="article-footer__previous"
+    href={previous.href}
+    aria-label={`${previousLabel} case study: ${previous.brand}`}
+  >
     <span class="article-footer__kicker">
-      <span>{`Showcase ${next.showcaseNumber}`}</span>
+      <span>{`${previousLabel} ${previous.showcaseNumber}`}</span>
+      <span>{`/ ${previous.showcaseTotal}`}</span>
+    </span>
+    <strong class="article-footer__brand">{previous.brand}</strong>
+    <span class="article-footer__title-row">
+      <span class="article-footer__previous-icon" aria-hidden="true">
+        <Logo />
+      </span>
+      <span class="article-footer__title">{previous.title}</span>
+    </span>
+  </a>
+  <a
+    class="article-footer__next"
+    href={next.href}
+    aria-label={`${nextLabel} case study: ${next.brand}`}
+  >
+    <span class="article-footer__kicker">
+      <span>{`${nextLabel} ${next.showcaseNumber}`}</span>
       <span>{`/ ${next.showcaseTotal}`}</span>
     </span>
     <strong class="article-footer__brand">{next.brand}</strong>
-    <span class="article-footer__title">{next.title}</span>
+    <span class="article-footer__title-row">
+      <span class="article-footer__title">{next.title}</span>
+      <span class="article-footer__next-icon" aria-hidden="true">
+        <Logo />
+      </span>
+    </span>
   </a>
   <nav class="article-footer__links" aria-label="Contact links">
     <a href="/resume.pdf">Resume</a>
@@ -30,6 +57,8 @@ const { next } = Astro.props;
 
 <style>
   .article-footer {
+    --footer-icon-offset: calc(var(--px) / 4);
+
     box-sizing: border-box;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -40,6 +69,8 @@ const { next } = Astro.props;
     color: var(--text-strong);
 
     @media (min-width: 64rem) {
+      --footer-icon-offset: calc(var(--px) / 6);
+
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.5rem;
       min-height: 18.75rem;
@@ -47,19 +78,37 @@ const { next } = Astro.props;
       align-items: end;
     }
 
-    & .article-footer__home {
-      display: inline-flex;
-      width: 1.5rem;
-      color: var(--text-strong);
+    & .article-footer__previous {
+      grid-column: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      color: var(--text-normal);
+      font-size: 1rem;
+      line-height: 1.5;
+      text-align: left;
 
       @media (min-width: 64rem) {
-        width: 2.25rem;
+        align-self: start;
+        font-size: clamp(1.5rem, 2.5vw, 3rem);
       }
     }
 
-    & .article-footer__home :global(.logo) {
-      width: 100%;
-      height: auto;
+    & .article-footer__next {
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      color: var(--text-normal);
+      font-size: 1rem;
+      line-height: 1.5;
+      text-align: right;
+
+      @media (min-width: 64rem) {
+        grid-column: 3;
+        align-self: start;
+        font-size: clamp(1.5rem, 2.5vw, 3rem);
+      }
     }
 
     & .article-footer__kicker {
@@ -80,35 +129,71 @@ const { next } = Astro.props;
       }
     }
 
-    & .article-footer__next {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      color: var(--text-normal);
-      font-size: 1.5rem;
-      line-height: 1.5;
-      text-align: right;
+    & .article-footer__brand {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 400;
 
-      & .article-footer__brand {
-        color: var(--text-muted);
-        font-size: 0.75rem;
-        font-weight: 400;
-
-        @media (min-width: 64rem) {
-          font-size: 0.8em;
-        }
+      @media (min-width: 64rem) {
+        font-size: 0.8em;
       }
+    }
 
-      & .article-footer__title {
-        max-width: 60ch;
-        font-size: inherit;
-        line-height: 1;
+    & .article-footer__title-row {
+      align-self: stretch;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.5rem;
+      align-items: start;
+      position: relative;
+    }
+
+    & .article-footer__previous-icon {
+      display: inline-flex;
+      position: absolute;
+      inset-inline-end: calc(100% + var(--footer-icon-offset));
+      color: var(--text-strong);
+
+      & :global(.logo) {
+        width: 0.625rem;
+        height: auto;
+        transform: translateY(100%) rotate(-45deg);
       }
 
       @media (min-width: 64rem) {
-        grid-column: 3;
-        align-self: start;
-        font-size: clamp(1.5rem, 2.5vw, 3rem);
+        width: 1rem;
+
+        & :global(.logo) {
+          width: 0.75rem;
+        }
+      }
+    }
+
+    & .article-footer__title {
+      display: block;
+      max-width: 60ch;
+      font-size: inherit;
+      line-height: 1;
+    }
+
+    & .article-footer__next-icon {
+      display: inline-flex;
+      position: absolute;
+      inset-inline-start: calc(100% + var(--footer-icon-offset));
+      color: var(--text-strong);
+
+      & :global(.logo) {
+        width: 0.625rem;
+        height: auto;
+        transform: translateY(100%) rotate(135deg);
+      }
+
+      @media (min-width: 64rem) {
+        width: 1rem;
+
+        & :global(.logo) {
+          width: 0.75rem;
+        }
       }
     }
 
@@ -123,6 +208,29 @@ const { next } = Astro.props;
       @media (min-width: 64rem) {
         grid-column: 1 / -1;
         font-size: 1.25rem;
+      }
+    }
+
+    & .article-footer__previous .article-footer__title {
+      text-align: left;
+    }
+
+    & .article-footer__previous .article-footer__title-row {
+      @media (min-width: 64rem) {
+        margin-inline-start: -1.25rem;
+        padding-inline-start: 1.25rem;
+      }
+    }
+
+    & .article-footer__next .article-footer__title {
+      justify-self: end;
+      text-align: right;
+    }
+
+    & .article-footer__next .article-footer__title-row {
+      @media (min-width: 64rem) {
+        margin-inline-end: -1.25rem;
+        padding-inline-end: 1.25rem;
       }
     }
   }

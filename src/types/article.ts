@@ -32,10 +32,13 @@ export type NumberedItem = {
   body: string;
 };
 
-export type NextShowcase = {
+export type ShowcaseLink = {
   href: string;
   showcaseNumber: number;
   showcaseTotal: number;
   brand: string;
   title: string;
 };
+
+export type NextShowcase = ShowcaseLink;
+export type PreviousShowcase = ShowcaseLink;

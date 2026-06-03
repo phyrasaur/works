@@ -4,7 +4,7 @@ import wishfulImage from "@/images/wishful/hero.jpg";
 import hyperprintMark from "@/graphics/hyperprint.svg";
 import donaidMark from "@/graphics/donaid.svg";
 import wishfulMark from "@/graphics/wishful.svg";
-import type { NextShowcase } from "@/types/article";
+import type { ShowcaseLink } from "@/types/article";
 import type { ShowcaseDetails, ShowcaseItem } from "@/types/showcase";
 
 export const showcaseItems: ShowcaseItem[] = [
@@ -48,19 +48,36 @@ export function getShowcase(slug: string): ShowcaseDetails {
   };
 }
 
-export function getNextShowcase(currentSlug: string): NextShowcase {
+function getShowcaseLink(index: number): ShowcaseLink {
+  const item = showcaseItems[index];
+
+  return {
+    href: `/${item.slug}`,
+    showcaseNumber: index + 1,
+    showcaseTotal: showcaseItems.length,
+    brand: item.brand,
+    title: item.title,
+  };
+}
+
+export function getNextShowcase(currentSlug: string): ShowcaseLink {
   const currentIndex = showcaseItems.findIndex(
     (item) => item.slug === currentSlug,
   );
   const nextIndex =
     currentIndex === -1 ? 0 : (currentIndex + 1) % showcaseItems.length;
-  const nextItem = showcaseItems[nextIndex];
 
-  return {
-    href: `/${nextItem.slug}`,
-    showcaseNumber: nextIndex + 1,
-    showcaseTotal: showcaseItems.length,
-    brand: nextItem.brand,
-    title: nextItem.title,
-  };
+  return getShowcaseLink(nextIndex);
+}
+
+export function getPreviousShowcase(currentSlug: string): ShowcaseLink {
+  const currentIndex = showcaseItems.findIndex(
+    (item) => item.slug === currentSlug,
+  );
+  const previousIndex =
+    currentIndex === -1
+      ? showcaseItems.length - 1
+      : (currentIndex - 1 + showcaseItems.length) % showcaseItems.length;
+
+  return getShowcaseLink(previousIndex);
 }

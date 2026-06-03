@@ -9,10 +9,15 @@ import ComparisonTable from "@/components/article/comparison-table.astro";
 import InsightList from "@/components/article/insight-list.astro";
 import MediaFigure from "@/components/article/media-figure.astro";
 import { hyperprint } from "@/data/hyperprint";
-import { getNextShowcase, getShowcase } from "@/data/showcase";
+import {
+  getNextShowcase,
+  getPreviousShowcase,
+  getShowcase,
+} from "@/data/showcase";
 
 const currentShowcase = getShowcase("hyperprint");
 const nextShowcase = getNextShowcase("hyperprint");
+const previousShowcase = getPreviousShowcase("hyperprint");
 ---
 
 <Shell title="Hyperprint - Firas Razak">
@@ -162,11 +167,18 @@ const nextShowcase = getNextShowcase("hyperprint");
     <InsightList insights={hyperprint.insights} />
   </Section>
 
-  <Footer next={nextShowcase} />
+  <Footer next={nextShowcase} previous={previousShowcase} />
 </Shell>
 
 <style is:global>
   .article {
+    & .article__section-copy--wide {
+      @media (min-width: 64rem) {
+        grid-column: 1 / -1;
+        max-width: none;
+      }
+    }
+
     & .article__media-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -187,13 +199,6 @@ const nextShowcase = getNextShowcase("hyperprint");
           grid-column: 2 / -1;
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
-      }
-    }
-
-    & .article__section-copy--wide {
-      @media (min-width: 64rem) {
-        grid-column: 1 / -1;
-        max-width: none;
       }
     }
 

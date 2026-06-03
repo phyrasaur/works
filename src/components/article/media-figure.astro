@@ -38,19 +38,6 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
       gap: 0.75rem;
     }
 
-    &.media-card--workshop-lead,
-    &.media-card--workshop-detail {
-      grid-column: 1 / -1;
-    }
-
-    &.media-card--blueprint,
-    &.media-card--interface,
-    &.media-card--outcome {
-      @media (min-width: 64rem) {
-        grid-column: 1 / -1;
-      }
-    }
-
     & .media-card__image {
       width: 100%;
       height: auto;
@@ -71,6 +58,19 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
         font-size: 1.25rem;
         letter-spacing: 0.03em;
         line-height: 1.35;
+      }
+    }
+
+    &.media-card--workshop-lead,
+    &.media-card--workshop-detail {
+      grid-column: 1 / -1;
+    }
+
+    &.media-card--blueprint,
+    &.media-card--interface,
+    &.media-card--outcome {
+      @media (min-width: 64rem) {
+        grid-column: 1 / -1;
       }
     }
   }

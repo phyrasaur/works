@@ -7,11 +7,16 @@ import Shell from "@/components/article/shell.astro";
 import BackgroundMeta from "@/components/article/background-meta.astro";
 import ImageBlock from "@/components/article/image-block.astro";
 import MediaFigure from "@/components/article/media-figure.astro";
-import { getNextShowcase, getShowcase } from "@/data/showcase";
+import {
+  getNextShowcase,
+  getPreviousShowcase,
+  getShowcase,
+} from "@/data/showcase";
 import { wishful } from "@/data/wishful";
 
 const currentShowcase = getShowcase("wishful");
 const nextShowcase = getNextShowcase("wishful");
+const previousShowcase = getPreviousShowcase("wishful");
 ---
 
 <Shell title="Wishful Menu - Firas Razak">
@@ -132,7 +137,7 @@ const nextShowcase = getNextShowcase("wishful");
     </p>
   </Section>
 
-  <Footer next={nextShowcase} />
+  <Footer next={nextShowcase} previous={previousShowcase} />
 </Shell>
 
 <style is:global>

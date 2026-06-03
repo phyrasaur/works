@@ -43,9 +43,6 @@ import Squiggle from "@/graphics/squiggle.svg";
       min-height: calc(100lvh - var(--px) * 5);
       padding: 0 var(--px) 0;
     }
-    &.is-past-hero {
-      opacity: 0;
-    }
 
     & .hero__squiggle {
       display: grid;
@@ -174,6 +171,10 @@ import Squiggle from "@/graphics/squiggle.svg";
       & .hero__link-muted {
         color: var(--text-muted);
       }
+    }
+
+    &.is-past-hero {
+      opacity: 0;
     }
   }
 </style>
