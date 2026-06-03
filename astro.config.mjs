@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, fontProviders } from "astro/config";
+import { defineConfig, fontProviders, sessionDrivers } from "astro/config";
 
 import cloudflare from "@astrojs/cloudflare";
 
@@ -25,6 +25,11 @@ export default defineConfig({
       },
     },
   ],
+
+  // This static site does not use Astro sessions, so avoid provisioning Cloudflare KV.
+  session: {
+    driver: sessionDrivers.lruCache(),
+  },
 
   adapter: cloudflare(),
 });
