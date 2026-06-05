@@ -13,7 +13,12 @@ type Props = {
 const { columns, rows, class: className } = Astro.props;
 ---
 
-<div class:list={["comparison-table", className]}>
+<div
+  class:list={["comparison-table", className]}
+  role="region"
+  aria-label="Comparison table"
+  tabindex="0"
+>
   <table>
     <thead>
       <tr>

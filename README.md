@@ -25,7 +25,7 @@ The homepage currently highlights three showcase projects:
 
 ```sh
 node >= 22.12.0
-pnpm
+pnpm 10.33.2
 ```
 
 ## Getting started
@@ -33,7 +33,7 @@ pnpm
 Install dependencies:
 
 ```sh
-pnpm install
+pnpm install --frozen-lockfile
 ```
 
 Start the local dev server:
@@ -50,12 +50,21 @@ http://localhost:4321
 
 ## Available scripts
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start the Astro development server |
-| `pnpm build` | Build the production site to `dist/` |
-| `pnpm preview` | Preview the production build locally |
-| `pnpm astro` | Run Astro CLI commands |
+| Command                  | Description                                      |
+| ------------------------ | ------------------------------------------------ |
+| `pnpm dev`               | Start the Astro development server               |
+| `pnpm build`             | Build the production site to `dist/`             |
+| `pnpm check`             | Run Astro and TypeScript diagnostics             |
+| `pnpm verify`            | Run environment, format, type, and build checks  |
+| `pnpm verify:full`       | Run standard checks plus browser tests           |
+| `pnpm env:check`         | Check local tools, ownership, and permissions    |
+| `pnpm env:check:network` | Include npm registry connectivity                |
+| `pnpm env:check:deploy`  | Include GitHub and Cloudflare authentication     |
+| `pnpm test:e2e`          | Test every route in desktop and mobile Chromium  |
+| `pnpm debug:site`        | Produce Playwright traces and screenshot reports |
+| `pnpm test:e2e:headed`   | Run browser tests visibly through WSLg           |
+| `pnpm preview`           | Preview the production build locally             |
+| `pnpm astro`             | Run Astro CLI commands                           |
 
 ## Project structure
 
@@ -87,15 +96,7 @@ import Banner from "@/components/banner.astro";
 
 ## Deployment notes
 
-This project currently uses Astro's default static build output. Unless an adapter is added later, deployment can target any static host that can serve the generated `dist/` folder.
-
-Good fits include:
-
-- Cloudflare Pages
-- Netlify
-- Vercel
-- GitHub Pages
-- Any static web server
+The site builds static routes through `@astrojs/cloudflare` and deploys with Wrangler using `wrangler.jsonc`. Run `pnpm env:check:deploy` before deployment work to validate network access and credentials.
 
 ## Repository status
 

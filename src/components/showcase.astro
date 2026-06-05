@@ -35,7 +35,11 @@ const itemCount = showcaseItems.length;
                 decoding="async"
               />
               <figcaption class={`showcase__mark showcase__mark--${item.slug}`}>
-                <a href={`/${item.slug}`} class="showcase__mark-link">
+                <a
+                  href={`/${item.slug}`}
+                  class="showcase__mark-link"
+                  aria-label={`View ${item.brand} showcase`}
+                >
                   <img
                     class="showcase__mark-image"
                     src={item.markImage.src}
