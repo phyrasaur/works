@@ -25,6 +25,8 @@ failures=0
 warnings=0
 repo_root=""
 permission_probe=""
+platform="$(uname -s)"
+is_wsl=false
 
 pass() {
   printf '[pass] %s\n' "$1"
@@ -48,10 +50,13 @@ cleanup() {
 
 trap cleanup EXIT
 
-if [[ "$(uname -s)" == "Linux" && -n "${WSL_DISTRO_NAME:-}" ]]; then
+if [[ "$platform" == "Linux" && -n "${WSL_DISTRO_NAME:-}" ]]; then
+  is_wsl=true
   pass "Running in WSL Linux (${WSL_DISTRO_NAME})"
+elif [[ "$platform" == "Linux" || "$platform" == "Darwin" ]]; then
+  pass "Running on supported platform: ${platform}"
 else
-  fail "This project expects a WSL Linux environment"
+  fail "Unsupported platform: ${platform}; use macOS or Linux"
 fi
 
 if repo_root="$(git rev-parse --show-toplevel 2>/dev/null)"; then
@@ -61,10 +66,10 @@ else
 fi
 
 if [[ -n "$repo_root" ]]; then
-  if [[ "$repo_root" == /mnt/* ]]; then
+  if $is_wsl && [[ "$repo_root" == /mnt/* ]]; then
     fail "Repository must live on the WSL filesystem, not under /mnt"
   else
-    pass "Repository is on the native WSL filesystem"
+    pass "Repository is on the native filesystem"
   fi
 
   if [[ -w "$repo_root" ]]; then
@@ -82,15 +87,15 @@ if [[ -n "$repo_root" ]]; then
   fi
 fi
 
-required_commands=(node npm pnpm git rg jq make cc xvfb-run)
+required_commands=(node npm pnpm git rg jq make cc)
 for command_name in "${required_commands[@]}"; do
   command_path="$(command -v "$command_name" 2>/dev/null || true)"
   if [[ -z "$command_path" ]]; then
     fail "Missing required command: ${command_name}"
-  elif [[ "$command_path" == /mnt/* ]]; then
+  elif $is_wsl && [[ "$command_path" == /mnt/* ]]; then
     fail "${command_name} resolves through Windows: ${command_path}"
   else
-    pass "${command_name} is Linux-native: ${command_path}"
+    pass "${command_name} is platform-native: ${command_path}"
   fi
 done
 
@@ -117,7 +122,7 @@ fi
 
 if [[ -d "node_modules/@playwright/test" ]]; then
   browser_path="$(
-    PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 node -e '
+    node -e '
       const { chromium } = require("@playwright/test");
       process.stdout.write(chromium.executablePath());
     '
@@ -131,14 +136,16 @@ else
   warn "Project dependencies are not installed; Playwright browser check skipped"
 fi
 
-if [[ -r /etc/wsl.conf ]] && grep -Eq '^[[:space:]]*appendWindowsPath[[:space:]]*=[[:space:]]*false[[:space:]]*$' /etc/wsl.conf; then
-  pass "WSL Windows PATH injection is disabled"
-else
-  warn "/etc/wsl.conf does not disable Windows PATH injection"
-fi
+if $is_wsl; then
+  if [[ -r /etc/wsl.conf ]] && grep -Eq '^[[:space:]]*appendWindowsPath[[:space:]]*=[[:space:]]*false[[:space:]]*$' /etc/wsl.conf; then
+    pass "WSL Windows PATH injection is disabled"
+  else
+    warn "/etc/wsl.conf does not disable Windows PATH injection"
+  fi
 
-if [[ ":${PATH}:" == *":/mnt/"* ]]; then
-  warn "Current shell still contains Windows PATH entries; run wsl.exe --shutdown from Windows"
+  if [[ ":${PATH}:" == *":/mnt/"* ]]; then
+    warn "Current shell still contains Windows PATH entries; run wsl.exe --shutdown from Windows"
+  fi
 fi
 
 if [[ -r "${HOME}/.codex/config.toml" ]]; then

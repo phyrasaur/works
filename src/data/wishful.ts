@@ -43,12 +43,12 @@ export const wishful = {
         {
           image: menuCustomisationImage,
           title: "Menu customisation",
-          body: "Customer orders a customised portion-controlled menu item",
+          body: "Restaurant creates a menu item with customisable options linked to a standard recipe.",
         },
         {
           image: restaurantInventoryImage,
-          title: "Restaurant inventory",
-          body: "Restaurant adds a standard recipe in the dashboard",
+          title: "Portion customisation",
+          body: "Customer adjusts ingredient portions while seeing the nutritional and price impact.",
         },
       ],
     },
@@ -59,7 +59,7 @@ export const wishful = {
         {
           image: menuPlannerImage,
           title: "Menu planning",
-          body: "Dietician plans a menu while counselling assisted with artificial intelligence",
+          body: "Dietitian turns consultation insights and nutrition requirements into a personalised menu plan with AI assistance.",
         },
       ],
     },

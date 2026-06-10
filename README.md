@@ -62,7 +62,7 @@ http://localhost:4321
 | `pnpm env:check:deploy`  | Include GitHub and Cloudflare authentication     |
 | `pnpm test:e2e`          | Test every route in desktop and mobile Chromium  |
 | `pnpm debug:site`        | Produce Playwright traces and screenshot reports |
-| `pnpm test:e2e:headed`   | Run browser tests visibly through WSLg           |
+| `pnpm test:e2e:headed`   | Run browser tests visibly                        |
 | `pnpm preview`           | Preview the production build locally             |
 | `pnpm astro`             | Run Astro CLI commands                           |
 

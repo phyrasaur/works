@@ -2,10 +2,10 @@
 
 ## Environment
 
-- Use Ubuntu WSL with the repository under `/home`, never `/mnt`.
-- Use Linux-native commands. `node`, `pnpm`, `git`, and build tools must not resolve through `/mnt/c`.
+- Use macOS or Linux. When using WSL, keep the repository under `/home`, never `/mnt`.
+- Use platform-native commands. In WSL, `node`, `pnpm`, `git`, and build tools must not resolve through `/mnt/c`.
 - Required versions are Node `>=22.12.0` and the exact pnpm version in `package.json`.
-- Install system packages with `sudo apt`; do not use `sudo` for dependency installation, builds, generated files, or repository edits.
+- Install system packages with the platform package manager; do not use `sudo` for dependency installation, builds, generated files, or repository edits.
 
 ## Project
 
@@ -16,7 +16,7 @@
 - Run `pnpm verify:full` when a change affects frontend behavior or rendering.
 - Run `pnpm test:e2e` for frontend changes; it checks every route at desktop and mobile sizes.
 - Run `pnpm debug:site` when traces and screenshot artifacts are needed.
-- Use `pnpm test:e2e:headed` or `pnpm test:e2e:debug` only when WSLg is available.
+- Use `pnpm test:e2e:headed` or `pnpm test:e2e:debug` only when a graphical display is available.
 - Run `pnpm env:check:network` when diagnosing dependency or network access.
 - Run `pnpm env:check:deploy` before deployment work.
 
