@@ -1,0 +1,53 @@
+---
+import ThemePicture from "@/components/theme-picture.astro";
+import type { ThemeImage } from "@/types/media";
+
+type Props = {
+  image: ThemeImage;
+  label: string;
+  wrapperClass?: string;
+  imageClass?: string;
+  loading?: "eager" | "lazy";
+  decoding?: "async" | "auto" | "sync";
+};
+
+const {
+  image,
+  label,
+  wrapperClass,
+  imageClass,
+  loading = "lazy",
+  decoding = "async",
+} = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={["lightbox-image-trigger", wrapperClass]}
+  aria-label={`Open ${label} in image viewer`}
+  data-lightbox-trigger
+  data-lightbox-light={image.light.src}
+  data-lightbox-dark={image.dark.src}
+  data-lightbox-label={label}
+>
+  <ThemePicture
+    class={imageClass}
+    image={image}
+    alt=""
+    loading={loading}
+    decoding={decoding}
+  />
+</button>
+
+<style>
+  .lightbox-image-trigger {
+    display: block;
+    min-width: 0;
+    padding: 0;
+    text-align: inherit;
+  }
+
+  .lightbox-image-trigger:hover {
+    cursor: zoom-in;
+  }
+</style>
