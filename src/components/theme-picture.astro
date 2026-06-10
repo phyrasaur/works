@@ -1,5 +1,4 @@
 ---
-import { getImage } from "astro:assets";
 import type { HTMLAttributes } from "astro/types";
 import type { ThemeImage } from "@/types/media";
 
@@ -36,38 +35,15 @@ if (
   );
 }
 
-async function resolveImage(source: ImageMetadata) {
-  if (source.format === "svg") {
-    return {
-      src: source.src,
-      srcset: source.src,
-    };
-  }
-
-  const result = await getImage({
-    src: source,
-    width,
-    height,
-    format: source.format,
-  });
-
-  return {
-    src: result.src,
-    srcset: result.srcSet.attribute || result.src,
-  };
-}
-
-const [lightImage, darkImage] = await Promise.all([
-  resolveImage(image.light),
-  resolveImage(image.dark),
-]);
+const lightImage = image.light.src;
+const darkImage = image.dark.src;
 ---
 
 <picture class="theme-picture">
-  <source srcset={lightImage.srcset} media="(prefers-color-scheme: light)" />
-  <source srcset={darkImage.srcset} media="(prefers-color-scheme: dark)" />
+  <source srcset={lightImage} media="(prefers-color-scheme: light)" />
+  <source srcset={darkImage} media="(prefers-color-scheme: dark)" />
   <img
-    src={lightImage.src}
+    src={lightImage}
     width={width}
     height={height}
     alt={alt}

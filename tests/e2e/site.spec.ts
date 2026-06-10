@@ -134,6 +134,7 @@ for (const route of routes) {
 
       for (const selectedThemeImage of selectedThemeImages) {
         expect(selectedThemeImage).toContain(`/${colorScheme}/`);
+        expect(selectedThemeImage).not.toContain("/_image?");
       }
 
       const showcaseMarkFills = await showcaseMarks.evaluateAll((marks) =>

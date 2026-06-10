@@ -31,5 +31,9 @@ export default defineConfig({
     driver: sessionDrivers.lruCache(),
   },
 
-  adapter: cloudflare(),
+  // The site is fully prerendered, so emit direct asset URLs instead of
+  // runtime /_image requests that require a deployed Cloudflare Worker route.
+  adapter: cloudflare({
+    imageService: "passthrough",
+  }),
 });
