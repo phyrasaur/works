@@ -2,6 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 const routes = ["/", "/donaid/", "/hyperprint/", "/resume/", "/wishful/"];
+const caseStudyRoutes = ["/donaid/", "/hyperprint/", "/wishful/"];
 
 for (const route of routes) {
   test(`${route} loads without browser-level failures`, async ({
@@ -247,3 +248,214 @@ for (const route of routes) {
     ).toEqual([]);
   });
 }
+
+for (const route of caseStudyRoutes) {
+  test(`${route} opens content images in the native lightbox`, async ({
+    page,
+  }, testInfo) => {
+    const colorScheme = testInfo.project.use.colorScheme;
+
+    expect(colorScheme === "light" || colorScheme === "dark").toBeTruthy();
+
+    await page.goto(route, { waitUntil: "networkidle" });
+
+    const triggers = page.locator("[data-lightbox-trigger]");
+    const trigger = triggers.first();
+    const dialog = page.locator("#media-lightbox");
+    const image = dialog.locator("[data-lightbox-image]");
+    const viewport = dialog.locator("[data-lightbox-viewport]");
+
+    expect(await triggers.count()).toBeGreaterThan(0);
+    await expect(
+      page.locator(".article-hero [data-lightbox-trigger]"),
+    ).toHaveCount(0);
+
+    await trigger.scrollIntoViewIfNeeded();
+    await trigger.click();
+
+    await expect(dialog).toBeVisible();
+    await expect(dialog).toHaveAttribute("open", "");
+    await expect(image).not.toHaveAttribute("alt", "");
+    await expect
+      .poll(async () =>
+        decodeURIComponent(
+          await image.evaluate(
+            (element) => (element as HTMLImageElement).currentSrc,
+          ),
+        ),
+      )
+      .toContain(`/${colorScheme}/`);
+
+    const initialGeometry = await dialog.evaluate((element) => {
+      const pictureElement = element.querySelector(".media-lightbox__picture");
+      const imageElement = element.querySelector("[data-lightbox-image]");
+
+      if (!pictureElement || !imageElement) return null;
+
+      const pictureRect = pictureElement.getBoundingClientRect();
+      const imageRect = imageElement.getBoundingClientRect();
+
+      return {
+        x:
+          imageRect.x +
+          imageRect.width / 2 -
+          (pictureRect.x + pictureRect.width / 2),
+        y:
+          imageRect.y +
+          imageRect.height / 2 -
+          (pictureRect.y + pictureRect.height / 2),
+      };
+    });
+
+    expect(initialGeometry).not.toBeNull();
+    expect(
+      Math.abs(initialGeometry?.x ?? Number.POSITIVE_INFINITY),
+    ).toBeLessThan(1);
+    expect(
+      Math.abs(initialGeometry?.y ?? Number.POSITIVE_INFINITY),
+    ).toBeLessThan(1);
+
+    await dialog.getByRole("button", { name: "Zoom in" }).click();
+    await expect(dialog).toHaveAttribute("data-scale", "1.5");
+
+    await page.keyboard.press("+");
+    await expect(dialog).toHaveAttribute("data-scale", "2");
+
+    await page.keyboard.press("0");
+    await expect(dialog).toHaveAttribute("data-scale", "1");
+
+    await viewport.dispatchEvent("wheel", { deltaY: -100 });
+    await expect(dialog).toHaveAttribute("data-scale", "1.5");
+
+    await dialog.getByRole("button", { name: "Reset zoom" }).click();
+    await expect(dialog).toHaveAttribute("data-scale", "1");
+
+    for (let index = 0; index < 6; index += 1) {
+      await dialog.getByRole("button", { name: "Zoom in" }).click();
+    }
+
+    await expect(dialog).toHaveAttribute("data-scale", "4");
+
+    const viewportBox = await viewport.boundingBox();
+    expect(viewportBox).not.toBeNull();
+
+    if (viewportBox) {
+      const startX = viewportBox.x + viewportBox.width / 2;
+      const startY = viewportBox.y + viewportBox.height / 2;
+
+      await page.mouse.move(startX, startY);
+      await page.mouse.down();
+      await page.mouse.move(startX + 60, startY + 40, { steps: 4 });
+      await page.mouse.up();
+    }
+
+    const translation = await dialog.evaluate((element) => ({
+      x: element.style.getPropertyValue("--lightbox-x"),
+      y: element.style.getPropertyValue("--lightbox-y"),
+    }));
+
+    expect(translation.x === "0px" && translation.y === "0px").toBeFalsy();
+
+    const accessibility = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+    const seriousViolations = accessibility.violations.filter(
+      (violation) =>
+        violation.impact === "critical" || violation.impact === "serious",
+    );
+
+    expect(seriousViolations).toEqual([]);
+
+    await dialog.getByRole("button", { name: "Close image viewer" }).click();
+    await expect(dialog).not.toBeVisible();
+    await expect(trigger).toBeFocused();
+
+    await trigger.click();
+    await expect(dialog).toHaveAttribute("data-scale", "1");
+
+    const picture = dialog.locator(".media-lightbox__picture");
+    const pictureBox = await picture.boundingBox();
+    expect(pictureBox).not.toBeNull();
+
+    if (pictureBox) {
+      await page.mouse.click(
+        pictureBox.x + pictureBox.width / 2,
+        pictureBox.y + pictureBox.height - 4,
+      );
+    }
+
+    await expect(dialog).not.toBeVisible();
+  });
+}
+
+test("/wishful/ expands its case-study video without replacing controls", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(HTMLVideoElement.prototype, "requestFullscreen", {
+      configurable: true,
+      value() {
+        const state = window as typeof window & {
+          fullscreenRequestCount?: number;
+        };
+
+        state.fullscreenRequestCount = (state.fullscreenRequestCount ?? 0) + 1;
+
+        return Promise.resolve();
+      },
+    });
+  });
+
+  await page.goto("/wishful/", { waitUntil: "networkidle" });
+
+  const video = page.locator("video[data-fullscreen-video]");
+
+  await expect(video).toHaveCount(1);
+  await expect(video).toHaveAttribute("controls", "");
+  await expect(video).toHaveAttribute("aria-keyshortcuts", "F");
+
+  await video.dblclick();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          (window as typeof window & { fullscreenRequestCount?: number })
+            .fullscreenRequestCount ?? 0,
+      ),
+    )
+    .toBe(1);
+
+  await video.focus();
+  await page.keyboard.press("f");
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          (window as typeof window & { fullscreenRequestCount?: number })
+            .fullscreenRequestCount ?? 0,
+      ),
+    )
+    .toBe(2);
+
+  await video.dispatchEvent("pointerup", {
+    bubbles: true,
+    clientX: 100,
+    clientY: 100,
+    pointerType: "touch",
+  });
+  await video.dispatchEvent("pointerup", {
+    bubbles: true,
+    clientX: 103,
+    clientY: 102,
+    pointerType: "touch",
+  });
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          (window as typeof window & { fullscreenRequestCount?: number })
+            .fullscreenRequestCount ?? 0,
+      ),
+    )
+    .toBe(3);
+});

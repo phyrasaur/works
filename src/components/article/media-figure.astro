@@ -1,5 +1,5 @@
 ---
-import ThemePicture from "@/components/theme-picture.astro";
+import LightboxImage from "@/components/article/lightbox-image.astro";
 import type { Figure } from "@/types/article";
 
 type Props = {
@@ -18,7 +18,10 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
         class="media-card__image"
         width={figure.video.width}
         height={figure.video.height}
-        aria-label={figure.title}
+        aria-label={`${figure.title}. Double-click or press F to view fullscreen.`}
+        aria-keyshortcuts="F"
+        data-fullscreen-video
+        tabindex="0"
         autoplay
         muted
         loop
@@ -32,10 +35,11 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
         ))}
       </video>
     ) : (
-      <ThemePicture
-        class="media-card__image"
+      <LightboxImage
         image={figure.image}
-        alt=""
+        label={figure.title}
+        wrapperClass="media-card__image-trigger"
+        imageClass="media-card__image"
         loading="lazy"
         decoding="async"
       />
@@ -70,6 +74,10 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
     @media (min-width: 64rem) {
       opacity: 0.9;
     }
+  }
+
+  .media-card__image-trigger {
+    width: 100%;
   }
 
   video.media-card__image {

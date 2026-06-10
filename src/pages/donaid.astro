@@ -6,9 +6,9 @@ import Section from "@/components/article/section.astro";
 import Shell from "@/components/article/shell.astro";
 import BackgroundMeta from "@/components/article/background-meta.astro";
 import InsightList from "@/components/article/insight-list.astro";
+import LightboxImage from "@/components/article/lightbox-image.astro";
 import MediaFigure from "@/components/article/media-figure.astro";
 import NumberedList from "@/components/article/numbered-list.astro";
-import ThemePicture from "@/components/theme-picture.astro";
 import { donaid } from "@/data/donaid";
 import {
   getNextShowcase,
@@ -156,10 +156,11 @@ const previousShowcase = getPreviousShowcase("donaid");
               <h3 class="feature-list__title">{feature.title}</h3>
               <p class="feature-list__body">{feature.body}</p>
             </div>
-            <ThemePicture
-              class="feature-list__image"
+            <LightboxImage
               image={feature.image}
-              alt=""
+              label={feature.title}
+              wrapperClass="feature-list__image-trigger"
+              imageClass="feature-list__image"
               loading="lazy"
               decoding="async"
             />
@@ -296,17 +297,24 @@ const previousShowcase = getPreviousShowcase("donaid");
     }
   }
 
-  .article .feature-list__image {
+  .article .feature-list__image-trigger {
     width: 100%;
-    height: auto;
     align-self: start;
-    background: var(--media-surface);
-    opacity: 0.9;
 
     @media (min-width: 64rem) {
       grid-column: 2;
       justify-self: center;
       width: min(100%, 35rem);
+    }
+  }
+
+  .article .feature-list__image {
+    width: 100%;
+    height: auto;
+    background: var(--media-surface);
+    opacity: 0.9;
+
+    @media (min-width: 64rem) {
       height: auto;
     }
   }

@@ -1,0 +1,535 @@
+<dialog
+  id="media-lightbox"
+  class="media-lightbox"
+  aria-labelledby="media-lightbox-title"
+>
+  <h2 id="media-lightbox-title" class="sr-only">Image viewer</h2>
+
+  <div class="media-lightbox__viewport" data-lightbox-viewport>
+    <picture class="media-lightbox__picture">
+      <source data-lightbox-light media="(prefers-color-scheme: light)" />
+      <source data-lightbox-dark media="(prefers-color-scheme: dark)" />
+      <img
+        class="media-lightbox__image"
+        data-lightbox-image
+        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/%3E"
+        alt=""
+        draggable="false"
+      />
+    </picture>
+  </div>
+
+  <div class="media-lightbox__toolbar" aria-label="Image controls">
+    <button
+      type="button"
+      class="media-lightbox__control"
+      data-lightbox-zoom-out
+      aria-label="Zoom out"
+    >
+      <span aria-hidden="true">−</span>
+    </button>
+    <button
+      type="button"
+      class="media-lightbox__control media-lightbox__reset"
+      data-lightbox-reset
+      aria-label="Reset zoom"
+    >
+      100%
+    </button>
+    <button
+      type="button"
+      class="media-lightbox__control"
+      data-lightbox-zoom-in
+      aria-label="Zoom in"
+    >
+      <span aria-hidden="true">+</span>
+    </button>
+    <button
+      type="button"
+      class="media-lightbox__control"
+      data-lightbox-close
+      aria-label="Close image viewer"
+    >
+      <svg
+        width="20"
+        height="20"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18 18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+</dialog>
+
+<style>
+  .media-lightbox {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    color: var(--read-default);
+    background: transparent;
+    border: 0;
+    opacity: 0;
+    transition:
+      opacity 180ms ease,
+      overlay 180ms ease allow-discrete,
+      display 180ms ease allow-discrete;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition-duration: 1ms;
+    }
+  }
+
+  .media-lightbox::backdrop {
+    background: rgb(0 0 0 / 82%);
+    opacity: 0;
+    transition: opacity 180ms ease;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition-duration: 1ms;
+    }
+  }
+
+  .media-lightbox:open {
+    opacity: 1;
+  }
+
+  .media-lightbox:open::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    .media-lightbox:open,
+    .media-lightbox:open::backdrop {
+      opacity: 0;
+    }
+  }
+
+  .media-lightbox__viewport {
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    padding: calc(var(--py) + 3rem) var(--px) var(--py);
+    overflow: hidden;
+    cursor: default;
+    touch-action: none;
+    user-select: none;
+  }
+
+  .media-lightbox[data-scale]:not([data-scale="1"]) .media-lightbox__viewport {
+    cursor: grab;
+  }
+
+  .media-lightbox[data-dragging] .media-lightbox__viewport {
+    cursor: grabbing;
+  }
+
+  .media-lightbox__picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  .media-lightbox__picture source {
+    display: none;
+  }
+
+  .media-lightbox__image {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transform: translate3d(var(--lightbox-x, 0), var(--lightbox-y, 0), 0)
+      scale(var(--lightbox-scale, 1));
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .media-lightbox__toolbar {
+    position: absolute;
+    z-index: 1;
+    top: var(--py);
+    left: 50%;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    color: var(--yang-950);
+    background: var(--yin-800);
+    border: 1px solid var(--yang-250);
+    transform: translateX(-50%);
+  }
+
+  .media-lightbox__control {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    color: inherit;
+    line-height: 1;
+    touch-action: manipulation;
+  }
+
+  .media-lightbox__control:hover {
+    color: var(--yang-1000);
+    background: var(--yang-150);
+  }
+
+  .media-lightbox__reset {
+    min-width: 3.5rem;
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+  }
+</style>
+
+<script>
+  const lightbox = document.getElementById("media-lightbox");
+
+  if (lightbox instanceof HTMLDialogElement) {
+    const viewport = lightbox.querySelector("[data-lightbox-viewport]");
+    const picture = lightbox.querySelector(".media-lightbox__picture");
+    const image = lightbox.querySelector("[data-lightbox-image]");
+    const lightSource = lightbox.querySelector("[data-lightbox-light]");
+    const darkSource = lightbox.querySelector("[data-lightbox-dark]");
+    const title = document.getElementById("media-lightbox-title");
+    const resetButton = lightbox.querySelector("[data-lightbox-reset]");
+    const zoomInButton = lightbox.querySelector("[data-lightbox-zoom-in]");
+    const zoomOutButton = lightbox.querySelector("[data-lightbox-zoom-out]");
+    const closeButton = lightbox.querySelector("[data-lightbox-close]");
+
+    if (
+      viewport instanceof HTMLElement &&
+      picture instanceof HTMLElement &&
+      image instanceof HTMLImageElement &&
+      lightSource instanceof HTMLSourceElement &&
+      darkSource instanceof HTMLSourceElement &&
+      title instanceof HTMLElement &&
+      resetButton instanceof HTMLButtonElement &&
+      zoomInButton instanceof HTMLButtonElement &&
+      zoomOutButton instanceof HTMLButtonElement &&
+      closeButton instanceof HTMLButtonElement
+    ) {
+      const minimumScale = 1;
+      const maximumScale = 4;
+      const scaleStep = 0.5;
+      const activePointers = new Map<number, PointerEvent>();
+      let scale = minimumScale;
+      let position = { x: 0, y: 0 };
+      let previousPointer: { x: number; y: number } | null = null;
+      let pinchDistance = 0;
+      let moved = false;
+      let returnFocus: HTMLElement | null = null;
+
+      const clamp = (value: number, minimum: number, maximum: number) =>
+        Math.min(maximum, Math.max(minimum, value));
+
+      const constrainPosition = () => {
+        const maximumX = Math.max(
+          0,
+          (image.offsetWidth * scale - picture.clientWidth) / 2,
+        );
+        const maximumY = Math.max(
+          0,
+          (image.offsetHeight * scale - picture.clientHeight) / 2,
+        );
+
+        position.x = clamp(position.x, -maximumX, maximumX);
+        position.y = clamp(position.y, -maximumY, maximumY);
+      };
+
+      const render = () => {
+        constrainPosition();
+        lightbox.style.setProperty("--lightbox-scale", scale.toString());
+        lightbox.style.setProperty("--lightbox-x", `${position.x}px`);
+        lightbox.style.setProperty("--lightbox-y", `${position.y}px`);
+        lightbox.dataset.scale = scale.toString();
+        resetButton.textContent = `${Math.round(scale * 100)}%`;
+        zoomOutButton.disabled = scale <= minimumScale;
+        zoomInButton.disabled = scale >= maximumScale;
+      };
+
+      const resetTransform = () => {
+        scale = minimumScale;
+        position = { x: 0, y: 0 };
+        activePointers.clear();
+        previousPointer = null;
+        pinchDistance = 0;
+        moved = false;
+        lightbox.removeAttribute("data-dragging");
+        render();
+      };
+
+      const setScale = (nextScale: number) => {
+        scale = clamp(nextScale, minimumScale, maximumScale);
+
+        if (scale === minimumScale) {
+          position = { x: 0, y: 0 };
+        }
+
+        render();
+      };
+
+      const openLightbox = (trigger: HTMLElement) => {
+        const lightImage = trigger.dataset.lightboxLight;
+        const darkImage = trigger.dataset.lightboxDark;
+        const label = trigger.dataset.lightboxLabel ?? "Case study image";
+
+        if (!lightImage || !darkImage) return;
+
+        returnFocus = trigger;
+        lightSource.srcset = lightImage;
+        darkSource.srcset = darkImage;
+        image.src = lightImage;
+        image.alt = label;
+        title.textContent = label;
+        resetTransform();
+        lightbox.showModal();
+        closeButton.focus();
+      };
+
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+
+        if (!(target instanceof Element)) return;
+
+        const trigger = target.closest("[data-lightbox-trigger]");
+
+        if (trigger instanceof HTMLElement) openLightbox(trigger);
+      });
+
+      zoomInButton.addEventListener("click", () => setScale(scale + scaleStep));
+      zoomOutButton.addEventListener("click", () =>
+        setScale(scale - scaleStep),
+      );
+      resetButton.addEventListener("click", resetTransform);
+      closeButton.addEventListener("click", () => lightbox.close());
+
+      viewport.addEventListener(
+        "wheel",
+        (event) => {
+          event.preventDefault();
+          setScale(scale + (event.deltaY < 0 ? scaleStep : -scaleStep));
+        },
+        { passive: false },
+      );
+
+      viewport.addEventListener("pointerdown", (event) => {
+        activePointers.set(event.pointerId, event);
+        viewport.setPointerCapture(event.pointerId);
+        moved = false;
+
+        if (activePointers.size === 1) {
+          previousPointer = { x: event.clientX, y: event.clientY };
+        } else if (activePointers.size === 2) {
+          const [first, second] = [...activePointers.values()];
+          pinchDistance = Math.hypot(
+            second.clientX - first.clientX,
+            second.clientY - first.clientY,
+          );
+        }
+
+        lightbox.dataset.dragging = "";
+      });
+
+      viewport.addEventListener("pointermove", (event) => {
+        if (!activePointers.has(event.pointerId)) return;
+
+        activePointers.set(event.pointerId, event);
+
+        if (activePointers.size === 2) {
+          const [first, second] = [...activePointers.values()];
+          const nextDistance = Math.hypot(
+            second.clientX - first.clientX,
+            second.clientY - first.clientY,
+          );
+
+          if (pinchDistance > 0) {
+            setScale(scale * (nextDistance / pinchDistance));
+            moved = true;
+          }
+
+          pinchDistance = nextDistance;
+          return;
+        }
+
+        if (scale > minimumScale && previousPointer) {
+          const deltaX = event.clientX - previousPointer.x;
+          const deltaY = event.clientY - previousPointer.y;
+
+          if (Math.abs(deltaX) + Math.abs(deltaY) > 1) moved = true;
+
+          position.x += deltaX;
+          position.y += deltaY;
+          previousPointer = { x: event.clientX, y: event.clientY };
+          render();
+        }
+      });
+
+      const releasePointer = (event: PointerEvent) => {
+        activePointers.delete(event.pointerId);
+
+        if (viewport.hasPointerCapture(event.pointerId)) {
+          viewport.releasePointerCapture(event.pointerId);
+        }
+
+        if (activePointers.size === 1) {
+          const [remainingPointer] = [...activePointers.values()];
+          previousPointer = {
+            x: remainingPointer.clientX,
+            y: remainingPointer.clientY,
+          };
+        } else {
+          previousPointer = null;
+        }
+
+        if (activePointers.size < 2) pinchDistance = 0;
+        if (activePointers.size === 0) {
+          lightbox.removeAttribute("data-dragging");
+        }
+      };
+
+      viewport.addEventListener("pointerup", releasePointer);
+      viewport.addEventListener("pointercancel", releasePointer);
+
+      viewport.addEventListener("click", (event) => {
+        if (!moved && (event.target === viewport || event.target === picture)) {
+          lightbox.close();
+        }
+        moved = false;
+      });
+
+      lightbox.addEventListener("keydown", (event) => {
+        if (event.key === "+" || event.key === "=") {
+          event.preventDefault();
+          setScale(scale + scaleStep);
+        } else if (event.key === "-") {
+          event.preventDefault();
+          setScale(scale - scaleStep);
+        } else if (event.key === "0") {
+          event.preventDefault();
+          resetTransform();
+        } else if (scale > minimumScale && event.key.startsWith("Arrow")) {
+          event.preventDefault();
+          const movement = event.shiftKey ? 80 : 24;
+
+          if (event.key === "ArrowLeft") position.x += movement;
+          if (event.key === "ArrowRight") position.x -= movement;
+          if (event.key === "ArrowUp") position.y += movement;
+          if (event.key === "ArrowDown") position.y -= movement;
+
+          render();
+        }
+      });
+
+      lightbox.addEventListener("close", () => {
+        resetTransform();
+        returnFocus?.focus();
+        returnFocus = null;
+      });
+
+      window.addEventListener("resize", resetTransform);
+
+      document.addEventListener("astro:before-swap", () => {
+        if (lightbox.open) lightbox.close();
+      });
+    }
+  }
+
+  type FullscreenVideo = HTMLVideoElement & {
+    webkitEnterFullscreen?: () => void;
+  };
+
+  const touchTaps = new WeakMap<
+    HTMLVideoElement,
+    { time: number; x: number; y: number }
+  >();
+
+  const enterVideoFullscreen = async (video: FullscreenVideo) => {
+    try {
+      if (video.requestFullscreen) {
+        await video.requestFullscreen();
+      } else {
+        video.webkitEnterFullscreen?.();
+      }
+    } catch {
+      // Fullscreen can be rejected when browser policy does not count the
+      // interaction as a user gesture. Leave playback controls unaffected.
+    }
+  };
+
+  document.addEventListener("dblclick", (event) => {
+    const target = event.target;
+
+    if (
+      target instanceof HTMLVideoElement &&
+      target.matches("[data-fullscreen-video]")
+    ) {
+      void enterVideoFullscreen(target);
+    }
+  });
+
+  document.addEventListener("pointerup", (event) => {
+    const target = event.target;
+
+    if (
+      event.pointerType !== "touch" ||
+      !(target instanceof HTMLVideoElement) ||
+      !target.matches("[data-fullscreen-video]")
+    ) {
+      return;
+    }
+
+    const previousTap = touchTaps.get(target);
+    const currentTap = {
+      time: performance.now(),
+      x: event.clientX,
+      y: event.clientY,
+    };
+
+    if (
+      previousTap &&
+      currentTap.time - previousTap.time <= 350 &&
+      Math.hypot(currentTap.x - previousTap.x, currentTap.y - previousTap.y) <=
+        24
+    ) {
+      touchTaps.delete(target);
+      void enterVideoFullscreen(target);
+    } else {
+      touchTaps.set(target, currentTap);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    const target = event.target;
+
+    if (
+      event.key.toLowerCase() === "f" &&
+      !event.altKey &&
+      !event.ctrlKey &&
+      !event.metaKey &&
+      target instanceof HTMLVideoElement &&
+      target.matches("[data-fullscreen-video]")
+    ) {
+      event.preventDefault();
+      void enterVideoFullscreen(target);
+    }
+  });
+</script>

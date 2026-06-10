@@ -1,21 +1,22 @@
 ---
-import ThemePicture from "@/components/theme-picture.astro";
+import LightboxImage from "@/components/article/lightbox-image.astro";
 import type { ThemeImage } from "@/types/media";
 
 type Props = {
   image: ThemeImage;
-  alt?: string;
+  label: string;
   class?: string;
 };
 
-const { image, alt = "", class: className } = Astro.props;
+const { image, label, class: className } = Astro.props;
 ---
 
 <figure class:list={["article-image-block", className]}>
-  <ThemePicture
-    class="article-image-block__image"
+  <LightboxImage
     image={image}
-    alt={alt}
+    label={label}
+    wrapperClass="article-image-block__trigger"
+    imageClass="article-image-block__image"
     loading="lazy"
     decoding="async"
   />
@@ -28,6 +29,10 @@ const { image, alt = "", class: className } = Astro.props;
     @media (min-width: 64rem) {
       grid-column: 1 / -1;
     }
+  }
+
+  .article-image-block__trigger {
+    width: 100%;
   }
 
   .article-image-block__image {
