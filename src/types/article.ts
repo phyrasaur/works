@@ -1,11 +1,28 @@
 import type { SvgComponent } from "astro/types";
 
-export type Figure = {
-  image: ImageMetadata;
+type FigureContent = {
   title: string;
   body: string;
   className?: string;
 };
+
+type ImageFigure = FigureContent & {
+  image: ImageMetadata;
+};
+
+type VideoFigure = FigureContent & {
+  video: {
+    poster: ImageMetadata;
+    width: number;
+    height: number;
+    sources: {
+      src: string;
+      type: "video/mp4" | "video/webm";
+    }[];
+  };
+};
+
+export type Figure = ImageFigure | VideoFigure;
 
 export type Feature = {
   label: string;

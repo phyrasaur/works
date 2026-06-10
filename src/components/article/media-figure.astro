@@ -11,15 +11,37 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
 ---
 
 <figure class:list={["media-card", figure.className, className]}>
-  <img
-    class="media-card__image"
-    src={figure.image.src}
-    width={figure.image.width}
-    height={figure.image.height}
-    alt=""
-    loading="lazy"
-    decoding="async"
-  />
+  {
+    "video" in figure ? (
+      <video
+        class="media-card__image"
+        width={figure.video.width}
+        height={figure.video.height}
+        poster={figure.video.poster.src}
+        aria-label={figure.title}
+        autoplay
+        muted
+        loop
+        playsinline
+        controls
+        preload="metadata"
+      >
+        {figure.video.sources.map((source) => (
+          <source src={source.src} type={source.type} />
+        ))}
+      </video>
+    ) : (
+      <img
+        class="media-card__image"
+        src={figure.image.src}
+        width={figure.image.width}
+        height={figure.image.height}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    )
+  }
   <figcaption class="media-card__caption">
     <strong>{figure.title}{titleSuffix}</strong>
     {" "}
@@ -40,6 +62,7 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
   }
 
   .media-card__image {
+    display: block;
     width: 100%;
     height: auto;
     opacity: 0.85;

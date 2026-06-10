@@ -1,6 +1,8 @@
 import bridgingWorldsImage from "@/images/wishful/bridging-worlds.png";
 import ecosystemMapImage from "@/images/wishful/ecosystem-map.png";
-import marketingLandingImage from "@/images/wishful/marketing-landing.png";
+import marketingLandingMp4 from "@/images/wishful/marketing-landing.mp4";
+import marketingLandingPoster from "@/images/wishful/marketing-landing-poster.webp";
+import marketingLandingWebm from "@/images/wishful/marketing-landing.webm";
 import menuCustomisationImage from "@/images/wishful/menu-customisation.png";
 import menuPlannerImage from "@/images/wishful/menu-planner.png";
 import restaurantInventoryImage from "@/images/wishful/restaurant-inventory.png";
@@ -30,7 +32,21 @@ export const wishful = {
       title: "Marketing landing page",
       figures: [
         {
-          image: marketingLandingImage,
+          video: {
+            poster: marketingLandingPoster,
+            width: 1668,
+            height: 998,
+            sources: [
+              {
+                src: marketingLandingWebm,
+                type: "video/webm" as const,
+              },
+              {
+                src: marketingLandingMp4,
+                type: "video/mp4" as const,
+              },
+            ],
+          },
           title: "Marketing the idea",
           body: "Conceptualising the novel idea with a concrete example first and foremost",
         },
