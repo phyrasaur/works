@@ -4,7 +4,7 @@ import Head from "@/components/head.astro";
 const skills = [
   {
     title: "Tech",
-    items: "Astro JS ⸱ React ⸱ Next.js ⸱ Tailwind CSS ⸱ Laravel ⸱ Git ⸱ AWS",
+    items: "Astro JS, React, Next.js, Tailwind CSS, Laravel, Git, AWS",
   },
   {
     title: "Design",
@@ -60,6 +60,7 @@ const experience = [
       name="description"
       content="Resume for Firas Razak, Product Manager and UX Designer."
     />
+    <meta name="author" content="Firas Razak" />
   </head>
   <body>
     <main class="resume">
@@ -116,8 +117,8 @@ const experience = [
       </section>
 
       <footer class="resume__footer">
-        <a href="https://www.linkedin.com/in/firasrazak" rel="me noreferrer">
-          linkedin/u/firasrazak
+        <a href="https://linked.in/firasrazak" rel="me noreferrer">
+          linked.in/firasrazak
         </a>
         <a href="mailto:hi@firas.works">hi@firas.works</a>
       </footer>
@@ -364,5 +365,168 @@ const experience = [
 
   .resume__footer a:hover {
     text-decoration: underline;
+  }
+
+  @page {
+    size: A4;
+    margin: 12mm 14mm;
+  }
+
+  @media print {
+    :global(html),
+    :global(body) {
+      background: #fff;
+      color: #111;
+      color-scheme: light;
+    }
+
+    :global(body) {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11pt;
+      line-height: 1.25;
+      overflow: visible;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .resume {
+      --resume-line-height: 1.25;
+
+      min-height: auto;
+      width: auto;
+      align-items: stretch;
+      gap: 4mm;
+      padding: 0 0 10mm;
+      overflow: visible;
+      background: #fff;
+      color: #111;
+    }
+
+    .resume__header,
+    .resume__summary,
+    .resume__skills,
+    .resume__experience,
+    .resume__footer {
+      max-width: none;
+    }
+
+    .resume__header {
+      gap: 0.5mm;
+    }
+
+    .resume__personal h1 {
+      color: #000;
+      font-size: 20pt;
+      font-weight: 700;
+    }
+
+    .resume__personal p {
+      color: #222;
+      font-size: 11pt;
+    }
+
+    .resume__title {
+      color: #111;
+      font-size: 13.5pt;
+      font-weight: 700;
+    }
+
+    .resume__education {
+      color: #333;
+      font-size: 10pt;
+    }
+
+    .resume__summary {
+      gap: 1mm;
+    }
+
+    .resume__section-heading {
+      font-size: 9pt;
+    }
+
+    .resume__section-heading h2,
+    .resume__label,
+    .resume__skill h2 {
+      color: #444;
+    }
+
+    .resume__section-heading p {
+      color: #555;
+    }
+
+    .resume__summary-copy {
+      color: #111;
+      font-size: 11pt;
+    }
+
+    .resume__skills {
+      gap: 1.75mm;
+    }
+
+    .resume__skill {
+      gap: 0.25mm;
+    }
+
+    .resume__skill h2 {
+      font-size: 9pt;
+    }
+
+    .resume__skill p {
+      color: #111;
+      font-size: 10.5pt;
+    }
+
+    .resume__experience {
+      gap: 2.5mm;
+    }
+
+    .resume__label {
+      font-size: 9pt;
+    }
+
+    .resume__role {
+      gap: 1.5mm;
+      break-inside: avoid;
+    }
+
+    .resume__role-header {
+      gap: 0.5mm;
+    }
+
+    .resume__role-header h3 {
+      color: #000;
+      font-size: 13.5pt;
+      font-weight: 700;
+    }
+
+    .resume__role-header p {
+      color: #222;
+      font-size: 10.5pt;
+      font-weight: 700;
+    }
+
+    .resume__role ul {
+      padding-inline-start: 3.5mm;
+      color: #111;
+      font-size: 10.5pt;
+    }
+
+    .resume__role li:not(:last-child) {
+      margin-bottom: 0.75mm;
+    }
+
+    .resume__footer {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      color: #111;
+      font-size: 10.5pt;
+    }
+
+    .resume__footer a {
+      text-decoration: underline;
+      text-underline-offset: 0.1em;
+    }
   }
 </style>
