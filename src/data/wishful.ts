@@ -1,11 +1,18 @@
-import bridgingWorldsImage from "@/images/wishful/bridging-worlds.png";
-import ecosystemMapImage from "@/images/wishful/ecosystem-map.png";
+import bridgingWorldsImageDark from "@/images/wishful/dark/bridging-worlds.png";
+import ecosystemMapImageDark from "@/images/wishful/dark/ecosystem-map.png";
+import marketingLandingPosterDark from "@/images/wishful/dark/marketing-landing-poster.webp";
+import menuCustomisationImageDark from "@/images/wishful/dark/menu-customisation.png";
+import menuPlannerImageDark from "@/images/wishful/dark/menu-planner.png";
+import restaurantInventoryImageDark from "@/images/wishful/dark/restaurant-inventory.png";
+import bridgingWorldsImageLight from "@/images/wishful/light/bridging-worlds.png";
+import ecosystemMapImageLight from "@/images/wishful/light/ecosystem-map.png";
+import marketingLandingPosterLight from "@/images/wishful/light/marketing-landing-poster.webp";
+import menuCustomisationImageLight from "@/images/wishful/light/menu-customisation.png";
+import menuPlannerImageLight from "@/images/wishful/light/menu-planner.png";
+import restaurantInventoryImageLight from "@/images/wishful/light/restaurant-inventory.png";
 import marketingLandingMp4 from "@/images/wishful/marketing-landing.mp4";
-import marketingLandingPoster from "@/images/wishful/marketing-landing-poster.webp";
 import marketingLandingWebm from "@/images/wishful/marketing-landing.webm";
-import menuCustomisationImage from "@/images/wishful/menu-customisation.png";
-import menuPlannerImage from "@/images/wishful/menu-planner.png";
-import restaurantInventoryImage from "@/images/wishful/restaurant-inventory.png";
+import { themeImage } from "@/types/media";
 
 export const wishful = {
   backgroundMeta: [
@@ -14,8 +21,11 @@ export const wishful = {
       body: "Product, service, interface design",
     },
   ],
-  ecosystemImage: ecosystemMapImage,
-  bridgingWorldsImage,
+  ecosystemImage: themeImage(ecosystemMapImageLight, ecosystemMapImageDark),
+  bridgingWorldsImage: themeImage(
+    bridgingWorldsImageLight,
+    bridgingWorldsImageDark,
+  ),
   problemSubsections: [
     {
       title: "Nutrition education gap",
@@ -33,7 +43,10 @@ export const wishful = {
       figures: [
         {
           video: {
-            poster: marketingLandingPoster,
+            poster: themeImage(
+              marketingLandingPosterLight,
+              marketingLandingPosterDark,
+            ),
             width: 1668,
             height: 998,
             sources: [
@@ -57,12 +70,18 @@ export const wishful = {
       title: "Portion-aware ordering terminal",
       figures: [
         {
-          image: menuCustomisationImage,
+          image: themeImage(
+            menuCustomisationImageLight,
+            menuCustomisationImageDark,
+          ),
           title: "Menu customisation",
           body: "Restaurant creates a menu item with customisable options linked to a standard recipe.",
         },
         {
-          image: restaurantInventoryImage,
+          image: themeImage(
+            restaurantInventoryImageLight,
+            restaurantInventoryImageDark,
+          ),
           title: "Portion customisation",
           body: "Customer adjusts ingredient portions while seeing the nutritional and price impact.",
         },
@@ -73,7 +92,7 @@ export const wishful = {
       title: "Menu planner",
       figures: [
         {
-          image: menuPlannerImage,
+          image: themeImage(menuPlannerImageLight, menuPlannerImageDark),
           title: "Menu planning",
           body: "Dietitian turns consultation insights and nutrition requirements into a personalised menu plan with AI assistance.",
         },

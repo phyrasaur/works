@@ -115,7 +115,7 @@
     line-height: 1.1;
     text-align: right;
     max-width: min-content;
-    color: var(--text-muted);
+    color: var(--read-low);
 
     @media (min-width: 64rem) {
       text-align: left;
@@ -129,7 +129,7 @@
     display: block;
     font-style: normal;
     font-weight: 500;
-    color: var(--text-strong);
+    color: var(--read-higher);
 
     @media (min-width: 64rem) {
       display: inline;
@@ -139,7 +139,7 @@
   .contact__claim {
     font-size: clamp(1.25rem, 9cqw, 3.5rem);
     line-height: 1.1;
-    color: var(--text-strong);
+    color: var(--read-higher);
     max-width: 24ch;
 
     @media (min-width: 64rem) {
@@ -153,7 +153,7 @@
 
   .contact__description {
     grid-column: 1;
-    color: var(--text-muted);
+    color: var(--read-low);
     font-size: clamp(1rem, 4cqw, 1.75rem);
     line-height: 1.35;
     letter-spacing: 0.04em;
@@ -184,12 +184,12 @@
     display: inline-flex;
     align-items: center;
     gap: 0.25em;
-    color: var(--text-strong);
+    color: var(--read-higher);
     line-height: 1;
   }
 
   .contact__links a:hover {
-    color: #fff;
+    color: var(--read-highest);
     text-decoration: underline;
   }
 

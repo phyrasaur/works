@@ -1,4 +1,6 @@
 ---
+import ThemePicture from "@/components/theme-picture.astro";
+import ShowcaseMark from "@/components/showcase-mark.astro";
 import type { ShowcaseDetails } from "@/types/showcase";
 
 type Props = {
@@ -20,23 +22,16 @@ const { item } = showcase;
     <h1 id={headingId} class="article-hero__title">{item.title}</h1>
   </hgroup>
   <figure class="article-hero__figure">
-    <img
+    <ThemePicture
       class="article-hero__image"
-      src={item.image.src}
-      width={item.image.width}
-      height={item.image.height}
+      image={item.image}
       alt=""
       decoding="async"
+      priority
       style={`view-transition-name: ${item.slug}`}
     />
     <figcaption class="article-hero__caption">
-      <img
-        class="article-hero__mark"
-        src={item.markImage.src}
-        width={item.markImage.width}
-        height={item.markImage.height}
-        alt={item.brand}
-      />
+      <ShowcaseMark slug={item.slug} title={item.brand} />
     </figcaption>
   </figure>
   <div class="article-hero__lede">
@@ -66,7 +61,7 @@ const { item } = showcase;
   .article-hero hgroup .article-hero__kicker {
     display: inline-flex;
     gap: 0.25rem;
-    color: var(--text-muted);
+    color: var(--read-low);
     font-size: 0.8em;
     font-weight: 600;
     line-height: 1;
@@ -78,11 +73,11 @@ const { item } = showcase;
   }
 
   .article-hero hgroup .article-hero__kicker span + span {
-    color: var(--text-dim);
+    color: var(--read-lowest);
   }
 
   .article-hero hgroup .article-hero__title {
-    color: var(--text-normal);
+    color: var(--read-default);
     font-weight: 400;
     line-height: 1;
     max-width: 60ch;
@@ -96,7 +91,7 @@ const { item } = showcase;
     position: relative;
     overflow: hidden;
     height: 30lvh;
-    background: #111;
+    background: var(--media-surface);
     display: grid;
 
     @media (min-width: 64rem) {
@@ -121,31 +116,11 @@ const { item } = showcase;
     display: grid;
   }
 
-  .article-hero__caption img {
-    place-self: center;
-    max-width: 35%;
-
-    @media (min-width: 64rem) {
-      max-width: 15%;
-    }
-  }
-
-  .article-hero__mark {
-    width: 8.25rem;
-    height: 3rem;
-    object-fit: contain;
-
-    @media (min-width: 64rem) {
-      width: 27.5rem;
-      height: 10rem;
-    }
-  }
-
   .article-hero__lede {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    color: var(--text-muted);
+    color: var(--read-low);
     font-size: 0.875rem;
     line-height: 1.35;
 
@@ -160,7 +135,7 @@ const { item } = showcase;
       gap: 1.75rem;
       grid-column: 3;
       grid-row: 1 / span 3;
-      color: #fff;
+      color: var(--read-highest);
       font-size: 1.25rem;
       letter-spacing: 0.03em;
       line-height: 1.41;
@@ -172,7 +147,7 @@ const { item } = showcase;
 
     @media (min-width: 80rem) {
       display: block;
-      color: var(--text-strong);
+      color: var(--read-higher);
       font-size: 1.5rem;
       font-weight: 500;
       letter-spacing: 0;

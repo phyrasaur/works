@@ -1,4 +1,5 @@
 import type { SvgComponent } from "astro/types";
+import type { ThemeImage } from "@/types/media";
 
 type FigureContent = {
   title: string;
@@ -7,12 +8,12 @@ type FigureContent = {
 };
 
 type ImageFigure = FigureContent & {
-  image: ImageMetadata;
+  image: ThemeImage;
 };
 
 type VideoFigure = FigureContent & {
   video: {
-    poster: ImageMetadata;
+    poster: ThemeImage;
     width: number;
     height: number;
     sources: {
@@ -28,7 +29,7 @@ export type Feature = {
   label: string;
   title: string;
   body: string;
-  image: ImageMetadata;
+  image: ThemeImage;
 };
 
 export type Insight = {

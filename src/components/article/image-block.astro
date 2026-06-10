@@ -1,6 +1,9 @@
 ---
+import ThemePicture from "@/components/theme-picture.astro";
+import type { ThemeImage } from "@/types/media";
+
 type Props = {
-  image: ImageMetadata;
+  image: ThemeImage;
   alt?: string;
   class?: string;
 };
@@ -9,11 +12,9 @@ const { image, alt = "", class: className } = Astro.props;
 ---
 
 <figure class:list={["article-image-block", className]}>
-  <img
+  <ThemePicture
     class="article-image-block__image"
-    src={image.src}
-    width={image.width}
-    height={image.height}
+    image={image}
     alt={alt}
     loading="lazy"
     decoding="async"
@@ -32,6 +33,7 @@ const { image, alt = "", class: className } = Astro.props;
   .article-image-block__image {
     width: 100%;
     height: auto;
+    background: var(--media-surface);
     opacity: 0.85;
 
     @media (min-width: 64rem) {

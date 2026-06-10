@@ -1,4 +1,5 @@
 ---
+import ThemePicture from "@/components/theme-picture.astro";
 import type { Figure } from "@/types/article";
 
 type Props = {
@@ -17,7 +18,6 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
         class="media-card__image"
         width={figure.video.width}
         height={figure.video.height}
-        poster={figure.video.poster.src}
         aria-label={figure.title}
         autoplay
         muted
@@ -25,17 +25,16 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
         playsinline
         controls
         preload="metadata"
+        style={`--poster-light: url("${figure.video.poster.light.src}"); --poster-dark: url("${figure.video.poster.dark.src}")`}
       >
         {figure.video.sources.map((source) => (
           <source src={source.src} type={source.type} />
         ))}
       </video>
     ) : (
-      <img
+      <ThemePicture
         class="media-card__image"
-        src={figure.image.src}
-        width={figure.image.width}
-        height={figure.image.height}
+        image={figure.image}
         alt=""
         loading="lazy"
         decoding="async"
@@ -65,6 +64,7 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
     display: block;
     width: 100%;
     height: auto;
+    background: var(--media-surface);
     opacity: 0.85;
 
     @media (min-width: 64rem) {
@@ -72,8 +72,18 @@ const { figure, titleSuffix = "", class: className } = Astro.props;
     }
   }
 
+  video.media-card__image {
+    background-image: var(--poster-light);
+    background-position: center;
+    background-size: cover;
+
+    @media (prefers-color-scheme: dark) {
+      background-image: var(--poster-dark);
+    }
+  }
+
   .media-card__caption {
-    color: var(--text-muted);
+    color: var(--read-low);
     font-size: 0.625rem;
     letter-spacing: 0.03em;
     line-height: 1.35;

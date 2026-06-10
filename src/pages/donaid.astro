@@ -8,6 +8,7 @@ import BackgroundMeta from "@/components/article/background-meta.astro";
 import InsightList from "@/components/article/insight-list.astro";
 import MediaFigure from "@/components/article/media-figure.astro";
 import NumberedList from "@/components/article/numbered-list.astro";
+import ThemePicture from "@/components/theme-picture.astro";
 import { donaid } from "@/data/donaid";
 import {
   getNextShowcase,
@@ -155,11 +156,9 @@ const previousShowcase = getPreviousShowcase("donaid");
               <h3 class="feature-list__title">{feature.title}</h3>
               <p class="feature-list__body">{feature.body}</p>
             </div>
-            <img
+            <ThemePicture
               class="feature-list__image"
-              src={feature.image.src}
-              width={feature.image.width}
-              height={feature.image.height}
+              image={feature.image}
               alt=""
               loading="lazy"
               decoding="async"
@@ -248,7 +247,7 @@ const previousShowcase = getPreviousShowcase("donaid");
 
   .article .feature-list__label {
     width: max-content;
-    color: var(--text-muted);
+    color: var(--read-low);
     font-size: 0.5rem;
     letter-spacing: 0.1em;
     line-height: 1;
@@ -274,7 +273,7 @@ const previousShowcase = getPreviousShowcase("donaid");
   }
 
   .article .feature-list__title {
-    color: var(--text-strong);
+    color: var(--read-higher);
     font-size: 1rem;
     font-weight: 400;
     line-height: 1;
@@ -285,13 +284,13 @@ const previousShowcase = getPreviousShowcase("donaid");
   }
 
   .article .feature-list__body {
-    color: var(--text-muted);
+    color: var(--read-low);
     font-size: 0.75rem;
     letter-spacing: 0.03em;
     line-height: 1.25;
 
     @media (min-width: 64rem) {
-      color: var(--text-normal);
+      color: var(--read-default);
       font-size: 1.25rem;
       line-height: 1.35;
     }
@@ -301,6 +300,7 @@ const previousShowcase = getPreviousShowcase("donaid");
     width: 100%;
     height: auto;
     align-self: start;
+    background: var(--media-surface);
     opacity: 0.9;
 
     @media (min-width: 64rem) {
@@ -313,14 +313,14 @@ const previousShowcase = getPreviousShowcase("donaid");
 
   .article__pull-quote {
     padding-block: 0.75rem;
-    color: var(--text-muted);
+    color: var(--read-low);
     font-size: 1rem;
     line-height: 1.15;
 
     @media (min-width: 64rem) {
       grid-column: 1 / span 2;
       padding-block: 0;
-      color: var(--text-normal);
+      color: var(--read-default);
       font-size: 1.875rem;
       line-height: 1.25;
     }
