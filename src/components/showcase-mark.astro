@@ -1,0 +1,49 @@
+---
+import DonAid from "@/graphics/donaid.svg";
+import Hyperprint from "@/graphics/hyperprint.svg";
+import Wishful from "@/graphics/wishful.svg";
+import type { ShowcaseSlug } from "@/types/showcase";
+
+type Props = {
+  slug: ShowcaseSlug;
+  title?: string;
+};
+
+const { slug, title } = Astro.props;
+const marks = {
+  donaid: DonAid,
+  hyperprint: Hyperprint,
+  wishful: Wishful,
+};
+const Mark = marks[slug];
+---
+
+<span class="showcase-mark">
+  <Mark
+    class="showcase-mark__svg"
+    role={title ? "img" : undefined}
+    aria-label={title}
+    aria-hidden={title ? undefined : "true"}
+  />
+</span>
+
+<style>
+  .showcase-mark {
+    display: grid;
+    place-self: center;
+    width: 8.25rem;
+    max-width: 35%;
+    color: var(--yang-1000);
+
+    @media (min-width: 64rem) {
+      width: 27.5rem;
+      max-width: 15%;
+    }
+  }
+
+  .showcase-mark__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>

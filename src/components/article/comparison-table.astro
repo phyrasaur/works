@@ -44,7 +44,7 @@ const { columns, rows, class: className } = Astro.props;
   .comparison-table {
     width: 100%;
     overflow-x: auto;
-    color: var(--text-normal);
+    color: var(--read-default);
     font-size: 0.875rem;
     letter-spacing: 0.02em;
     line-height: 1.35;
@@ -75,26 +75,26 @@ const { columns, rows, class: className } = Astro.props;
   .comparison-table th,
   .comparison-table td {
     padding: 0.75rem 0.75rem 0.75rem 0;
-    border-top: 1px solid var(--hairline);
+    border-top: 1px solid var(--line-default);
     text-align: left;
     vertical-align: top;
   }
 
   .comparison-table thead th {
     border-top: 0;
-    color: var(--text-muted);
+    color: var(--read-low);
     font-weight: 700;
   }
 
   .comparison-table tbody th {
     width: 18%;
-    color: var(--text-strong);
+    color: var(--read-higher);
     font-weight: 400;
     white-space: nowrap;
   }
 
   .comparison-table td {
-    color: var(--text-normal);
+    color: var(--read-default);
 
     @media (min-width: 64rem) {
       padding: 0.75rem 1.5rem 0.75rem 0;

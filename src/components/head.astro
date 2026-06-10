@@ -8,23 +8,92 @@ import { Font } from "astro:assets";
 <Font cssVariable="--font-pp-neue-montreal" />
 <meta name="viewport" content="width=device-width" />
 <meta name="generator" content={Astro.generator} />
-<meta name="theme-color" content="#000" />
-<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#fff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)" />
+<meta name="color-scheme" content="light dark" />
 <style is:global>
   :root {
+    color-scheme: light;
+
+    --yin-50: rgb(0 0 0 / 5%);
+    --yin-100: rgb(0 0 0 / 10%);
+    --yin-150: rgb(0 0 0 / 15%);
+    --yin-200: rgb(0 0 0 / 20%);
+    --yin-250: rgb(0 0 0 / 25%);
+    --yin-300: rgb(0 0 0 / 30%);
+    --yin-350: rgb(0 0 0 / 35%);
+    --yin-400: rgb(0 0 0 / 40%);
+    --yin-450: rgb(0 0 0 / 45%);
+    --yin-500: rgb(0 0 0 / 50%);
+    --yin-550: rgb(0 0 0 / 55%);
+    --yin-600: rgb(0 0 0 / 60%);
+    --yin-650: rgb(0 0 0 / 65%);
+    --yin-700: rgb(0 0 0 / 70%);
+    --yin-750: rgb(0 0 0 / 75%);
+    --yin-800: rgb(0 0 0 / 80%);
+    --yin-850: rgb(0 0 0 / 85%);
+    --yin-900: rgb(0 0 0 / 90%);
+    --yin-950: rgb(0 0 0 / 95%);
+    --yin-1000: rgb(0 0 0);
+    --yang-50: rgb(255 255 255 / 5%);
+    --yang-100: rgb(255 255 255 / 10%);
+    --yang-150: rgb(255 255 255 / 15%);
+    --yang-200: rgb(255 255 255 / 20%);
+    --yang-250: rgb(255 255 255 / 25%);
+    --yang-300: rgb(255 255 255 / 30%);
+    --yang-350: rgb(255 255 255 / 35%);
+    --yang-400: rgb(255 255 255 / 40%);
+    --yang-450: rgb(255 255 255 / 45%);
+    --yang-500: rgb(255 255 255 / 50%);
+    --yang-550: rgb(255 255 255 / 55%);
+    --yang-600: rgb(255 255 255 / 60%);
+    --yang-650: rgb(255 255 255 / 65%);
+    --yang-700: rgb(255 255 255 / 70%);
+    --yang-750: rgb(255 255 255 / 75%);
+    --yang-800: rgb(255 255 255 / 80%);
+    --yang-850: rgb(255 255 255 / 85%);
+    --yang-900: rgb(255 255 255 / 90%);
+    --yang-950: rgb(255 255 255 / 95%);
+    --yang-1000: rgb(255 255 255);
+
+    --read-lowest: var(--yin-550);
+    --read-lower: var(--yin-600);
+    --read-low: var(--yin-650);
+    --read-default: var(--yin-700);
+    --read-high: var(--yin-800);
+    --read-higher: var(--yin-900);
+    --read-highest: var(--yin-1000);
+    --surface-default: var(--yang-1000);
+    --surface-subtle: var(--yin-50);
+    --line-default: var(--yin-200);
+    --focus-default: var(--yin-1000);
+    --shadow-default: var(--yin-750);
+    --overlay-low: var(--yin-200);
+    --overlay-high: var(--yin-600);
+    --media-surface: var(--yin-950);
     --section-gap: 0.25rem;
-    --text-strong: #ffffffe6;
-    --text-normal: #ffffffd1;
-    --text-muted: #ffffffb3;
-    --text-dim: #ffffff8a;
-    --hairline: #ffffff40;
-    --surface: #000;
     --page-max: 120rem;
     --px: 1.5rem;
     --py: 1.5rem;
     --dvh: 100dvh;
     --lvh: 100lvh;
     --vh: 100vh;
+
+    @media (prefers-color-scheme: dark) {
+      color-scheme: dark;
+
+      --read-lowest: var(--yang-500);
+      --read-lower: var(--yang-550);
+      --read-low: var(--yang-600);
+      --read-default: var(--yang-700);
+      --read-high: var(--yang-800);
+      --read-higher: var(--yang-900);
+      --read-highest: var(--yang-1000);
+      --surface-default: var(--yin-1000);
+      --surface-subtle: var(--yang-50);
+      --line-default: var(--yang-250);
+      --focus-default: var(--yang-1000);
+    }
 
     @media screen and (min-width: 48rem) {
       --px: 3.5rem;
@@ -56,8 +125,8 @@ import { Font } from "astro:assets";
       "Open Sans",
       "Helvetica Neue",
       sans-serif;
-    background-color: black;
-    color: var(--text-normal);
+    background-color: var(--surface-default);
+    color: var(--read-default);
     line-height: 1;
     font-size: 0.875rem;
     margin: 0;
@@ -118,7 +187,7 @@ import { Font } from "astro:assets";
   }
 
   :where(a, button):focus-visible {
-    outline: 2px solid #fff;
+    outline: 2px solid var(--focus-default);
     outline-offset: 0.25rem;
   }
 

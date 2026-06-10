@@ -1,9 +1,9 @@
-import hyperprintImage from "@/images/hyperprint/hero.jpg";
-import donaidImage from "@/images/donaid/hero.jpg";
-import wishfulImage from "@/images/wishful/hero.jpg";
-import hyperprintMark from "@/graphics/hyperprint.svg";
-import donaidMark from "@/graphics/donaid.svg";
-import wishfulMark from "@/graphics/wishful.svg";
+import hyperprintImageLight from "@/images/hyperprint/light/hero.jpg";
+import hyperprintImageDark from "@/images/hyperprint/dark/hero.jpg";
+import donaidImageLight from "@/images/donaid/light/hero.jpg";
+import donaidImageDark from "@/images/donaid/dark/hero.jpg";
+import wishfulImageLight from "@/images/wishful/light/hero.jpg";
+import wishfulImageDark from "@/images/wishful/dark/hero.jpg";
 import type { ShowcaseLink } from "@/types/article";
 import type { ShowcaseDetails, ShowcaseItem } from "@/types/showcase";
 
@@ -12,24 +12,30 @@ export const showcaseItems: ShowcaseItem[] = [
     brand: "Hyperprint",
     title: "Branding printshop customer experience",
     service: "Service design",
-    image: hyperprintImage,
-    markImage: hyperprintMark,
+    image: {
+      light: hyperprintImageLight,
+      dark: hyperprintImageDark,
+    },
     slug: "hyperprint",
   },
   {
     brand: "DonAid",
     title: "Donation tracking & audit conceptualised",
     service: "Product management",
-    image: donaidImage,
-    markImage: donaidMark,
+    image: {
+      light: donaidImageLight,
+      dark: donaidImageDark,
+    },
     slug: "donaid",
   },
   {
     brand: "Wishful Menu",
     title: "Democracy in menu planning at a restaurant",
     service: "Product design",
-    image: wishfulImage,
-    markImage: wishfulMark,
+    image: {
+      light: wishfulImageLight,
+      dark: wishfulImageDark,
+    },
     slug: "wishful",
   },
 ];

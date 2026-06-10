@@ -29,12 +29,11 @@ const { title } = Astro.props;
     max-width: var(--page-max);
     min-height: 100vh;
     margin-inline: auto;
-    background: #000;
+    background: var(--surface-default);
   }
 
   .article strong {
     font-weight: 700;
-    opacity: 0.8;
   }
 
   .article__section-copy {
@@ -42,7 +41,7 @@ const { title } = Astro.props;
     line-height: 1.4;
     letter-spacing: 0.02em;
     max-width: 56ch;
-    color: var(--text-normal);
+    color: var(--read-default);
 
     @media (min-width: 64rem) {
       grid-column: 2 / -1;

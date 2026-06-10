@@ -40,13 +40,13 @@ import { infoContent } from "@/data/info";
     max-height: 100dvh;
     margin: auto 0 0;
     padding: 0;
-    background: #000;
+    background: var(--surface-default);
     border: 0;
-    border-top: 1px solid var(--hairline);
-    box-shadow: 0 -2rem 5rem #000000bf;
+    border-top: 1px solid var(--line-default);
+    box-shadow: 0 -2rem 5rem var(--shadow-default);
     overflow-y: auto;
     opacity: 0;
-    color: var(--text-normal);
+    color: var(--read-default);
     transform: translateY(100%);
     transition:
       opacity 300ms ease,
@@ -65,14 +65,18 @@ import { infoContent } from "@/data/info";
       max-height: none;
       margin: 0 0 0 auto;
       border-top: 0;
-      border-left: 1px solid var(--hairline);
-      box-shadow: -49px 0 200px 87px #000000bf;
+      border-left: 1px solid var(--line-default);
+      box-shadow: -49px 0 200px 87px var(--shadow-default);
       transform: translateX(100%);
     }
   }
 
   .info-dialog::backdrop {
-    background: linear-gradient(to bottom, #00000031, #00000099);
+    background: linear-gradient(
+      to bottom,
+      var(--overlay-low),
+      var(--overlay-high)
+    );
     opacity: 0;
     transition: opacity 300ms ease;
 
@@ -81,7 +85,7 @@ import { infoContent } from "@/data/info";
     }
 
     @media (min-width: 64rem) {
-      background: linear-gradient(to right, #00000012, #00000099);
+      background: linear-gradient(to right, var(--yin-50), var(--overlay-high));
     }
   }
 
@@ -155,7 +159,7 @@ import { infoContent } from "@/data/info";
   }
 
   .info-dialog__close:hover {
-    color: #fff;
+    color: var(--read-highest);
   }
 
   .info-dialog__content {

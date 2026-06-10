@@ -32,7 +32,7 @@ import Squiggle from "@/graphics/squiggle.svg";
     min-height: calc(100lvh - var(--px) * 8);
     display: grid;
     padding-block: 1.5rem;
-    color: var(--text-strong);
+    color: var(--read-higher);
     grid-template-rows: 1fr;
     transition: opacity 600ms;
     opacity: 1;
@@ -56,7 +56,7 @@ import Squiggle from "@/graphics/squiggle.svg";
     align-self: center;
     width: 100vw;
     height: auto;
-    color: var(--text-normal, #ffffffbf);
+    color: var(--read-default);
     overflow: visible;
 
     @media (min-width: 64rem) {
@@ -98,7 +98,7 @@ import Squiggle from "@/graphics/squiggle.svg";
   }
 
   .hero__profile p {
-    color: var(--text-muted);
+    color: var(--read-low);
     line-height: 1.2;
     letter-spacing: 0.03em;
   }
@@ -126,7 +126,7 @@ import Squiggle from "@/graphics/squiggle.svg";
     display: grid;
     place-items: end;
     gap: 0.5rem;
-    color: var(--text-normal);
+    color: var(--read-default);
     font-size: 1rem;
   }
 
@@ -151,7 +151,7 @@ import Squiggle from "@/graphics/squiggle.svg";
   }
 
   .hero__link .hero__link-muted {
-    color: var(--text-muted);
+    color: var(--read-low);
   }
 
   .hero.is-past-hero {
@@ -171,13 +171,13 @@ import Squiggle from "@/graphics/squiggle.svg";
       left: calc(100% + 1rem);
       content: "";
       width: 5rem;
-      border-top: 1px solid var(--hairline);
+      border-top: 1px solid var(--line-default);
     }
   }
 
   .hero__link:hover {
     @media (min-width: 64rem) {
-      color: #fff;
+      color: var(--read-highest);
     }
   }
 

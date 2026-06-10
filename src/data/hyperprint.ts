@@ -1,14 +1,23 @@
-import automatedDtpImage from "@/images/hyperprint/automated-dtp.png";
-import checkoutModalImage from "@/images/hyperprint/checkout-modal.png";
-import landingPageImage from "@/images/hyperprint/landing-page.png";
-import orderDashboardImage from "@/images/hyperprint/order-dashboard.png";
-import productCustomisationImage from "@/images/hyperprint/product-customisation.png";
-import serviceBlueprintImage from "@/images/hyperprint/service-blueprint.png";
-import standardisedFormsImage from "@/images/hyperprint/standardised-forms.png";
-import vendorCostingImage from "@/images/hyperprint/vendor-costing.png";
+import automatedDtpImageDark from "@/images/hyperprint/dark/automated-dtp.png";
+import checkoutModalImageDark from "@/images/hyperprint/dark/checkout-modal.png";
+import landingPageImageDark from "@/images/hyperprint/dark/landing-page.png";
+import orderDashboardImageDark from "@/images/hyperprint/dark/order-dashboard.png";
+import productCustomisationImageDark from "@/images/hyperprint/dark/product-customisation.png";
+import serviceBlueprintImageDark from "@/images/hyperprint/dark/service-blueprint.png";
+import standardisedFormsImageDark from "@/images/hyperprint/dark/standardised-forms.png";
+import vendorCostingImageDark from "@/images/hyperprint/dark/vendor-costing.png";
+import automatedDtpImageLight from "@/images/hyperprint/light/automated-dtp.png";
+import checkoutModalImageLight from "@/images/hyperprint/light/checkout-modal.png";
+import landingPageImageLight from "@/images/hyperprint/light/landing-page.png";
+import orderDashboardImageLight from "@/images/hyperprint/light/order-dashboard.png";
+import productCustomisationImageLight from "@/images/hyperprint/light/product-customisation.png";
+import serviceBlueprintImageLight from "@/images/hyperprint/light/service-blueprint.png";
+import standardisedFormsImageLight from "@/images/hyperprint/light/standardised-forms.png";
+import vendorCostingImageLight from "@/images/hyperprint/light/vendor-costing.png";
 import ClariteamImage from "@/graphics/clariteam.svg";
 import ThinkpencilImage from "@/graphics/thinkpencil.svg";
 import VitruvianImage from "@/graphics/vitruvian.svg";
+import { themeImage } from "@/types/media";
 export const hyperprint = {
   backgroundMeta: [
     {
@@ -60,13 +69,16 @@ export const hyperprint = {
   ],
   workshopFigures: [
     {
-      image: standardisedFormsImage,
+      image: themeImage(
+        standardisedFormsImageLight,
+        standardisedFormsImageDark,
+      ),
       title: "Standardised forms",
       body: "Frontline call flows, order checklists, and email templates made customer interactions more consistent",
       className: "media-card--workshop-lead",
     },
     {
-      image: serviceBlueprintImage,
+      image: themeImage(serviceBlueprintImageLight, serviceBlueprintImageDark),
       title: "Service blueprint",
       body: "Mapped the business to identify friction points and standardise operations",
       className: "media-card--workshop-detail",
@@ -74,34 +86,37 @@ export const hyperprint = {
   ],
   transformationFigures: [
     {
-      image: vendorCostingImage,
+      image: themeImage(vendorCostingImageLight, vendorCostingImageDark),
       title: "Centralised vendor costing database",
       body: "with built-in calculations enabled quick comparisons, backup options, and stronger price negotiation",
     },
     {
-      image: automatedDtpImage,
+      image: themeImage(automatedDtpImageLight, automatedDtpImageDark),
       title: "Automated DTP",
       body: "pre-press workflows, together with job barcode, improves the print production efficiency",
     },
   ],
   digitalServiceHero: {
-    image: landingPageImage,
+    image: themeImage(landingPageImageLight, landingPageImageDark),
     title: "On-brand landing page",
     body: "The interface extends the experimental rebrand, using bright, playful colours derived from a shifted CMYK hue to keep the digital experience distinctly on-brand",
   },
   digitalServiceFigures: [
     {
-      image: productCustomisationImage,
+      image: themeImage(
+        productCustomisationImageLight,
+        productCustomisationImageDark,
+      ),
       title: "Product customisation",
       body: "breaks print customisation into common sections and then reveals advanced options progressively so the happy path stays simple. Current total is displayed all the time to aid customers for budgeting",
     },
     {
-      image: checkoutModalImage,
+      image: themeImage(checkoutModalImageLight, checkoutModalImageDark),
       title: "Floating checkout modal",
       body: "sits on top of the customisation page, using a graphic backdrop to reduce noise and keep the user focused. It preserves the underlying scroll position and can be dismissed anytime to return to product customisation without losing context.",
     },
     {
-      image: orderDashboardImage,
+      image: themeImage(orderDashboardImageLight, orderDashboardImageDark),
       title: "Order dashboard",
       body: "can be functional and fun to look at. Main information is laid out in a collapsible table with an option to drill down into the details",
     },
