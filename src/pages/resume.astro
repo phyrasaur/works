@@ -1,0 +1,368 @@
+---
+import Head from "@/components/head.astro";
+
+const skills = [
+  {
+    title: "Tech",
+    items: "Astro JS ⸱ React ⸱ Next.js ⸱ Tailwind CSS ⸱ Laravel ⸱ Git ⸱ AWS",
+  },
+  {
+    title: "Design",
+    items: "Figma, Webflow, Photoshop, Illustrator, AfterEffects, Premier Pro",
+  },
+  {
+    title: "Management",
+    items: "Jira, Notion, Google Workspace, Slack",
+  },
+  {
+    title: "AI tooling",
+    items: "Codex, Devin, Perplexity, Figma Make, Notion AI, ChatGPT",
+  },
+];
+
+const experience = [
+  {
+    company: "Interum (M) Sdn Bhd",
+    role: "Product Manager interim CTO",
+    highlights: [
+      "Owned product roadmap and delivery for DonAid, a donation-tracking and reconciliation platform",
+      "Designed workflows for donations, remittance, settlement, reconciliation, reporting, and public tracking",
+      "Produced PRDs, user stories, IA, wireframes, acceptance criteria, and product documentation",
+      "Coordinated founder priorities, vendors, and technical redevelopment",
+    ],
+  },
+  {
+    company: "Clickr Media Pte. Ltd.",
+    role: "Senior Creative Designer",
+    highlights: [
+      "Designed UX/UI for banking, logistics, e-commerce, certification, and property-related platforms",
+      "Improved information clarity, usability, and service flows across client projects",
+      "Worked with multidisciplinary teams across strategy, design, and implementation",
+    ],
+  },
+  {
+    company: "Brightside Solutions Sdn Bhd",
+    role: "Operations, Sales & Creative Manager",
+    highlights: [
+      "Grew from graphic designer to owner’s right-hand across operations, sales, design, and production",
+      "Managed client accounts, vendors, production workflows, quotations, and delivery.",
+      "Led branding, website, e-commerce, and digital transformation initiatives.",
+    ],
+  },
+];
+---
+
+<html lang="en">
+  <head>
+    <Head />
+    <title>Resume ⸱ Firas Razak</title>
+    <meta
+      name="description"
+      content="Resume for Firas Razak, Product Manager and UX Designer."
+    />
+  </head>
+  <body>
+    <main class="resume">
+      <header class="resume__header">
+        <div class="resume__personal">
+          <h1>Firas Razak</h1>
+          <p>Greater Kuala Lumpur</p>
+        </div>
+        <p class="resume__title">Product Manager &amp; UX Designer</p>
+        <p class="resume__education">BSc (Hons), Dietetic</p>
+      </header>
+
+      <section class="resume__summary" aria-labelledby="summary-title">
+        <div class="resume__section-heading">
+          <h2 id="summary-title">Summary</h2>
+          <p>Operations → Design → Product → Frontend</p>
+        </div>
+        <p class="resume__summary-copy">
+          Product manager and UX designer with a background in print operations,
+          sales, marketing, interface design and frontend development. I
+          translate ambiguous founder vision into software architecture &amp;
+          workflows, requirements, user experiences and shipped software.
+        </p>
+      </section>
+
+      <section class="resume__skills" aria-label="Skills and tools">
+        {
+          skills.map(({ title, items }) => (
+            <div class="resume__skill">
+              <h2>{title}</h2>
+              <p>{items}</p>
+            </div>
+          ))
+        }
+      </section>
+
+      <section class="resume__experience" aria-labelledby="experience-title">
+        <h2 id="experience-title" class="resume__label">Experience</h2>
+        {
+          experience.map(({ company, role, highlights }) => (
+            <article class="resume__role">
+              <header class="resume__role-header">
+                <h3>{company}</h3>
+                <p>{role}</p>
+              </header>
+              <ul>
+                {highlights.map((highlight) => (
+                  <li>{highlight}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </section>
+
+      <footer class="resume__footer">
+        <a href="https://www.linkedin.com/in/firasrazak" rel="me noreferrer">
+          linkedin/u/firasrazak
+        </a>
+        <a href="mailto:hi@firas.works">hi@firas.works</a>
+      </footer>
+    </main>
+  </body>
+</html>
+
+<style>
+  .resume {
+    --resume-line-height: 1.35;
+
+    box-sizing: border-box;
+    min-height: 100svh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.75rem;
+    padding: 1rem;
+    overflow-wrap: break-word;
+    background: #000;
+    color: #ffffffe6;
+
+    @media (min-width: 48rem) {
+      --resume-line-height: 1.5;
+
+      align-items: center;
+      gap: 2.25rem;
+      padding: 1.75rem;
+    }
+  }
+
+  .resume__header,
+  .resume__summary,
+  .resume__skills,
+  .resume__experience,
+  .resume__footer {
+    width: 100%;
+
+    @media (min-width: 48rem) {
+      max-width: 40rem;
+    }
+  }
+
+  .resume__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    line-height: var(--resume-line-height);
+  }
+
+  .resume__personal {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    white-space: nowrap;
+  }
+
+  .resume__personal h1 {
+    color: #fffffff2;
+    font-size: 1.25rem;
+    font-weight: 400;
+
+    @media (min-width: 48rem) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .resume__personal p {
+    color: #ffffffe6;
+    font-size: 0.875rem;
+    text-align: right;
+  }
+
+  .resume__title {
+    color: #ffffffe6;
+    font-size: 0.875rem;
+
+    @media (min-width: 48rem) {
+      font-size: 1.25rem;
+    }
+  }
+
+  .resume__education {
+    color: #ffffffb3;
+    font-size: 0.75rem;
+
+    @media (min-width: 48rem) {
+      font-size: 0.875rem;
+    }
+  }
+
+  .resume__summary {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    line-height: var(--resume-line-height);
+  }
+
+  .resume__section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.625rem;
+    white-space: nowrap;
+
+    @media (min-width: 48rem) {
+      font-size: 0.75rem;
+    }
+  }
+
+  .resume__section-heading h2,
+  .resume__label,
+  .resume__skill h2 {
+    color: #ffffff99;
+    font-size: inherit;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .resume__section-heading p {
+    color: #ffffff80;
+  }
+
+  .resume__summary-copy {
+    font-size: 0.875rem;
+
+    @media (min-width: 48rem) {
+      font-size: 1rem;
+    }
+  }
+
+  .resume__skills {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    line-height: var(--resume-line-height);
+  }
+
+  .resume__skill {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .resume__skill h2 {
+    font-size: 0.625rem;
+
+    @media (min-width: 48rem) {
+      font-size: 0.75rem;
+    }
+  }
+
+  .resume__skill p {
+    font-size: 0.75rem;
+
+    @media (min-width: 48rem) {
+      font-size: 0.875rem;
+    }
+  }
+
+  .resume__experience {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .resume__label {
+    width: 100%;
+    font-size: 0.625rem;
+    line-height: var(--resume-line-height);
+
+    @media (min-width: 48rem) {
+      font-size: 0.75rem;
+    }
+  }
+
+  .resume__role {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .resume__role-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    line-height: var(--resume-line-height);
+  }
+
+  .resume__role-header h3 {
+    font-size: 0.875rem;
+    font-weight: 400;
+
+    @media (min-width: 48rem) {
+      font-size: 1.25rem;
+    }
+  }
+
+  .resume__role-header p {
+    color: #ffffffcc;
+    font-size: 0.75rem;
+
+    @media (min-width: 48rem) {
+      font-size: 1rem;
+    }
+  }
+
+  .resume__role ul {
+    margin: 0;
+    padding-inline-start: 0.625rem;
+    font-size: 0.875rem;
+    line-height: var(--resume-line-height);
+    list-style-type: square;
+
+    @media (min-width: 48rem) {
+      font-size: 1rem;
+    }
+  }
+
+  .resume__role li::marker {
+    font-size: 0.625em;
+  }
+
+  .resume__role li:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  .resume__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: #fff;
+    font-size: 0.875rem;
+    line-height: var(--resume-line-height);
+    white-space: nowrap;
+  }
+
+  .resume__footer a:hover {
+    text-decoration: underline;
+  }
+</style>

@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/donaid/", "/hyperprint/", "/wishful/"];
+const routes = ["/", "/donaid/", "/hyperprint/", "/resume/", "/wishful/"];
 
 for (const route of routes) {
   test(`${route} loads without browser-level failures`, async ({
