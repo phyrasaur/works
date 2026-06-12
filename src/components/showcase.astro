@@ -77,13 +77,7 @@ const itemCount = showcaseItems.length;
 </section>
 
 <style>
-  :global(html) {
-    scroll-snap-type: y proximity;
-  }
-
   .showcase {
-    --showcase-snap-offset: 5rem;
-
     scroll-margin-top: 5rem;
   }
 
@@ -97,8 +91,6 @@ const itemCount = showcaseItems.length;
 
   .showcase__item {
     position: relative;
-    scroll-margin-top: var(--showcase-snap-offset);
-    scroll-snap-align: start;
   }
 
   .showcase__card {
